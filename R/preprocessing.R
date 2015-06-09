@@ -1,5 +1,7 @@
 # ==== GLOBAL LIBRARIES ====
 library(plyr)
+# For PCA
+library(FactoMineR)
 
 # ==== GLOBAL CONSTANTS ====
 DB_FILE = "../data/DATABASE_NMS Burden levels_15-4-2012.csv"
@@ -48,3 +50,12 @@ raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
 
 # Standardized 0 mean, 1 stddev
 raw.filtered <- as.data.frame(scale(raw.filtered))
+
+# ==== PCA (Note: not helpful for identifying specific factors) ====
+par(mfrow = c(1, 2))
+pca <- PCA(raw.filtered)
+# pca$eig
+# pca$var$coord
+# head(pca$ind$coord)
+# plot(x = 1:length(rownames(pca$eig)), y = (pca$eig$eigenvalue), type="b")
+# Elbow appears around 3 factors
