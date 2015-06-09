@@ -16,6 +16,8 @@ for (i in 2:15) {
 
 plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares")
 
+# ==== TODO: OTHER WAYS TO FIND OPTIMAL K ====
+
 # ==== INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
 str(splits)

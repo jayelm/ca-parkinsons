@@ -45,3 +45,6 @@ raw.omitted <- na.omit(raw)
 
 # raw with only select nms and motor symptoms
 raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
+
+# Standardized 0 mean, 1 stddev
+raw.filtered <- as.data.frame(scale(raw.filtered))
