@@ -2,6 +2,7 @@
 library(plyr)
 # For PCA
 library(FactoMineR)
+library(psych)
 
 # ==== GLOBAL CONSTANTS ====
 DB_FILE = "../data/DATABASE_NMS Burden levels_15-4-2012.csv"
@@ -26,7 +27,7 @@ MOTOR.SYMPTOMS = c("tremor",
                    "pigd")
 # Change this variable to change symptoms
 SYMPTOMS.TO.USE = ALL.SYMPTOMS
-  
+
 # ==== UTILITY FUNCTIONS ====
 splitdf <- function(dataframe, seed=NULL, trainfrac=0.7) {
   if (trainfrac<=0 | trainfrac>=1) stop("Training fraction must be between 0 and 1, not inclusive")
@@ -48,7 +49,12 @@ raw.omitted <- na.omit(raw)
 # raw with only select nms and motor symptoms
 raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
 
-# Standardized 0 mean, 1 stddev
+# ==== DESCRIPTIVE STATISTICS (BEFORE STANDARDIZATION) ====
+# TODO - change raw.filtered to raw.omitted.filtered, or something like that
+raw.omitted.stats <- describe(raw.omitted)
+raw.filtered.stats <- describe(raw.filtered)
+
+# ==== STANDARDIZATION ====
 raw.filtered <- as.data.frame(scale(raw.filtered))
 
 # ==== PCA (Note: not helpful for identifying specific factors) ====
@@ -57,5 +63,8 @@ pca <- PCA(raw.filtered)
 # pca$eig
 # pca$var$coord
 # head(pca$ind$coord)
-# plot(x = 1:length(rownames(pca$eig)), y = (pca$eig$eigenvalue), type="b")
+plot(x = 1:length(rownames(pca$eig)), y = (pca$eig$eigenvalue), type="b",
+     xlab="Factor", ylab="Eigenvalue", xaxp=c(0, 14, 14))
 # Elbow appears around 3 factors
+# Reset par for the rest of the script
+par(mfrow = c(1, 1))

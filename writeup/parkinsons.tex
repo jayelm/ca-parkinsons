@@ -1,0 +1,126 @@
+\documentclass[letter,12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\pagestyle{fancy}
+\lhead{Jesse Mu}
+\rhead{CSCI339 Term Project}
+\graphicspath{ {../figures/} }
+
+\begin{document}
+
+\title{Cluster Analysis: Identifying Parkinson's Disease Subtypes}
+\date{Wednesday, June 10}
+\author{Jesse Mu}
+\maketitle
+
+\section{Preprocessing}
+
+\subsection{Dataset Description}
+951 subjects, 145 metrics, collected 15-4-2012. From Pablo Martinez Mart\'in.
+170 subjects with missing values (brought down to 781); these were removed
+automatically, even if the missing values were not included in the selected
+features below. This will need to be changed later on, by keeping those
+removed that still have all selceted features and perhaps with some
+compensation for missing values.
+
+\subsection{Selected Features}
+
+Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l|l|l}
+    Name & Type & Format & Description \\
+    \hline
+    nms\_d1 & byte & \%8.0g & cardiovascular \\
+    nms\_d2 & byte & \%8.0g & sleep/fatigue \\
+    nms\_d3 & byte & \%8.0g & mood/cognition \\
+    nms\_d4 & byte & \%8.0g & percep/hallucinations \\
+    nms\_d5 & byte & \%8.0g & attention/memory \\
+    nms\_d6 & byte & \%8.0g & gastrointestinal \\
+    nms\_d7 & byte & \%8.0g & urinary \\
+    nms\_d8 & byte & \%8.0g & sexual function \\
+    nms\_d9 & byte & \%8.0g & miscellaneous \\
+    tremor & float & \%9.0g & tremor \\
+    bradykin & float & \%9.0g & bradykinesia\tablefootnote{Impaired ability to
+    adjust the body's position.} \\
+    rigidity & float & \%9.0g & rigidity \\
+    axial & float & \%9.0g & axial\tablefootnote{Issues affecting the middle of
+    the body.} \\
+    pigd & float & \%9.0g & postural instability and gait difficulty \\
+  \end{tabular}
+  \caption{Selected Features and Details}
+  \label{tab:selcted_features}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l|l|l}
+  Name  &       $\mu$ & $\sigma$ & min-max \\
+         \hline
+nms\_d1&   1.76&  3.32&   0-24 \\
+nms\_d2&   8.71&  8.76&   0-48 \\
+nms\_d3&   8.70& 11.83&   0-60 \\
+nms\_d4&   1.65&  3.94&   0-33 \\
+nms\_d5&   5.22&  7.44&   0-36 \\
+nms\_d6&   5.67&  6.92&   0-36 \\
+nms\_d7&   8.02&  9.09&   0-36 \\
+nms\_d8&   3.57&  5.97&   0-24 \\
+nms\_d9&   6.99&  7.74&   0-48 \\
+tremor&   2.59&  2.63&   0-12 \\
+bradykin& 2.49&  1.39&   0-6 \\
+rigidity& 2.34&  1.36&   0-6 \\
+axial&    3.28&  2.75&   0-12 \\
+pigd&     3.36&  2.77&   0-12 \\
+  \end{tabular}
+  \caption{Descriptive Statistics}
+  \label{tab:descriptive_statistics}
+\end{table}
+
+\subsection{Dimensionality Reduction: PCA}
+
+May not be useful? If we're trying to identify \emph{clinically} relevant
+features, merging them may not be a good idea.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{pca-eigenvalues.png}
+  \caption{Scree test: eigenvalues by factor}
+  \label{fig:pca-eigenvalues}
+\end{figure}
+
+Figure~\ref{fig:pca-eigenvalues} shows scree test elbow occurs around 2 or 3. Also, eigenvalues 1 and $2 > 1$, while 3
+is around .9
+
+\section{$k$-means}
+\subsection{Identifying optimal number of clusters}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{kmeans-wss-error.png}
+  \caption{Scree test: WSS error by cluster size}
+  \label{fig:kmeans-wss-error}
+\end{figure}
+
+Figure~\ref{fig:kmeans-wss-error} shows no optimal elbow in scree test! Maybe 2-3?
+
+% TODO: More optimal cluster determination (PAMK, NbClust)
+
+\subsection{Decision Tree classifier based on clusters}
+
+% Pruned, non-pruned tree
+
+\section{Biclustering}
+
+\section{Subspace clustering}
+
+% TODO: Wat.
+
+\section{Bayesian Networks}
+
+\end{document}
