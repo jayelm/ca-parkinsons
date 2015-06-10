@@ -2,6 +2,8 @@
 library(cluster)
 library(rpart)
 library(plyr)
+library(fpc)
+library(NbClust)
 
 # ==== LOAD DATA ====
 source('./preprocessing.R')
@@ -14,9 +16,21 @@ for (i in 2:15) {
   wss[i] <- sum(kmeans(raw.filtered, i)$withinss)
 }
 
-plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares")
+plot(1:15, wss, type="b",
+     xlab="Number of Clusters", ylab="Within groups sum of squares")
 
-# ==== TODO: OTHER WAYS TO FIND OPTIMAL K ====
+# ==== NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
+# This is taking a long time
+# nb <- NbClust(raw.filtered, distance = "euclidean",
+#               min.nc=2, max.nc=15, method = "kmeans",
+#               index = "alllong", alphaBeale = 0.1)
+# hist(nb$Best.nc[1,], breaks = max(na.omit(nb$Best.nc[1,])))
+
+# ==== PAM ESTIMATION FOR OPTIMAL K ====
+# Estimates 2
+pamk.best <- pamk(raw.filtered)
+cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
+plot(pam(raw.filtered, pamk.best$nc), main="Optimal clustering")
 
 # ==== INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
