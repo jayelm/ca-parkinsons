@@ -60,7 +60,8 @@ str(splits)
 splits$trainset = raw.filtered
 
 # FIXME: How are we identifying k = 4? (Arbitrary right now)
-cl <- kmeans(splits$trainset, 4, nstart = 25)
+K = 3
+cl <- kmeans(splits$trainset, K, nstart = 25)
 
 # Add cluster label to original data, rename
 trainset.labeled <- cbind(splits$trainset, cl$cluster)
@@ -93,6 +94,43 @@ pruned.t <- prune(t, cp = cp)
 plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
 text(pruned.t, use.n=TRUE, all=TRUE, cex=.8, pos=1)
 # stopping point - pruned tree
+
+# ==== KMEANS CLUSTERING COMPRESSED FUNCTION ====
+# Use for iteration!
+kmeans_dtree <- function(data, k, save = FALSE) {
+  cl <- kmeans(splits$trainset, K, nstart = 25)
+  labeled_data <- cbind(data, cl$cluster)
+  # Add cluster label to original data, rename
+  labeled_data <- rename(labeled_data, c("cl$cluster"="cluster"))
+  # Convert to factor
+  labeled_data$cluster <- as.factor(labeled_data$cluster)
+  t <- rpart(cluster ~ ., trainset.labeled)
+  # Print error statistics
+  printcp(t)
+  # Find resubstitution rate
+  pred.t <- table(predict(t, type="class"), trainset.labeled$cluster)
+  resub <- 1-sum(diag(pred.t))/sum(pred.t)
+
+  # Prune, find minimum cp
+  cp <- t$cptable[which.min(t$cptable[,"xerror"]),"CP"]
+  pruned.t <- prune(t, cp = cp)
+
+  if (save) {
+    # TODO: Find a way to save the plots!!
+  }
+  plot(t, uniform=TRUE, main="Decision Tree")
+  text(t, use.n=TRUE, all=TRUE, cex=.8)
+
+  plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
+  text(pruned.t, use.n=TRUE, all=TRUE, cex=.8)
+
+  list(
+    "data" = labeled_data,
+    "unpruned.tree" = t,
+    "pruned.tree" = pruned.t,
+    "resub.error" = resub
+  )
+}
 
 # ==== NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
