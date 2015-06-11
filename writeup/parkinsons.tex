@@ -1,4 +1,4 @@
-\documentclass[letter,12pt]{article}
+\documentclass[letterpaper,12pt]{article}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -6,9 +6,9 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{tablefootnote}
-\pagestyle{fancy}
-\lhead{Jesse Mu}
-\rhead{CSCI339 Term Project}
+% \pagestyle{fancy}
+% \lhead{Jesse Mu}
+% \rhead{CSCI339 Term Project}
 \graphicspath{ {../figures/} }
 
 \begin{document}
@@ -32,7 +32,7 @@ compensation for missing values.
 
 Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
 
-\begin{table}[h]
+\begin{table}[ht]
   \centering
   \begin{tabular}{l|l|l|l}
     Name & Type & Format & Description \\
@@ -58,7 +58,7 @@ Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
   \label{tab:selcted_features}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
   \centering
   \begin{tabular}{l|l|l|l}
   Name  &       $\mu$ & $\sigma$ & min-max \\
@@ -87,7 +87,7 @@ pigd&     3.36&  2.77&   0-12 \\
 May not be useful? If we're trying to identify \emph{clinically} relevant
 features, merging them may not be a good idea.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\linewidth]{pca-eigenvalues.png}
   \caption{Scree test: eigenvalues by factor}
@@ -100,7 +100,9 @@ is around .9
 \section{$k$-means}
 \subsection{Identifying optimal number of clusters}
 
-\begin{figure}[h]
+\subsubsection{WSS Error Scree Test}
+
+\begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\linewidth]{kmeans-wss-error.png}
   \caption{Scree test: WSS error by cluster size}
@@ -109,11 +111,37 @@ is around .9
 
 Figure~\ref{fig:kmeans-wss-error} shows no optimal elbow in scree test! Maybe 2-3?
 
-% TODO: More optimal cluster determination (PAMK, NbClust)
+\subsubsection{Gap Statistic}
+
+Optimal cluster is the local maximum of the gap statistic, but it appears to be
+consistently increasing in Figure~\ref{fig:gap-statistic}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{gap-statistic.png}
+  \caption{Gap statistic by cluster size}
+  \label{fig:gap-statistic}
+\end{figure}
+
+\subsubsection{Average Silhouette Width}
+
+Figure~\ref{fig:asw} shows average silhouette width as being consistently under
+0.25 for all clusters, implying the data is not well structured.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{asw.png}
+  \caption{Average silhouette width by cluster size}
+  \label{fig:asw}
+\end{figure}
+
+% \subsubsection{\texttt{NbClust} package}
 
 \subsection{Decision Tree classifier based on clusters}
 
-% Pruned, non-pruned tree
+% TODO: Use compressed function to plot decision trees based on clusters with
+% 2, 3, 4 groups.
+% See if there are any common factors here!
 
 \section{Biclustering}
 

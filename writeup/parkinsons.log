@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  10 JUN 2015 17:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  11 JUN 2015 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -201,18 +201,10 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 (/home/jesse/texmf/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 ))
-
-Package tablefootnote Warning: Package etoolbox not available, therefore
-(tablefootnote)                substituting commands \AtEndEnvironment and
-(tablefootnote)                \AfterEndEnvironment for tablefootnotes
-(tablefootnote)                 on input line 447.
-
-)
-
-LaTeX Warning: Unused global option(s):
-    [letter].
-
-(./parkinsons.aux)
+(/home/jesse/texmf/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/03/19 v2.1d e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count107
+)) (./parkinsons.aux)
 \openout1 = `parkinsons.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -232,7 +224,7 @@ LaTeX Font Info:    ... okay on input line 14.
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
 * driver: pdftex
-* paper: <default>
+* paper: letterpaper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
@@ -264,16 +256,16 @@ LaTeX Font Info:    ... okay on input line 14.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count107
+\scratchcounter=\count108
 \scratchdimen=\dimen124
 \scratchbox=\box28
-\nofMPsegments=\count108
-\nofMParguments=\count109
+\nofMPsegments=\count109
+\nofMParguments=\count110
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count110
+\MPscratchCnt=\count111
 \MPscratchDim=\dimen125
-\MPnumerator=\count111
-\makeMPintoPDFobject=\count112
+\MPnumerator=\count112
+\makeMPintoPDFobject=\count113
 \everyMPtoPDFconversion=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -338,55 +330,50 @@ File: ../figures/pca-eigenvalues.png Graphic file (type png)
 Package pdftex.def Info: ../figures/pca-eigenvalues.png used on input line 92.
 (pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 <../figures/kmeans-wss-error.png, id=11, 691.58376pt x 458.71375pt>
 File: ../figures/kmeans-wss-error.png Graphic file (type png)
 
 <use ../figures/kmeans-wss-error.png>
-Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 105
+Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 107
 .
 (pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
 
+<../figures/gap-statistic.png, id=12, 691.58376pt x 458.71375pt>
+File: ../figures/gap-statistic.png Graphic file (type png)
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+<use ../figures/gap-statistic.png>
+Package pdftex.def Info: ../figures/gap-statistic.png used on input line 121.
+(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
 
+<../figures/asw.png, id=13, 691.58376pt x 458.71375pt>
+File: ../figures/asw.png Graphic file (type png)
 
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[2]
-
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[3 <../figures/pca-eigenvalues.png> <../figures/kmeans-wss-error.png>]
-(./parkinsons.aux) ) 
+<use ../figures/asw.png>
+Package pdftex.def Info: ../figures/asw.png used on input line 133.
+(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
+ [2] [3 <../figures/pca-eigenvalues.png>] [4 <../figures/kmeans-wss-error.png> 
+<../figures/gap-statistic.png>] [5 <../figures/asw.png>] (./parkinsons.aux) ) 
 Here is how much of TeX's memory you used:
- 3421 strings out of 495028
- 45722 string characters out of 6181497
- 116894 words of memory out of 5000000
- 6542 multiletter control sequences out of 15000+600000
+ 3724 strings out of 495028
+ 49342 string characters out of 6181497
+ 123331 words of memory out of 5000000
+ 6840 multiletter control sequences out of 15000+600000
  21087 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,13n,43p,248b,262s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on parkinsons.pdf (3 pages, 111093 bytes).
+ 38i,13n,43p,807b,262s stack positions out of 5000i,500n,10000p,200000b,80000s
+</
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti12.pfb>
+Output written on parkinsons.pdf (5 pages, 129593 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 60 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

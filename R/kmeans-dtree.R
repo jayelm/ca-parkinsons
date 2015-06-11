@@ -19,6 +19,20 @@ for (i in 2:15) {
 plot(1:15, wss, type="b",
      xlab="Number of Clusters", ylab="Within groups sum of squares")
 
+# ==== TODO: BIC ====
+# See http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters
+library(mclust)
+# NOW - does this have to do with EM/hierarchical models. not cluster-based?
+# Run the function to see how many clusters
+# it finds to be optimal, set it to search for
+# at least 1 model and up 20.
+# Traditionally this takes a while, so it's uncommented
+# d_clust <- Mclust(as.matrix(raw.filtered), G=1:20)
+# m.best <- dim(d_clust$z)[2]
+# cat("model-based optimal number of clusters:", m.best, "\n")
+# # 3 clusters
+# plot(d_clust)
+
 # ==== NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
 # This is taking a long time
 # nb <- NbClust(raw.filtered, distance = "euclidean",
@@ -28,9 +42,15 @@ plot(1:15, wss, type="b",
 
 # ==== PAM ESTIMATION FOR OPTIMAL K ====
 # Estimates 2
-pamk.best <- pamk(raw.filtered)
-cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
-plot(pam(raw.filtered, pamk.best$nc), main="Optimal clustering")
+pam_sils <- c()
+for (i in 1:15) {
+  pam_sils <- c(pam_sils, pam(raw.filtered, k=i)$silinfo$avg.width)
+}
+plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
+
+# ==== GAP STATISTIC ESTIMATION ====
+gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
+plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
 
 # ==== INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
