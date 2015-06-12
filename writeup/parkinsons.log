@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  12 JUN 2015 15:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  12 JUN 2015 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -271,21 +271,46 @@ Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 (/home/jesse/texmf/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/03/19 v2.1d e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count109
-)) (./parkinsons.aux)
+))
+(/home/jesse/texmf/tex/latex/listings/listings.sty
+\lst@mode=\count110
+\lst@gtempboxa=\box30
+\lst@token=\toks23
+\lst@length=\count111
+\lst@currlwidth=\dimen126
+\lst@column=\count112
+\lst@pos=\count113
+\lst@lostspace=\dimen127
+\lst@width=\dimen128
+\lst@newlines=\count114
+\lst@lineno=\count115
+\lst@maxwidth=\dimen129
+
+(/home/jesse/texmf/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count116
+\lst@skipnumbers=\count117
+\lst@framebox=\box31
+)
+(/home/jesse/texmf/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+ (./parkinsons.aux)
 \openout1 = `parkinsons.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -323,23 +348,24 @@ LaTeX Font Info:    ... okay on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen126
-\scratchbox=\box30
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen127
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks24
+\scratchcounter=\count118
+\scratchdimen=\dimen130
+\scratchbox=\box32
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen131
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
+\everyMPtoPDFconversion=\toks25
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 26.
+\c@lstlisting=\count124
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 26.
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -350,14 +376,15 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ../figures/pca-eigenvalues.png Graphic file (type png)
 
 <use ../figures/pca-eigenvalues.png>
-Package pdftex.def Info: ../figures/pca-eigenvalues.png used on input line 99.
+Package pdftex.def Info: ../figures/pca-eigenvalues.png used on input line 104.
+
 (pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
 
 <../figures/kmeans-wss-error.png, id=11, 691.58376pt x 458.71375pt>
 File: ../figures/kmeans-wss-error.png Graphic file (type png)
 
 <use ../figures/kmeans-wss-error.png>
-Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 114
+Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 119
 .
 (pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
 
@@ -365,64 +392,65 @@ Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 114
 File: ../figures/gap-statistic.png Graphic file (type png)
 
 <use ../figures/gap-statistic.png>
-Package pdftex.def Info: ../figures/gap-statistic.png used on input line 128.
+Package pdftex.def Info: ../figures/gap-statistic.png used on input line 133.
 (pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
 
 <../figures/asw.png, id=13, 691.58376pt x 458.71375pt>
 File: ../figures/asw.png Graphic file (type png)
 
 <use ../figures/asw.png>
-Package pdftex.def Info: ../figures/asw.png used on input line 140.
+Package pdftex.def Info: ../figures/asw.png used on input line 145.
 (pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
- [2]
-<../figures/dtree-kmeans-pruned-2.pdf, id=21, 505.89pt x 505.89pt>
+ [2] [3 <../figures/pca-eigenvalues.png>] [4 <../figures/kmeans-wss-error.png>]
+ [5 <../figures/gap-statistic.png>]
+<../figures/dtree-kmeans-pruned-2.pdf, id=34, 505.89pt x 505.89pt>
 File: ../figures/dtree-kmeans-pruned-2.pdf Graphic file (type pdf)
 
 <use ../figures/dtree-kmeans-pruned-2.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-2.pdf used on input lin
-e 181.
+e 261.
 (pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
 
-<../figures/dtree-kmeans-pruned-3.pdf, id=22, 505.89pt x 505.89pt>
+<../figures/dtree-kmeans-pruned-3.pdf, id=35, 505.89pt x 505.89pt>
 File: ../figures/dtree-kmeans-pruned-3.pdf Graphic file (type pdf)
 
 <use ../figures/dtree-kmeans-pruned-3.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-3.pdf used on input lin
-e 188.
+e 268.
 (pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
 
-<../figures/dtree-kmeans-pruned-4.pdf, id=23, 505.89pt x 505.89pt>
+<../figures/dtree-kmeans-pruned-4.pdf, id=36, 505.89pt x 505.89pt>
 File: ../figures/dtree-kmeans-pruned-4.pdf Graphic file (type pdf)
 
 <use ../figures/dtree-kmeans-pruned-4.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-4.pdf used on input lin
-e 195.
+e 275.
 (pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
- [3 <../figures/pca-eigenvalues.png>] [4 <../figures/kmeans-wss-error.png> <../
-figures/gap-statistic.png>] [5 <../figures/asw.png>] [6 <../figures/dtree-kmean
-s-pruned-2.pdf>] [7 <../figures/dtree-kmeans-pruned-3.pdf>] [8 <../figures/dtre
-e-kmeans-pruned-4.pdf>]
-(./parkinsons.aux) ) 
+ [6 <../figures/asw.png>] [7 <../figures/dtree-kmeans-pruned-2.pdf>] [8 <../fig
+ures/dtree-kmeans-pruned-3.pdf>]
+[9 <../figures/dtree-kmeans-pruned-4.pdf>] (./parkinsons.aux) ) 
 Here is how much of TeX's memory you used:
- 3893 strings out of 495028
- 52133 string characters out of 6181497
- 125744 words of memory out of 5000000
- 6993 multiletter control sequences out of 15000+600000
- 21087 words of font info for 78 fonts, out of 8000000 for 9000
+ 5078 strings out of 495028
+ 69536 string characters out of 6181497
+ 210862 words of memory out of 5000000
+ 8165 multiletter control sequences out of 15000+600000
+ 21256 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,14n,43p,807b,269s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on parkinsons.pdf (8 pages, 152532 bytes).
+ 42i,14n,43p,798b,1427s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on parkinsons.pdf (9 pages, 172081 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

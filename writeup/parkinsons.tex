@@ -13,6 +13,11 @@
 \usepackage{rotating}
 \usepackage{epstopdf}
 \usepackage{tablefootnote}
+% for word wrap verbatim
+\usepackage{listings}
+\lstset{
+   breaklines=true,
+   basicstyle=\ttfamily}
 % \pagestyle{fancy}
 % \lhead{Jesse Mu}
 % \rhead{CSCI339 Term Project}
@@ -144,33 +149,111 @@ Figure~\ref{fig:asw} shows average silhouette width as being consistently under
 
 % \subsubsection{\texttt{NbClust} package}
 
-\subsection{Decision Tree classifier based on clusters}
-
+\subsection{Cluster statistics}
 % CLUSTERS: 2
 % ================================
-% Root node error: 0.2573624
-% Complexity Parameter: 0.01741294
-% 10-fold CV error: 0.1241997
+% Sizes: 201 580
+% WithinSS: 4248.585 4132.434
+% Sum WithinSS: 8381.019
 % CLUSTERS: 3
 % ================================
-% Root node error: 0.4571063
-% Complexity Parameter: 0.0140056
-% 10-fold CV error: 0.1766965
+% Sizes: 420 231 130
+% WithinSS: 2618.368 1973.82 3076.542
+% Sum WithinSS: 7668.73
 % CLUSTERS: 4
 % ================================
+% Sizes: 61 372 145 203
+% WithinSS: 1481.25 1845.389 2147.988 1609.555
+% Sum WithinSS: 7084.183
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l|l|l|l}
+    $k$ & $n$ & Within SS & sum(Within SS) \\
+    \hline
+    2 & 201/580 & 4248.585/4132.434 & 8381.019 \\
+    3 & 420/231/130 & 2618.368/1973.82/3076.542 &  7668.73 \\
+    4 & 61/372/145/203 & 1481.25/1845.389/2147.988/1609.555 & 7084.183
+  \end{tabular}
+  \caption{Cluster statistics}
+  \label{tab:cluster-statistics}
+\end{table}
+
+\subsection{Centers}
+Omitted; too much information.
+\iffalse
+\begin{lstlisting}
+CLUSTERS: 2
+================================
+> 1   nms_d1    nms_d2    nms_d3    nms_d4    nms_d5    nms_d6    nms_d7    nms_d8    nms_d9    tremor  bradykin
+0.7328282 0.9345720 0.9810287 0.8195052 0.7908599 0.8551764 0.8493069 0.6376458 0.6289463 0.2008254 0.8019272
+ rigidity     axial      pigd
+0.6840038 1.0834910 1.0634082
+> 2    nms_d1     nms_d2     nms_d3     nms_d4     nms_d5     nms_d6     nms_d7     nms_d8     nms_d9     tremor
+-0.2539629 -0.3238776 -0.3399772 -0.2840009 -0.2740739 -0.2963629 -0.2943288 -0.2209772 -0.2179624 -0.0695964
+  bradykin   rigidity      axial       pigd
+-0.2779093 -0.2370427 -0.3754857 -0.3685259
+CLUSTERS: 3
+================================
+> 1    nms_d1     nms_d2     nms_d3     nms_d4     nms_d5     nms_d6     nms_d7     nms_d8     nms_d9     tremor
+-0.2699345 -0.3571672 -0.3574942 -0.2776501 -0.2579928 -0.3084614 -0.3030016 -0.2270260 -0.1867338 -0.2531402
+  bradykin   rigidity      axial       pigd
+-0.6091393 -0.5542033 -0.5792769 -0.5775312
+> 2     nms_d1      nms_d2      nms_d3      nms_d4      nms_d5      nms_d6      nms_d7      nms_d8      nms_d9
+-0.13369057 -0.07938936 -0.05832302 -0.22742096 -0.18981647 -0.02540265 -0.15964421 -0.08973885 -0.16993231
+     tremor    bradykin    rigidity       axial        pigd
+ 0.39256552  0.69210577  0.63956741  0.43974428  0.44762184
+> 3   nms_d1    nms_d2    nms_d3    nms_d4    nms_d5    nms_d6    nms_d7    nms_d8    nms_d9    tremor  bradykin
+1.1096539 1.2949935 1.2586166 1.3011330 1.1708044 1.0417061 1.2626038 0.8929277 0.9052504 0.1202787 0.7381697
+ rigidity     axial      pigd
+0.6540408 1.0901181 1.0704805
+CLUSTERS: 4
+================================
+> 1   nms_d1    nms_d2    nms_d3    nms_d4    nms_d5    nms_d6    nms_d7    nms_d8    nms_d9    tremor  bradykin
+1.5558981 1.4133002 1.1184738 1.9877193 1.2550406 1.5834288 1.4194860 0.7793719 0.8480830 0.4984324 1.5155436
+ rigidity     axial      pigd
+1.5055810 1.9495563 1.9242566
+> 2    nms_d1     nms_d2     nms_d3     nms_d4     nms_d5     nms_d6     nms_d7     nms_d8     nms_d9     tremor
+-0.3206187 -0.4993585 -0.4670797 -0.3084269 -0.3380326 -0.3885648 -0.3868053 -0.2817080 -0.3620072 -0.2526726
+  bradykin   rigidity      axial       pigd
+-0.5841212 -0.5460419 -0.5968519 -0.5927227
+> 3     nms_d1      nms_d2      nms_d3      nms_d4      nms_d5      nms_d6      nms_d7      nms_d8      nms_d9
+ 0.35964469  0.82182933  0.92114183  0.30981044  0.75178256  0.42320932  0.66431905  0.63701383  0.85893238
+     tremor    bradykin    rigidity       axial        pigd
+-0.34050774 -0.15173201 -0.20269121  0.04852427  0.04032785
+> 4     nms_d1      nms_d2      nms_d3      nms_d4      nms_d5      nms_d6      nms_d7      nms_d8      nms_d9
+-0.13688715 -0.09662665 -0.13812235 -0.25339210 -0.29466914 -0.06605132 -0.19223309 -0.17297198 -0.20498319
+     tremor    bradykin    rigidity       axial        pigd
+ 0.55647025  0.72337965  0.69299204  0.47325105  0.47914113
+\end{lstlisting}
+\fi
+
+\subsection{Decision tree classifier based on clusters}
+% seed = 911
+% CLUSTERS: 2
+% ================================
+% Complexity Parameter: 0.03482587
+% 10-fold CV error: 0.134443
+% Root node error: 0.2573624
+% CLUSTERS: 3
+% ================================
+% Complexity Parameter: 0.01
+% 10-fold CV error: 0.1946223
+% Root node error: 0.4622279
+% CLUSTERS: 4
+% ================================
+% Complexity Parameter: 0.01
+% 10-fold CV error: 0.2483995
 % Root node error: 0.5236876
-% Complexity Parameter: 0.01222494
-% 10-fold CV error: 0.2535211
 \begin{table}[ht]
   \centering
   \begin{tabular}{l|l|l|l|l|l}
-    K & CP\tablefootnote{Complexity Parameter} & CV Xerror\tablefootnote{10-fold cross
+    $k$ & CP\tablefootnote{Complexity Parameter} & CV Xerror\tablefootnote{10-fold cross
     validation} & Root Feature &
     Root Error & Figure \\
     \hline
-    2 & 0.017 & 0.124 & & 0.257 & Figure~\ref{fig:kmeans-dtree-2} \\
-    3 & 0.014 & 0.177 & & 0.457 & Figure~\ref{fig:kmeans-dtree-3} \\
-    4 & 0.012 & 0.254 & & 0.524 & Figure~\ref{fig:kmeans-dtree-4} \\
+    2 & 0.0348 & 0.134 & axial $\geq$ 0.44 & 0.257 & Figure~\ref{fig:kmeans-dtree-2} \\
+    3 & 0.0100 & 0.194 & bradykin $<$ 0.0041 & 0.462 & Figure~\ref{fig:kmeans-dtree-3} \\
+    4 & 0.0100 & 0.248 & bradykin $<$ 0.0041 & 0.523 & Figure~\ref{fig:kmeans-dtree-4} \\
   \end{tabular}
   \caption{$k$-kmeans decision trees statistics}
   \label{tab:k-means-dtrees}
