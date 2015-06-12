@@ -5,6 +5,13 @@
 \usepackage{bm}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
+% Random packages from
+% http://tex.stackexchange.com/questions/50070/landscape-figure-in-latex
+% Necessary for sideways pictures
+\usepackage{wrapfig}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{epstopdf}
 \usepackage{tablefootnote}
 % \pagestyle{fancy}
 % \lhead{Jesse Mu}
@@ -25,7 +32,7 @@
 170 subjects with missing values (brought down to 781); these were removed
 automatically, even if the missing values were not included in the selected
 features below. This will need to be changed later on, by keeping those
-removed that still have all selceted features and perhaps with some
+removed that still have all selected features and perhaps with some
 compensation for missing values.
 
 \subsection{Selected Features}
@@ -55,7 +62,7 @@ Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
     pigd & float & \%9.0g & postural instability and gait difficulty \\
   \end{tabular}
   \caption{Selected Features and Details}
-  \label{tab:selcted_features}
+  \label{tab:selected-features}
 \end{table}
 
 \begin{table}[ht]
@@ -79,7 +86,7 @@ axial&    3.28&  2.75&   0-12 \\
 pigd&     3.36&  2.77&   0-12 \\
   \end{tabular}
   \caption{Descriptive Statistics}
-  \label{tab:descriptive_statistics}
+  \label{tab:descriptive-statistics}
 \end{table}
 
 \subsection{Dimensionality Reduction: PCA}
@@ -139,9 +146,57 @@ Figure~\ref{fig:asw} shows average silhouette width as being consistently under
 
 \subsection{Decision Tree classifier based on clusters}
 
-% TODO: Use compressed function to plot decision trees based on clusters with
-% 2, 3, 4 groups.
-% See if there are any common factors here!
+% CLUSTERS: 2
+% ================================
+% Root node error: 0.2573624
+% Complexity Parameter: 0.01741294
+% 10-fold CV error: 0.1241997
+% CLUSTERS: 3
+% ================================
+% Root node error: 0.4571063
+% Complexity Parameter: 0.0140056
+% 10-fold CV error: 0.1766965
+% CLUSTERS: 4
+% ================================
+% Root node error: 0.5236876
+% Complexity Parameter: 0.01222494
+% 10-fold CV error: 0.2535211
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l|l|l|l|l|l}
+    K & CP\footnote{Complexity Parameter} & CV Xerror\footnote{10-fold cross
+    validation} & Root Feature &
+    Root Error & Figure \\
+    \hline
+    2 & 0.017 & 0.124 & & 0.257 & Figure~\ref{fig:kmeans-dtree-2} \\
+    3 & 0.014 & 0.177 & & 0.457 & Figure~\ref{fig:kmeans-dtree-3} \\
+    4 & 0.012 & 0.254 & & 0.524 & Figure~\ref{fig:kmeans-dtree-4} \\
+  \end{tabular}
+  \caption{$k$-kmeans decision trees statistics}
+  \label{tab:k-means-dtrees}
+\end{table}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{dtree-kmeans-pruned-2.pdf}
+  \caption{Decision Tree from $k$-means clustering, 2 clusters}
+  \label{fig:kmeans-dtree-2}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{dtree-kmeans-pruned-3.pdf}
+  \caption{Decision Tree from $k$-means clustering, 3 clusters}
+  \label{fig:kmeans-dtree-3}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{dtree-kmeans-pruned-4.pdf}
+  \caption{Decision Tree from $k$-means clustering, 4 clusters}
+  \label{fig:kmeans-dtree-4}
+\end{figure}
+
 
 \section{Biclustering}
 
