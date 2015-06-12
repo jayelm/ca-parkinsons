@@ -178,6 +178,17 @@ for (i in 2:4) {
   trees[[istr]] <-  kmeans_dtree(raw.filtered, i, save = TRUE)
 }
 
+# ==== PRINT GLOBAL TREE STATS ====
+for (i in 2:4) {
+  istr <- paste("clusters", i, sep="")
+  t <- trees[[istr]]$pruned.tree
+  cat("CLUSTERS: ", i, "\n", sep="")
+  cat("================================\n")
+  cat("Root node error: ", t$frame$dev[1L] / t$frame$n[1L], "\n", sep="")
+  cat("Complexity Parameter: ", tail(t$cptable[, "CP"], n=1), "\n", sep="")
+  cat("10-fold CV error: ", trees[[istr]]$xv.error.pruned, "\n", sep="")
+}
+
 # ==== NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
 # information
