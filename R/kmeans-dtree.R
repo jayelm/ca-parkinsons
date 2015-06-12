@@ -198,9 +198,24 @@ for (i in 2:4) {
   cl <- trees[[istr]]$clustering
   cat("CLUSTERS: ", i, "\n", sep="")
   cat("================================\n")
-  cat("WithinSS:", cl$withinss, "\n", sep=" ")
   cat("Sizes:", cl$size, "\n", sep=" ")
+  cat("WithinSS:", cl$withinss, "\n", sep=" ")
+  cat("Sum WithinSS:", sum(cl$withinss), "\n", sep=" ")
 }
+
+# ==== PRINT CENTERS ====
+for (i in 2:4) {
+  istr <- paste("clusters", i, sep="")
+  cl <- trees[[istr]]$clustering
+  cat("CLUSTERS: ", i, "\n", sep="")
+  cat("================================\n")
+  for (j in 1:i) {
+    center <- cl$centers[j, ]
+    cat("> ", j, sep="")
+    print(center)
+  }
+}
+
 # ==== NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
 # information
