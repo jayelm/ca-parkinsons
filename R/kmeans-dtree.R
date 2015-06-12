@@ -105,7 +105,7 @@ kmeans_dtree <- function(data, k, save = FALSE) {
   labeled_data <- rename(labeled_data, c("cl$cluster"="cluster"))
   # Convert to factor
   labeled_data$cluster <- as.factor(labeled_data$cluster)
-  t <- rpart(cluster ~ ., trainset.labeled)
+  t <- rpart(cluster ~ ., labeled_data)
 
   # Find 10-fold CV error rate for UNPRUNED tree
   # Old resub rate method
