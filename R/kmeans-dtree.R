@@ -1,6 +1,7 @@
 # ==== LOAD LIBRARIES ====
 library(cluster)
 library(rpart)
+library(rpart.plot)
 library(plyr)
 library(fpc)
 library(NbClust)
@@ -60,8 +61,8 @@ str(splits)
 splits$trainset = raw.filtered
 
 # FIXME: How are we identifying k = 4? (Arbitrary right now)
-K = 3
-cl <- kmeans(splits$trainset, K, nstart = 25)
+# Arbitrary 4 choice - variable is later
+cl <- kmeans(splits$trainset, 4, nstart = 25)
 
 # Add cluster label to original data, rename
 trainset.labeled <- cbind(splits$trainset, cl$cluster)
@@ -98,38 +99,83 @@ text(pruned.t, use.n=TRUE, all=TRUE, cex=.8, pos=1)
 # ==== KMEANS CLUSTERING COMPRESSED FUNCTION ====
 # Use for iteration!
 kmeans_dtree <- function(data, k, save = FALSE) {
-  cl <- kmeans(splits$trainset, K, nstart = 25)
+  cl <- kmeans(splits$trainset, k, nstart = 25)
   labeled_data <- cbind(data, cl$cluster)
   # Add cluster label to original data, rename
   labeled_data <- rename(labeled_data, c("cl$cluster"="cluster"))
   # Convert to factor
   labeled_data$cluster <- as.factor(labeled_data$cluster)
   t <- rpart(cluster ~ ., trainset.labeled)
-  # Print error statistics
-  printcp(t)
-  # Find resubstitution rate
-  pred.t <- table(predict(t, type="class"), trainset.labeled$cluster)
-  resub <- 1-sum(diag(pred.t))/sum(pred.t)
 
-  # Prune, find minimum cp
+  # Find 10-fold CV error rate for UNPRUNED tree
+  # Old resub rate method
+  # pred.t <- table(predict(t, type="class"), trainset.labeled$cluster)
+  # resub <- 1-sum(diag(pred.t))/sum(pred.t)
+
+  # From printcp source, this is how root node error is calculated
+  # cat("Root node error: ", format(t$frame$dev[1L], digits = digits),
+  #     "/", t$frame$n[1L], " = ", format(t$frame$dev[1L]/t$frame$n[1L],
+  #                                     digits = digits), "\n\n", sep = "")
+  # Specifically the root node error is
+  root.node.error.unpruned <- t$frame$dev[1L] / t$frame$n[1L]
+  # Then, multiply by minimum xerror. We know this is the last element of the cp table,
+  # Since that's how we pruned it
+  xerror.min.unpruned <- tail(t$cptable[, "xerror"], n=1)
+  xv.error.unpruned <- xerror.min.unpruned * root.node.error.unpruned
+
+
+  # PRUNE, find complexity parameter associated with minimum cross-validated error
+  # TODO: Maybe select within 1 stddev?
   cp <- t$cptable[which.min(t$cptable[,"xerror"]),"CP"]
   pruned.t <- prune(t, cp = cp)
 
-  if (save) {
-    # TODO: Find a way to save the plots!!
-  }
-  plot(t, uniform=TRUE, main="Decision Tree")
-  text(t, use.n=TRUE, all=TRUE, cex=.8)
+  # Calculate 10-fold CV error for PRUNED tree
+  root.node.error.pruned <- pruned.t$frame$dev[1L] / pruned.t$frame$n[1L]
+  xerror.min.pruned <- tail(pruned.t$cptable[, "xerror"], n=1)
+  xv.error.pruned <- xerror.min.pruned * root.node.error.pruned
 
-  plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
-  text(pruned.t, use.n=TRUE, all=TRUE, cex=.8)
+  # Plot and save trees
+  # Also look at fancyRpartPlot()
+  # fancyRpartPlot(tree.2)
+  # plot(t, uniform=TRUE, main="Decision Tree")
+  # text(t, use.n=TRUE, all=TRUE, cex=.8)
+  # ?prp for extra keyword args - this one displays class proportions
+  prp(t, extra = 1, main = paste("Unpruned Tree, ", i, " clusters", sep=""))
+  # Get usr coordinates to add text to bottom right
+  # NOTE: doesn't work, passing for now.
+  # usr <- par("usr")
+  # text(usr[2], usr[3], paste("10-fold CV error: ", xv.error.unpruned, sep=""), adj=c(1, 0))
+  if (save) {
+    dev.copy(pdf, paste('../figures/dtree-kmeans-unpruned-', k, '.pdf', sep=''))
+    dev.off()
+  }
+
+  prp(pruned.t, extra = 1, main = paste("Pruned Tree, ", i, " clusters", sep=""))
+  # usr <- par("usr")
+  # text(usr[2], usr[3], paste("10-fold CV error: ", xv.error.pruned, sep=""), adj=c(1, 0))
+  # plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
+  # text(pruned.t, use.n=TRUE, all=TRUE, cex=.8)
+  if (save) {
+    dev.copy(pdf, paste('../figures/dtree-kmeans-pruned-', k, '.pdf', sep=''))
+    dev.off()
+  }
 
   list(
     "data" = labeled_data,
     "unpruned.tree" = t,
+    # These are the same, you idiot.
+    "xv.error.unpruned" = xv.error.unpruned,
     "pruned.tree" = pruned.t,
-    "resub.error" = resub
+    "xv.error.pruned" = xv.error.pruned
   )
+}
+
+# ==== KMEANS DTREE OBTAINING PLOTS ====
+trees <- vector(mode = "list", length = 3)
+names(trees) <- c("clusters2", "clusters3", "clusters4")
+for (i in 2:4) {
+  istr <- paste("clusters", i, sep="")
+  trees[[istr]] <-  kmeans_dtree(raw.filtered, i, save = TRUE)
 }
 
 # ==== NOTES ====
