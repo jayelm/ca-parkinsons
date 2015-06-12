@@ -98,7 +98,9 @@ text(pruned.t, use.n=TRUE, all=TRUE, cex=.8, pos=1)
 
 # ==== KMEANS CLUSTERING COMPRESSED FUNCTION ====
 # Use for iteration!
-kmeans_dtree <- function(data, k, save = FALSE) {
+kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
+  # Reproducibility!
+  set.seed(seed)
   cl <- kmeans(splits$trainset, k, nstart = 25)
   labeled_data <- cbind(data, cl$cluster)
   # Add cluster label to original data, rename
@@ -162,6 +164,7 @@ kmeans_dtree <- function(data, k, save = FALSE) {
 
   list(
     "data" = labeled_data,
+    "clustering" = cl,
     "unpruned.tree" = t,
     # These are the same, you idiot.
     "xv.error.unpruned" = xv.error.unpruned,
@@ -184,11 +187,20 @@ for (i in 2:4) {
   t <- trees[[istr]]$pruned.tree
   cat("CLUSTERS: ", i, "\n", sep="")
   cat("================================\n")
-  cat("Root node error: ", t$frame$dev[1L] / t$frame$n[1L], "\n", sep="")
   cat("Complexity Parameter: ", tail(t$cptable[, "CP"], n=1), "\n", sep="")
   cat("10-fold CV error: ", trees[[istr]]$xv.error.pruned, "\n", sep="")
+  cat("Root node error: ", t$frame$dev[1L] / t$frame$n[1L], "\n", sep="")
 }
 
+# ==== PRINT CLUSTER STATS ====
+for (i in 2:4) {
+  istr <- paste("clusters", i, sep="")
+  cl <- trees[[istr]]$clustering
+  cat("CLUSTERS: ", i, "\n", sep="")
+  cat("================================\n")
+  cat("WithinSS:", cl$withinss, "\n", sep=" ")
+  cat("Sizes:", cl$size, "\n", sep=" ")
+}
 # ==== NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
 # information
