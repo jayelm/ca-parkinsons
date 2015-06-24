@@ -13,6 +13,7 @@ library(mclust)
 # So this should be false unless I've changed something about the
 # kmeans analysis
 SAVE.DTREES = FALSE
+# TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
 source('./preprocessing.R')
