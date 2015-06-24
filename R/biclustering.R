@@ -1,24 +1,24 @@
-# ==== LIBRARIES ====
+# LIBRARIES ====
 # http://cran.r-project.org/web/packages/biclust/biclust.pdf
 library(biclust)  # Quite a recent package (May 12, 2015)
 
-# ==== LOAD DATA ====
+# LOAD DATA ====
 source('./preprocessing.R')
 
-# ==== CONSTANTS ====
+# CONSTANTS ====
 # Number of biclusters
 # Note - N can't be more than 16 for par, will need to fix that later
 # (multiple plots/pagination)
 N <- 16
 
-# ==== BICLUSTERING ====
+# BICLUSTERING ====
 # Bimax algorithm
 bcl <- biclust(as.matrix(raw.filtered), method=BCBimax(), minr=2, minc=2, number=N)
 
-# ==== BUBBLEPLOT (?) ====
+# BUBBLEPLOT (?) ====
 bubbleplot(raw.filtered, bcl)
 
-# ==== CLUSTER HEATMAPS ====
+# CLUSTER HEATMAPS ====
 
 # Optimal grid organization
 par(mfrow = n2mfrow(N))

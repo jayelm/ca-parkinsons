@@ -1,4 +1,4 @@
-# ==== LOAD LIBRARIES ====
+# LOAD LIBRARIES ====
 library(cluster)
 library(rpart)
 library(rpart.plot)
@@ -6,10 +6,10 @@ library(plyr)
 library(fpc)
 library(NbClust)
 
-# ==== LOAD DATA ====
+# LOAD DATA ====
 source('./preprocessing.R')
 
-# ==== VISUALIZE WSS ERROR TO FIND OPTIMAL K ====
+# VISUALIZE WSS ERROR TO FIND OPTIMAL K ====
 # NOTE: Doesn't work well, there isn't any elbow
 
 wss <- (nrow(raw.filtered)-1)*sum(apply(raw.filtered, 2, var))
@@ -20,7 +20,7 @@ for (i in 2:15) {
 plot(1:15, wss, type="b",
      xlab="Number of Clusters", ylab="Within groups sum of squares")
 
-# ==== TODO: BIC ====
+# TODO: BIC ====
 # See http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters
 library(mclust)
 # NOW - does this have to do with EM/hierarchical models. not cluster-based?
@@ -34,14 +34,14 @@ library(mclust)
 # # 3 clusters
 # plot(d_clust)
 
-# ==== NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
+# NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
 # This is taking a long time
 # nb <- NbClust(raw.filtered, distance = "euclidean",
 #               min.nc=2, max.nc=15, method = "kmeans",
 #               index = "alllong", alphaBeale = 0.1)
 # hist(nb$Best.nc[1,], breaks = max(na.omit(nb$Best.nc[1,])))
 
-# ==== PAM ESTIMATION FOR OPTIMAL K ====
+# PAM ESTIMATION FOR OPTIMAL K ====
 # Estimates 2
 pam_sils <- c()
 for (i in 1:15) {
@@ -49,11 +49,11 @@ for (i in 1:15) {
 }
 plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
 
-# ==== GAP STATISTIC ESTIMATION ====
+# GAP STATISTIC ESTIMATION ====
 gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
 plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
 
-# ==== INITIAL KMEANS CLUSTERING ====
+# INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
 str(splits)
 # NOTE: We're not splitting yet! (Don't know what the learning task is!)
@@ -70,7 +70,7 @@ trainset.labeled <- rename(trainset.labeled, c("cl$cluster"="cluster"))
 # Convert to factor
 trainset.labeled$cluster <- as.factor(trainset.labeled$cluster)
 
-# ==== BUILD DECISION TREE (UNPRUNED) ====
+# BUILD DECISION TREE (UNPRUNED) ====
 t <- rpart(cluster ~ ., trainset.labeled)
 
 # Print error statistics
@@ -80,23 +80,23 @@ pred.t <- table(predict(t, type="class"), trainset.labeled$cluster)
 resub <- 1-sum(diag(pred.t))/sum(pred.t)
 print(resub)
 
-# ==== PLOT RESULTS (UNPRUNED TREE) ====
+# PLOT RESULTS (UNPRUNED TREE) ====
 plot(t, uniform=TRUE, main="Decision Tree")
 text(t, use.n=TRUE, all=TRUE, cex=.8)
 
-# ==== PRUNE TREE ====
+# PRUNE TREE ====
 # first find minimum cp
 cp <- t$cptable[which.min(t$cptable[,"xerror"]),"CP"]
 print(cp)
 pruned.t <- prune(t, cp = cp)
 # printcp(pruned.t)
 
-# ==== PLOT RESULTS (PRUNED TREE) ====
+# PLOT RESULTS (PRUNED TREE) ====
 plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
 text(pruned.t, use.n=TRUE, all=TRUE, cex=.8, pos=1)
 # stopping point - pruned tree
 
-# ==== KMEANS CLUSTERING COMPRESSED FUNCTION ====
+# KMEANS CLUSTERING COMPRESSED FUNCTION ====
 # Use for iteration!
 kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
   # Reproducibility!
@@ -173,7 +173,7 @@ kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
   )
 }
 
-# ==== KMEANS DTREE OBTAINING PLOTS ====
+# KMEANS DTREE OBTAINING PLOTS ====
 trees <- vector(mode = "list", length = 3)
 names(trees) <- c("clusters2", "clusters3", "clusters4")
 for (i in 2:4) {
@@ -181,7 +181,7 @@ for (i in 2:4) {
   trees[[istr]] <-  kmeans_dtree(raw.filtered, i, save = TRUE)
 }
 
-# ==== PRINT GLOBAL TREE STATS ====
+# PRINT GLOBAL TREE STATS ====
 for (i in 2:4) {
   istr <- paste("clusters", i, sep="")
   t <- trees[[istr]]$pruned.tree
@@ -192,7 +192,7 @@ for (i in 2:4) {
   cat("Root node error: ", t$frame$dev[1L] / t$frame$n[1L], "\n", sep="")
 }
 
-# ==== PRINT CLUSTER STATS ====
+# PRINT CLUSTER STATS ====
 for (i in 2:4) {
   istr <- paste("clusters", i, sep="")
   cl <- trees[[istr]]$clustering
@@ -203,7 +203,7 @@ for (i in 2:4) {
   cat("Sum WithinSS:", sum(cl$withinss), "\n", sep=" ")
 }
 
-# ==== PRINT CENTERS ====
+# PRINT CENTERS ====
 for (i in 2:4) {
   istr <- paste("clusters", i, sep="")
   cl <- trees[[istr]]$clustering
@@ -216,7 +216,7 @@ for (i in 2:4) {
   }
 }
 
-# ==== BIND CLUSTER TO ORIGINAL DATA ====
+# BIND CLUSTER TO ORIGINAL DATA ====
 labeled <- vector(mode = "list", length = 3)
 labeled <- lapply(1:3, function(i) cbind(raw.omitted, trees[[paste("clusters", i+1, sep="")]]$clustering$cluster))
 lnames <- c("clusters2", "clusters3", "clusters4")
@@ -226,7 +226,7 @@ for (name in lnames) {
   names(labeled[[name]])[145] <- "cluster"
 }
 
-# ==== COMBINE LABELS WITH ORIGINAL DATA ====
+# COMBINE LABELS WITH ORIGINAL DATA ====
 clusters <- lapply(2:4, function(i) {
   name <- paste("clusters", i, sep="")
   current <- labeled[[name]]
@@ -240,7 +240,7 @@ for (i in 2:4) {
   names(clusters[[paste("clusters", i, sep="")]]) <- 1:i
 }
 
-# ==== SUMMARY OF CLUSTER STATISTICS ====
+# SUMMARY OF CLUSTER STATISTICS ====
 # TODO: Find similarity among the variables "For the interpreter"
 
 interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
@@ -257,7 +257,7 @@ for (i in 2:4) {
   }
 }
 
-# ==== NOTES ====
+# NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
 # information
 # e.g. splits like
