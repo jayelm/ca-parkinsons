@@ -21,7 +21,7 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
 # So this should be false unless I've changed something about the
 # kmeans analysis
 SAVE.DTREES = FALSE
-SAVE.BARPLOTS = FALSE
+SAVE.BOXPLOTS = FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
@@ -332,8 +332,8 @@ for (i in c("2", "3", "4")) {
     guides(fill = FALSE) +
     facet_wrap( ~ variable, scales = "free")
   print(p)
-  if (SAVE.BARPLOTS) {
-    ggsave(paste("../figures/kmeans-summaries-", k, ".pdf", sep=""))
+  if (SAVE.BOXPLOTS) {
+    ggsave(paste("../figures/kmeans-summaries-", i, ".pdf", sep=""))
   }
 }
 
