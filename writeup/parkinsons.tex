@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
+\usepackage{numprint}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 % Random packages from
@@ -22,6 +23,10 @@
 % \lhead{Jesse Mu}
 % \rhead{CSCI339 Term Project}
 \graphicspath{ {../figures/} }
+% Or this, if run from main folder
+% \graphicspath{ {./figures/} }
+
+
 
 \begin{document}
 
@@ -280,8 +285,92 @@ CLUSTERS: 4
   \label{fig:kmeans-dtree-4}
 \end{figure}
 
+\subsection{Summary Statistics based on Clusters}
 
+\begin{lstlisting}
+k = 2, cluster 1
+var,mean,sd,min,max
+age,68.38,9.4,42,89
+sex,0.43,0.5,0,1
+pdonset,57.65,10.81,32,87
+durat_pd,10.73,7.14,0,40
+cisitot,13.07,4.55,2,24
+k = 2, cluster 2
+var,mean,sd,min,max
+age,63.43,9.55,37,89
+sex,0.36,0.48,0,1
+pdonset,56.44,10.62,28,89
+durat_pd,6.99,4.94,0,28
+cisitot,6.64,3.42,0,16
+
+k = 3, cluster 1
+var,mean,sd,min,max
+age,62.69,9.43,37,89
+sex,0.39,0.49,0,1
+pdonset,56.04,10.41,28,89
+durat_pd,6.65,4.66,0,26
+cisitot,5.76,3.15,0,15
+k = 3, cluster 2
+var,mean,sd,min,max
+age,66.17,9.74,38,86
+sex,0.32,0.47,0,1
+pdonset,57.78,11.19,32,84
+durat_pd,8.39,5.79,0,31
+cisitot,9.95,3.5,2,22
+k = 3, cluster 3
+var,mean,sd,min,max
+age,68.62,9.2,50,89
+sex,0.46,0.5,0,1
+pdonset,57.24,10.46,35,87
+durat_pd,11.38,7.52,0,40
+cisitot,13.52,5.01,2,24
+
+k = 4, cluster 1
+var,mean,sd,min,max
+age,71.9,8.1,54,89
+sex,0.46,0.5,0,1
+pdonset,58.28,10.27,35,87
+durat_pd,13.62,7.76,0,40
+cisitot,16.72,4.14,4,24
+k = 4, cluster 2
+var,mean,sd,min,max
+age,62.65,9.63,37,89
+sex,0.36,0.48,0,1
+pdonset,56.13,10.47,28,89
+durat_pd,6.52,4.66,0,25
+cisitot,5.58,3.12,0,15
+k = 4, cluster 3
+var,mean,sd,min,max
+age,64.79,9.3,44,86
+sex,0.47,0.5,0,1
+pdonset,56.2,10.71,35,85
+durat_pd,8.59,6.16,0,27
+cisitot,9.23,3.88,2,19
+k = 4, cluster 4
+var,mean,sd,min,max
+age,66.27,9.47,40,86
+sex,0.33,0.47,0,1
+pdonset,57.84,11.06,32,84
+durat_pd,8.43,5.64,0,31
+cisitot,10.06,3.49,3,22
+\end{lstlisting}
 \section{Biclustering}
+
+Used BCBimax clustering algorithm. Clusters seem quite sparse.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{biclust-16.pdf}
+  \caption{Biclustering $N = 16$}
+  \label{fig:biclust-16}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{bubbleplot-16.pdf}
+  \caption{Bubbleplot $N = 16$}
+  \label{fig:bubbleplot-16}
+\end{figure}
 
 \section{Subspace clustering}
 
