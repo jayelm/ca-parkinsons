@@ -250,19 +250,37 @@ for (i in 2:4) {
 
 # SUMMARY OF CLUSTER STATISTICS ====
 # TODO: Find similarity among the variables "For the interpreter"
+# Rounding constant
+PRECISION = 3
 
 interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
 for (i in 2:4) {
   name <- paste("clusters", i, sep="")
   current <- clusters[[name]]
+  # Begin collecting clusters of csv
+  clusters.csv <- c()
   for (c in 1:i) {
     cname <- paste(c)
     # WE ONLY CARE ABOUT THE INTERPRETED
     current.filtered <- current[[cname]][, interpreted]
+    # Print out stuff first
+    # NOTE: this format differs from what is written to csv (csv has cluster column)
     cat("k = ", i, ", ", "CLUSTER ", cname, '\n', sep="")
+    filtered.description <- round(describe(current.filtered)[, c('mean', 'sd', 'min', 'max')],
+                                  PRECISION)
     # Select a couple of statistics
-    write.csv(round(describe(current.filtered)[, c('mean', 'sd', 'min', 'max')], 2))
+    write.csv(filtered.description)
+    # Attach varaible rownames, number of cluster (c)
+    filtered.description <- cbind(variable=rownames(filtered.description), filtered.description)
+    filtered.description <- cbind(cluster=rep(c, length(interpreted)), filtered.description)
+    # Then add to csv list
+    clusters.csv <- rbind(clusters.csv, filtered.description)
   }
+  # Write cluster summaries as csv to data folder
+  # NOTE: This (should) stays the same because of the seeding, unlike the PDFs,
+  # so we don't need a boolean flag here
+  write.csv(clusters.csv, file = paste("../data/kmeans-summaries-", i, ".csv", sep=""),
+            row.names = FALSE)
 }
 
 # NOTES ====
