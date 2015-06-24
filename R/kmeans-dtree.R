@@ -280,8 +280,8 @@ for (i in 2:4) {
   # Begin collecting clusters of csv
   summaries.csv <- c()
   clusters.csv <- c()
-  for (c in 1:i) {
-    cname <- paste(c)
+  for (clus in 1:i) {
+    cname <- paste(clus)
     # WE ONLY CARE ABOUT THE INTERPRETED
     # FALSE - now we're going to just include everything
     current.filtered <- current[[cname]][, INTERPRETED]
@@ -294,12 +294,12 @@ for (i in 2:4) {
     write.csv(filtered.description)
     # Attach variable rownames, number of cluster (c)
     filtered.description <- cbind(variable=rownames(filtered.description), filtered.description)
-    filtered.description <- cbind(cluster=rep(c, length(INTERPRETED)), filtered.description)
+    filtered.description <- cbind(cluster=rep(clus, length(INTERPRETED)), filtered.description)
     # Then add to csv list
     summaries.csv <- rbind(summaries.csv, filtered.description)
 
     # Attach cluster id to all elements in the cluster
-    filtered.with_clusters <- cbind(cluster=rep(c, nrow(current.filtered)), current.filtered)
+    filtered.with_clusters <- cbind(cluster=rep(clus, nrow(current.filtered)), current.filtered)
     clusters.csv <- rbind(clusters.csv, filtered.with_clusters)
   }
   # Write cluster summaries as csv to data folder
