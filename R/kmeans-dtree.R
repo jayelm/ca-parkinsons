@@ -14,6 +14,7 @@ library(ggplot2)
 # So this should be false unless I've changed something about the
 # kmeans analysis
 SAVE.DTREES = FALSE
+SAVE.BARPLOTS = TRUE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
@@ -255,7 +256,14 @@ for (i in 2:4) {
 # Rounding constant
 PRECISION = 3
 
-interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
+# FIXME: The results from shortened list of interpreted variables below, which I've saved in
+# the data folder (for now), are not automatically saved to the data or figures folders. If
+# they're needed, we need to save them again.
+# interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
+interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
+                 "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
+                 "nms_d6", "nms_d7", "nms_d8", "nms_d9",
+                 "tremor", "bradykin", "rigidity", "axial", "pigd")
 for (i in 2:4) {
   name <- paste("clusters", i, sep="")
   current <- clusters[[name]]
@@ -264,6 +272,7 @@ for (i in 2:4) {
   for (c in 1:i) {
     cname <- paste(c)
     # WE ONLY CARE ABOUT THE INTERPRETED
+    # FALSE - now we're going to just include everything
     current.filtered <- current[[cname]][, interpreted]
     # Print out stuff first
     # NOTE: this format differs from what is written to csv (csv has cluster column)
@@ -308,7 +317,9 @@ for (k in c("2", "3", "4")) {
     geom_bar(stat = "identity", position = position_dodge()) +
     geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position = position_dodge(), width = 0.2)
   print(p)
-  ggsave(paste("../figures/kmeans-summaries-", k, ".pdf", sep=""))
+  if (SAVE.BARPLOTS) {
+    ggsave(paste("../figures/kmeans-summaries-", k, ".pdf", sep=""))
+  }
 }
 
 # NOTES ====
