@@ -5,6 +5,14 @@ library(rpart.plot)
 library(plyr)
 library(fpc)
 library(NbClust)
+# library for TODO: BIC
+library(mclust)
+
+# CONSTANTS ====
+# Remember - PDFs can vary even if the (seeded) clusters don't
+# So this should be false unless I've changed something about the
+# kmeans analysis
+SAVE.DTREES = FALSE
 
 # LOAD DATA ====
 source('./preprocessing.R')
@@ -22,7 +30,6 @@ plot(1:15, wss, type="b",
 
 # TODO: BIC ====
 # See http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters
-library(mclust)
 # NOW - does this have to do with EM/hierarchical models. not cluster-based?
 # Run the function to see how many clusters
 # it finds to be optimal, set it to search for
@@ -178,7 +185,8 @@ trees <- vector(mode = "list", length = 3)
 names(trees) <- c("clusters2", "clusters3", "clusters4")
 for (i in 2:4) {
   istr <- paste("clusters", i, sep="")
-  trees[[istr]] <-  kmeans_dtree(raw.filtered, i, save = TRUE)
+  # Remember - PDFs can vary even if the (seeded) clusters don't
+  trees[[istr]] <-  kmeans_dtree(raw.filtered, i, save = SAVE.DTREES)
 }
 
 # PRINT GLOBAL TREE STATS ====
@@ -250,10 +258,10 @@ for (i in 2:4) {
   for (c in 1:i) {
     cname <- paste(c)
     # WE ONLY CARE ABOUT THE INTERPRETED
-    interpreted <- current[[cname]][, interpreted]
+    current.filtered <- current[[cname]][, interpreted]
     cat("k = ", i, ", ", "CLUSTER ", cname, '\n', sep="")
     # Select a couple of statistics
-    write.csv(round(describe(interpreted)[, c('mean', 'sd', 'min', 'max')], 2))
+    write.csv(round(describe(current.filtered)[, c('mean', 'sd', 'min', 'max')], 2))
   }
 }
 
