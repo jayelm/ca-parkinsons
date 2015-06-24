@@ -10,11 +10,17 @@ library(mclust)
 library(ggplot2)
 
 # CONSTANTS ====
+# INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
+INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
+                 "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
+                 "nms_d6", "nms_d7", "nms_d8", "nms_d9",
+                 "tremor", "bradykin", "rigidity", "axial", "pigd")
+
 # Remember - PDFs can vary even if the (seeded) clusters don't
 # So this should be false unless I've changed something about the
 # kmeans analysis
 SAVE.DTREES = FALSE
-SAVE.BARPLOTS = TRUE
+SAVE.BARPLOTS = FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
@@ -251,7 +257,9 @@ for (i in 2:4) {
   names(clusters[[paste("clusters", i, sep="")]]) <- 1:i
 }
 
-# SUMMARY OF CLUSTER STATISTICS ====
+# COLLECTED CLUSTERS AND SUMMARY OF CLUSTER STATISTICS ====
+# Get both the summary of the statistics and collect the raw clusters
+# in the form clusters$clustersN$[[N]] for box plotting later on
 # TODO: Find similarity among the variables "For the interpreter"
 # Rounding constant
 PRECISION = 3
@@ -260,20 +268,23 @@ PRECISION = 3
 # the data folder (for now), are not automatically saved to the data or figures folders. If
 # they're needed, we need to save them again.
 # interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
-interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
-                 "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
-                 "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial", "pigd")
+# NOTE: This is now set as a constant up above
+
+# This is a global collection of clusters to be used
+clusters.raw <- vector(mode = "list", length = 3)
+names(clusters.raw) <- 2:4
+
 for (i in 2:4) {
   name <- paste("clusters", i, sep="")
   current <- clusters[[name]]
   # Begin collecting clusters of csv
+  summaries.csv <- c()
   clusters.csv <- c()
   for (c in 1:i) {
     cname <- paste(c)
     # WE ONLY CARE ABOUT THE INTERPRETED
     # FALSE - now we're going to just include everything
-    current.filtered <- current[[cname]][, interpreted]
+    current.filtered <- current[[cname]][, INTERPRETED]
     # Print out stuff first
     # NOTE: this format differs from what is written to csv (csv has cluster column)
     cat("k = ", i, ", ", "CLUSTER ", cname, '\n', sep="")
@@ -281,17 +292,24 @@ for (i in 2:4) {
                                   PRECISION)
     # Select a couple of statistics
     write.csv(filtered.description)
-    # Attach varaible rownames, number of cluster (c)
+    # Attach variable rownames, number of cluster (c)
     filtered.description <- cbind(variable=rownames(filtered.description), filtered.description)
-    filtered.description <- cbind(cluster=rep(c, length(interpreted)), filtered.description)
+    filtered.description <- cbind(cluster=rep(c, length(INTERPRETED)), filtered.description)
     # Then add to csv list
-    clusters.csv <- rbind(clusters.csv, filtered.description)
+    summaries.csv <- rbind(summaries.csv, filtered.description)
+
+    # Attach cluster id to all elements in the cluster
+    filtered.with_clusters <- cbind(cluster=rep(c, nrow(current.filtered)), current.filtered)
+    clusters.csv <- rbind(clusters.csv, filtered.with_clusters)
   }
   # Write cluster summaries as csv to data folder
   # NOTE: This (should) stays the same because of the seeding, unlike the PDFs,
   # so we don't need a boolean flag here
-  write.csv(clusters.csv, file = paste("../data/kmeans-summaries-", i, ".csv", sep=""),
+  write.csv(summaries.csv, file = paste("../data/kmeans-summaries-", i, ".csv", sep=""),
             row.names = FALSE)
+  write.csv(clusters.csv, file = paste("../data/kmeans-raw-", i, ".csv", sep=""),
+            row.names = FALSE)
+  clusters.raw[[i]] <- clusters.csv
 }
 
 # PLOT CLUSTER RESULTS ====
