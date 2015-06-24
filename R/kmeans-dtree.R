@@ -216,6 +216,47 @@ for (i in 2:4) {
   }
 }
 
+# ==== BIND CLUSTER TO ORIGINAL DATA ====
+labeled <- vector(mode = "list", length = 3)
+labeled <- lapply(1:3, function(i) cbind(raw.omitted, trees[[paste("clusters", i+1, sep="")]]$clustering$cluster))
+lnames <- c("clusters2", "clusters3", "clusters4")
+names(labeled) <- lnames
+# I use 145 indexing because I'm not sure if tail() copies
+for (name in lnames) {
+  names(labeled[[name]])[145] <- "cluster"
+}
+
+# ==== COMBINE LABELS WITH ORIGINAL DATA ====
+clusters <- lapply(2:4, function(i) {
+  name <- paste("clusters", i, sep="")
+  current <- labeled[[name]]
+  separated <- lapply(1:i, function(c) {
+    current[current$cluster == c, ]
+  })
+})
+names(clusters) <- lnames
+
+for (i in 2:4) {
+  names(clusters[[paste("clusters", i, sep="")]]) <- 1:i
+}
+
+# ==== SUMMARY OF CLUSTER STATISTICS ====
+# TODO: Find similarity among the variables "For the interpreter"
+
+interpreted <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
+for (i in 2:4) {
+  name <- paste("clusters", i, sep="")
+  current <- clusters[[name]]
+  for (c in 1:i) {
+    cname <- paste(c)
+    # WE ONLY CARE ABOUT THE INTERPRETED
+    interpreted <- current[[cname]][, interpreted]
+    cat("k = ", i, ", ", "CLUSTER ", cname, '\n', sep="")
+    # Select a couple of statistics
+    write.csv(round(describe(interpreted)[, c('mean', 'sd', 'min', 'max')], 2))
+  }
+}
+
 # ==== NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
 # information
