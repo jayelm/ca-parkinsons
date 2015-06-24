@@ -238,6 +238,24 @@ Figure~\ref{fig:asw} shows average silhouette width as being consistently under
 
 \subsection{Interpretation of Clusters}
 
+\subsubsection{Cluster summaries}
+
+Available in
+Figures~\ref{fig:kmeans-summaries-2},~\ref{fig:kmeans-summaries-3},
+and~\ref{fig:kmeans-summaries-4}. Error bar is standard error.
+
+\subsubsection{Interpretation}
+
+$k = 2$ seems too basic. Cluster is organized solely by severity - all
+symptoms, including motor and nonmotor, are higher in severity in cluster 1,
+and lower in cluster 2. Quite consistently, groups in cluster 1 are generally
+of slightly higher age and pd duration.
+
+$k = 3$ seems like a further development of $k = 2$, where clusters are simply
+organized by linearly increasing severity.
+
+$k = 4$ is where it gets interesting.
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{kmeans-summaries-2.pdf}
