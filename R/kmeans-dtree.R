@@ -228,7 +228,6 @@ for (i in 2:4) {
 }
 
 # BIND CLUSTER TO ORIGINAL DATA ====
-labeled <- vector(mode = "list", length = 3)
 labeled <- lapply(1:3, function(i) cbind(raw.omitted, trees[[paste("clusters", i+1, sep="")]]$clustering$cluster))
 lnames <- c("clusters2", "clusters3", "clusters4")
 names(labeled) <- lnames
