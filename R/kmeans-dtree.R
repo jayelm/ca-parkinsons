@@ -7,6 +7,7 @@ library(fpc)
 library(NbClust)
 # library for TODO: BIC
 library(mclust)
+library(ggplot2)
 
 # CONSTANTS ====
 # Remember - PDFs can vary even if the (seeded) clusters don't
@@ -182,6 +183,7 @@ kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
 }
 
 # KMEANS DTREE OBTAINING PLOTS ====
+# FIXME: This can be vectorized with lapply
 trees <- vector(mode = "list", length = 3)
 names(trees) <- c("clusters2", "clusters3", "clusters4")
 for (i in 2:4) {
@@ -282,6 +284,32 @@ for (i in 2:4) {
   # so we don't need a boolean flag here
   write.csv(clusters.csv, file = paste("../data/kmeans-summaries-", i, ".csv", sep=""),
             row.names = FALSE)
+}
+
+# PLOT CLUSTER RESULTS ====
+# TODO: I may just need to plot everything, not just variables for the interpreter
+# Then ideally (but not necessary) I'd want to find some way to differentiate the variables
+# "For the interpreter" and the clustered variables and serialize that into the csv
+summaries <- lapply(2:4, function(i) {
+  raw <- read.csv(paste("../data/kmeans-summaries-", i, ".csv", sep=""),
+                  stringsAsFactors = TRUE)
+  # Turn numeric clusters into factors
+  raw$cluster = factor(raw$cluster)
+  raw
+})
+# FIXME: By using standard numeric list names, I can't use summaries$2 or summaries[[2]],
+# only summaries$"2" or summaries[["2"]]
+# seems confusing and not standardized with the rest of the script
+names(summaries) <- 2:4 # NOTE: These numbers become factors (strings)!
+for (k in c("2", "3", "4")) {
+  summary <- summaries[[k]]
+  p <- ggplot(summary, aes(x = cluster, y = mean, fill=cluster)) +
+    guides(fill = FALSE) +
+    facet_wrap( ~ variable, scales = "free") +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position = position_dodge(), width = 0.2)
+  print(p)
+  ggsave(paste("../figures/kmeans-summaries-", k, ".pdf", sep=""))
 }
 
 # NOTES ====
