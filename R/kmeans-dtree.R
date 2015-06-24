@@ -277,7 +277,7 @@ for (i in 2:4) {
     # Print out stuff first
     # NOTE: this format differs from what is written to csv (csv has cluster column)
     cat("k = ", i, ", ", "CLUSTER ", cname, '\n', sep="")
-    filtered.description <- round(describe(current.filtered)[, c('mean', 'sd', 'min', 'max')],
+    filtered.description <- round(describe(current.filtered)[, c('mean', 'sd', 'min', 'max', 'se')],
                                   PRECISION)
     # Select a couple of statistics
     write.csv(filtered.description)
@@ -315,7 +315,8 @@ for (k in c("2", "3", "4")) {
     guides(fill = FALSE) +
     facet_wrap( ~ variable, scales = "free") +
     geom_bar(stat = "identity", position = position_dodge()) +
-    geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position = position_dodge(), width = 0.2)
+    geom_errorbar(aes(ymin = mean - se, ymax = mean + se),
+                  position = position_dodge(), width = 0.2)
   print(p)
   if (SAVE.BARPLOTS) {
     ggsave(paste("../figures/kmeans-summaries-", k, ".pdf", sep=""))
