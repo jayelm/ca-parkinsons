@@ -8,6 +8,7 @@ library(NbClust)
 # library for TODO: BIC
 library(mclust)
 library(ggplot2)
+library(tidyr)
 
 # CONSTANTS ====
 # INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
@@ -272,7 +273,7 @@ PRECISION = 3
 
 # This is a global collection of clusters to be used
 clusters.raw <- vector(mode = "list", length = 3)
-names(clusters.raw) <- 2:4
+names(clusters.raw) <- c("2", "3", "4")
 
 for (i in 2:4) {
   name <- paste("clusters", i, sep="")
@@ -309,32 +310,27 @@ for (i in 2:4) {
             row.names = FALSE)
   write.csv(clusters.csv, file = paste("../data/kmeans-raw-", i, ".csv", sep=""),
             row.names = FALSE)
-  clusters.raw[[i]] <- clusters.csv
+  clusters.raw[[paste(i)]] <- clusters.csv
 }
 
+# CLUSTERS RAW WIDE -> LONG ====
+clusters.raw.long <- vector(mode = "list", length = 3)
+names(clusters.raw.long) <- c("2", "3", "4")
+for (i in c("2", "3", "4")) {
+  clusters.raw.long[[i]] <- gather(clusters.raw[[i]], variable, measurement, age:pigd)
+}
+
+
 # PLOT CLUSTER RESULTS ====
-# TODO: I may just need to plot everything, not just variables for the interpreter
-# Then ideally (but not necessary) I'd want to find some way to differentiate the variables
-# "For the interpreter" and the clustered variables and serialize that into the csv
-summaries <- lapply(2:4, function(i) {
-  raw <- read.csv(paste("../data/kmeans-summaries-", i, ".csv", sep=""),
-                  stringsAsFactors = TRUE)
-  # Turn numeric clusters into factors
-  raw$cluster = factor(raw$cluster)
-  raw
-})
 # FIXME: By using standard numeric list names, I can't use summaries$2 or summaries[[2]],
 # only summaries$"2" or summaries[["2"]]
 # seems confusing and not standardized with the rest of the script
-names(summaries) <- 2:4 # NOTE: These numbers become factors (strings)!
-for (k in c("2", "3", "4")) {
-  summary <- summaries[[k]]
-  p <- ggplot(summary, aes(x = cluster, y = mean, fill=cluster)) +
+for (i in c("2", "3", "4")) {
+  clus <- clusters.raw.long[[i]]
+  p <- ggplot(clus, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
+    geom_boxplot() +
     guides(fill = FALSE) +
-    facet_wrap( ~ variable, scales = "free") +
-    geom_bar(stat = "identity", position = position_dodge()) +
-    geom_errorbar(aes(ymin = mean - se, ymax = mean + se),
-                  position = position_dodge(), width = 0.2)
+    facet_wrap( ~ variable, scales = "free")
   print(p)
   if (SAVE.BARPLOTS) {
     ggsave(paste("../figures/kmeans-summaries-", k, ".pdf", sep=""))
