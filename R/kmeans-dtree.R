@@ -341,6 +341,11 @@ for (i in c("2", "3", "4")) {
 # FIXME: By using standard numeric list names, I can't use summaries$2 or summaries[[2]],
 # only summaries$"2" or summaries[["2"]]
 # seems confusing and not standardized with the rest of the script
+
+# Reorder clusters to c(2, 3, 4, 1) for k = 4 to simplify interpretation
+clusters.raw.long[["4"]]$cluster <- factor(clusters.raw.long[["4"]]$cluster,
+                                              levels = c(2, 3, 4, 1))
+
 for (i in c("2", "3", "4")) {
   clus <- clusters.raw.long[[i]]
   p <- ggplot(clus, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
