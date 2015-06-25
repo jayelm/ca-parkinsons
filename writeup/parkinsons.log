@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  24 JUN 2015 17:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  25 JUN 2015 18:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -517,7 +517,7 @@ onts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti12.pfb>
-Output written on parkinsons.pdf (13 pages, 222696 bytes).
+Output written on parkinsons.pdf (13 pages, 222354 bytes).
 PDF statistics:
  148 PDF objects out of 1000 (max. 8388607)
  99 compressed objects within 1 object stream
