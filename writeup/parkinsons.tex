@@ -305,6 +305,44 @@ $k = 4$ is where it gets interesting.
   \label{fig:kmeans-summaries-4}
 \end{figure}
 
+\section{Affinity Propagation}
+
+\subsection{Clustering}
+
+AP with input preferences minimized ($q = 0$) resulted in 8 clusters.
+With the standard median input preferences ($q = 0.5$), algorithm failed to
+converge with default parameters. Even setting damping factor to 0.98, maximum
+iterations to 10000, and convergence iterations to 1000 failed to converge.
+Might need to try a longer term work.
+
+\emph{However}, given that input preferences control how many clusters are
+found, I don't think it's very useful to have some dozen clusters running
+around.
+
+\subsubsection{Silhouette Plots}
+
+Silhouette plot in Figure~\ref{fig:ap-silhouette} looks pretty weak, really.
+Tons of overlap between the clusters.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{ap-silhouette.pdf}
+  \caption{AP silhouette plot, $k = 8$}
+  \label{fig:ap-silhouette}
+\end{figure}
+
+\subsection{Interpretation}
+
+Boxplot summary of clusters available in Figure~\ref{fig:ap-summaries}.
+\textbf{Discussion forthcoming.}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{ap-summaries.pdf}
+  \caption{AP Boxplot Summaries}
+  \label{fig:ap-summaries}
+\end{figure}
+
 \section{Biclustering}
 
 Used BCBimax clustering algorithm. Clusters seem quite sparse.
