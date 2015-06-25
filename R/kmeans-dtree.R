@@ -119,6 +119,14 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 911) {
   # Reproducibility!
   set.seed(seed)
   cl <- kmeans(splits$trainset, k, nstart = 25)
+  # Visualize clustering with clusplot
+  clusplot(raw.filtered, cl$cluster, main = paste("Silhouette plot k =", 4))
+  if (save) {
+    # FIXME: This save boolean flag is SAVE.DTREES outside of this function
+    # which is slightly ambiguous (these are silhouette plots!)
+    dev.copy(pdf, paste('../figures/kmeans-silhouette-', k, '.pdf', sep=''))
+    dev.off()
+  }
   labeled.data <- cbind(data, cluster=cl$cluster)
   # Convert to factor
   labeled.data$cluster <- as.factor(labeled.data$cluster)
