@@ -115,16 +115,20 @@ text(pruned.t, use.n=TRUE, all=TRUE, cex=.8, pos=1)
 
 # KMEANS CLUSTERING COMPRESSED FUNCTION ====
 # Use for iteration!
-kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
+kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 911) {
   # Reproducibility!
   set.seed(seed)
   cl <- kmeans(splits$trainset, k, nstart = 25)
-  labeled_data <- cbind(data, cl$cluster)
-  # Add cluster label to original data, rename
-  labeled_data <- rename(labeled_data, c("cl$cluster"="cluster"))
+  labeled.data <- cbind(data, cluster=cl$cluster)
   # Convert to factor
-  labeled_data$cluster <- as.factor(labeled_data$cluster)
-  t <- rpart(cluster ~ ., labeled_data)
+  labeled.data$cluster <- as.factor(labeled.data$cluster)
+
+  # Do the same thing with unscaled data to compare
+  labeled.data.unscaled <- cbind(data.unscaled, cluster=cl$cluster)
+  labeled.data.unscaled$cluster <- as.factor(labeled.data.unscaled$cluster)
+
+  t.unscaled <- rpart(cluster ~ ., labeled.data.unscaled)
+  t <- rpart(cluster ~ ., labeled.data)
 
   # Find 10-fold CV error rate for UNPRUNED tree
   # Old resub rate method
@@ -153,6 +157,10 @@ kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
   xerror.min.pruned <- tail(pruned.t$cptable[, "xerror"], n=1)
   xv.error.pruned <- xerror.min.pruned * root.node.error.pruned
 
+  # Do the same with the unscaled tree
+  cp.unscaled <- t.unscaled$cptable[which.min(t.unscaled$cptable[,"xerror"]),"CP"]
+  pruned.t.unscaled <- prune(t.unscaled, cp = cp)
+
   # Plot and save trees
   # Also look at fancyRpartPlot()
   # fancyRpartPlot(tree.2)
@@ -179,8 +187,16 @@ kmeans_dtree <- function(data, k, save = FALSE, seed = 911) {
     dev.off()
   }
 
+  # Plot the unscaled tree
+  prp(pruned.t.unscaled, extra = 1,
+      main = paste("UNSCALED Pruned Tree, ", i, " clusters", sep=""))
+  if (save) {
+    dev.copy(pdf, paste('../figures/dtree-kmeans-pruned-unscaled-', k, '.pdf', sep=''))
+    dev.off()
+  }
+
   list(
-    "data" = labeled_data,
+    "data" = labeled.data,
     "clustering" = cl,
     "unpruned.tree" = t,
     # These are the same, you idiot.
@@ -197,7 +213,7 @@ names(trees) <- c("clusters2", "clusters3", "clusters4")
 for (i in 2:4) {
   istr <- paste("clusters", i, sep="")
   # Remember - PDFs can vary even if the (seeded) clusters don't
-  trees[[istr]] <-  kmeans_dtree(raw.filtered, i, save = SAVE.DTREES)
+  trees[[istr]] <-  kmeans.dtree(raw.filtered, raw.filtered.unscaled, i, save = SAVE.DTREES)
 }
 
 # PRINT GLOBAL TREE STATS ====

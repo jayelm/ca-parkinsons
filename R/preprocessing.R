@@ -55,6 +55,7 @@ raw.omitted.stats <- describe(raw.omitted)
 raw.filtered.stats <- describe(raw.filtered)
 
 # STANDARDIZATION ====
+raw.filtered.unscaled <- raw.filtered
 raw.filtered <- as.data.frame(scale(raw.filtered))
 
 # PCA (Note: not helpful for identifying specific factors) ====
