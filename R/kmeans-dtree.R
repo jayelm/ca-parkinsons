@@ -336,15 +336,20 @@ for (i in c("2", "3", "4")) {
   clusters.raw.long[[i]] <- gather(clusters.raw[[i]], variable, measurement, age:pigd)
 }
 
+# REORDER FACTORS BY INCREASING CISITOT ====
+for (i in c("2", "3", "4")) {
+  cisitot <- clusters.raw.long[[i]][clusters.raw.long[[i]]$variable == "cisitot", ] 
+  cisitot.means <- sapply(factor(1:as.integer(i)), function(i) {
+    mean(cisitot[cisitot$cluster == i, ]$measurement)
+  })
+  clusters.raw.long[[i]]$cluster <- factor(clusters.raw.long[[i]]$cluster,
+                                           levels = order(cisitot.means))
+}
 
 # PLOT CLUSTER RESULTS ====
 # FIXME: By using standard numeric list names, I can't use summaries$2 or summaries[[2]],
 # only summaries$"2" or summaries[["2"]]
 # seems confusing and not standardized with the rest of the script
-
-# Reorder clusters to c(2, 3, 4, 1) for k = 4 to simplify interpretation
-clusters.raw.long[["4"]]$cluster <- factor(clusters.raw.long[["4"]]$cluster,
-                                              levels = c(2, 3, 4, 1))
 
 for (i in c("2", "3", "4")) {
   clus <- clusters.raw.long[[i]]
