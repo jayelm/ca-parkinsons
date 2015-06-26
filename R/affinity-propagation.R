@@ -13,7 +13,7 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
                  "tremor", "bradykin", "rigidity", "axial", "pigd")
 # save.plots for now since I don't know what else to plot!
-SAVE.PLOTS <- TRUE
+SAVE.PLOTS <- FALSE
 
 # CLUSTERING ====
 # Lambda - dampening factor - usually 0.9, higher takes longer to converge
