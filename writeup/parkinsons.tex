@@ -78,20 +78,20 @@ Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
   \begin{tabular}{l|l|l|l}
   Name  &       $\mu$ & $\sigma$ & min-max \\
          \hline
-nms\_d1&   1.76&  3.32&   0-24 \\
-nms\_d2&   8.71&  8.76&   0-48 \\
-nms\_d3&   8.70& 11.83&   0-60 \\
-nms\_d4&   1.65&  3.94&   0-33 \\
-nms\_d5&   5.22&  7.44&   0-36 \\
-nms\_d6&   5.67&  6.92&   0-36 \\
-nms\_d7&   8.02&  9.09&   0-36 \\
-nms\_d8&   3.57&  5.97&   0-24 \\
-nms\_d9&   6.99&  7.74&   0-48 \\
-tremor&   2.59&  2.63&   0-12 \\
-bradykin& 2.49&  1.39&   0-6 \\
-rigidity& 2.34&  1.36&   0-6 \\
-axial&    3.28&  2.75&   0-12 \\
-pigd&     3.36&  2.77&   0-12 \\
+nms\_d1&   1.73&  3.35&   0-24 \\
+nms\_d2&   8.75&  8.70&   0-48 \\
+nms\_d3&   8.68& 11.55&   0-60 \\
+nms\_d4&   1.64&  3.86&   0-33 \\
+nms\_d5&   5.42&  7.43&   0-36 \\
+nms\_d6&   5.53&  6.79&   0-36 \\
+nms\_d7&   8.08&  8.94&   0-36 \\
+nms\_d8&   3.52&  5.97&   0-24 \\
+nms\_d9&   7.13&  7.79&   0-48 \\
+tremor&   2.59&  2.58&   0-12 \\
+bradykin& 2.40&  1.41&   0-6 \\
+rigidity& 2.24&  1.36&   0-6 \\
+axial&    3.25&  2.68&   0-12 \\
+pigd&     3.31&  2.71&   0-12 \\
   \end{tabular}
   \caption{Descriptive Statistics}
   \label{tab:descriptive-statistics}
@@ -117,8 +117,8 @@ shows results of preliminary PCA.
   \label{fig:pca-eigenvalues}
 \end{figure}
 
-Figure~\ref{fig:pca-eigenvalues} shows scree test elbow occurs around 2 or 3. Also, eigenvalues 1 and $2 > 1$, while 3
-is around .9
+Figure~\ref{fig:pca-eigenvalues} shows scree test elbow occurs around 2 or 2 or
+.4 Also, eigenvalues $1-5 > 1$.
 
 \clearpage
 \section{$k$-means}
@@ -164,27 +164,27 @@ Figure~\ref{fig:asw} shows average silhouette width as being consistently under
 \subsection{Cluster statistics}
 % CLUSTERS: 2
 % ================================
-% Sizes: 201 580
-% WithinSS: 4248.585 4132.434
-% Sum WithinSS: 8381.019
+% Sizes: 229 672
+% WithinSS: 6117.986 7695.411
+% Sum WithinSS: 13813.4
 % CLUSTERS: 3
 % ================================
-% Sizes: 420 231 130
-% WithinSS: 2618.368 1973.82 3076.542
-% Sum WithinSS: 7668.73
+% Sizes: 333 134 434
+% WithinSS: 4669.037 4009.387 4153.892
+% Sum WithinSS: 12832.32
 % CLUSTERS: 4
 % ================================
-% Sizes: 61 372 145 203
-% WithinSS: 1481.25 1845.389 2147.988 1609.555
-% Sum WithinSS: 7084.183
+% Sizes: 79 394 275 153
+% WithinSS: 2366.585 3356.709 3454.142 2879.508
+% Sum WithinSS: 12056.94
 \begin{table}[h]
   \centering
   \begin{tabular}{l|l|l|l}
     $k$ & $n$ & Within SS & sum(Within SS) \\
     \hline
-    2 & 201/580 & 4248.585/4132.434 & 8381.019 \\
-    3 & 420/231/130 & 2618.368/1973.82/3076.542 &  7668.73 \\
-    4 & 61/372/145/203 & 1481.25/1845.389/2147.988/1609.555 & 7084.183
+    2 & 229/672 & 6118/7695 & 13813 \\
+    3 & 333/134/434 & 4669/40009/4154 & 12832 \\
+    4 & 79/394/275/153 & 2367/3357/3454/2880  & 12057 \\
   \end{tabular}
   \caption{Cluster statistics}
   \label{tab:cluster-statistics}
@@ -222,19 +222,19 @@ $z$-score data.
 % seed = 911
 % CLUSTERS: 2
 % ================================
-% Complexity Parameter: 0.03482587
-% 10-fold CV error: 0.134443
-% Root node error: 0.2573624
+% Complexity Parameter: 0.02183406
+% 10-fold CV error: 0.1132075
+% Root node error: 0.254162
 % CLUSTERS: 3
 % ================================
-% Complexity Parameter: 0.01
-% 10-fold CV error: 0.1946223
-% Root node error: 0.4622279
+% Complexity Parameter: 0.01070664
+% 10-fold CV error: 0.190899
+% Root node error: 0.518313
 % CLUSTERS: 4
 % ================================
 % Complexity Parameter: 0.01
-% 10-fold CV error: 0.2483995
-% Root node error: 0.5236876
+% 10-fold CV error: 0.2552719
+% Root node error: 0.5627081
 \begin{table}[h]
   \centering
   \begin{tabular}{l|l|l|l|l|l}
@@ -242,9 +242,9 @@ $z$-score data.
     validation} & Root Feature &
     Root Error & Figure \\
     \hline
-    2 & 0.0348 & 0.134 & axial $\geq$ 0.44 & 0.257 & Figure~\ref{fig:kmeans-dtree-2} \\
-    3 & 0.0100 & 0.194 & bradykin $<$ 0.0041 & 0.462 & Figure~\ref{fig:kmeans-dtree-3} \\
-    4 & 0.0100 & 0.248 & bradykin $<$ 0.0041 & 0.523 & Figure~\ref{fig:kmeans-dtree-4} \\
+    2 & 0.0218 & 0.113 & axial $\geq$ 4.5 & 0.254 & Figure~\ref{fig:kmeans-dtree-2} \\
+    3 & 0.0107 & 0.191 & pigd $\geq$ 2.5 & 0.518 & Figure~\ref{fig:kmeans-dtree-3} \\
+    4 & 0.0100 & 0.255 & pigd $<$ 2.5 & 0.563 & Figure~\ref{fig:kmeans-dtree-4} \\
   \end{tabular}
   \caption{$k$-kmeans decision trees statistics}
   \label{tab:k-means-dtrees}
