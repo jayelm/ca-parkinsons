@@ -32,7 +32,7 @@ source('./preprocessing.R')
 
 wss <- (nrow(raw.filtered)-1)*sum(apply(raw.filtered, 2, var))
 for (i in 2:15) {
-  wss[i] <- sum(kmeans(raw.filtered, i)$withinss)
+  wss[i] <- sum(kmeans(raw.filtered, i, nstart = 25)$withinss)
 }
 
 plot(1:15, wss, type="b",
