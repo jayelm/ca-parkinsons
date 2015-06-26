@@ -134,7 +134,7 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 911) {
   set.seed(seed)
   cl <- kmeans(splits$trainset, k, nstart = 25)
   # Visualize clustering with clusplot
-  clusplot(raw.filtered, cl$cluster, main = paste("Silhouette plot k =", 4))
+  clusplot(raw.filtered, cl$cluster, main = paste("Silhouette plot k =", k))
   if (save) {
     # FIXME: This save boolean flag is SAVE.DTREES outside of this function
     # which is slightly ambiguous (these are silhouette plots!)
