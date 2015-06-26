@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  26 JUN 2015 16:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  26 JUN 2015 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -399,17 +399,20 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<../figures/pca-eigenvalues.png, id=10, 691.58376pt x 458.71375pt>
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../figures/pca-eigenvalues.png, id=1, 691.58376pt x 458.71375pt>
 File: ../figures/pca-eigenvalues.png Graphic file (type png)
 
 <use ../figures/pca-eigenvalues.png>
-Package pdftex.def Info: ../figures/pca-eigenvalues.png used on input line 109.
+Package pdftex.def Info: ../figures/pca-eigenvalues.png used on input line 107.
 
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
+ [1
 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -418,7 +421,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ../figures/kmeans-wss-error.png Graphic file (type png)
 
 <use ../figures/kmeans-wss-error.png>
-Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 125
+Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 123
 .
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
@@ -426,7 +429,7 @@ Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 125
 File: ../figures/gap-statistic.png Graphic file (type png)
 
 <use ../figures/gap-statistic.png>
-Package pdftex.def Info: ../figures/gap-statistic.png used on input line 139.
+Package pdftex.def Info: ../figures/gap-statistic.png used on input line 137.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -436,7 +439,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ../figures/asw.png Graphic file (type png)
 
 <use ../figures/asw.png>
-Package pdftex.def Info: ../figures/asw.png used on input line 151.
+Package pdftex.def Info: ../figures/asw.png used on input line 149.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -450,7 +453,7 @@ File: ../figures/kmeans-silhouette-2.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-silhouette-2.pdf>
 Package pdftex.def Info: ../figures/kmeans-silhouette-2.pdf used on input line 
-196.
+194.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
  [4
 
@@ -463,7 +466,7 @@ File: ../figures/kmeans-silhouette-3.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-silhouette-3.pdf>
 Package pdftex.def Info: ../figures/kmeans-silhouette-3.pdf used on input line 
-203.
+201.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -474,7 +477,7 @@ File: ../figures/kmeans-silhouette-4.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-silhouette-4.pdf>
 Package pdftex.def Info: ../figures/kmeans-silhouette-4.pdf used on input line 
-210.
+208.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -488,7 +491,7 @@ File: ../figures/dtree-kmeans-pruned-unscaled-2.pdf Graphic file (type pdf)
 
 <use ../figures/dtree-kmeans-pruned-unscaled-2.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-unscaled-2.pdf used on 
-input line 249.
+input line 247.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -499,7 +502,7 @@ File: ../figures/dtree-kmeans-pruned-unscaled-3.pdf Graphic file (type pdf)
 
 <use ../figures/dtree-kmeans-pruned-unscaled-3.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-unscaled-3.pdf used on 
-input line 256.
+input line 254.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -510,7 +513,7 @@ File: ../figures/dtree-kmeans-pruned-unscaled-4.pdf Graphic file (type pdf)
 
 <use ../figures/dtree-kmeans-pruned-unscaled-4.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-unscaled-4.pdf used on 
-input line 263.
+input line 261.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -522,7 +525,7 @@ File: ../figures/kmeans-summaries-2.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-summaries-2.pdf>
 Package pdftex.def Info: ../figures/kmeans-summaries-2.pdf used on input line 2
-90.
+88.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -533,7 +536,7 @@ File: ../figures/kmeans-summaries-3.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-summaries-3.pdf>
 Package pdftex.def Info: ../figures/kmeans-summaries-3.pdf used on input line 2
-97.
+95.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -544,7 +547,7 @@ File: ../figures/kmeans-summaries-4.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-summaries-4.pdf>
 Package pdftex.def Info: ../figures/kmeans-summaries-4.pdf used on input line 3
-04.
+02.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -560,7 +563,7 @@ igures/kmeans-summaries-2.pdf>] [14 <../figures/kmeans-summaries-3.pdf>]
 File: ../figures/ap-silhouette.pdf Graphic file (type pdf)
 
 <use ../figures/ap-silhouette.pdf>
-Package pdftex.def Info: ../figures/ap-silhouette.pdf used on input line 334.
+Package pdftex.def Info: ../figures/ap-silhouette.pdf used on input line 332.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -573,7 +576,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ../figures/hc-dendrograms.pdf Graphic file (type pdf)
 
 <use ../figures/hc-dendrograms.pdf>
-Package pdftex.def Info: ../figures/hc-dendrograms.pdf used on input line 349.
+Package pdftex.def Info: ../figures/hc-dendrograms.pdf used on input line 347.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
@@ -587,7 +590,7 @@ File: ../figures/hc-summaries-complete-k4.pdf Graphic file (type pdf)
 
 <use ../figures/hc-summaries-complete-k4.pdf>
 Package pdftex.def Info: ../figures/hc-summaries-complete-k4.pdf used on input 
-line 377.
+line 375.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 <../figures/hc-summaries-complete-dynamic.pdf, id=162, 691.58376pt x 458.71375p
@@ -595,7 +598,7 @@ t>
 File: ../figures/hc-summaries-complete-dynamic.pdf Graphic file (type pdf)
  <use ../figures/hc-summaries-complete-dynamic.pdf>
 Package pdftex.def Info: ../figures/hc-summaries-complete-dynamic.pdf used on i
-nput line 384.
+nput line 382.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -606,7 +609,7 @@ File: ../figures/hc-summaries-ward-D-k4.pdf Graphic file (type pdf)
 
 <use ../figures/hc-summaries-ward-D-k4.pdf>
 Package pdftex.def Info: ../figures/hc-summaries-ward-D-k4.pdf used on input li
-ne 392.
+ne 390.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -617,7 +620,7 @@ File: ../figures/hc-summaries-ward-D-h60.pdf Graphic file (type pdf)
 
 <use ../figures/hc-summaries-ward-D-h60.pdf>
 Package pdftex.def Info: ../figures/hc-summaries-ward-D-h60.pdf used on input l
-ine 399.
+ine 397.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -630,7 +633,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ../figures/ap-summaries.pdf Graphic file (type pdf)
 
 <use ../figures/ap-summaries.pdf>
-Package pdftex.def Info: ../figures/ap-summaries.pdf used on input line 432.
+Package pdftex.def Info: ../figures/ap-summaries.pdf used on input line 430.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 
@@ -640,7 +643,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ../figures/biclust-16.pdf Graphic file (type pdf)
 
 <use ../figures/biclust-16.pdf>
-Package pdftex.def Info: ../figures/biclust-16.pdf used on input line 443.
+Package pdftex.def Info: ../figures/biclust-16.pdf used on input line 441.
 (pdftex.def)             Requested size: 469.75502pt x 607.9196pt.
  [19 <../figures/hc-summaries-complete-k4.pdf>]
 
@@ -650,7 +653,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ../figures/bubbleplot-16.pdf Graphic file (type pdf)
 
 <use ../figures/bubbleplot-16.pdf>
-Package pdftex.def Info: ../figures/bubbleplot-16.pdf used on input line 450.
+Package pdftex.def Info: ../figures/bubbleplot-16.pdf used on input line 448.
 (pdftex.def)             Requested size: 469.75502pt x 607.9196pt.
 
 
@@ -679,7 +682,7 @@ sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share
 -dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on parkinsons.pdf (25 pages, 540552 bytes).
+Output written on parkinsons.pdf (25 pages, 540308 bytes).
 PDF statistics:
  269 PDF objects out of 1000 (max. 8388607)
  185 compressed objects within 2 object streams

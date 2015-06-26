@@ -25,6 +25,10 @@ MOTOR.SYMPTOMS = c("tremor",
                    "rigidity",
                    "axial",
                    "pigd")
+INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
+                 "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
+                 "nms_d6", "nms_d7", "nms_d8", "nms_d9",
+                 "tremor", "bradykin", "rigidity", "axial", "pigd")
 # Change this variable to change symptoms
 SYMPTOMS.TO.USE = ALL.SYMPTOMS
 
@@ -44,10 +48,12 @@ raw <- read.csv(DB_FILE)
 # Study is irrelevant
 raw$study <- NULL
 # Get rid of NAs (later may use some kind of missing value compensation method
-raw.omitted <- na.omit(raw)
+# This only brings it down to 901, rather than ~700 something!
+raw.omitted <- raw[, INTERPRETED]
+raw.omitted <- na.omit(raw.omitted)
 
 # raw with only select nms and motor symptoms
-raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
+raw.filtered <- raw.omitted
 
 # DESCRIPTIVE STATISTICS (BEFORE STANDARDIZATION) ====
 # TODO - change raw.filtered to raw.omitted.filtered, or something like that
