@@ -49,7 +49,7 @@ compensation for missing values.
 
 Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
 
-\begin{table}[ht]
+\begin{table}[h]
   \centering
   \begin{tabular}{l|l|l|l}
     Name & Type & Format & Description \\
@@ -75,7 +75,7 @@ Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
   \label{tab:selected-features}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[h]
   \centering
   \begin{tabular}{l|l|l|l}
   Name  &       $\mu$ & $\sigma$ & min-max \\
@@ -104,7 +104,7 @@ pigd&     3.36&  2.77&   0-12 \\
 May not be useful? If we're trying to identify \emph{clinically} relevant
 features, merging them may not be a good idea.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{pca-eigenvalues.png}
   \caption{Scree test: eigenvalues by factor}
@@ -114,12 +114,13 @@ features, merging them may not be a good idea.
 Figure~\ref{fig:pca-eigenvalues} shows scree test elbow occurs around 2 or 3. Also, eigenvalues 1 and $2 > 1$, while 3
 is around .9
 
+\clearpage
 \section{$k$-means}
 \subsection{Identifying optimal number of clusters}
 
 \subsubsection{WSS Error Scree Test}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-wss-error.png}
   \caption{Scree test: WSS error by cluster size}
@@ -133,7 +134,7 @@ Figure~\ref{fig:kmeans-wss-error} shows no optimal elbow in scree test! Maybe 2-
 Optimal cluster is the local maximum of the gap statistic, but it appears to be
 consistently increasing in Figure~\ref{fig:gap-statistic}.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{gap-statistic.png}
   \caption{Gap statistic by cluster size}
@@ -145,7 +146,7 @@ consistently increasing in Figure~\ref{fig:gap-statistic}.
 Figure~\ref{fig:asw} shows average silhouette width as being consistently under
 0.25 for all clusters, implying the data is not well structured.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{asw.png}
   \caption{Average silhouette width by cluster size}
@@ -170,7 +171,7 @@ Figure~\ref{fig:asw} shows average silhouette width as being consistently under
 % Sizes: 61 372 145 203
 % WithinSS: 1481.25 1845.389 2147.988 1609.555
 % Sum WithinSS: 7084.183
-\begin{table}[ht]
+\begin{table}[h]
   \centering
   \begin{tabular}{l|l|l|l}
     $k$ & $n$ & Within SS & sum(Within SS) \\
@@ -190,21 +191,21 @@ Figures~\ref{fig:kmeans-silhouette-2},~\ref{fig:kmeans-silhouette-3},
 and~\ref{fig:kmeans-silhouette-4}. Note: constructed with standardized
 $z$-score data.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-silhouette-2.pdf}
   \caption{$k$-means cluster silhouette plot, $k = 2$}
   \label{fig:kmeans-silhouette-2}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-silhouette-3.pdf}
   \caption{$k$-means cluster silhouette plot, $k = 3$}
   \label{fig:kmeans-silhouette-3}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-silhouette-4.pdf}
   \caption{$k$-means cluster silhouette plot, $k = 4$}
@@ -228,7 +229,7 @@ $z$-score data.
 % Complexity Parameter: 0.01
 % 10-fold CV error: 0.2483995
 % Root node error: 0.5236876
-\begin{table}[ht]
+\begin{table}[h]
   \centering
   \begin{tabular}{l|l|l|l|l|l}
     $k$ & CP\tablefootnote{Complexity Parameter} & CV Xerror\tablefootnote{10-fold cross
@@ -243,21 +244,21 @@ $z$-score data.
   \label{tab:k-means-dtrees}
 \end{table}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{dtree-kmeans-pruned-unscaled-2.pdf}
   \caption{Decision Tree from $k$-means clustering, 2 clusters}
   \label{fig:kmeans-dtree-2}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{dtree-kmeans-pruned-unscaled-3.pdf}
   \caption{Decision Tree from $k$-means clustering, 3 clusters}
   \label{fig:kmeans-dtree-3}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{dtree-kmeans-pruned-unscaled-4.pdf}
   \caption{Decision Tree from $k$-means clustering, 4 clusters}
@@ -284,27 +285,28 @@ organized by linearly increasing severity.
 
 $k = 4$ is where it gets interesting.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-summaries-2.pdf}
   \caption{Cluster Summaries, $k = 2$}
   \label{fig:kmeans-summaries-2}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-summaries-3.pdf}
   \caption{Cluster Summaries, $k = 3$}
   \label{fig:kmeans-summaries-3}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-summaries-4.pdf}
   \caption{Cluster Summaries, $k = 4$}
   \label{fig:kmeans-summaries-4}
 \end{figure}
 
+\clearpage
 \section{Affinity Propagation}
 
 \subsection{Clustering}
@@ -327,18 +329,84 @@ around.
 Silhouette plot in Figure~\ref{fig:ap-silhouette} looks pretty weak, really.
 Tons of overlap between the clusters.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{ap-silhouette.pdf}
   \caption{AP silhouette plot, $k = 8$}
   \label{fig:ap-silhouette}
 \end{figure}
 
+\clearpage
+\section{Hierarchical Clustering}
+
+\subsection{Clustering}
+
+Four dissimilarity methods were used with a euclidean distance matrix.
+Dendrograms available in Figure~\ref{fig:hc-dendrograms}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{hc-dendrograms.pdf}
+  \caption{Dendrograms}
+  \label{fig:hc-dendrograms}
+\end{figure}
+
+\subsection{Cutting Trees}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l|l|l}
+    Method & Condition & n & Figure \\
+    \hline
+    Complete & $k = 4$ & 4 (665/74/35/7) & ~\ref{fig:hc-summaries-complete-k4} \\
+    Complete & \texttt{dynamicTreeCut}\tablefootnote{Package \texttt{dynamicTreeCut} in R (Langfelder P,
+  Zhang B, Horvath S (2007)). Hybrid method, minimum cluster selection
+parameters} & 11 (7/270/138/83/79/49/46/39/35/35) &
+    ~\ref{fig:hc-summaries-complete-dynamic} \\
+    Ward & $k = 4$ & 4 (294/236/120/131) & ~\ref{fig:hc-summaries-ward-D-k4} \\
+    Ward & $h = 60$ & 6 (97/236/120/197/91/40) &
+    ~\ref{fig:hc-summaries-ward-D-h60} \\
+  \end{tabular}
+  \caption{Clusters from Tree Cutting}
+  \label{tab:tree-cutting}
+\end{table}
+
+\subsection{Interpretation}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{hc-summaries-complete-k4.pdf}
+  \caption{Using maximum (complete linkage) dissimilarity, cutting tree for $k = 4$}
+  \label{fig:hc-summaries-complete-k4}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{hc-summaries-complete-dynamic.pdf}
+  \caption{Using maximum (complete linkage) dissimilarity, cutting tree
+    dynamically}
+  \label{fig:hc-summaries-complete-dynamic}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{hc-summaries-ward-D-k4.pdf}
+  \caption{Using Ward (1963) dissimilarity, cutting tree for $k = 4$}
+  \label{fig:hc-summaries-ward-D-k4}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{hc-summaries-ward-D-h60.pdf}
+  \caption{Using Ward (1963) dissimilarity, cutting tree at $h = 60$}
+  \label{fig:hc-summaries-ward-D-h60}
+\end{figure}
+
+
 \subsection{Interpretation}
 
 Cluster sizes are available in Table~\ref{tab:ap-cluster-sizes}
 
-\begin{table}[ht]
+\begin{table}[h]
   \centering
   \begin{tabular}{l|l}
   Cluster & Size \\
@@ -359,7 +427,7 @@ Cluster sizes are available in Table~\ref{tab:ap-cluster-sizes}
 Boxplot summary of clusters available in Figure~\ref{fig:ap-summaries}.
 \textbf{Discussion forthcoming.}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{ap-summaries.pdf}
   \caption{AP Boxplot Summaries}
@@ -370,14 +438,14 @@ Boxplot summary of clusters available in Figure~\ref{fig:ap-summaries}.
 
 Used BCBimax clustering algorithm. Clusters seem quite sparse.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{biclust-16.pdf}
   \caption{Biclustering $N = 16$}
   \label{fig:biclust-16}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{bubbleplot-16.pdf}
   \caption{Bubbleplot $N = 16$}
