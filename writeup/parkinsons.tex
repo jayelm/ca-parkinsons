@@ -100,11 +100,19 @@ pigd&     3.36&  2.77&   0-12 \\
 \subsection{Dimensionality Reduction: PCA}
 
 May not be useful? If we're trying to identify \emph{clinically} relevant
-features, merging them may not be a good idea.
+features, merging them may not be a good idea. Regardless, Figure~\ref{fig:pca}
+shows results of preliminary PCA.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{pca-eigenvalues.png}
+  \includegraphics[width=\linewidth]{pca.pdf}
+  \caption{PCA Analysis}
+  \label{fig:pca}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{pca-eigenvalues.pdf}
   \caption{Scree test: eigenvalues by factor}
   \label{fig:pca-eigenvalues}
 \end{figure}

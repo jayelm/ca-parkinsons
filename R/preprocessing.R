@@ -5,8 +5,9 @@ library(FactoMineR)
 library(psych)
 
 # GLOBAL CONSTANTS ====
-DB_FILE = "../data/DATABASE_NMS Burden levels_15-4-2012.csv"
-ALL.SYMPTOMS = c("nms_d1",
+SAVE.PREPROCESSING.PLOTS <- FALSE
+DB_FILE <- "../data/DATABASE_NMS Burden levels_15-4-2012.csv"
+ALL.SYMPTOMS <- c("nms_d1",
                  "nms_d2",
                  "nms_d3",
                  "nms_d4",
@@ -20,7 +21,7 @@ ALL.SYMPTOMS = c("nms_d1",
                  "rigidity",
                  "axial",
                  "pigd")
-MOTOR.SYMPTOMS = c("tremor",
+MOTOR.SYMPTOMS <- c("tremor",
                    "bradykin",
                    "rigidity",
                    "axial",
@@ -30,7 +31,7 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
                  "tremor", "bradykin", "rigidity", "axial", "pigd")
 # Change this variable to change symptoms
-SYMPTOMS.TO.USE = ALL.SYMPTOMS
+SYMPTOMS.TO.USE <- ALL.SYMPTOMS
 
 # UTILITY FUNCTIONS ====
 splitdf <- function(dataframe, seed=NULL, trainfrac=0.7) {
@@ -67,11 +68,20 @@ raw.filtered <- as.data.frame(scale(raw.filtered))
 # PCA (Note: not helpful for identifying specific factors) ====
 par(mfrow = c(1, 2))
 pca <- PCA(raw.filtered)
+if (SAVE.PREPROCESSING.PLOTS) {
+  dev.copy(pdf, "../figures/pca.pdf")
+  dev.off()
+}
 # pca$eig
 # pca$var$coord
 # head(pca$ind$coord)
+par(mfrow = c(1, 1))
 plot(x = 1:length(rownames(pca$eig)), y = (pca$eig$eigenvalue), type="b",
-     xlab="Factor", ylab="Eigenvalue", xaxp=c(0, 14, 14))
+     xlab="Factor", ylab="Eigenvalue", xaxp=c(0, 19, 19))
+if (SAVE.PREPROCESSING.PLOTS) {
+  dev.copy(pdf, "../figures/pca-eigenvalues.pdf")
+  dev.off()
+}
+
 # Elbow appears around 3 factors
 # Reset par for the rest of the script
-par(mfrow = c(1, 1))
