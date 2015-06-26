@@ -363,14 +363,14 @@ Dendrograms available in Figure~\ref{fig:hc-dendrograms}
   \begin{tabular}{l|l|l|l}
     Method & Condition & n & Figure \\
     \hline
-    Complete & $k = 4$ & 4 (665/74/35/7) & ~\ref{fig:hc-summaries-complete-k4} \\
+    Complete & $k = 4$ & 4 (790/81/18/12) & ~\ref{fig:hc-summaries-complete-k4} \\
     Complete & \texttt{dynamicTreeCut}\tablefootnote{Package \texttt{dynamicTreeCut} in R (Langfelder P,
   Zhang B, Horvath S (2007)). Hybrid method, minimum cluster selection
-parameters} & 11 (7/270/138/83/79/49/46/39/35/35) &
+parameters} & 13 (255/99/77/64/62/58/56/46/44/41/37/32/30) &
     ~\ref{fig:hc-summaries-complete-dynamic} \\
-    Ward & $k = 4$ & 4 (294/236/120/131) & ~\ref{fig:hc-summaries-ward-D-k4} \\
-    Ward & $h = 60$ & 6 (97/236/120/197/91/40) &
-    ~\ref{fig:hc-summaries-ward-D-h60} \\
+    Ward & $k = 4$ & 4 (200/237/263/201) & ~\ref{fig:hc-summaries-ward-D-k4} \\
+    Ward & $h = 100$ & 3 (437/263/201) &
+    ~\ref{fig:hc-summaries-ward-D-h100} \\
   \end{tabular}
   \caption{Clusters from Tree Cutting}
   \label{tab:tree-cutting}
@@ -402,9 +402,9 @@ parameters} & 11 (7/270/138/83/79/49/46/39/35/35) &
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{hc-summaries-ward-D-h60.pdf}
-  \caption{Using Ward (1963) dissimilarity, cutting tree at $h = 60$}
-  \label{fig:hc-summaries-ward-D-h60}
+  \includegraphics[width=\linewidth]{hc-summaries-ward-D-h100.pdf}
+  \caption{Using Ward (1963) dissimilarity, cutting tree at $h = 100$}
+  \label{fig:hc-summaries-ward-D-h100}
 \end{figure}
 
 

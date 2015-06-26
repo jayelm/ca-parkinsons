@@ -14,7 +14,7 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
                  "tremor", "bradykin", "rigidity", "axial", "pigd")
-SAVE.PLOTS = TRUE
+SAVE.PLOTS <- FALSE
 
 # COMPUTE DISTANCE MATRIX (EUCLIDEAN) ====
 hclust.dist <- dist(raw.filtered)
@@ -51,7 +51,7 @@ par(mfrow=c(1, 1))
 # Let's pick Max for now
 
 # 11 results in 4 clusters
-HEIGHT = 11
+HEIGHT = 100
 K = 4
 
 # Complete linkage cuts
@@ -73,8 +73,8 @@ hcl.complete.mem <- cutree(hcl.complete, k = K)
 #                                   deepSplit = FALSE)
 
 # Ward (1963) linkage cuts
-# hcl.complete.mem <- cutree(hcl.ward.D, h = 60)
 # hcl.complete.mem <- cutree(hcl.ward.D, k = K)
+# hcl.complete.mem <- cutree(hcl.ward.D, h = HEIGHT)
 
 # Then print out the number of clusters and frequencies
 nclust <- length(unique(hcl.complete.mem))
@@ -94,8 +94,8 @@ labeled.complete.long <- gather(labeled.complete, variable, measurement, age:pig
 
 # ORDER BY INCREASING CISITOT ====
 # We need to shift by 1 if using dynamic, since dynamicTreeCut starts at 0.
-DYNAMIC = FALSE
-# DYNAMIC = TRUE
+DYNAMIC <- FALSE
+# DYNAMIC <- TRUE
 cisitot <- labeled.complete.long[labeled.complete.long$variable == "cisitot", ] 
 anyNA(cisitot)
 cisitot.means <- sapply(1:nclust, function(i) {
@@ -116,7 +116,7 @@ print(p)
 
 if (SAVE.PLOTS) {
   ggsave("../figures/hc-summaries-complete-k4.pdf")
-  # ggsave("../figures/hc-summaries-ward-D-k4.pdf")
-  # ggsave("../figures/hc-summaries-ward-D-h60.pdf")
   # ggsave("../figures/hc-summaries-complete-dynamic.pdf")
+  # ggsave("../figures/hc-summaries-ward-D-k4.pdf")
+  # ggsave("../figures/hc-summaries-ward-D-h100.pdf")
 }
