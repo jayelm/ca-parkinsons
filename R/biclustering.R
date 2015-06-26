@@ -15,10 +15,6 @@ SAVE.PLOTS <- FALSE
 # BICLUSTERING ====
 # Bimax algorithm
 bcl <- biclust(as.matrix(raw.filtered), method=BCBimax(), minr=2, minc=2, number=N)
-if (SAVE.PLOTS) {
-  dev.copy(pdf, paste("../figures/biclust-", N, ".pdf", sep=""))
-  dev.off()
-}
 
 # BUBBLEPLOT (?) ====
 bubbleplot(raw.filtered, bcl)
@@ -34,7 +30,7 @@ par(mfrow = n2mfrow(N))
 for (i in 1:N) {
   drawHeatmap(raw.filtered, bicResult=bcl, number=i)
 }
-# if (SAVE.PLOTS) {
-#   dev.copy(pdf, paste("../figures/biclust-heatmap-", N, ".pdf", sep=""))
-#   dev.off()
-# }
+if (SAVE.PLOTS) {
+  dev.copy(pdf, paste("../figures/biclust-heatmaps-", N, ".pdf", sep=""))
+  dev.off()
+}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  26 JUN 2015 17:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  26 JUN 2015 17:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -643,11 +643,12 @@ Package pdftex.def Info: ../figures/ap-summaries.pdf used on input line 440.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../figures/biclust-16.pdf, id=202, 505.89pt x 505.89pt>
-File: ../figures/biclust-16.pdf Graphic file (type pdf)
+<../figures/biclust-heatmaps-16.pdf, id=202, 505.89pt x 505.89pt>
+File: ../figures/biclust-heatmaps-16.pdf Graphic file (type pdf)
 
-<use ../figures/biclust-16.pdf>
-Package pdftex.def Info: ../figures/biclust-16.pdf used on input line 451.
+<use ../figures/biclust-heatmaps-16.pdf>
+Package pdftex.def Info: ../figures/biclust-heatmaps-16.pdf used on input line 
+451.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
  [21 <../figures/hc-summaries-complete-k4.pdf>]
 
@@ -666,31 +667,31 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [22 <../figures/hc-summaries-complete-dynamic.pdf>] [23 <../figures/hc-summarie
 s-ward-D-k4.pdf>] [24 <../figures/hc-summaries-ward-D-h100.pdf>] [25 <../figure
-s/ap-summaries.pdf>] [26 <../figures/biclust-16.pdf>] [27 <../figures/biclust-b
-ubbleplot-16.pdf>] (./parkinsons.aux) ) 
+s/ap-summaries.pdf>] [26 <../figures/biclust-heatmaps-16.pdf>] [27 <../figures/
+biclust-bubbleplot-16.pdf>] (./parkinsons.aux) ) 
 Here is how much of TeX's memory you used:
  5522 strings out of 495028
- 78222 string characters out of 6181497
+ 78276 string characters out of 6181497
  156968 words of memory out of 5000000
  8587 multiletter control sequences out of 15000+600000
  21424 words of font info for 80 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,14n,43p,798b,249s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on parkinsons.pdf (27 pages, 571973 bytes).
+</usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on parkinsons.pdf (27 pages, 597924 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
- 215 compressed objects within 3 object streams
+ 303 PDF objects out of 1000 (max. 8388607)
+ 214 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
