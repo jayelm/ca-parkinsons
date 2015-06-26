@@ -1,12 +1,14 @@
 # ca-parkinsons
 
+![PD Analysis](./analysis.png)
+
 This repository contains exploratory work done by me at the Polytechnic
 University of Madrid in Summer 2015. The objective is to apply cluster analysis
 to data collected from Parkinson's disease patients to identify relevant
 subtypes and important clinical features. A summary of my results so far is
 located in writeup/parkinsons.pdf.
 
-Related work (also saved in the papers folder):
+Related work (those that are freely available are also saved in the papers folder):
 
  - van Rooden et al (2010).
      [The Identification of Parkinson's Disease Subtypes Using Cluster
@@ -21,3 +23,6 @@ Related work (also saved in the papers folder):
      the European Quality of Life-5 Dimensions (EQ-5D) from the 39-item
      Parkinson’s Disease Questionnaire (PDQ-39)
      ](http://www.sciencedirect.com/science/article/pii/S1532046412001074)
+ - Fereshtehnejad et al (**June 15, 2015**). [New Clinical Subtypes of
+     Parkinson Disease and Their Longitudinal
+     Progression](http://archneur.jamanetwork.com/article.aspx?articleid=2318972)
