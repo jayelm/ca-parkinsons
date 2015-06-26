@@ -22,6 +22,7 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
 # kmeans analysis
 SAVE.DTREES = FALSE
 SAVE.BOXPLOTS = FALSE
+SAVE.EXPLORE.PLOTS <- FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
@@ -37,6 +38,10 @@ for (i in 2:15) {
 
 plot(1:15, wss, type="b",
      xlab="Number of Clusters", ylab="Within groups sum of squares")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/kmeans-wss-error.pdf")
+  dev.off()
+}
 
 # TODO: BIC ====
 # See http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters
@@ -65,10 +70,18 @@ for (i in 1:15) {
   pam_sils <- c(pam_sils, pam(raw.filtered, k=i)$silinfo$avg.width)
 }
 plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/asw.pdf")
+  dev.off()
+}
 
 # GAP STATISTIC ESTIMATION ====
 gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
 plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/gap-statistic.pdf")
+  dev.off()
+}
 
 # INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
