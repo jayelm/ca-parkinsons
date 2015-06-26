@@ -309,11 +309,14 @@ $k = 4$ is where it gets interesting.
 
 \subsection{Clustering}
 
+Package \texttt{apcluster} was used. Distance matrix was the negative euclidean
+squared distance ($r = 2$).
+
 AP with input preferences minimized ($q = 0$) resulted in 8 clusters.
 With the standard median input preferences ($q = 0.5$), algorithm failed to
 converge with default parameters. Even setting damping factor to 0.98, maximum
 iterations to 10000, and convergence iterations to 1000 failed to converge.
-Might need to try a longer term work.
+Might need to try a longer run.
 
 \emph{However}, given that input preferences control how many clusters are
 found, I don't think it's very useful to have some dozen clusters running
@@ -332,6 +335,26 @@ Tons of overlap between the clusters.
 \end{figure}
 
 \subsection{Interpretation}
+
+Cluster sizes are available in Table~\ref{tab:ap-cluster-sizes}
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l|l}
+  Cluster & Size \\
+  \hline
+  1 & 54 \\
+  2 & 68 \\
+  3 & 25 \\
+  4 & 259 \\
+  5 & 102 \\
+  6 & 68 \\
+  7 & 185 \\
+  8 & 20 \\
+  \end{tabular}
+  \caption{AP Cluster Sizes}
+  \label{tab:ap-cluster-sizes}
+\end{table}
 
 Boxplot summary of clusters available in Figure~\ref{fig:ap-summaries}.
 \textbf{Discussion forthcoming.}

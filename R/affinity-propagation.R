@@ -73,6 +73,12 @@ if (SAVE.PLOTS) {
   dev.off()
 }
 
+# GET SIZES OF CLUSTERS ====
+cat("cluster,size\n")
+for (i in 1:nclust) {
+  cat(i, ",", length(apclusters[[i]]), "\n", sep="")
+}
+
 # Visualization
 # heatmap(raw.filtered.apclus)
 # plot(raw.filtered.apclus, raw.filtered)
