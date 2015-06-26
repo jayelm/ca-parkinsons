@@ -20,9 +20,10 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
 # Remember - PDFs can vary even if the (seeded) clusters don't
 # So this should be false unless I've changed something about the
 # kmeans analysis
-SAVE.DTREES = FALSE
-SAVE.BOXPLOTS = FALSE
+# explore plots is the determining clusters plots
 SAVE.EXPLORE.PLOTS <- FALSE
+SAVE.DTREES <- FALSE
+SAVE.BOXPLOTS <- FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
@@ -278,7 +279,8 @@ lnames <- c("clusters2", "clusters3", "clusters4")
 names(labeled) <- lnames
 # I use 145 indexing because I'm not sure if tail() copies
 for (name in lnames) {
-  names(labeled[[name]])[145] <- "cluster"
+  # A convoluted way to get the last element - tail was throwing an error
+  names(labeled[[name]])[length(names(labeled[[name]]))] <- "cluster"
 }
 
 # COMBINE LABELS WITH ORIGINAL DATA ====
