@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  26 JUN 2015 13:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  26 JUN 2015 15:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -408,7 +408,7 @@ File: ../figures/pca-eigenvalues.png Graphic file (type png)
 <use ../figures/pca-eigenvalues.png>
 Package pdftex.def Info: ../figures/pca-eigenvalues.png used on input line 109.
 
-(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
+(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 <../figures/kmeans-wss-error.png, id=11, 691.58376pt x 458.71375pt>
 File: ../figures/kmeans-wss-error.png Graphic file (type png)
@@ -416,21 +416,21 @@ File: ../figures/kmeans-wss-error.png Graphic file (type png)
 <use ../figures/kmeans-wss-error.png>
 Package pdftex.def Info: ../figures/kmeans-wss-error.png used on input line 124
 .
-(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
+(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 <../figures/gap-statistic.png, id=12, 691.58376pt x 458.71375pt>
 File: ../figures/gap-statistic.png Graphic file (type png)
 
 <use ../figures/gap-statistic.png>
 Package pdftex.def Info: ../figures/gap-statistic.png used on input line 138.
-(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
+(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
 <../figures/asw.png, id=13, 691.58376pt x 458.71375pt>
 File: ../figures/asw.png Graphic file (type png)
 
 <use ../figures/asw.png>
 Package pdftex.def Info: ../figures/asw.png used on input line 150.
-(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
+(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
  [2]
 <../figures/kmeans-silhouette-2.pdf, id=21, 505.89pt x 505.89pt>
 File: ../figures/kmeans-silhouette-2.pdf Graphic file (type pdf)
@@ -438,7 +438,7 @@ File: ../figures/kmeans-silhouette-2.pdf Graphic file (type pdf)
 <use ../figures/kmeans-silhouette-2.pdf>
 Package pdftex.def Info: ../figures/kmeans-silhouette-2.pdf used on input line 
 195.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 <../figures/kmeans-silhouette-3.pdf, id=22, 505.89pt x 505.89pt>
 File: ../figures/kmeans-silhouette-3.pdf Graphic file (type pdf)
@@ -446,7 +446,7 @@ File: ../figures/kmeans-silhouette-3.pdf Graphic file (type pdf)
 <use ../figures/kmeans-silhouette-3.pdf>
 Package pdftex.def Info: ../figures/kmeans-silhouette-3.pdf used on input line 
 202.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 <../figures/kmeans-silhouette-4.pdf, id=23, 505.89pt x 505.89pt>
 File: ../figures/kmeans-silhouette-4.pdf Graphic file (type pdf)
@@ -454,7 +454,7 @@ File: ../figures/kmeans-silhouette-4.pdf Graphic file (type pdf)
 <use ../figures/kmeans-silhouette-4.pdf>
 Package pdftex.def Info: ../figures/kmeans-silhouette-4.pdf used on input line 
 209.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 <../figures/dtree-kmeans-pruned-unscaled-2.pdf, id=24, 505.89pt x 505.89pt>
 File: ../figures/dtree-kmeans-pruned-unscaled-2.pdf Graphic file (type pdf)
@@ -462,7 +462,7 @@ File: ../figures/dtree-kmeans-pruned-unscaled-2.pdf Graphic file (type pdf)
 <use ../figures/dtree-kmeans-pruned-unscaled-2.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-unscaled-2.pdf used on 
 input line 248.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 <../figures/dtree-kmeans-pruned-unscaled-3.pdf, id=25, 505.89pt x 505.89pt>
 File: ../figures/dtree-kmeans-pruned-unscaled-3.pdf Graphic file (type pdf)
@@ -470,7 +470,7 @@ File: ../figures/dtree-kmeans-pruned-unscaled-3.pdf Graphic file (type pdf)
 <use ../figures/dtree-kmeans-pruned-unscaled-3.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-unscaled-3.pdf used on 
 input line 255.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 <../figures/dtree-kmeans-pruned-unscaled-4.pdf, id=26, 505.89pt x 505.89pt>
 File: ../figures/dtree-kmeans-pruned-unscaled-4.pdf Graphic file (type pdf)
@@ -478,9 +478,9 @@ File: ../figures/dtree-kmeans-pruned-unscaled-4.pdf Graphic file (type pdf)
 <use ../figures/dtree-kmeans-pruned-unscaled-4.pdf>
 Package pdftex.def Info: ../figures/dtree-kmeans-pruned-unscaled-4.pdf used on 
 input line 262.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
- [3 <../figures/pca-eigenvalues.png>]
-<../figures/kmeans-summaries-2.pdf, id=32, 691.58376pt x 458.71375pt>
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+ [3 <../figures/pca-eigenvalues.png>] [4 <../figures/kmeans-wss-error.png>]
+<../figures/kmeans-summaries-2.pdf, id=36, 691.58376pt x 458.71375pt>
 File: ../figures/kmeans-summaries-2.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-summaries-2.pdf>
@@ -488,7 +488,7 @@ Package pdftex.def Info: ../figures/kmeans-summaries-2.pdf used on input line 2
 89.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
-<../figures/kmeans-summaries-3.pdf, id=33, 691.58376pt x 458.71375pt>
+<../figures/kmeans-summaries-3.pdf, id=37, 691.58376pt x 458.71375pt>
 File: ../figures/kmeans-summaries-3.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-summaries-3.pdf>
@@ -496,7 +496,7 @@ Package pdftex.def Info: ../figures/kmeans-summaries-3.pdf used on input line 2
 96.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
-<../figures/kmeans-summaries-4.pdf, id=34, 691.58376pt x 458.71375pt>
+<../figures/kmeans-summaries-4.pdf, id=38, 691.58376pt x 458.71375pt>
 File: ../figures/kmeans-summaries-4.pdf Graphic file (type pdf)
 
 <use ../figures/kmeans-summaries-4.pdf>
@@ -504,63 +504,64 @@ Package pdftex.def Info: ../figures/kmeans-summaries-4.pdf used on input line 3
 03.
 (pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
-<../figures/ap-silhouette.pdf, id=35, 505.89pt x 505.89pt>
+<../figures/ap-silhouette.pdf, id=39, 505.89pt x 505.89pt>
 File: ../figures/ap-silhouette.pdf Graphic file (type pdf)
 
 <use ../figures/ap-silhouette.pdf>
-Package pdftex.def Info: ../figures/ap-silhouette.pdf used on input line 329.
-(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
- [4 <../figures/kmeans-wss-error.png>]
-<../figures/ap-summaries.pdf, id=40, 691.58376pt x 458.71375pt>
+Package pdftex.def Info: ../figures/ap-silhouette.pdf used on input line 332.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+ [5 <../figures/gap-statistic.png>]
+<../figures/ap-summaries.pdf, id=45, 691.58376pt x 458.71375pt>
 File: ../figures/ap-summaries.pdf Graphic file (type pdf)
 
 <use ../figures/ap-summaries.pdf>
-Package pdftex.def Info: ../figures/ap-summaries.pdf used on input line 341.
-(pdftex.def)             Requested size: 375.80544pt x 249.26959pt.
+Package pdftex.def Info: ../figures/ap-summaries.pdf used on input line 364.
+(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
 
-<../figures/biclust-16.pdf, id=41, 614.295pt x 794.97pt>
+<../figures/biclust-16.pdf, id=46, 614.295pt x 794.97pt>
 File: ../figures/biclust-16.pdf Graphic file (type pdf)
 
 <use ../figures/biclust-16.pdf>
-Package pdftex.def Info: ../figures/biclust-16.pdf used on input line 352.
-(pdftex.def)             Requested size: 375.80544pt x 486.3381pt.
+Package pdftex.def Info: ../figures/biclust-16.pdf used on input line 375.
+(pdftex.def)             Requested size: 469.75502pt x 607.9196pt.
 
-<../figures/bubbleplot-16.pdf, id=42, 614.295pt x 794.97pt>
+<../figures/bubbleplot-16.pdf, id=47, 614.295pt x 794.97pt>
 File: ../figures/bubbleplot-16.pdf Graphic file (type pdf)
 
 <use ../figures/bubbleplot-16.pdf>
-Package pdftex.def Info: ../figures/bubbleplot-16.pdf used on input line 359.
-(pdftex.def)             Requested size: 375.80544pt x 486.3381pt.
- [5 <../figures/gap-statistic.png>] [6 <../figures/asw.png>] [7 <../figures/kme
-ans-silhouette-2.pdf>] [8 <../figures/kmeans-silhouette-3.pdf>] [9 <../figures/
-kmeans-silhouette-4.pdf>] [10 <../figures/dtree-kmeans-pruned-unscaled-2.pdf>] 
-[11 <../figures/dtree-kmeans-pruned-unscaled-3.pdf>] [12 <../figures/dtree-kmea
-ns-pruned-unscaled-4.pdf>] [13 <../figures/kmeans-summaries-2.pdf>] [14 <../fig
-ures/kmeans-summaries-3.pdf>] [15 <../figures/kmeans-summaries-4.pdf>] [16 <../
-figures/ap-silhouette.pdf>] [17 <../figures/ap-summaries.pdf>] [18 <../figures/
-biclust-16.pdf>] [19 <../figures/bubbleplot-16.pdf>] (./parkinsons.aux) ) 
+Package pdftex.def Info: ../figures/bubbleplot-16.pdf used on input line 382.
+(pdftex.def)             Requested size: 469.75502pt x 607.9196pt.
+ [6 <../figures/asw.png>] [7] [8 <../figures/kmeans-silhouette-2.pdf>] [9 <../f
+igures/kmeans-silhouette-3.pdf>] [10 <../figures/kmeans-silhouette-4.pdf>] [11 
+<../figures/dtree-kmeans-pruned-unscaled-2.pdf>] [12 <../figures/dtree-kmeans-p
+runed-unscaled-3.pdf>] [13 <../figures/dtree-kmeans-pruned-unscaled-4.pdf>] [14
+ <../figures/kmeans-summaries-2.pdf>]
+[15 <../figures/kmeans-summaries-3.pdf>] [16 <../figures/kmeans-summaries-4.pdf
+>] [17 <../figures/ap-silhouette.pdf>] [18 <../figures/ap-summaries.pdf>]
+[19 <../figures/biclust-16.pdf>] [20 <../figures/bubbleplot-16.pdf>]
+(./parkinsons.aux) ) 
 Here is how much of TeX's memory you used:
- 5481 strings out of 495028
- 76874 string characters out of 6181497
- 156889 words of memory out of 5000000
- 8553 multiletter control sequences out of 15000+600000
- 21087 words of font info for 78 fonts, out of 8000000 for 9000
+ 5484 strings out of 495028
+ 76917 string characters out of 6181497
+ 156898 words of memory out of 5000000
+ 8555 multiletter control sequences out of 15000+600000
+ 21256 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,14n,43p,798b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmti12.pfb>
-Output written on parkinsons.pdf (19 pages, 360872 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmtt12.pfb>
+Output written on parkinsons.pdf (20 pages, 365489 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
+ 214 PDF objects out of 1000 (max. 8388607)
+ 146 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
