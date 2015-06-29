@@ -386,6 +386,37 @@ for (i in c("2", "3", "4")) {
   }
 }
 
+# GENDER STATS ====
+# TODO: Calculate for all k
+cluster.genders <- sapply(1:4, function(i) {
+  clus4 <- clusters.raw.long[["4"]]
+  mean(clus4[clus4$cluster == i & clus4$variable == "sex", ]$measurement)
+})
+
+# BIG VERSIONS OF CLUS4 ====
+clus4 <- clusters.raw.long[["4"]]
+# Manually save these!
+p <- ggplot(clus4, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
+  geom_boxplot() +
+  guides(fill = FALSE) +
+  facet_wrap( ~ variable, scales = "free")
+print(p)
+
+# Split by level of NMS impairment
+low.nms <- clus4[clus4$cluster == 2 | clus4$cluster == 3, ]
+high.nms <- clus4[clus4$cluster == 1 | clus4$cluster == 4, ]
+p <- ggplot(low.nms, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
+  geom_boxplot() +
+  guides(fill = FALSE) +
+  facet_wrap( ~ variable, scales = "free")
+print(p)
+p <- ggplot(high.nms, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
+  geom_boxplot() +
+  guides(fill = FALSE) +
+  facet_wrap( ~ variable, scales = "free")
+print(p)
+
+
 # NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
 # information
