@@ -416,6 +416,21 @@ p <- ggplot(high.nms, aes(x = factor(cluster), y = measurement, fill = factor(cl
   facet_wrap( ~ variable, scales = "free")
 print(p)
 
+# Significant differneces between population means ====
+# Try axial (most demonstrative feature)
+clus4.wide <- clusters.raw[["4"]]
+# Assuming 1st column is cluster (which it should be)
+oneways <- lapply(colnames(clus4.wide[, -1]), function(col) {
+  oneway.test(substitute(i ~ cluster, list(i = as.name(col))), data = clus4.wide)
+})
+for (test in oneways) {
+  if (test$p.value < 0.05) {
+    cat('insig\n')
+  } else {
+    cat('SIG:\n')
+    cat(test$data.name, '\n')
+  }
+}
 
 # NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
