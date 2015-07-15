@@ -312,6 +312,43 @@ $k = 4$ is where it gets interesting.
   \label{fig:kmeans-summaries-4}
 \end{figure}
 
+\subsubsection{Statistical Significance Tests, $k = 4$}
+Using one-way ANOVA for multiple means, we reject the null
+hypothesis that the means are the same with $p < 0.05$ for every variable
+\emph{except} \texttt{pdonset}.
+
+\subsubsection{Ranked Features}
+
+\begin{table}[h]
+  \centering
+  \caption{Features ranked by information gain}
+  \label{tab:info_gain}
+  \begin{tabular}{l|l}
+    variable & information gain \\
+    \hline
+    axial      & 0.20640691 \\
+    cisitot      & 0.20008571 \\
+    pigd      & 0.18193982 \\
+    nms\_d2      & 0.13178572 \\
+    nms\_d9      & 0.12116024 \\
+    bradykin      & 0.11966097 \\
+    nms\_d3      & 0.09421859 \\
+    rigidity      & 0.09260628 \\
+    nms\_d5      & 0.07579997 \\
+    nms\_d4      & 0.07438784 \\
+    nms\_d6      & 0.06620599 \\
+    nms\_d7      & 0.05574956 \\
+    nms\_d1      & 0.05509838 \\
+    tremor      & 0.04140473 \\
+    nms\_d8      & 0.03786173 \\
+    durat\_pd      & 0.02794420 \\
+    age      & 0.00000000 \\
+    sex      & 0.00000000 \\
+    pdonset      & 0.00000000 \\
+  \end{tabular}
+\end{table}
+
+
 \clearpage
 \section{Affinity Propagation}
 

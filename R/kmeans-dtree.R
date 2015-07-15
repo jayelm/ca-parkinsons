@@ -419,9 +419,13 @@ print(p)
 # Significant differneces between population means ====
 # Try axial (most demonstrative feature)
 clus4.wide <- clusters.raw[["4"]]
+# Why isn't this already a factor? Really confused
+# Because it wasn't set in clusters.raw - if this is a bad thing lmk
+clus4.wide$cluster <- as.factor(clus4.wide$cluster)
 # Assuming 1st column is cluster (which it should be)
 oneways <- lapply(colnames(clus4.wide[, -1]), function(col) {
-  oneway.test(substitute(i ~ cluster, list(i = as.name(col))), data = clus4.wide)
+  fm <- substitute(i ~ cluster, list(i = as.name(col)))
+  oneway.test(fm, clus4.wide)
 })
 for (test in oneways) {
   if (test$p.value < 0.05) {
@@ -431,6 +435,39 @@ for (test in oneways) {
     cat(test$data.name, '\n')
   }
 }
+
+# Tukey's HSD test ====
+
+tukeys <- lapply(colnames(clus4.wide[, -1]), function(col) {
+  # Doesn't work the oneway way for some reason!
+  fm <- as.formula(paste(col, '~ cluster'))
+  TukeyHSD(aov(fm, clus4.wide))$cluster
+})
+names(tukeys) <- colnames(clus4.wide[, -1])
+
+for (var in names(tukeys)) {
+  test <- tukeys[[var]]
+  # Check for nonsignificant, since there are more significant
+  sigs <- test[test[, "p adj"] > 0.05, ]
+  if (!identical(logical(0), as.logical(sigs))) { 
+    # Super hacky to figure out if null matrix without type error
+    cat(var, ' insignificant differences', ':', '\n', sep='')
+    if (class(sigs) == 'numeric') {  # If returned just a single vector, can't do anything
+      # Print em all, don't know how to get around this
+      print(test)
+    }
+    print(sigs)
+  } else {
+    cat(var, 'nothing', '\n')
+  }
+}
+
+# Rank by most informative features ====
+features.ranked <- information.gain(cluster ~ ., clus4.wide)
+# Add to a separate column because rownames are annoying
+features.ranked$variable <- rownames(features.ranked)
+rownames(features.ranked) <- NULL
+features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'attr_importance')]
 
 # NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
