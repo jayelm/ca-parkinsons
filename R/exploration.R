@@ -1,3 +1,6 @@
+# NOTE: This is just bits and pieces of sandbox code.
+# Not really meant to be sourced.
+
 # Libraries ====
 library(corrplot)
 library(ggplot2)
@@ -64,3 +67,50 @@ plot(hc(c2.df[, -20]))
 plot(hc(c4.df[, -20]))
 plot(hc(c3.df[, -20]))
 plot(hc(c1.df[, -20]))
+
+# Markov blanket feature selection
+parkinsons.chr <- parkinsons
+parkinsons$class <- as.factor(as.character(parkinsons$class))
+# Discretize first
+pd.discrete <- discretize(parkinsons, method = "quantile")
+iamb(parkinsons)
+tan_cl(parkinsons, class = "class")
+
+# More correlation (from asdm) ====
+pd.cor <- cor(parkinsons[, 1:19])
+corrplot(pd.cor, method = 'ellipse', type = 'lower', diag = F)
+pd.cor['pigd', 'axial']
+pd.cor['pigd', 'cisitot']
+pd.cor['axial', 'cisitot']
+pd.cor['pdonset', 'age']
+pd.cor['bradykin', 'rigidity']
+
+pd.cor['nms_d2', 'nms_d3']
+
+pd <- parkinsons
+pd[, 1:19] <- scale(pd[, 1:19])
+pd.iamb <- iamb(pd)
+plot(pd.iamb)
+pd.tan_cl <- tan_cl(pd, class = "class")
+pd.hc <- hc(pd)
+pd.cpt <- cptable(pd)
+as.grain(pd.cpt)
+pd.whitelist <- data.frame(
+  from = c('axial', 'pigd', 'tremor', 'bradykin', 'rigidity'),
+  to = c('cisitot', 'cisitot', 'cisitot', 'cisitot', 'cisitot')
+)
+pd.hc.wl <- hc(pd, whitelist = pd.whitelist)
+pd.hc <- si.hiton.pc(pd)
+plot(pd.hc)
+pd.hc.mb <- mb(pd.hc, 'class')
+pd.hc.mb
+length(mb(pd.hc.mb, 'class'))
+
+pd.woclass <- pd[, 1:19]
+pd.woclass.hc <- hc(pd[, 1:19])
+plot(pd.woclass.hc)
+mb(pd.woclass.hc, 'cisitot')
+
+# PCA ====
+pc <- princomp(pd[, 1:19])
+plot(pc)

@@ -361,7 +361,7 @@ for (i in c("2", "3", "4")) {
 
 # REORDER FACTORS BY INCREASING CISITOT ====
 for (i in c("2", "3", "4")) {
-  cisitot <- clusters.raw.long[[i]][clusters.raw.long[[i]]$variable == "cisitot", ] 
+  cisitot <- clusters.raw.long[[i]][clusters.raw.long[[i]]$variable == "cisitot", ]
   cisitot.means <- sapply(factor(1:as.integer(i)), function(i) {
     mean(cisitot[cisitot$cluster == i, ]$measurement)
   })
@@ -449,7 +449,7 @@ for (var in names(tukeys)) {
   test <- tukeys[[var]]
   # Check for nonsignificant, since there are more significant
   sigs <- test[test[, "p adj"] > 0.05, ]
-  if (!identical(logical(0), as.logical(sigs))) { 
+  if (!identical(logical(0), as.logical(sigs))) {
     # Super hacky to figure out if null matrix without type error
     cat(var, ' insignificant differences', ':', '\n', sep='')
     if (class(sigs) == 'numeric') {  # If returned just a single vector, can't do anything
@@ -476,6 +476,18 @@ features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'a
 # 90/214/56/421
 # 89/421/57/214
 # 214/421/57/89
+
 # but nms_d3 < 17.5 seems to be a main classifier here, eeven though it's not very
 # practically informative
 # also nms_d7
+
+# WRITE TO ARFF FOR WEKA ====
+clus4.wide <- clusters.raw[["4"]][, c(2:20, 1)]
+clus4.wide <- rename(clus4.wide, c("cluster" = "class"))
+clus4.wide$class <- as.factor(clus4.wide$class)
+head(clus4.wide)
+# Rename to parkinsons because it makes more sense
+parkinsons <- clus4.wide
+if (assertthat::are_equal(ncol(clusters.raw[["4"]]), ncol(parkinsons))) {
+  foreign::write.arff(parkinsons, './parkinsons-k4.arff')
+}
