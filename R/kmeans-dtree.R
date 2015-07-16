@@ -418,14 +418,14 @@ print(p)
 
 # Significant differneces between population means ====
 # Try axial (most demonstrative feature)
-clus4.wide <- clusters.raw[["4"]]
+clus4.wide.st <- clusters.raw[["4"]]
 # Why isn't this already a factor? Really confused
 # Because it wasn't set in clusters.raw - if this is a bad thing lmk
-clus4.wide$cluster <- as.factor(clus4.wide$cluster)
+clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
 # Assuming 1st column is cluster (which it should be)
-oneways <- lapply(colnames(clus4.wide[, -1]), function(col) {
+oneways <- lapply(colnames(clus4.wide.st[, -1]), function(col) {
   fm <- substitute(i ~ cluster, list(i = as.name(col)))
-  oneway.test(fm, clus4.wide)
+  oneway.test(fm, clus4.wide.st)
 })
 for (test in oneways) {
   if (test$p.value < 0.05) {
@@ -438,12 +438,12 @@ for (test in oneways) {
 
 # Tukey's HSD test ====
 
-tukeys <- lapply(colnames(clus4.wide[, -1]), function(col) {
+tukeys <- lapply(colnames(clus4.wide.st[, -1]), function(col) {
   # Doesn't work the oneway way for some reason!
   fm <- as.formula(paste(col, '~ cluster'))
-  TukeyHSD(aov(fm, clus4.wide))$cluster
+  TukeyHSD(aov(fm, clus4.wide.st))$cluster
 })
-names(tukeys) <- colnames(clus4.wide[, -1])
+names(tukeys) <- colnames(clus4.wide.st[, -1])
 
 for (var in names(tukeys)) {
   test <- tukeys[[var]]

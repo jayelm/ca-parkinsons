@@ -16,10 +16,36 @@ raw.nopdonset.unscaled$pdonset <- NULL
 N <- 4
 SAVE.PLOTS <- FALSE
 
+# Trim this ====
+nmses <- sapply(1:9, function(i) paste('nms_d', i, sep=''))
+extras <- c('age', 'durat_pd', 'cisitot')
+raw.nms <- raw.nopdonset[, c(nmses, extras)]
+raw.nms.unscaled <- raw.nopdonset.unscaled[, c(nmses, extras)]
+raw.motor <- raw.nopdonset[, c('rigidity', 'axial', 'bradykin', 'tremor', 'pigd')]
+raw.motor.unscaled <- raw.nopdonset.unscaled[, c('rigidity', 'axial', 'bradykin', 'tremor', 'pigd')]
+
 # BICLUSTERING ====
 # Bimax algorithm
-bcl <- biclust(as.matrix(raw.nopdonset), method=BCPlaid(), iter.startup = 50, iter.layer = 50)
-bcls <- bicluster(raw.nopdonset.unscaled, bcl)
+set.seed(0)
+bcl <- biclust(as.matrix(raw.nms.unscaled), method=BCCC())
+bcls <- bicluster(raw.nms.unscaled, bcl)
+for (i in 1:100) {
+  cat(i, '\n')
+  varname <- paste('Bicluster', i, sep='')
+  bc <- bcls[[varname]]
+  plot(bc)
+  x <- readline()
+  corrplot(cor(bc), method = 'number')
+  x <- readline()
+  if (x == 'q') break
+}
+plot(bcls$Bicluster7)
+drawHeatmap(raw.nms.unscaled, bicResult = bcl, number = 3)
+for (bc in bcls) {
+  cat('dim:', dim(bc), '\n')
+}
+
+# TODO: CORRPLOT
 
 # Transform pdonset to number of years w/ parkinsons?
 # Then we want to look at some kind of comparison between NONMOTOR...
