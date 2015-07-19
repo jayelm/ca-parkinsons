@@ -23,6 +23,7 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
 # explore plots is the determining clusters plots
 SAVE.EXPLORE.PLOTS <- FALSE
 SAVE.DTREES <- FALSE
+SAVE.OVA.DTREES <- FALSE
 SAVE.BOXPLOTS <- FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
@@ -490,4 +491,38 @@ head(clus4.wide)
 parkinsons <- clus4.wide
 if (assertthat::are_equal(ncol(clusters.raw[["4"]]), ncol(parkinsons))) {
   foreign::write.arff(parkinsons, './parkinsons-k4.arff')
+}
+
+# 1vA decision trees ====
+
+# Check SAVE.OVA.DTREES constant up top!
+
+# For each cluster
+set.seed(0) # Note: not 911!
+for (i in 1:4) {
+  cat("Testing", i, "\n")
+  trainset.ova <- trainset.labeled
+  # Convert to as.numeric so I can put 0 in there
+  trainset.ova$cluster <- as.numeric(trainset.ova$cluster)
+  trainset.ova[trainset.ova$cluster != i, ]$cluster <- 0
+  trainset.ova$cluster <- as.factor(trainset.ova$cluster)
+  # Attach to unscaled,
+  trainset.ova.unscaled <- cbind(raw.filtered.unscaled, cluster = trainset.ova$cluster)
+  t.ova <- rpart(cluster ~ ., trainset.ova.unscaled)
+
+  prp(t.ova, extra = 1, main = paste("Unpruned ", i, " vs all", sep=""))
+  # Prune it later
+  cp.ova <- t.ova$cptable[which.min(t.ova$cptable[,"xerror"]),"CP"]
+  printcp(t.ova)
+  print(cp.ova)
+  if (SAVE.OVA.DTREES) {
+    dev.copy(pdf, paste('../figures/dtree-', i, 'va-unpruned.pdf', sep=''))
+    dev.off()
+  }
+  pruned.t.ova <- prune(t.ova, cp = cp.ova)
+  prp(pruned.t.ova, extra = 1, main = paste("Pruned ", i, " vs all", sep=""))
+  if (SAVE.OVA.DTREES) {
+    dev.copy(pdf, paste('../figures/dtree-', i, 'va-pruned.pdf', sep=''))
+    dev.off()
+  }
 }
