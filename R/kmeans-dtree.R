@@ -354,11 +354,11 @@ for (i in 2:4) {
 }
 
 # CLUSTERS RAW WIDE -> LONG ====
-clusters.raw.long <- vector(mode = "list", length = 3)
+# NOTE: This lapply conversion hasn't been tested fully yet!
+clusters.raw.long <- lapply(c("2", "3", "4"), function(i) {
+  gather(clusters.raw[[i]], variable, measurement, age:pigd)
+})
 names(clusters.raw.long) <- c("2", "3", "4")
-for (i in c("2", "3", "4")) {
-  clusters.raw.long[[i]] <- gather(clusters.raw[[i]], variable, measurement, age:pigd)
-}
 
 # REORDER FACTORS BY INCREASING CISITOT ====
 for (i in c("2", "3", "4")) {
