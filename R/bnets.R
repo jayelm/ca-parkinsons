@@ -20,3 +20,11 @@ plot(clus4.iamb)
 mb(clus4.iamb, 'cluster')
 plot(hc(clus4.df))
 mb(hc(clus4.df), 'cluster')
+
+# Learning only in c3 ====
+# Standardize to force gaussian vars
+c3.woclus <- c3[, -1]
+c3.std <- as.data.frame(scale(c3.woclus))
+c3.hc <- hc(c3.std)
+plot(c3.hc)
+mb(c3.hc, "cisitot")

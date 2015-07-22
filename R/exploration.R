@@ -13,6 +13,14 @@ c2 <- clus4.wide[clus4.wide$class == 2, ]
 c3 <- clus4.wide[clus4.wide$class == 3, ]
 c4 <- clus4.wide[clus4.wide$class == 4, ]
 
+# OR alternative cluster usage if the full kmeans-dtree script hasn't been run
+if (FALSE) {
+  c1 <- clus4.wide[clus4.wide$cluster == 1, ]
+  c2 <- clus4.wide[clus4.wide$cluster == 2, ]
+  c3 <- clus4.wide[clus4.wide$cluster == 3, ]
+  c4 <- clus4.wide[clus4.wide$cluster == 4, ]
+}
+
 # Plot w/o cluster
 par(mfrow=c(2, 2))
 corrplot(cor(c2[, -20]), method = 'pie', title = 'Correlation 2', diag = F, type = 'lower')
