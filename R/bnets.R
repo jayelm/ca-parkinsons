@@ -47,7 +47,7 @@ if (SAVE.BNETS) {
   dev.off()
 }
 # Max-min hill-climbing ====
-c1.gs <- bnlearn::mmhc(c1.std)
+c1.mmhc <- bnlearn::mmhc(c1.std)
 plot(c1.mmhc)
 title('Min-Max Hill Climbing Algorithm on Cluster 1')
 if (SAVE.BNETS) {
