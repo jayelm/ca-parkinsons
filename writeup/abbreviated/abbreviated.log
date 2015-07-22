@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.6)  16 JUL 2015 09:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  22 JUL 2015 15:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -110,7 +110,7 @@ Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
 LaTeX Info: Redefining \bm on input line 204.
 )
-(/home/jayelm/texmf/tex/latex/numprint/numprint.sty
+(/home/jesse/texmf/tex/latex/numprint/numprint.sty
 Package: numprint 2012/08/20 v1.39 Print numbers (HH)
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
@@ -199,7 +199,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen122
 \Gin@req@width=\dimen123
 )
-(/home/jayelm/texmf/tex/latex/wrapfig/wrapfig.sty
+(/home/jesse/texmf/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen124
 \WF@size=\dimen125
 \c@WF@wrappedlines=\count113
@@ -210,7 +210,7 @@ Package: wrapfig 2003/01/31  v 3.6
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/rotating/rotating.sty
+(/home/jesse/texmf/tex/latex/rotating/rotating.sty
 Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
@@ -269,13 +269,13 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
-(/home/jayelm/texmf/tex/latex/tablefootnote/tablefootnote.sty
+(/home/jesse/texmf/tex/latex/tablefootnote/tablefootnote.sty
 Package: tablefootnote 2014/01/26 v1.1c Table foot notes (HMM)
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/letltxmacro.sty
 Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
 )
-(/home/jayelm/texmf/tex/latex/xifthen/xifthen.sty
+(/home/jesse/texmf/tex/latex/xifthen/xifthen.sty
 Package: xifthen 2009/04/17 v1.3 Extended ifthen features
 
 (/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
@@ -295,41 +295,38 @@ LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count118
 \calc@Cskip=\skip65
 )
-(/home/jayelm/texmf/tex/latex/ifmtarg/ifmtarg.sty
+(/home/jesse/texmf/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 ))
-
-Package tablefootnote Warning: Package etoolbox not available, therefore
-(tablefootnote)                substituting commands \AtEndEnvironment and
-(tablefootnote)                \AfterEndEnvironment for tablefootnotes
-(tablefootnote)                 on input line 447.
-
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count119
+(/home/jesse/texmf/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/03/19 v2.1d e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count119
+))
+(/home/jesse/texmf/tex/latex/listings/listings.sty
+\lst@mode=\count120
 \lst@gtempboxa=\box30
 \lst@token=\toks27
-\lst@length=\count120
+\lst@length=\count121
 \lst@currlwidth=\dimen128
-\lst@column=\count121
-\lst@pos=\count122
+\lst@column=\count122
+\lst@pos=\count123
 \lst@lostspace=\dimen129
 \lst@width=\dimen130
-\lst@newlines=\count123
-\lst@lineno=\count124
+\lst@newlines=\count124
+\lst@lineno=\count125
 \lst@maxwidth=\dimen131
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
-\c@lstnumber=\count125
-\lst@skipnumbers=\count126
+(/home/jesse/texmf/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count126
+\lst@skipnumbers=\count127
 \lst@framebox=\box31
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2013/08/26 1.5b listings configuration
+(/home/jesse/texmf/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
-Package: listings 2013/08/26 1.5b (Carsten Heinz)
-
-(./abbreviated.aux)
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+ (./abbreviated.aux)
 \openout1 = `abbreviated.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
@@ -381,19 +378,19 @@ LaTeX Font Info:    ... okay on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count127
+\scratchcounter=\count128
 \scratchdimen=\dimen132
 \scratchbox=\box32
-\nofMPsegments=\count128
-\nofMParguments=\count129
+\nofMPsegments=\count129
+\nofMParguments=\count130
 \everyMPshowfont=\toks28
-\MPscratchCnt=\count130
+\MPscratchCnt=\count131
 \MPscratchDim=\dimen133
-\MPnumerator=\count131
-\makeMPintoPDFobject=\count132
+\MPnumerator=\count132
+\makeMPintoPDFobject=\count133
 \everyMPtoPDFconversion=\toks29
 )
-\c@lstlisting=\count133
+\c@lstlisting=\count134
 LaTeX Font Info:    Try loading font information for U+msa on input line 33.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -445,50 +442,46 @@ line 242.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/abbreviated/bradykin-cisitot.pdf, id=24, 794.97pt x 614.295pt>
-File: ../../figures/abbreviated/bradykin-cisitot.pdf Graphic file (type pdf)
+<../../figures/dtree-1va-pruned.pdf, id=24, 505.89pt x 505.89pt>
+File: ../../figures/dtree-1va-pruned.pdf Graphic file (type pdf)
 
-<use ../../figures/abbreviated/bradykin-cisitot.pdf>
-Package pdftex.def Info: ../../figures/abbreviated/bradykin-cisitot.pdf used on
- input line 253.
-(pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-<../../figures/abbreviated/bradykin-cisitot-condensed.pdf, id=25, 794.97pt x 61
-4.295pt>
-File: ../../figures/abbreviated/bradykin-cisitot-condensed.pdf Graphic file (ty
-pe pdf)
- <use ../../figures/abbreviated/bradykin-cisitot-condensed.pdf>
-Package pdftex.def Info: ../../figures/abbreviated/bradykin-cisitot-condensed.p
-df used on input line 260.
-(pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
+<use ../../figures/dtree-1va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-1va-pruned.pdf used on input line 
+253.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+<../../figures/dtree-2va-pruned.pdf, id=25, 505.89pt x 505.89pt>
+File: ../../figures/dtree-2va-pruned.pdf Graphic file (type pdf)
 
-<../../figures/abbreviated/bradykin-cisitot-all.pdf, id=26, 794.97pt x 614.295p
-t>
-File: ../../figures/abbreviated/bradykin-cisitot-all.pdf Graphic file (type pdf
-)
- <use ../../figures/abbreviated/bradykin-cisitot-all.pdf>
-Package pdftex.def Info: ../../figures/abbreviated/bradykin-cisitot-all.pdf use
-d on input line 267.
-(pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
+<use ../../figures/dtree-2va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-2va-pruned.pdf used on input line 
+260.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/abbreviated/rigidity-cisitot.pdf, id=27, 794.97pt x 614.295pt>
-File: ../../figures/abbreviated/rigidity-cisitot.pdf Graphic file (type pdf)
+<../../figures/dtree-3va-pruned.pdf, id=26, 505.89pt x 505.89pt>
+File: ../../figures/dtree-3va-pruned.pdf Graphic file (type pdf)
 
-<use ../../figures/abbreviated/rigidity-cisitot.pdf>
-Package pdftex.def Info: ../../figures/abbreviated/rigidity-cisitot.pdf used on
- input line 274.
-(pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
+<use ../../figures/dtree-3va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-3va-pruned.pdf used on input line 
+266.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/dtree-4va-pruned.pdf, id=27, 505.89pt x 505.89pt>
+File: ../../figures/dtree-4va-pruned.pdf Graphic file (type pdf)
+
+<use ../../figures/dtree-4va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-4va-pruned.pdf used on input line 
+273.
+(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -498,39 +491,39 @@ File: ../../figures/abbreviated/bnets.pdf Graphic file (type pdf)
 
 <use ../../figures/abbreviated/bnets.pdf>
 Package pdftex.def Info: ../../figures/abbreviated/bnets.pdf used on input line
- 288.
+ 286.
 (pdftex.def)             Requested size: 375.80544pt x 290.40588pt.
- [4]
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5] [6 <../../figures/dtree-kmeans-pruned-unscaled-4.pdf>] [7 <../../figures/km
-eans-summaries-4.pdf>] [8 <../../figures/abbreviated/corrplots.pdf>] [9 <../../
-figures/abbreviated/bradykin-cisitot.pdf>] [10 <../../figures/abbreviated/brady
-kin-cisitot-condensed.pdf>] [11 <../../figures/abbreviated/bradykin-cisitot-all
-.pdf>] [12 <../../figures/abbreviated/rigidity-cisitot.pdf>] [13 <../../figures
-/abbreviated/bnets.pdf>] (./abbreviated.aux) ) 
+[4] [5 <../../figures/dtree-kmeans-pruned-unscaled-4.pdf>] [6 <../../figures/km
+eans-summaries-4.pdf>] [7 <../../figures/abbreviated/corrplots.pdf>] [8 <../../
+figures/dtree-1va-pruned.pdf>] [9 <../../figures/dtree-2va-pruned.pdf>]
+[10 <../../figures/dtree-3va-pruned.pdf>] [11 <../../figures/dtree-4va-pruned.p
+df>] [12 <../../figures/abbreviated/bnets.pdf>] (./abbreviated.aux) ) 
 Here is how much of TeX's memory you used:
- 5134 strings out of 495028
- 72331 string characters out of 6181498
- 151419 words of memory out of 5000000
- 8217 multiletter control sequences out of 15000+600000
+ 5429 strings out of 495028
+ 75270 string characters out of 6181497
+ 157834 words of memory out of 5000000
+ 8509 multiletter control sequences out of 15000+600000
  21256 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,14n,43p,331b,252s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on abbreviated.pdf (13 pages, 333093 bytes).
+ 42i,14n,43p,799b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+t12.pfb>
+Output written on abbreviated.pdf (12 pages, 490027 bytes).
 PDF statistics:
- 150 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
+ 140 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

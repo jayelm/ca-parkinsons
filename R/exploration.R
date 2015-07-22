@@ -23,10 +23,10 @@ if (FALSE) {
 
 # Plot w/o cluster
 par(mfrow=c(2, 2))
-corrplot(cor(c2[, -19]), method = 'pie', title = 'Correlation 2', diag = F, type = 'lower')
-corrplot(cor(c4[, -19]), method = 'pie', title = 'Correlation 4', diag = F, type = 'lower')
-corrplot(cor(c3[, -19]), method = 'pie', title = 'Correlation 3', diag = F, type = 'lower')
-corrplot(cor(c1[, -19]), method = 'pie', title = 'Correlation 1', diag = F, type = 'lower')
+corrplot(cor(c4[, -19]), method = 'ellipse', title = 'Correlation 4', diag = F, type = 'lower')
+corrplot(cor(c1[, -19]), method = 'ellipse', title = 'Correlation 1', diag = F, type = 'lower')
+corrplot(cor(c3[, -19]), method = 'ellipse', title = 'Correlation 3', diag = F, type = 'lower')
+corrplot(cor(c2[, -19]), method = 'ellipse', title = 'Correlation 2', diag = F, type = 'lower')
 par(mfrow=c(1, 1))
 
 par(mfrow=c(2, 2))
@@ -48,6 +48,7 @@ ggplot(clus4.wide, aes(x = rigidity, y = cisitot)) +
   stat_smooth(method = 'lm') +
   theme_bw()
 
+# NOTE: This hsan't been updated for new group names!
 # Check chisq independence of sex and nms_d8 for c1 (severe group)
 # Being male or female affects sexual function reports, in general
 # (Assuming male here)
