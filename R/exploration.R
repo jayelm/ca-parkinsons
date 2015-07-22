@@ -23,10 +23,10 @@ if (FALSE) {
 
 # Plot w/o cluster
 par(mfrow=c(2, 2))
-corrplot(cor(c2[, -20]), method = 'pie', title = 'Correlation 2', diag = F, type = 'lower')
-corrplot(cor(c4[, -20]), method = 'pie', title = 'Correlation 4', diag = F, type = 'lower')
-corrplot(cor(c3[, -20]), method = 'pie', title = 'Correlation 3', diag = F, type = 'lower')
-corrplot(cor(c1[, -20]), method = 'pie', title = 'Correlation 1', diag = F, type = 'lower')
+corrplot(cor(c2[, -19]), method = 'pie', title = 'Correlation 2', diag = F, type = 'lower')
+corrplot(cor(c4[, -19]), method = 'pie', title = 'Correlation 4', diag = F, type = 'lower')
+corrplot(cor(c3[, -19]), method = 'pie', title = 'Correlation 3', diag = F, type = 'lower')
+corrplot(cor(c1[, -19]), method = 'pie', title = 'Correlation 1', diag = F, type = 'lower')
 par(mfrow=c(1, 1))
 
 par(mfrow=c(2, 2))
@@ -64,17 +64,17 @@ c3.df <- as.data.frame(as.matrix(c3))
 c1.df <- as.data.frame(as.matrix(c1))
 
 # iamb w/o class
-plot(iamb(c2.df[, -20]), main = '2')
-plot(iamb(c4.df[, -20]), main = '4')
-plot(iamb(c3.df[, -20]), main = '3')
-plot(iamb(c1.df[, -20]), main = '1')
+plot(iamb(c2.df[, -19]), main = '2')
+plot(iamb(c4.df[, -19]), main = '4')
+plot(iamb(c3.df[, -19]), main = '3')
+plot(iamb(c1.df[, -19]), main = '1')
 
 # hc w/o class
 # Too sparse - need more data
-plot(hc(c2.df[, -20]))
-plot(hc(c4.df[, -20]))
-plot(hc(c3.df[, -20]))
-plot(hc(c1.df[, -20]))
+plot(hc(c2.df[, -19]))
+plot(hc(c4.df[, -19]))
+plot(hc(c3.df[, -19]))
+plot(hc(c1.df[, -19]))
 
 # Markov blanket feature selection
 parkinsons.chr <- parkinsons
@@ -85,10 +85,11 @@ iamb(parkinsons)
 tan_cl(parkinsons, class = "class")
 
 # More correlation (from asdm) ====
-pd.cor <- cor(parkinsons[, 1:19])
+pd.cor <- cor(parkinsons[, 1:18])
 corrplot(pd.cor, method = 'ellipse', type = 'lower', diag = F)
-pd.cor['pigd', 'axial']
-pd.cor['pigd', 'cisitot']
+# Remember pigd is gone!
+# pd.cor['pigd', 'axial']
+# pd.cor['pigd', 'cisitot']
 pd.cor['axial', 'cisitot']
 pd.cor['pdonset', 'age']
 pd.cor['bradykin', 'rigidity']
@@ -96,7 +97,7 @@ pd.cor['bradykin', 'rigidity']
 pd.cor['nms_d2', 'nms_d3']
 
 pd <- parkinsons
-pd[, 1:19] <- scale(pd[, 1:19])
+pd[, 1:18] <- scale(pd[, 1:18])
 pd.iamb <- iamb(pd)
 plot(pd.iamb)
 pd.tan_cl <- tan_cl(pd, class = "class")
@@ -104,8 +105,8 @@ pd.hc <- hc(pd)
 pd.cpt <- cptable(pd)
 as.grain(pd.cpt)
 pd.whitelist <- data.frame(
-  from = c('axial', 'pigd', 'tremor', 'bradykin', 'rigidity'),
-  to = c('cisitot', 'cisitot', 'cisitot', 'cisitot', 'cisitot')
+  from = c('axial', 'tremor', 'bradykin', 'rigidity'),
+  to = c('cisitot', 'cisitot', 'cisitot', 'cisitot')
 )
 pd.hc.wl <- hc(pd, whitelist = pd.whitelist)
 pd.hc <- si.hiton.pc(pd)
@@ -114,11 +115,11 @@ pd.hc.mb <- mb(pd.hc, 'class')
 pd.hc.mb
 length(mb(pd.hc.mb, 'class'))
 
-pd.woclass <- pd[, 1:19]
-pd.woclass.hc <- hc(pd[, 1:19])
+pd.woclass <- pd[, 1:18]
+pd.woclass.hc <- hc(pd[, 1:18])
 plot(pd.woclass.hc)
 mb(pd.woclass.hc, 'cisitot')
 
 # PCA ====
-pc <- princomp(pd[, 1:19])
+pc <- princomp(pd[, 1:18])
 plot(pc)

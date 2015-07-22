@@ -13,7 +13,7 @@ source('./preprocessing.R')
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial", "pigd")
+                 "tremor", "bradykin", "rigidity", "axial")
 SAVE.PLOTS <- FALSE
 
 # COMPUTE DISTANCE MATRIX (EUCLIDEAN) ====
@@ -90,13 +90,13 @@ print(count(hcl.complete.mem))
 labeled.complete <- cbind(cluster=hcl.complete.mem, raw.omitted[, INTERPRETED])
 
 # WIDE -> LONG ====
-labeled.complete.long <- gather(labeled.complete, variable, measurement, age:pigd)
+labeled.complete.long <- gather(labeled.complete, variable, measurement, age:axial)
 
 # ORDER BY INCREASING CISITOT ====
 # We need to shift by 1 if using dynamic, since dynamicTreeCut starts at 0.
 DYNAMIC <- FALSE
 # DYNAMIC <- TRUE
-cisitot <- labeled.complete.long[labeled.complete.long$variable == "cisitot", ] 
+cisitot <- labeled.complete.long[labeled.complete.long$variable == "cisitot", ]
 anyNA(cisitot)
 cisitot.means <- sapply(1:nclust, function(i) {
   mean(cisitot[cisitot$cluster == i - DYNAMIC, ]$measurement)

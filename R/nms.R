@@ -29,7 +29,7 @@ names(c4.labeled) <- 2:4
 
 # Convert wide -> long ====
 c4.labeled.long <- lapply(c("2", "3", "4"), function(i) {
-  gather(c4.labeled[[i]], variable, measurement, age:pigd)
+  gather(c4.labeled[[i]], variable, measurement, age:axial)
 })
 names(c4.labeled.long) <- c("2", "3", "4")
 

@@ -21,8 +21,8 @@ nmses <- sapply(1:9, function(i) paste('nms_d', i, sep=''))
 extras <- c('age', 'durat_pd', 'cisitot')
 raw.nms <- raw.nopdonset[, c(nmses, extras)]
 raw.nms.unscaled <- raw.nopdonset.unscaled[, c(nmses, extras)]
-raw.motor <- raw.nopdonset[, c('rigidity', 'axial', 'bradykin', 'tremor', 'pigd')]
-raw.motor.unscaled <- raw.nopdonset.unscaled[, c('rigidity', 'axial', 'bradykin', 'tremor', 'pigd')]
+raw.motor <- raw.nopdonset[, c('rigidity', 'axial', 'bradykin', 'tremor')]
+raw.motor.unscaled <- raw.nopdonset.unscaled[, c('rigidity', 'axial', 'bradykin', 'tremor')]
 
 # BICLUSTERING ====
 # Bimax algorithm

@@ -19,17 +19,15 @@ ALL.SYMPTOMS <- c("nms_d1",
                  "tremor",
                  "bradykin",
                  "rigidity",
-                 "axial",
-                 "pigd")
+                 "axial")
 MOTOR.SYMPTOMS <- c("tremor",
                    "bradykin",
                    "rigidity",
-                   "axial",
-                   "pigd")
+                   "axial")
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial", "pigd")
+                 "tremor", "bradykin", "rigidity", "axial")
 # Change this variable to change symptoms
 SYMPTOMS.TO.USE <- ALL.SYMPTOMS
 

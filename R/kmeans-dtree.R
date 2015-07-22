@@ -15,7 +15,7 @@ library(tidyr)
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial", "pigd")
+                 "tremor", "bradykin", "rigidity", "axial")
 
 # Remember - PDFs can vary even if the (seeded) clusters don't
 # So this should be false unless I've changed something about the
@@ -356,7 +356,7 @@ for (i in 2:4) {
 # CLUSTERS RAW WIDE -> LONG ====
 # NOTE: This lapply conversion hasn't been tested fully yet!
 clusters.raw.long <- lapply(c("2", "3", "4"), function(i) {
-  gather(clusters.raw[[i]], variable, measurement, age:pigd)
+  gather(clusters.raw[[i]], variable, measurement, age:axial)
 })
 names(clusters.raw.long) <- c("2", "3", "4")
 
@@ -483,7 +483,8 @@ features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'a
 # also nms_d7
 
 # WRITE TO ARFF FOR WEKA ====
-clus4.wide <- clusters.raw[["4"]][, c(2:20, 1)]
+clus4.wide <- clusters.raw[["4"]][, c(2:19, 1)]
+# NOTE: Here is where the cluster/class renaming happens (.arff)
 clus4.wide <- rename(clus4.wide, c("cluster" = "class"))
 clus4.wide$class <- as.factor(clus4.wide$class)
 head(clus4.wide)

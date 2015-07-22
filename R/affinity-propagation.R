@@ -11,7 +11,7 @@ source('./preprocessing.R')
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial", "pigd")
+                 "tremor", "bradykin", "rigidity", "axial")
 # save.plots for now since I don't know what else to plot!
 SAVE.PLOTS <- FALSE
 
@@ -35,7 +35,7 @@ for (i in 1:nclust) {
 }
 
 # WIDE -> LONG ====
-unscaled.apclus.long <- gather(unscaled.apclus, variable, measurement, age:pigd)
+unscaled.apclus.long <- gather(unscaled.apclus, variable, measurement, age:axial)
 
 # FACTOR CLUSTERS, ORDER BY BY CISITOT ====
 # FIXME: Is it bad that the clusters are only factored here rather than
