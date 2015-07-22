@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  22 JUL 2015 15:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.10)  22 JUL 2015 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -486,13 +486,35 @@ Package pdftex.def Info: ../../figures/dtree-4va-pruned.pdf used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/abbreviated/bnets.pdf, id=28, 794.97pt x 614.295pt>
-File: ../../figures/abbreviated/bnets.pdf Graphic file (type pdf)
+<../../figures/clus1-bnet-gs.pdf, id=28, 505.89pt x 505.89pt>
+File: ../../figures/clus1-bnet-gs.pdf Graphic file (type pdf)
 
-<use ../../figures/abbreviated/bnets.pdf>
-Package pdftex.def Info: ../../figures/abbreviated/bnets.pdf used on input line
- 286.
-(pdftex.def)             Requested size: 375.80544pt x 290.40588pt.
+<use ../../figures/clus1-bnet-gs.pdf>
+Package pdftex.def Info: ../../figures/clus1-bnet-gs.pdf used on input line 286
+.
+(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/clus1-bnet-hc.pdf, id=29, 505.89pt x 505.89pt>
+File: ../../figures/clus1-bnet-hc.pdf Graphic file (type pdf)
+
+<use ../../figures/clus1-bnet-hc.pdf>
+Package pdftex.def Info: ../../figures/clus1-bnet-hc.pdf used on input line 293
+.
+(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/clus1-bnet-mmhc.pdf, id=30, 505.89pt x 505.89pt>
+File: ../../figures/clus1-bnet-mmhc.pdf Graphic file (type pdf)
+
+<use ../../figures/clus1-bnet-mmhc.pdf>
+Package pdftex.def Info: ../../figures/clus1-bnet-mmhc.pdf used on input line 3
+00.
+(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -501,29 +523,30 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 eans-summaries-4.pdf>] [7 <../../figures/abbreviated/corrplots.pdf>] [8 <../../
 figures/dtree-1va-pruned.pdf>] [9 <../../figures/dtree-2va-pruned.pdf>]
 [10 <../../figures/dtree-3va-pruned.pdf>] [11 <../../figures/dtree-4va-pruned.p
-df>] [12 <../../figures/abbreviated/bnets.pdf>] (./abbreviated.aux) ) 
+df>] [12 <../../figures/clus1-bnet-gs.pdf>] [13 <../../figures/clus1-bnet-hc.pd
+f>] [14 <../../figures/clus1-bnet-mmhc.pdf>] (./abbreviated.aux) ) 
 Here is how much of TeX's memory you used:
- 5429 strings out of 495028
- 75270 string characters out of 6181497
- 157834 words of memory out of 5000000
- 8509 multiletter control sequences out of 15000+600000
+ 5441 strings out of 495028
+ 75622 string characters out of 6181497
+ 157853 words of memory out of 5000000
+ 8519 multiletter control sequences out of 15000+600000
  21256 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,14n,43p,799b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t12.pfb>
-Output written on abbreviated.pdf (12 pages, 490027 bytes).
+</usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12
+.pfb>
+Output written on abbreviated.pdf (14 pages, 497611 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
+ 162 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

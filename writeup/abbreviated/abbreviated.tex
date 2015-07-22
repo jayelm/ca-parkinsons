@@ -276,16 +276,30 @@ Figures~\ref{fig:1va},~\ref{fig:2va},~\ref{fig:3va},~\ref{fig:4va}.
 \end{figure}
 \section{Other Work}
 
-\subsection{Bayesian Networks}
+\subsection{Bayesian Networks on Cluster 1}
 
-In Figure~\ref{fig:bnets}. Structure is too sparse, need to discretize or use
-some kind of regularization (e.g. a lasso)
+Figures~\ref{fig:bnet-gs},~\ref{fig:bnet-hc}, and~\ref{fig:bnet-mmhc} show various
+learning algorithms.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\linewidth]{bnets.pdf}
-  \caption{Bayesian Networks}
-  \label{fig:bnets}
+  \includegraphics[width=0.8\linewidth]{clus1-bnet-gs.pdf}
+  \caption{Grow Shrink Algorithm}
+  \label{fig:bnet-gs}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{clus1-bnet-hc.pdf}
+  \caption{Hill Climbing Algorithm}
+  \label{fig:bnet-hc}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{clus1-bnet-mmhc.pdf}
+  \caption{Min-Max Hill Climbing Algorithm}
+  \label{fig:bnet-mmhc}
 \end{figure}
 
 \end{document}
