@@ -9,6 +9,7 @@ library(NbClust)
 library(mclust)
 library(ggplot2)
 library(tidyr)
+library(FSelector)
 
 # CONSTANTS ====
 # INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
@@ -33,6 +34,8 @@ source('./preprocessing.R')
 # VISUALIZE WSS ERROR TO FIND OPTIMAL K ====
 # NOTE: Doesn't work well, there isn't any elbow
 
+# Just in case it's still defined from below
+var <- NULL
 wss <- (nrow(raw.filtered)-1)*sum(apply(raw.filtered, 2, var))
 for (i in 2:15) {
   wss[i] <- sum(kmeans(raw.filtered, i, nstart = 25)$withinss)
@@ -130,7 +133,7 @@ text(pruned.t, use.n=TRUE, all=TRUE, cex=.8, pos=1)
 
 # KMEANS CLUSTERING COMPRESSED FUNCTION ====
 # Use for iteration!
-kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 911) {
+kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
   # Reproducibility!
   set.seed(seed)
   cl <- kmeans(splits$trainset, k, nstart = 25)
@@ -430,9 +433,9 @@ oneways <- lapply(colnames(clus4.wide.st[, -1]), function(col) {
 })
 for (test in oneways) {
   if (test$p.value < 0.05) {
-    cat('insig\n')
+    cat('sig\n')
   } else {
-    cat('SIG:\n')
+    cat('INSIG:\n')
     cat(test$data.name, '\n')
   }
 }
@@ -446,29 +449,30 @@ tukeys <- lapply(colnames(clus4.wide.st[, -1]), function(col) {
 })
 names(tukeys) <- colnames(clus4.wide.st[, -1])
 
-for (var in names(tukeys)) {
-  test <- tukeys[[var]]
+for (v in names(tukeys)) {
+  test <- tukeys[[v]]
   # Check for nonsignificant, since there are more significant
   sigs <- test[test[, "p adj"] > 0.05, ]
   if (!identical(logical(0), as.logical(sigs))) {
     # Super hacky to figure out if null matrix without type error
-    cat(var, ' insignificant differences', ':', '\n', sep='')
+    cat(v, ' insignificant differences', ':', '\n', sep='')
     if (class(sigs) == 'numeric') {  # If returned just a single vector, can't do anything
       # Print em all, don't know how to get around this
       print(test)
     }
     print(sigs)
   } else {
-    cat(var, 'nothing', '\n')
+    cat(v, 'nothing', '\n')
   }
 }
 
 # Rank by most informative features ====
-features.ranked <- information.gain(cluster ~ ., clus4.wide)
+features.ranked <- information.gain(cluster ~ ., clus4.wide.st)
 # Add to a separate column because rownames are annoying
 features.ranked$variable <- rownames(features.ranked)
 rownames(features.ranked) <- NULL
-features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'attr_importance')]
+info.gain.ranks <- features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'attr_importance')]
+print(info.gain.ranks)
 
 # NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
@@ -490,8 +494,8 @@ clus4.wide$class <- as.factor(clus4.wide$class)
 head(clus4.wide)
 # Rename to parkinsons because it makes more sense
 parkinsons <- clus4.wide
-if (assertthat::are_equal(ncol(clusters.raw[["4"]]), ncol(parkinsons))) {
-  foreign::write.arff(parkinsons, './parkinsons-k4.arff')
+if (assertthat::are_equal(ncol(clusters.raw[["4"]]), ncol(parkinsons)) && SAVE.ARFF) {
+  foreign::write.arff(parkinsons, '../data/parkinsons-k4.arff')
 }
 
 # 1vA decision trees ====
@@ -499,7 +503,7 @@ if (assertthat::are_equal(ncol(clusters.raw[["4"]]), ncol(parkinsons))) {
 # Check SAVE.OVA.DTREES constant up top!
 
 # For each cluster
-set.seed(0) # Note: not 911!
+set.seed(0)
 for (i in 1:4) {
   cat("Testing", i, "\n")
   trainset.ova <- trainset.labeled

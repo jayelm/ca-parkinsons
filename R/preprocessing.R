@@ -52,7 +52,7 @@ raw.omitted <- raw[, INTERPRETED]
 raw.omitted <- na.omit(raw.omitted)
 
 # raw with only select nms and motor symptoms
-raw.filtered <- raw.omitted
+raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
 
 # DESCRIPTIVE STATISTICS (BEFORE STANDARDIZATION) ====
 # TODO - change raw.filtered to raw.omitted.filtered, or something like that
