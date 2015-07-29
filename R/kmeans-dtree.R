@@ -26,6 +26,7 @@ SAVE.EXPLORE.PLOTS <- FALSE
 SAVE.DTREES <- FALSE
 SAVE.OVA.DTREES <- FALSE
 SAVE.BOXPLOTS <- FALSE
+SAVE.ARFF <- FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
@@ -531,3 +532,17 @@ for (i in 1:4) {
     dev.off()
   }
 }
+
+# Visualization with parallel coordinates ====
+library(MASS)  # Modern applied statistics with S
+
+# If not done already in exploration, double check
+c1 <- clus4.wide[clus4.wide$class == 1, ]
+c2 <- clus4.wide[clus4.wide$class == 2, ]
+c3 <- clus4.wide[clus4.wide$class == 3, ]
+c4 <- clus4.wide[clus4.wide$class == 4, ]
+
+c1.woclass <- c1
+c1.woclass$class <- NULL
+
+parcoord(c1.woclass, col = as.numeric(c1$class))

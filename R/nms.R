@@ -13,7 +13,7 @@ SAVE.C1PLOTS <- FALSE
 
 
 # Do kmeans clustering on subgroup ====
-# c1 is what we're interested in, that's set in kmeans dtree
+# c1 is what we're interested in, that's set in exploration.R
 set.seed(0)
 c1.woclass <- c1
 c1.woclass$class <- NULL
