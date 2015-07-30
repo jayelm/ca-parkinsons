@@ -95,10 +95,24 @@ axial&    3.25&  2.68&   0-12 \\
 
 \section{$k$-means}
 
-$k$-means clustering with $k = 4$ was tried. $k = 2, 3$ provided models that
-were too simplistic. $k = 5$ did not provide any new information, but rather
-just fragmented existing groups.
+$k$-means clustering with $k = 4$ was tried. Statistics for determining the
+optimal number of clusters were used, but were inconclusive: results in
+Figure~\ref{tab:numclus}. This probably indicates that the data is not very
+well clustered. $k = 2, 3$ provided models that were too simplistic. $k = 5$
+did not provide any new information, but rather just fragmented existing
+groups.
 
+\begin{table}[h]
+  \centering
+  \caption{caption}
+  \label{tab:numclus}
+  \begin{tabular}{l|l}
+    Criterion & Optimal $k$ \\
+    \hline
+    Minimum ASW & Inconclusive  \\
+    % TODO: Finish this
+  \end{tabular}
+\end{table}
 \begin{table}[h]
   \centering
   \caption{Cluster statistics}

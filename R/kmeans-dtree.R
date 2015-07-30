@@ -81,6 +81,11 @@ if (SAVE.EXPLORE.PLOTS) {
   dev.off()
 }
 
+library(fpc)
+pamk.best <- pamk(raw.filtered)
+cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
+plot(pam(raw.filtered, pamk.best$nc))
+
 # GAP STATISTIC ESTIMATION ====
 gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
 plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
