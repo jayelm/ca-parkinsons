@@ -80,3 +80,6 @@ cat("affinity propogation optimal number of clusters:", length(d.apclus@clusters
 # 4
 heatmap(d.apclus)
 plot(d.apclus, c1.woclass)
+
+
+# write.csv(c1.woclass, '~/Downloads/nms-unscaled.csv')

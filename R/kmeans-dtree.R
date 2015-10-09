@@ -10,6 +10,8 @@ library(mclust)
 library(ggplot2)
 library(tidyr)
 library(FSelector)
+library(apclust)
+library(RColorBrewer) # For colors for decision tree plots
 
 # CONSTANTS ====
 # INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
@@ -56,11 +58,11 @@ if (SAVE.EXPLORE.PLOTS) {
 # it finds to be optimal, set it to search for
 # at least 1 model and up 20.
 # Traditionally this takes a while, so it's uncommented
-# d_clust <- Mclust(as.matrix(raw.filtered), G=1:20)
-# m.best <- dim(d_clust$z)[2]
-# cat("model-based optimal number of clusters:", m.best, "\n")
-# # 3 clusters
-# plot(d_clust)
+d_clust <- Mclust(as.matrix(raw.filtered), G=1:20)
+m.best <- dim(d_clust$z)[2]
+cat("model-based optimal number of clusters:", m.best, "\n")
+# 3 clusters
+plot(d_clust)
 
 # NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
 # This is taking a long time
@@ -93,6 +95,18 @@ if (SAVE.EXPLORE.PLOTS) {
   dev.copy(pdf, "../figures/gap-statistic.pdf")
   dev.off()
 }
+
+# Affinity propagation ====
+# Auto commented out because this takes a while
+# library(apcluster)
+# raw.filtered.apclus <- apcluster(negDistMat(r=2), raw.filtered,
+#           details = TRUE, q = 0, lam = 0.98,
+#           maxits=10000, convits=1000)
+# cat("affinity propogation optimal number of clusters:",
+#     length(raw.filtered.apclus@clusters), "\n")
+# # 4
+# heatmap(raw.filtered.apclus)
+# plot(raw.filtered.apclus, raw.filtered)
 
 # INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
@@ -199,7 +213,8 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
   # plot(t, uniform=TRUE, main="Decision Tree")
   # text(t, use.n=TRUE, all=TRUE, cex=.8)
   # ?prp for extra keyword args - this one displays class proportions
-  prp(t, extra = 1, main = paste("Unpruned Tree, ", i, " clusters", sep=""))
+  prp(t, extra = 1, main = paste("Unpruned Tree, ", i, " clusters", sep=""),
+      box.col = c('red', 'green', 'blue', 'pink')[t$frame$yval])
   # Get usr coordinates to add text to bottom right
   # NOTE: doesn't work, passing for now.
   # usr <- par("usr")
@@ -209,7 +224,8 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
     dev.off()
   }
 
-  prp(pruned.t, extra = 1, main = paste("Pruned Tree, ", i, " clusters", sep=""))
+  prp(pruned.t, extra = 1, main = paste("Pruned Tree, ", i, " clusters", sep=""),
+      box.col = c('red', 'green', 'blue', 'pink')[pruned.t$frame$yval])
   # usr <- par("usr")
   # text(usr[2], usr[3], paste("10-fold CV error: ", xv.error.pruned, sep=""), adj=c(1, 0))
   # plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
@@ -221,7 +237,8 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
 
   # Plot the unscaled tree
   prp(pruned.t.unscaled, extra = 1,
-      main = paste("UNSCALED Pruned Tree, ", i, " clusters", sep=""))
+      main = paste("UNSCALED Pruned Tree, ", i, " clusters", sep=""),
+      box.col = tail(palette(), n = -1)[labeled.data$cluster])
   if (save) {
     dev.copy(pdf, paste('../figures/dtree-kmeans-pruned-unscaled-', k, '.pdf', sep=''))
     dev.off()
@@ -521,7 +538,8 @@ for (i in 1:4) {
   trainset.ova.unscaled <- cbind(raw.filtered.unscaled, cluster = trainset.ova$cluster)
   t.ova <- rpart(cluster ~ ., trainset.ova.unscaled)
 
-  prp(t.ova, extra = 1, main = paste("Unpruned ", i, " vs all", sep=""))
+  prp(t.ova, extra = 1, main = paste("Unpruned ", i, " vs all", sep=""),
+      box.col = tail(palette(), n = -1)[t.ova$frame$yval])
   # Prune it later
   cp.ova <- t.ova$cptable[which.min(t.ova$cptable[,"xerror"]),"CP"]
   printcp(t.ova)
@@ -531,7 +549,8 @@ for (i in 1:4) {
     dev.off()
   }
   pruned.t.ova <- prune(t.ova, cp = cp.ova)
-  prp(pruned.t.ova, extra = 1, main = paste("Pruned ", i, " vs all", sep=""))
+  prp(pruned.t.ova, extra = 1, main = paste("Pruned ", i, " vs all", sep=""),
+      box.col = tail(palette(), n = -1)[pruned.t.ova$frame$yval])
   if (SAVE.OVA.DTREES) {
     dev.copy(pdf, paste('../figures/dtree-', i, 'va-pruned.pdf', sep=''))
     dev.off()
