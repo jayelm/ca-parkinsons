@@ -11,6 +11,87 @@ library(ggplot2)
 # Constants ====
 SAVE.C1PLOTS <- FALSE
 
+# VISUALIZE WSS ERROR TO FIND OPTIMAL K ====
+# NOTE: Doesn't work well, there isn't any elbow
+
+# Just in case it's still defined from below
+var <- NULL
+wss <- (nrow(c1.woclass)-1)*sum(apply(c1.woclass, 2, var))
+for (i in 2:15) {
+  wss[i] <- sum(kmeans(c1.woclass, i, nstart = 25)$withinss)
+}
+
+plot(1:15, wss, type="b",
+     xlab="Number of Clusters", ylab="Within groups sum of squares")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/kmeans-wss-error.pdf")
+  dev.off()
+}
+
+# TODO: BIC ====
+# See http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters
+# NOW - does this have to do with EM/hierarchical models. not cluster-based?
+# Run the function to see how many clusters
+# it finds to be optimal, set it to search for
+# at least 1 model and up 20.
+# Traditionally this takes a while, so it's uncommented
+d_clust <- Mclust(as.matrix(c1.woclass), G=1:20)
+m.best <- dim(d_clust$z)[2]
+cat("model-based optimal number of clusters:", m.best, "\n")
+# 3 clusters
+plot(d_clust)
+
+# NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
+# This is taking a long time
+# nb <- NbClust(c1.woclass, distance = "euclidean",
+#               min.nc=2, max.nc=15, method = "kmeans",
+#               index = "alllong", alphaBeale = 0.1)
+# hist(nb$Best.nc[1,], breaks = max(na.omit(nb$Best.nc[1,])))
+
+# PAM ESTIMATION FOR OPTIMAL K ====
+# Estimates 2
+pam_sils <- c()
+for (i in 1:15) {
+  pam_sils <- c(pam_sils, pam(c1.woclass, k=i)$silinfo$avg.width)
+}
+plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/asw.pdf")
+  dev.off()
+}
+
+library(fpc)
+pamk.best <- pamk(c1.woclass)
+cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
+plot(pam(c1.woclass, pamk.best$nc))
+
+# GAP STATISTIC ESTIMATION ====
+gaps <- clusGap(c1.woclass, kmeans, 14, B = 100)
+plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/gap-statistic.pdf")
+  dev.off()
+}
+
+# Affinity propagation ====
+# Auto commented out because this takes a while
+library(apcluster)
+c1.woclass.apclus <- apcluster(negDistMat(r=2), c1.woclass,
+          details = TRUE, q = 0, lam = 0.98,
+          maxits=10000, convits=1000)
+cat("affinity propogation optimal number of clusters:",
+    length(c1.woclass.apclus@clusters), "\n")
+# 4
+heatmap(c1.woclass.apclus)
+plot(c1.woclass.apclus, c1.woclass)
+
+plot(1:15, wss, type="b",
+     xlab="Number of Clusters", ylab="Within groups sum of squares")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/kmeans-wss-error.pdf")
+  dev.off()
+}
+
 
 # Do kmeans clustering on subgroup ====
 # c1 is what we're interested in, that's set in exploration.R
