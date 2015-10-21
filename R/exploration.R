@@ -5,6 +5,8 @@
 library(corrplot)
 library(ggplot2)
 
+SAVE.COR.PARS = FALSE
+
 # Need clus4.wide from kmeans.dtree (the one with the class modified)
 
 # Random exploration ====
@@ -22,24 +24,35 @@ if (FALSE) {
 }
 
 # Plot w/o cluster
-par(mfrow=c(2, 2))
-corrplot(cor(c4[, -19]), method = 'ellipse', title = 'Correlation 4', diag = F, type = 'lower')
-corrplot(cor(c1[, -19]), method = 'ellipse', title = 'Correlation 1', diag = F, type = 'lower')
-corrplot(cor(c3[, -19]), method = 'ellipse', title = 'Correlation 3', diag = F, type = 'lower')
-corrplot(cor(c2[, -19]), method = 'ellipse', title = 'Correlation 2', diag = F, type = 'lower')
+par(mfrow=c(2, 2), oma=c(0, 0, 0, 0))
+corrplot(cor(c1[, -19]), method = 'ellipse', title = 'Correlation 1',
+         mar = c(1, 0, 1, 0), diag = F, type = 'lower')
+corrplot(cor(c2[, -19]), method = 'ellipse', title = 'Correlation 2',
+         mar = c(1, 0, 1, 0), diag = F, type = 'lower')
+corrplot(cor(c3[, -19]), method = 'ellipse', title = 'Correlation 3',
+         mar = c(1, 0, 1, 0), diag = F, type = 'lower')
+corrplot(cor(c4[, -19]), method = 'ellipse', title = 'Correlation 4',
+         mar = c(1, 0, 1, 0), diag = F, type = 'lower')
 par(mfrow=c(1, 1))
-
-par(mfrow=c(2, 2))
+if (SAVE.CORR.PLOT) {
+  dev.copy(pdf, '../figures/corrplots.pdf')
+  dev.off()
+}
 
 # Check out relationship between bradykinesia and cisitot -
 # Correlation in c1 but not c2, c3, c4
-clus4.wide$class <- factor(clus4.wide$class, levels = c(2, 4, 3, 1))
-ggplot(clus4.wide, aes(x = bradykin, y = cisitot)) +
+# TODO
+clus4.wide$class <- factor(clus4.wide$class, levels = c(1, 2, 3, 4))
+p <- ggplot(clus4.wide, aes(x = bradykin, y = cisitot)) +
   facet_wrap( ~ class, scales = 'free') +
   geom_point() +
   stat_smooth(method = 'lm') +
   theme_bw()
+print(p)
 
+if (SAVE.COR.PARS) {
+  ggsave("../figures/bradykin-v-cisitot.pdf")
+}
 # Same for rigidity - more severe PD has larger dynamics of
 # brady/rigidity expression?
 ggplot(clus4.wide, aes(x = rigidity, y = cisitot)) +
@@ -48,14 +61,75 @@ ggplot(clus4.wide, aes(x = rigidity, y = cisitot)) +
   stat_smooth(method = 'lm') +
   theme_bw()
 
+if (SAVE.COR.PARS) {
+  ggsave("../figures/rigidity-v-cisitot.pdf")
+}
+
+# Relationship between rigidity and nms_d6
+p <- ggplot(clus4.wide, aes(x = bradykin, y = nms_d6)) +
+  facet_wrap( ~ class, scales = 'free') +
+  geom_point() +
+  stat_smooth(method = 'lm') +
+  theme_bw()
+print(p)
+
+if (SAVE.COR.PARS) {
+  ggsave("../figures/bradykin-v-nms_d6.pdf")
+}
+# Same for rigidity - more severe PD has larger dynamics of
+# brady/rigidity expression?
+ggplot(clus4.wide, aes(x = rigidity, y = nms_d6)) +
+  facet_wrap( ~ class, scales = 'free') +
+  geom_point() +
+  stat_smooth(method = 'lm') +
+  theme_bw()
+
+if (SAVE.COR.PARS) {
+  ggsave("../figures/rigidity-v-nms_d6.pdf")
+}
+
 # NOTE: This hsan't been updated for new group names!
 # Check chisq independence of sex and nms_d8 for c1 (severe group)
 # Being male or female affects sexual function reports, in general
 # (Assuming male here)
-chisq.test(c2$rigidity, c2$cisitot, simulate.p.value = T)
-chisq.test(c4$pdonset, c4$age, simulate.p.value = T)
-cor.test(c4$bradykin, c4$durat_pd)
 
+# CORRELATION TEST RESULTS ====
+# (pearson moment)
+
+print.cor <- function(ct, comp, n) {
+  # ct$data.name preserves variable input
+  cat(n, ": ", comp[[1]], " and ", comp[[2]], "\t", ct$conf.int, "\t",
+      ct$p.value, "\n", sep="")
+}
+
+cor.comparisons <- list(
+  c('bradykin', 'cisitot'),
+  c('rigidity', 'cisitot'),
+  c('bradykin', 'nms_d6'),
+  c('rigidity', 'nms_d6')
+)
+
+test.cors <- function() {
+  cat("Vars\tConfidence Interval\tPVal\n")
+  for (comp in cor.comparisons) {
+    cortest <- cor.test(c1[[comp[1]]], c1[[comp[2]]])
+    print.cor(cortest, comp, "c1")
+  }
+  for (comp in cor.comparisons) {
+    cortest <- cor.test(c2[[comp[1]]], c2[[comp[2]]])
+    print.cor(cortest, comp, "c2")
+  }
+  for (comp in cor.comparisons) {
+    cortest <- cor.test(c3[[comp[1]]], c3[[comp[2]]])
+    print.cor(cortest, comp, "c3")
+  }
+  for (comp in cor.comparisons) {
+    cortest <- cor.test(c4[[comp[1]]], c4[[comp[2]]])
+    print.cor(cortest, comp, "c4")
+  }
+}
+
+test.cors()
 
 # Bayes nets ===
 # Try learning bns within the clusters
