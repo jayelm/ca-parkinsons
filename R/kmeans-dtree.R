@@ -10,8 +10,10 @@ library(mclust)
 library(ggplot2)
 library(tidyr)
 library(FSelector)
-library(apclust)
+# library(apclust)
 library(RColorBrewer) # For colors for decision tree plots
+my.palette = brewer.pal(8, "Pastel1")
+
 
 # CONSTANTS ====
 # INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
@@ -25,15 +27,34 @@ INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
 # kmeans analysis
 # explore plots is the determining clusters plots
 SAVE.EXPLORE.PLOTS <- FALSE
-SAVE.DTREES <- FALSE
+SAVE.DTREES <- TRUE
 SAVE.OVA.DTREES <- FALSE
 SAVE.BOXPLOTS <- FALSE
 SAVE.ARFF <- FALSE
+SAVE.2VA.DTREES <- FALSE
 # TODO: Make k = 2, 3, 4 modifiable via constant
 
 # LOAD DATA ====
 source('./preprocessing.R')
 
+rename.clusters <- function(cl) {
+  # Does passing in the argument not pass by reference?
+  # I'm just putting this (ugly) code everywhere else
+  for (i in 1:length(cl$cluster)) {
+    curr.cluster <- cl$cluster[[i]]
+
+    if (curr.cluster == 1) { # nms
+      cl$cluster[[i]] <- 2
+    } else if (curr.cluster == 2) { # all severe
+      cl$cluster[[i]] <- 4
+    } else if (curr.cluster == 3) { # motor
+      cl$cluster[[i]] <- 3
+    } else if (curr.cluster == 4) { # mild
+      cl$cluster[[i]] <- 1
+    }
+
+  }
+}
 # VISUALIZE WSS ERROR TO FIND OPTIMAL K ====
 # NOTE: Doesn't work well, there isn't any elbow
 
@@ -58,11 +79,11 @@ if (SAVE.EXPLORE.PLOTS) {
 # it finds to be optimal, set it to search for
 # at least 1 model and up 20.
 # Traditionally this takes a while, so it's uncommented
-d_clust <- Mclust(as.matrix(raw.filtered), G=1:20)
-m.best <- dim(d_clust$z)[2]
-cat("model-based optimal number of clusters:", m.best, "\n")
+# d_clust <- Mclust(as.matrix(raw.filtered), G=1:20)
+# m.best <- dim(d_clust$z)[2]
+# cat("model-based optimal number of clusters:", m.best, "\n")
 # 3 clusters
-plot(d_clust)
+# plot(d_clust)
 
 # NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
 # This is taking a long time
@@ -71,30 +92,31 @@ plot(d_clust)
 #               index = "alllong", alphaBeale = 0.1)
 # hist(nb$Best.nc[1,], breaks = max(na.omit(nb$Best.nc[1,])))
 
+#NOTE - changed 20151020 - commented to speed up calc
 # PAM ESTIMATION FOR OPTIMAL K ====
 # Estimates 2
-pam_sils <- c()
-for (i in 1:15) {
-  pam_sils <- c(pam_sils, pam(raw.filtered, k=i)$silinfo$avg.width)
-}
-plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
-if (SAVE.EXPLORE.PLOTS) {
-  dev.copy(pdf, "../figures/asw.pdf")
-  dev.off()
-}
+# pam_sils <- c()
+# for (i in 1:15) {
+  # pam_sils <- c(pam_sils, pam(raw.filtered, k=i)$silinfo$avg.width)
+# }
+# plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
+# if (SAVE.EXPLORE.PLOTS) {
+  # dev.copy(pdf, "../figures/asw.pdf")
+  # dev.off()
+# }
 
-library(fpc)
-pamk.best <- pamk(raw.filtered)
-cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
-plot(pam(raw.filtered, pamk.best$nc))
+# library(fpc)
+# pamk.best <- pamk(raw.filtered)
+# cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
+# plot(pam(raw.filtered, pamk.best$nc))
 
 # GAP STATISTIC ESTIMATION ====
-gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
-plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
-if (SAVE.EXPLORE.PLOTS) {
-  dev.copy(pdf, "../figures/gap-statistic.pdf")
-  dev.off()
-}
+# gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
+# plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
+# if (SAVE.EXPLORE.PLOTS) {
+  # dev.copy(pdf, "../figures/gap-statistic.pdf")
+  # dev.off()
+# }
 
 # Affinity propagation ====
 # Auto commented out because this takes a while
@@ -117,7 +139,26 @@ splits$trainset = raw.filtered
 
 # FIXME: How are we identifying k = 4? (Arbitrary right now)
 # Arbitrary 4 choice - variable is later
+set.seed(0)  # Important to let clusters be the same
 cl <- kmeans(splits$trainset, 4, nstart = 25)
+# Added 20151020 - and rename here
+print (cl$cluster)
+  for (i in 1:length(cl$cluster)) {
+    curr.cluster <- cl$cluster[[i]]
+
+    if (curr.cluster == 1) { # nms
+      cl$cluster[[i]] <- 2
+    } else if (curr.cluster == 2) { # all severe
+      cl$cluster[[i]] <- 4
+    } else if (curr.cluster == 3) { # motor
+      cl$cluster[[i]] <- 3
+    } else if (curr.cluster == 4) { # mild
+      cl$cluster[[i]] <- 1
+    } else {
+      print("wat")
+    }
+  }
+print(cl$cluster)
 
 # Add cluster label to original data, rename
 trainset.labeled <- cbind(splits$trainset, cl$cluster)
@@ -166,6 +207,23 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
     dev.off()
   }
   labeled.data <- cbind(data, cluster=cl$cluster)
+  # Rename clusters (added 20151020)
+  if (k == 4) {
+  for (i in 1:length(cl$cluster)) {
+    curr.cluster <- cl$cluster[[i]]
+
+    if (curr.cluster == 1) { # nms
+      cl$cluster[[i]] <- 2
+    } else if (curr.cluster == 2) { # all severe
+      cl$cluster[[i]] <- 4
+    } else if (curr.cluster == 3) { # motor
+      cl$cluster[[i]] <- 3
+    } else if (curr.cluster == 4) { # mild
+      cl$cluster[[i]] <- 1
+    }
+
+  }
+  }
   # Convert to factor
   labeled.data$cluster <- as.factor(labeled.data$cluster)
 
@@ -224,8 +282,7 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
     dev.off()
   }
 
-  prp(pruned.t, extra = 1, main = paste("Pruned Tree, ", i, " clusters", sep=""),
-      box.col = c('red', 'green', 'blue', 'pink')[pruned.t$frame$yval])
+  prp(pruned.t, extra = 1, main = paste("Pruned Tree, ", i, " clusters", sep=""))
   # usr <- par("usr")
   # text(usr[2], usr[3], paste("10-fold CV error: ", xv.error.pruned, sep=""), adj=c(1, 0))
   # plot(pruned.t, uniform=TRUE, main="Decision Tree (Pruned)")
@@ -237,8 +294,7 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
 
   # Plot the unscaled tree
   prp(pruned.t.unscaled, extra = 1,
-      main = paste("UNSCALED Pruned Tree, ", i, " clusters", sep=""),
-      box.col = tail(palette(), n = -1)[labeled.data$cluster])
+      main = paste("UNSCALED Pruned Tree, ", i, " clusters", sep=""))
   if (save) {
     dev.copy(pdf, paste('../figures/dtree-kmeans-pruned-unscaled-', k, '.pdf', sep=''))
     dev.off()
@@ -408,7 +464,7 @@ for (i in c("2", "3", "4")) {
     guides(fill = FALSE) +
     facet_wrap( ~ variable, scales = "free")
   print(p)
-  if (SAVE.BOXPLOTS) {
+  if (SAVE.BOXPLOTS || TRUE) {
     ggsave(paste("../figures/kmeans-summaries-", i, ".pdf", sep=""))
   }
 }
@@ -430,8 +486,9 @@ p <- ggplot(clus4, aes(x = factor(cluster), y = measurement, fill = factor(clust
 print(p)
 
 # Split by level of NMS impairment
-low.nms <- clus4[clus4$cluster == 2 | clus4$cluster == 3, ]
-high.nms <- clus4[clus4$cluster == 1 | clus4$cluster == 4, ]
+# NOTE: 20151020: change upon changing cluster!!
+low.nms <- clus4[clus4$cluster == 1 | clus4$cluster == 3, ]
+high.nms <- clus4[clus4$cluster == 2 | clus4$cluster == 4, ]
 p <- ggplot(low.nms, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
   geom_boxplot() +
   guides(fill = FALSE) +
@@ -490,12 +547,13 @@ for (v in names(tukeys)) {
 }
 
 # Rank by most informative features ====
-features.ranked <- information.gain(cluster ~ ., clus4.wide.st)
+# Commented out because is throwing a java.lang weka error
+# features.ranked <- information.gain(cluster ~ ., clus4.wide.st)
 # Add to a separate column because rownames are annoying
-features.ranked$variable <- rownames(features.ranked)
-rownames(features.ranked) <- NULL
-info.gain.ranks <- features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'attr_importance')]
-print(info.gain.ranks)
+# features.ranked$variable <- rownames(features.ranked)
+# rownames(features.ranked) <- NULL
+# info.gain.ranks <- features.ranked[with(features.ranked, order(-attr_importance)), c('variable', 'attr_importance')]
+# print(info.gain.ranks)
 
 # NOTES ====
 # Note - with clustering, indeed the main feature (root of the tree) doesn't carry much
@@ -532,14 +590,20 @@ for (i in 1:4) {
   trainset.ova <- trainset.labeled
   # Convert to as.numeric so I can put 0 in there
   trainset.ova$cluster <- as.numeric(trainset.ova$cluster)
+  # added 20151020 - DON'T RENAME HERE (already renamed!!!)
+  # rename.clusters(trainset.ova)  # Rename before doing weird things
+
   trainset.ova[trainset.ova$cluster != i, ]$cluster <- 0
   trainset.ova$cluster <- as.factor(trainset.ova$cluster)
   # Attach to unscaled,
   trainset.ova.unscaled <- cbind(raw.filtered.unscaled, cluster = trainset.ova$cluster)
   t.ova <- rpart(cluster ~ ., trainset.ova.unscaled)
+  if (i == 2) {
+    t.ova.2 <- t.ova
+  }
 
   prp(t.ova, extra = 1, main = paste("Unpruned ", i, " vs all", sep=""),
-      box.col = tail(palette(), n = -1)[t.ova$frame$yval])
+      box.col = tail(my.palette, n = -1)[t.ova$frame$yval])
   # Prune it later
   cp.ova <- t.ova$cptable[which.min(t.ova$cptable[,"xerror"]),"CP"]
   printcp(t.ova)
@@ -550,7 +614,7 @@ for (i in 1:4) {
   }
   pruned.t.ova <- prune(t.ova, cp = cp.ova)
   prp(pruned.t.ova, extra = 1, main = paste("Pruned ", i, " vs all", sep=""),
-      box.col = tail(palette(), n = -1)[pruned.t.ova$frame$yval])
+      box.col = tail(my.palette, n = -1)[pruned.t.ova$frame$yval])
   if (SAVE.OVA.DTREES) {
     dev.copy(pdf, paste('../figures/dtree-', i, 'va-pruned.pdf', sep=''))
     dev.off()
@@ -566,7 +630,75 @@ c2 <- clus4.wide[clus4.wide$class == 2, ]
 c3 <- clus4.wide[clus4.wide$class == 3, ]
 c4 <- clus4.wide[clus4.wide$class == 4, ]
 
-c1.woclass <- c1
-c1.woclass$class <- NULL
+# c1.woclass <- c1
+# c1.woclass$class <- NULL
+c2.woclass <- c2
+c2.woclass$class <- NULL
 
-parcoord(c1.woclass, col = as.numeric(c1$class))
+# No, we care about c2 now
+
+# Pointless, doesn't help.
+# parcoord(c1.woclass, col = as.numeric(c1$class))
+
+# 2 and 4 vs 0 decision trees ====
+trainset.2va <- trainset.labeled
+# Convert to as.numeric so I can put 0 in there
+trainset.2va$cluster <- as.numeric(trainset.2va$cluster)
+# added 20151020 - DON'T RENAME HERE (already renamed!!!)
+# rename.clusters(trainset.2va)  # Rename before doing weird things
+
+trainset.2va[trainset.2va$cluster != 2 & trainset.2va$cluster !=4 , ]$cluster <- 0
+trainset.2va$cluster <- as.factor(trainset.2va$cluster)
+# Attach to unscaled,
+trainset.2va.unscaled <- cbind(raw.filtered.unscaled, cluster = trainset.2va$cluster)
+t.2va <- rpart(cluster ~ ., trainset.2va.unscaled)
+
+prp(t.2va, extra = 1, main = paste("Unpruned ", i, " vs all", sep=""),
+    box.col = tail(my.palette, n = -1)[t.2va$frame$yval])
+# Prune it later
+cp.2va <- t.2va$cptable[which.min(t.2va$cptable[,"xerror"]),"CP"]
+printcp(t.2va)
+print(cp.2va)
+if (SAVE.2VA.DTREES) {
+  dev.copy(pdf, paste('../figures/dtree-2and4va-unpruned.pdf', sep=''))
+  dev.off()
+}
+pruned.t.2va <- prune(t.2va, cp = cp.2va)
+prp(pruned.t.2va, extra = 1, main = paste("Pruned 2 and 4 vs rest", sep=""),
+    box.col = tail(my.palette, n = -1)[pruned.t.2va$frame$yval])
+if (SAVE.2VA.DTREES) {
+  dev.copy(pdf, paste('../figures/dtree-2and4va-pruned.pdf', sep=''))
+  dev.off()
+}
+
+
+# 2 and 3 vs 0 dtrees ====
+trainset.2va <- trainset.labeled
+# Convert to as.numeric so I can put 0 in there
+trainset.2va$cluster <- as.numeric(trainset.2va$cluster)
+# added 20151020 - DON'T RENAME HERE (already renamed!!!)
+# rename.clusters(trainset.2va)  # Rename before doing weird things
+
+trainset.2va[trainset.2va$cluster != 2 & trainset.2va$cluster != 3 , ]$cluster <- 0
+trainset.2va$cluster <- as.factor(trainset.2va$cluster)
+# Attach to unscaled,
+trainset.2va.unscaled <- cbind(raw.filtered.unscaled, cluster = trainset.2va$cluster)
+t.2va <- rpart(cluster ~ ., trainset.2va.unscaled)
+
+prp(t.2va, extra = 1, main = paste("Unpruned ", i, " vs all", sep=""),
+    box.col = tail(my.palette, n = -1)[t.2va$frame$yval])
+# Prune it later
+cp.2va <- t.2va$cptable[which.min(t.2va$cptable[,"xerror"]),"CP"]
+printcp(t.2va)
+print(cp.2va)
+if (SAVE.2VA.DTREES) {
+  dev.copy(pdf, paste('../figures/dtree-2and3va-unpruned.pdf', sep=''))
+  dev.off()
+}
+pruned.t.2va <- prune(t.2va, cp = cp.2va)
+prp(pruned.t.2va, extra = 1, main = paste("Pruned 2 and 3 vs rest", sep=""),
+    box.col = tail(my.palette, n = -1)[pruned.t.2va$frame$yval])
+if (SAVE.2VA.DTREES) {
+  dev.copy(pdf, paste('../figures/dtree-2and3va-pruned.pdf', sep=''))
+  dev.off()
+}

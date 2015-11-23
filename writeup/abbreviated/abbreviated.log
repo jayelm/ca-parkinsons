@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.6)  10 SEP 2015 03:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.6)  23 OCT 2015 04:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -327,27 +327,60 @@ File: listings.cfg 2013/08/26 1.5b listings configuration
 ))
 Package: listings 2013/08/26 1.5b (Carsten Heinz)
 
-(./abbreviated.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen132
+\captionmargin@=\dimen133
+\captionwidth=\dimen134
+\caption@tempdima=\dimen135
+\caption@indent=\dimen136
+\caption@parindent=\dimen137
+\caption@hangindent=\dimen138
+)
+\c@ContinuedFloat=\count128
+Package caption Info: listings package is loaded.
+Package caption Info: rotating package is loaded.
+Package caption Info: wrapfig package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+\c@KVtest=\count129
+\sf@farskip=\skip66
+\sf@captopadj=\dimen139
+\sf@capskip=\skip67
+\sf@nearskip=\skip68
+\c@subfigure=\count130
+\c@subfigure@save=\count131
+\c@lofdepth=\count132
+\c@subtable=\count133
+\c@subtable@save=\count134
+\c@lotdepth=\count135
+\sf@top=\skip69
+\sf@bottom=\skip70
+) (./abbreviated.aux)
 \openout1 = `abbreviated.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
 * driver: pdftex
-* paper: letterpaper
+* paper: <default>
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
@@ -362,12 +395,12 @@ LaTeX Font Info:    ... okay on input line 30.
 * \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=44.0pt
-* \marginparsep=10.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -379,24 +412,27 @@ LaTeX Font Info:    ... okay on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count128
-\scratchdimen=\dimen132
+\scratchcounter=\count136
+\scratchdimen=\dimen140
 \scratchbox=\box32
-\nofMPsegments=\count129
-\nofMParguments=\count130
+\nofMPsegments=\count137
+\nofMParguments=\count138
 \everyMPshowfont=\toks28
-\MPscratchCnt=\count131
-\MPscratchDim=\dimen133
-\MPnumerator=\count132
-\makeMPintoPDFobject=\count133
+\MPscratchCnt=\count139
+\MPscratchDim=\dimen141
+\MPnumerator=\count140
+\makeMPintoPDFobject=\count141
 \everyMPtoPDFconversion=\toks29
 )
-\c@lstlisting=\count134
-LaTeX Font Info:    Try loading font information for U+msa on input line 34.
+\c@lstlisting=\count142
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 35.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 34.
+LaTeX Font Info:    Try loading font information for U+msb on input line 35.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -404,32 +440,42 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<../../figures/dtree-kmeans-pruned-unscaled-4.pdf, id=12, 505.89pt x 505.89pt>
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/dtree-kmeans-pruned-unscaled-4.pdf, id=1, 505.89pt x 505.89pt>
 File: ../../figures/dtree-kmeans-pruned-unscaled-4.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-kmeans-pruned-unscaled-4.pdf>
 Package pdftex.def Info: ../../figures/dtree-kmeans-pruned-unscaled-4.pdf used 
-on input line 143.
+on input line 144.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+ [1
 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/kmeans-summaries-4.pdf, id=13, 691.58376pt x 458.71375pt>
+<../../figures/kmeans-summaries-4.pdf, id=15, 609.27625pt x 361.35pt>
 File: ../../figures/kmeans-summaries-4.pdf Graphic file (type pdf)
 
 <use ../../figures/kmeans-summaries-4.pdf>
 Package pdftex.def Info: ../../figures/kmeans-summaries-4.pdf used on input lin
-e 156.
-(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
+e 157.
+(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [2]
+Overfull \hbox (0.58484pt too wide) in paragraph at lines 245--257
+[]\OT1/cmr/m/n/10 The most in-for-ma-tive non-mo-tor symp-toms are nms[]d2 (sle
+ep-/-fa-tigue) at 2, along with nms[]d3 (mood/cog-
+ []
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -437,122 +483,202 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/abbreviated/corrplots.pdf, id=23, 794.97pt x 614.295pt>
-File: ../../figures/abbreviated/corrplots.pdf Graphic file (type pdf)
+<../../figures/bradykin-v-cisitot.pdf, id=25, 609.27625pt x 361.35pt>
+File: ../../figures/bradykin-v-cisitot.pdf Graphic file (type pdf)
 
-<use ../../figures/abbreviated/corrplots.pdf>
-Package pdftex.def Info: ../../figures/abbreviated/corrplots.pdf used on input 
-line 304.
-(pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
+<use ../../figures/bradykin-v-cisitot.pdf>
+Package pdftex.def Info: ../../figures/bradykin-v-cisitot.pdf used on input lin
+e 339.
+(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
 
+<../../figures/rigidity-v-cisitot.pdf, id=27, 609.27625pt x 361.35pt>
+File: ../../figures/rigidity-v-cisitot.pdf Graphic file (type pdf)
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4] [5] <../../figures/c1-summaries-2.pdf, id=30, 691.58376pt x 458.71375pt>
-File: ../../figures/c1-summaries-2.pdf Graphic file (type pdf)
-
-<use ../../figures/c1-summaries-2.pdf>
-Package pdftex.def Info: ../../figures/c1-summaries-2.pdf used on input line 35
-8.
-(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
+<use ../../figures/rigidity-v-cisitot.pdf>
+Package pdftex.def Info: ../../figures/rigidity-v-cisitot.pdf used on input lin
+e 344.
+(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/c1-summaries-3.pdf, id=31, 691.58376pt x 458.71375pt>
-File: ../../figures/c1-summaries-3.pdf Graphic file (type pdf)
+<../../figures/bradykin-v-nms_d6.pdf, id=29, 609.27625pt x 361.35pt>
+File: ../../figures/bradykin-v-nms_d6.pdf Graphic file (type pdf)
 
-<use ../../figures/c1-summaries-3.pdf>
-Package pdftex.def Info: ../../figures/c1-summaries-3.pdf used on input line 36
-4.
-(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
+<use ../../figures/bradykin-v-nms_d6.pdf>
+Package pdftex.def Info: ../../figures/bradykin-v-nms_d6.pdf used on input line
+ 356.
+(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
 
+<../../figures/rigidity-v-nms_d6.pdf, id=31, 609.27625pt x 361.35pt>
+File: ../../figures/rigidity-v-nms_d6.pdf Graphic file (type pdf)
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/c1-summaries-4.pdf, id=32, 691.58376pt x 458.71375pt>
-File: ../../figures/c1-summaries-4.pdf Graphic file (type pdf)
-
-<use ../../figures/c1-summaries-4.pdf>
-Package pdftex.def Info: ../../figures/c1-summaries-4.pdf used on input line 37
-0.
-(pdftex.def)             Requested size: 469.75502pt x 311.58525pt.
+<use ../../figures/rigidity-v-nms_d6.pdf>
+Package pdftex.def Info: ../../figures/rigidity-v-nms_d6.pdf used on input line
+ 361.
+(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] <../../figures/dtree-4va-pruned.pdf, id=36, 505.89pt x 505.89pt>
-File: ../../figures/dtree-4va-pruned.pdf Graphic file (type pdf)
+<../../figures/corrplots.pdf, id=33, 505.89pt x 505.89pt>
+File: ../../figures/corrplots.pdf Graphic file (type pdf)
 
-<use ../../figures/dtree-4va-pruned.pdf>
-Package pdftex.def Info: ../../figures/dtree-4va-pruned.pdf used on input line 
-463.
-(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+<use ../../figures/corrplots.pdf>
+Package pdftex.def Info: ../../figures/corrplots.pdf used on input line 369.
+(pdftex.def)             Requested size: 319.42996pt x 319.43799pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/dtree-1va-pruned.pdf, id=37, 505.89pt x 505.89pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/c2-summaries-2.pdf, id=34, 609.27625pt x 361.35pt>
+File: ../../figures/c2-summaries-2.pdf Graphic file (type pdf)
+
+<use ../../figures/c2-summaries-2.pdf>
+Package pdftex.def Info: ../../figures/c2-summaries-2.pdf used on input line 42
+5.
+(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/c2-summaries-3.pdf, id=35, 609.27625pt x 361.35pt>
+File: ../../figures/c2-summaries-3.pdf Graphic file (type pdf)
+
+<use ../../figures/c2-summaries-3.pdf>
+Package pdftex.def Info: ../../figures/c2-summaries-3.pdf used on input line 43
+1.
+(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/c2-summaries-4.pdf, id=36, 609.27625pt x 361.35pt>
+File: ../../figures/c2-summaries-4.pdf Graphic file (type pdf)
+
+<use ../../figures/c2-summaries-4.pdf>
+Package pdftex.def Info: ../../figures/c2-summaries-4.pdf used on input line 43
+7.
+(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] [5] <../../figures/dtree-1va-pruned.pdf, id=47, 505.89pt x 505.89pt>
 File: ../../figures/dtree-1va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-1va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-1va-pruned.pdf used on input line 
-470.
-(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+554.
+(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../../figures/dtree-3va-pruned.pdf, id=38, 505.89pt x 505.89pt>
-File: ../../figures/dtree-3va-pruned.pdf Graphic file (type pdf)
-
-<use ../../figures/dtree-3va-pruned.pdf>
-Package pdftex.def Info: ../../figures/dtree-3va-pruned.pdf used on input line 
-477.
-(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-2va-pruned.pdf, id=39, 505.89pt x 505.89pt>
+<../../figures/dtree-2va-pruned.pdf, id=48, 505.89pt x 505.89pt>
 File: ../../figures/dtree-2va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2va-pruned.pdf used on input line 
-484.
-(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
+561.
+(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] [8] [9 <../../figures/dtree-kmeans-pruned-unscaled-4.pdf>] [10 <../../figur
-es/kmeans-summaries-4.pdf>] [11 <../../figures/abbreviated/corrplots.pdf>]
-[12 <../../figures/c1-summaries-2.pdf>] [13 <../../figures/c1-summaries-3.pdf>]
-[14 <../../figures/c1-summaries-4.pdf>] [15 <../../figures/dtree-4va-pruned.pdf
->] [16 <../../figures/dtree-1va-pruned.pdf>] [17 <../../figures/dtree-3va-prune
-d.pdf>] [18 <../../figures/dtree-2va-pruned.pdf>] (./abbreviated.aux) ) 
+<../../figures/dtree-3va-pruned.pdf, id=49, 505.89pt x 505.89pt>
+File: ../../figures/dtree-3va-pruned.pdf Graphic file (type pdf)
+
+<use ../../figures/dtree-3va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-3va-pruned.pdf used on input line 
+567.
+(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/dtree-4va-pruned.pdf, id=50, 505.89pt x 505.89pt>
+File: ../../figures/dtree-4va-pruned.pdf Graphic file (type pdf)
+
+<use ../../figures/dtree-4va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-4va-pruned.pdf used on input line 
+573.
+(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/dtree-2and4va-pruned.pdf, id=51, 505.89pt x 505.89pt>
+File: ../../figures/dtree-2and4va-pruned.pdf Graphic file (type pdf)
+
+<use ../../figures/dtree-2and4va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-2and4va-pruned.pdf used on input l
+ine 608.
+(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/dtree-2and3va-pruned.pdf, id=52, 505.89pt x 505.89pt>
+File: ../../figures/dtree-2and3va-pruned.pdf Graphic file (type pdf)
+
+<use ../../figures/dtree-2and3va-pruned.pdf>
+Package pdftex.def Info: ../../figures/dtree-2and3va-pruned.pdf used on input l
+ine 615.
+(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6]
+Overfull \hbox (2.71106pt too wide) in paragraph at lines 648--659
+$\OML/cmm/m/it/10 k$\OT1/cmr/m/n/10 -means clus-ter-ing on this Parkin-sons' Di
+s-ease data set re-veals clus-ters that con-firm pre-vi-ous computationally-
+ []
+
+[7]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [8] [9 <../../figures/dtree-kmeans-pruned-unscaled-4.pdf>] [10 <../../figures/
+kmeans-summaries-4.pdf>] [11 <../../figures/bradykin-v-cisitot.pdf> <../../figu
+res/rigidity-v-cisitot.pdf>] [12 <../../figures/bradykin-v-nms_d6.pdf> <../../f
+igures/rigidity-v-nms_d6.pdf>] [13 <../../figures/corrplots.pdf> <../../figures
+/c2-summaries-2.pdf>] [14 <../../figures/c2-summaries-3.pdf> <../../figures/c2-
+summaries-4.pdf>] [15 <../../figures/dtree-1va-pruned.pdf> <../../figures/dtree
+-2va-pruned.pdf>] [16 <../../figures/dtree-3va-pruned.pdf> <../../figures/dtree
+-4va-pruned.pdf>] [17 <../../figures/dtree-2and4va-pruned.pdf> <../../figures/d
+tree-2and3va-pruned.pdf>] (./abbreviated.aux) ) 
 Here is how much of TeX's memory you used:
- 5439 strings out of 495028
- 75740 string characters out of 6181498
- 157931 words of memory out of 5000000
- 8518 multiletter control sequences out of 15000+600000
- 19227 words of font info for 71 fonts, out of 8000000 for 9000
+ 6640 strings out of 495028
+ 97868 string characters out of 6181498
+ 188256 words of memory out of 5000000
+ 9704 multiletter control sequences out of 15000+600000
+ 16760 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,15n,43p,799b,247s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mti12.pfb>
-Output written on abbreviated.pdf (18 pages, 533402 bytes).
+ 42i,14n,47p,799b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti10.pfb>
+Output written on abbreviated.pdf (17 pages, 639655 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 123 compressed objects within 2 object streams
+ 259 PDF objects out of 1000 (max. 8388607)
+ 187 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

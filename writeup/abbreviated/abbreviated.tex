@@ -1,4 +1,4 @@
-\documentclass[letterpaper,12pt]{article}
+\documentclass[10pt]{article}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -16,6 +16,8 @@
 \usepackage{tablefootnote}
 % for word wrap verbatim
 \usepackage{listings}
+\usepackage{caption}
+\usepackage{subfig}
 \lstset{
    breaklines=true,
    basicstyle=\ttfamily}
@@ -23,9 +25,8 @@
 % \lhead{Jesse Mu}
 % \rhead{CSCI339 Term Project}
 % One more .. since we're in the abbreviated subdir
-\graphicspath{ {../../figures/abbreviated/} {../../figures/} }
-
-
+\graphicspath{ {../../figures/} }
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
 
 \begin{document}
 
@@ -39,7 +40,8 @@
 951 subjects, 145 metrics, collected 15-4-2012 from Pablo Martinez Mart\'in. Only
 19 features used for clustering and/or interpretation.  50 subjects with
 missing values of the features to be used in clustering (brought down to 901).
-It was decided to not impute the data.
+It was decided to not impute the data. Data was scaled to $\mu = 0, \sigma =
+1$ during clustering and modeling, then unscaled for visualization.
 
 \subsection{Selected Features}
 
@@ -110,9 +112,8 @@ groups.
     Minimum ASW & 2 \\
     BIC & 18 \\
     SSE Scree Plot & Inconclusive \\
-    Gap Statistic & 4, 13? \\
-    Affinity Propagation\tablefootnote{$\lambda = 0.98$, q = 0, maxits = 1000,
-    convits = 100} & 8 \\
+    Gap Statistic & 4 \\
+    Affinity Propagation & 8 \\%\tablefootnote{$\lambda = 0.98$, q = 0, maxits = 1000, %convits = 100} & 8 \\
 
 
   \end{tabular}
@@ -151,83 +152,78 @@ located in Section~\ref{feature-importance}.
 
 Available in Figure~\ref{fig:kmeans-summaries-4}. Error bar is standard error.
 
-\begin{figure}[h]
+\begin{figure*}[h]
   \centering
   \includegraphics[width=\linewidth]{kmeans-summaries-4.pdf}
   \caption{Cluster Summaries, $k = 4$}
   \label{fig:kmeans-summaries-4}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Interpretation}
-$k$-means clustering ($k = 4$) found four clusters. They are numbered (somewhat
-confusingly) according to the automatically assigned numbers of the cluster
-analysis, and not by any intuitive pattern. With a brief description, they are:
+$k$-means clustering ($k = 4$) found four clusters. With a brief description,
+they are:
 
+% TODO: Figure out where the cluster reordering appears in other graphs
+% (kmeans, correlation) and redo those!!!
+% AND THE REST OF THE PAPER
+% TODO: LEVELS play a big factor - when I factor by reordering levels\dots
 \begin{itemize}
-  \item[4.] $(n = 406)$ Mildly affected in all domains.
-  \item[1.] $(n = 189)$ Severely affected in nonmotor domains; mildly
+  \item[1.] $(n = 406)$ Mildly affected in all domains.
+  \item[2.] $(n = 189)$ Severely affected in nonmotor domains; mildly
     affected in motor domains.
   \item[3.] $(n = 221)$ Severely affected in motor domains; mildly
     affected in nonmotor domains.
-  \item[2.] $(n = 88)$ Severely affected in all domains.
+  \item[4.] $(n = 88)$ Severely affected in all domains.
 \end{itemize}
 
-These cluster results are identical to the four clusters found in van Rooden et
-al \cite{vanrooden10}, which was done with a separate dataset using a different
-modeling method (expectation-maximization), supporting these subtype
-classifications. Unlike van Rooden, mean disease durations differences do exist
-between subtypes 4 (mild) and 2 (severe), likely due to further development of
-the disease, although the differences between 1 and 3 (nonmotor/motor
-predominated) subtypes are insignificant, suggesting different developmental
-paths of the disease.
-
 \subsubsection{Statistical Significance Tests, $k = 4$}
-Using one-way ANOVA for multiple means, we reject the null
-hypothesis that the means are the same with $p < 0.05$ for every variable
-\emph{except} pdonset.
+For each variable $i$ and cluster means $\mu_i^1, \mu_i^2, \mu_i^3, \mu_i^4$,
+we use one-way ANOVA for multiple means and reject the null hypothesis that
+$\mu_i^1 = \mu_i^2 = \mu_i^3 = \mu_i^4$ with $p < 0.05$ for every variable
+except pdonset.
 
 Post-hoc analysis using Tukey's HSD to examine statistically significant
 differences between individual means is available in Table~\ref{tab:tukeyhsd}.
-Only statistically insignificant relations are provided; all other relations
-are significant with $p < 0.05$.
+For brevity, only statistically insignificant relations are provided; all other
+relations are significant with $p < 0.05$.
 
 \begin{table}[h]
   \centering
   \begin{tabular}{l|l|l}
   Variable & Cluster Relation & $p$ \\
   \hline
-  age & 3-1 & 0.724 \\
-      & 4-1 & 0.428 \\
-  \hline
-  sex & 2-1 & 0.849 \\
-      & 4-1 & 0.092 \\
-      & 3-2 & 0.161 \\
-      & 4-2 & 0.827 \\
-      & 4-3 & 0.216 \\
-  \hline
-  pdonset & 2-1 & 0.147 \\
-          & 3-1 & 0.370 \\
-          & 4-1 & 0.859 \\
-          & 3-2 & 0.803 \\
-          & 4-2 & 0.305 \\
-          & 4-3 & 0.700 \\
-  \hline
-  durat\_pd & 3-1 & 0.562 \\
-  \hline
-  cisitot & 3-1 & 0.523 \\
-  \hline
-  nms\_d1 & 4-3 & 0.333 \\
-  \hline
-  nms\_d4 & 4-3 & 0.557 \\
-  \hline
-  nms\_d5 & 4-3 & 0.856 \\
-  \hline
-  nms\_d8 & 4-3 & 0.122 \\
-  \hline
-  nms\_d9 & 2-1 & 0.730 \\
-         & 4-3 & 0.074 \\
-  \hline
-  tremor & 4-1 & 0.360 \\
+age & 2-1 & 0.428 \\
+    & 3-2 & 0.724 \\
+    \hline
+sex & 2-1 & 0.0918 \\
+    & 3-1 & 0.216 \\
+    & 4-1 & 0.827 \\
+    & 4-2 & 0.849 \\
+    & 4-3 & 0.161 \\
+    \hline
+pdonset & 2-1 & 0.859 \\
+        & 3-1 & 0.700 \\
+        & 4-1 & 0.305 \\
+        & 3-2 & 0.370 \\
+        & 4-2 & 0.147 \\
+        & 4-3 & 0.803 \\
+\hline
+durat\_pd & 3-2 & 0.562 \\
+\hline
+cisitot & 3-2 & 0.522 \\
+\hline
+nms\_d1 & 3-1 & 0.333 \\
+\hline
+nms\_d4 & 3-1 & 0.557 \\
+\hline
+nms\_d5 & 3-1 & 0.856 \\
+\hline
+nms\_d8 & 3-1 & 0.122 \\
+\hline
+nms\_d9 & 3-1 & 0.0735 \\
+       & 4-2 & 0.730 \\
+\hline
+tremor & 2-1 & 0.360 \\
   \end{tabular}
   \caption{Tukey's HSD Insignificant Differences}
   \label{tab:tukeyhsd}
@@ -240,8 +236,8 @@ Features ranked by information gain with respect to cluster are available in
 Table~\ref{tab:info_gain}. Also, in the 4-cluster decision tree in
 Figure~\ref{fig:kmeans-dtree-4}, features are ranked implicitly by importance
 in determining clusters. We see, quite naturally, that standard measures of
-motor symptoms rank very highly (1, 2, 4, 5) in information gain \emph{except}
-termor (12). Similarly, bradykinesia (1) is used as the root node of the
+motor symptoms rank very highly (ranks 1, 2, 4, 5) in information gain \emph{except}
+tremor (12). Similarly, bradykinesia (1) is used as the root node of the
 4-cluster decision tree, although other motor symptoms are used further down
 the tree, since immediately successive motor symptom decision nodes would, due
 to their determination of clusters, be redundant.
@@ -261,32 +257,33 @@ this investigation and van Rooden.
 
 Interestingly, demographic information, including durat\_pd, age, sex, and
 pdonset, plays almost no role in the determination of these clusters. That the
-time of onset of PD or sex nulls important, clinically-relevant questions about
-the demographic sources of these different subtypes.
+time of onset of PD or sex is largely irrelevant provides an important negative answer to
+clinically-relevant questions about the demographic sources of these different
+subtypes.
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{l|l|l}
+  \begin{tabular}{r|l|l}
     rank & variable & information gain \\
     \hline
-    1 & bradykin      & 0.31574672 \\
-    2 & rigidity      & 0.29560018 \\
-    3 & nms\_d2      & 0.24218407 \\
-    4 & cisitot      & 0.22920103 \\
-    5 & axial      & 0.22780750 \\
-    6 & nms\_d3      & 0.20480570 \\
-    7 & nms\_d9      & 0.15782743 \\
-    8 & nms\_d7      & 0.15290569 \\
-    9 & nms\_d5      & 0.14454931 \\
-    10 & nms\_d6      & 0.14025139 \\
-    11 & nms\_d1      & 0.13212756 \\
-    12 & tremor      & 0.10937168 \\
-    13 & nms\_d4      & 0.10710526 \\
-    14 & nms\_d8      & 0.10005480 \\
-    15 & durat\_pd      & 0.02876190 \\
-    16 & age      & 0.02346158 \\
-    17 & sex      & 0.00000000 \\
-    18 & pdonset      & 0.00000000 \\
+    1 & bradykin      & 0.316 \\
+    2 & rigidity      & 0.296 \\
+    3 & nms\_d2      & 0.242 \\
+    4 & cisitot      & 0.229 \\
+    5 & axial      & 0.228 \\
+    6 & nms\_d3      & 0.205 \\
+    7 & nms\_d9      & 0.158 \\
+    8 & nms\_d7      & 0.153 \\
+    9 & nms\_d5      & 0.145 \\
+    10 & nms\_d6      & 0.140 \\
+    11 & nms\_d1      & 0.132 \\
+    12 & tremor      & 0.109 \\
+    13 & nms\_d4      & 0.107 \\
+    14 & nms\_d8      & 0.100 \\
+    15 & durat\_pd      & 0.0288 \\
+    16 & age      & 0.0235 \\
+    17 & sex      & 0.000 \\
+    18 & pdonset      & 0.000 \\
   \end{tabular}
   \caption{Features ranked by information gain}
   \label{tab:info_gain}
@@ -295,25 +292,97 @@ the demographic sources of these different subtypes.
 \subsubsection{Correlation Plots}
 
 The interplay between specific symptoms in each of the four clusters was
-examined in Figure~\ref{fig:corrplots}, but nothing too interesting was found. There is, perhaps somewhat
-interestingly, a somewhat higher correlation between bradykinesia, rigidity,
-and nms\_d6 (gastrointestinal), but it was not judged to be significant.
+examined in Figure~\ref{fig:corrplots}. There are two points of note. The first
+is that there is a higher correlation in cluster 4 (severe) between overall
+severity (cisitot) and bradykinesia and rigidity, illustrated in
+Figure~\ref{fig:corrxy-br}.
+Second, there exists a somewhat higher correlation between
+bradykinesia, rigidity, and nms\_d6 (gastrointestinal) in cluster 4,
+illustrated in Figure~\ref{fig:corrxy-d6}. These differences are statistically
+significant; correlation tests are located in Table~\ref{tab:cortests}. I am
+unsure of the significance or proper interpretation of these results.
+
+\begin{table*}[h]
+  \centering
+  \begin{tabular}{l|l|l|l}
+ Cluster & Variables & 95\% CI & $p$ \\
+    \hline
+1 & bradykin, cisitot&[-0.0225, 0.171]&0.131 \\
+  & rigidity, cisitot&[-0.000406, 0.192]&0.0510 \\
+  & bradykin, nms\_d6&[-0.0634, 0.131]&0.493 \\
+  & rigidity, nms\_d6&[-0.101, 0.0932]&0.934 \\
+  \hline
+2 & bradykin, cisitot&[0.0786, 0.351]&$0.00248^{(**)}$ \\
+  & rigidity, cisitot&[-0.215, 0.069]&0.310 \\
+  & bradykin, nms\_d6&[-0.152, 0.133]&0.897 \\
+  & rigidity, nms\_d6&[-0.123, 0.163]&0.781 \\
+  \hline
+3 & bradykin, cisitot&[0.0995, 0.350]&$0.000620^{(***)}$ \\
+  & rigidity, cisitot&[0.0687, 0.322]&$0.00298^{(**)}$ \\
+  & bradykin, nms\_d6&[0.0350, 0.292]&$0.0134^{(*)}$ \\
+  & rigidity, nms\_d6&[-0.0846, 0.179]&0.478 \\
+  \hline
+  4 & bradykin, cisitot&[0.454, 0.724]&${3.97\e{-10}}^{(***)}$ \\
+& rigidity, cisitot&[0.375, 0.675]&${4.99\e{-08}}^{(***)}$ \\
+  & bradykin, nms\_d6&[0.297, 0.624]&${2.60\e{-06}}^{(***)}$ \\
+  & rigidity, nms\_d6&[0.278, 0.611]&${6.43\e{-06}}^{(***)}$ \\
+  \end{tabular}
+  \caption{Correlation tests. (*) $p < 0.05$, (**) $p < 0.01$, (***), $p < 0.001$}
+  \label{tab:cortests}
+\end{table*}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{corrplots.pdf}
+  \subfloat[][]{%
+  \includegraphics[clip,width=0.8\linewidth]{bradykin-v-cisitot.pdf}
+  \label{bradyv}
+}
+
+\subfloat[][]{%
+  \includegraphics[clip,width=0.8\linewidth]{rigidity-v-cisitot.pdf}
+  \label{rigidv}
+}
+  \caption{Relationship between \protect\subref{bradyv} bradykinesia,
+  \protect\subref{rigidv} rigidity and overall severity (cisitot). Shaded band
+is 95\% confidence interval.}
+  \label{fig:corrxy-br}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \subfloat[][]{%
+  \includegraphics[clip,width=0.8\linewidth]{bradykin-v-nms_d6.pdf}
+  \label{brady6}
+}
+
+\subfloat[][]{%
+  \includegraphics[clip,width=0.8\linewidth]{rigidity-v-nms_d6.pdf}
+  \label{rigid6}
+}
+  \caption{Relationship between \protect\subref{brady6} bradykinesia,
+  \protect\subref{rigid6} rigidity and nms\_d6 (gastrointestinal). Shaded band
+is 95\% confidence interval.}
+  \label{fig:corrxy-d6}
+\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.68\linewidth]{corrplots.pdf}
   \caption{Correlation plots}
   \label{fig:corrplots}
 \end{figure}
 
 \section{Nonmotor-predominant subtype analysis}
-\subsection{$k$-means sub-subdivision on Cluster 1}
+\subsection{$k$-means sub-subdivision on Cluster 2}
+% TODO: Synthesize changed subtype 2 analysis with discussion HERE and in
+% conclusion. Make sure to reread and ensure that all plots have been updated
+% (in particular, the 4 cluster decision tree?). Incorporate some stuff from
+% standard progression of motor diseases paper and the new nms subtype paper.
 
 In an attempt to understand further the properties of the nonmotor-dominated
 subtypes, $k$-means analysis was run again on specifically this subtype to
 examine any possible patterns.
 
- The same $k$-determining tests were run on subtype 1 and are displayed
+The same $k$-determining tests were run on subtype 2 and are displayed
 in Table~\ref{tab:numclus-nms}.
 
 \begin{table}[h]
@@ -329,56 +398,55 @@ in Table~\ref{tab:numclus-nms}.
     convits = 100} & 5 \\
   \end{tabular}
   \caption{Results of various techniques for determining $k$, applied to
-  subtype 1}
+  subtype 2}
   \label{tab:numclus-nms}
 \end{table}
 
 Boxplots for $k$-means run for $k = 2, 3, 4$ can
-be seen in Figures~\ref{fig:c1-summaries-2},~\ref{fig:c1-summaries-3},
-and~\ref{fig:c1-summaries-4}.
+be seen in Figures~\ref{fig:c2-summaries-2},~\ref{fig:c2-summaries-3},
+and~\ref{fig:c2-summaries-4}. Clusters are ordered by increasing cisitot.
 
 \subsection{Interpretation}
 \label{sub:nms-interp}
 
 An interesting set of subtleties occurs when $k = 2$ and 3. When $k = 2$, the
-two groups
-are generally somewhat similar, except nms\_d2 and nms\_d3 move in opposite
-directions, i.e.\ sub-subtype 2 generally has higher nms\_d2 scores but lower
-nms\_d3 scores. In addition, sub-subtype 2 has higher axial scores. This
-difference can be once again observed in $k = 3$, where subtype 3 is shown to
-have higher nms\_d2 scores, lower nms\_d3 scores, and higher axial scores. This
-may indicate a trend in nonmotor-dominated PD for nms\_d2 and nms\_d3 to live
-on opposite ends of a spectrum, i.e.\ patients especially severe in one may not
-be as severe in the other. This difference can also been seen in
-Section~\ref{sub:ova}, when OVA decision trees are discussed for the the
-nonmotor-dominated group.
+two groups are divided generally by PD severity (see cisitot and especially
+axial). The specific symptoms of the two groups follow this trend, except
+nms\_d3 and tremor, which are actually decreasing, and other symptoms like
+rigidity, nms\_d4, and nms\_d9, which are more indeterminate.
+
+When $k = 3$, the symptoms that continue show a non-monotonically increasing
+trend are nms\_d2, tremor, and rigidity scores, where patients in the 3rd
+subtype exhibit lower severities. nms\_d4 and nms\_d9 differences turn out to be
+not as pronounced.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{c1-summaries-2.pdf}
+  \includegraphics[width=\linewidth]{c2-summaries-2.pdf}
   \caption{Clustering on nonmotor group: $k = 2$}
-  \label{fig:c1-summaries-2}
+  \label{fig:c2-summaries-2}
 \end{figure}
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{c1-summaries-3.pdf}
+  \includegraphics[width=\linewidth]{c2-summaries-3.pdf}
   \caption{Clustering on nonmotor group: $k = 3$}
-  \label{fig:c1-summaries-3}
+  \label{fig:c2-summaries-3}
 \end{figure}
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{c1-summaries-4.pdf}
+  \includegraphics[width=\linewidth]{c2-summaries-4.pdf}
   \caption{Clustering on nonmotor group: $k = 4$}
-  \label{fig:c1-summaries-4}
+  \label{fig:c2-summaries-4}
 \end{figure}
 
 
-\section{Modeling}
+\section{Further modeling}
 
 One further step of this investigation was to produce accurate, practical
 models that could be used in a clinical setting to predict the subtype of PD
-based on previous clustering results. Cluster assignments were treated as
-labels in a supervised classification problem in an attempt to produce useful
+based on previous clustering results. Cluster assignments obtained from
+previous $k$-means investigation were treated as labels in a supervised
+classification problem in an attempt to produce useful and easily interpretable
 models.
 
 \subsection{One-versus-all decision trees}
@@ -387,47 +455,72 @@ models.
 While the decision tree in Figure~\ref{fig:kmeans-dtree-4} is useful, it could
 be considered overly complicated. Additionally, a model is not necessarily
 needed to make simpler diagnoses such as classifying a patient as mildly
-affected (subtype 4) or severely affected (subtype 2). One-versus-all (OVA)
+affected (subtype 1) or severely affected (subtype 4). One-versus-all (OVA)
 decision trees were thus considered, in order to isolate the classification
 problem and look at possible distinguishing characteristics of individual
 subtypes. These OVA decision trees for all 4 subtypes are located in
-Figures~\ref{fig:4va},~\ref{fig:1va},~\ref{fig:3va}, and~\ref{fig:2va}.
+Figures~\ref{fig:1va},~\ref{fig:2va},~\ref{fig:3va}, and~\ref{fig:4va}. Trees
+are pruned by selecting the version of tree with the minimum 10-fold
+cross-validated error.
 
-\subsubsection{4 (mild)}
-This tree is very odd. The root node considers nms\_d9 $< 7.5$ (miscellaneous)
-and classifies by far the biggest majority of negative examples when this
-symptom is milder, even though the subgroup 4 is the mild subtype. After
-intuitively then classifying on the mildness of rigidity the tree then proceeds
-to classify once again negative examples based on mildness of nms\_d2 (sleep)
-and positive examples solely based on more severe manifestations of nms\_d2,
-despite the means of these nonmotor symptoms being quite similar according to
-the boxplots.  However, accuracy on the final node is quite poor (61
-misclassifications) which could be an indicator that the cluster is not well
-defined.
+\subsubsection{1 (mild)}
+The tree for the mild subtype classifies mainly based on negative responses to
+nodes asking whether the patient has a relatively severe manifestation of a
+symptom. The majority of examples are classified by following the bradykinesia
+$<$ 2.5, which subsequently tests the severity of several nonmotor symptoms.
+Most of subtype 1 patients that score relatively mildly on these scales are
+classified this way. There are also small populations of patients who 1) score
+% http://www.ncbi.nlm.nih.gov/pubmed/22233888
+higher on bradykinesia but lower with axial, tremor, rigidity, and nms\_d2 and
+2) score higher in nms\_d2 (sleep) but lower with nms\_d7 (urinary).
+% This tree is very odd. The root node considers nms\_d9 $< 7.5$  and nms\_d3 (miscellaneous)
+% and classifies by far the biggest majority of negative examples when this
+% symptom is milder, even though the subgroup 1 is the mild subtype. After
+% intuitively then classifying on the mildness of rigidity (rigidity >= 3.5) the tree then proceeds
+% to classify once again negative examples mostly based on mildness of nms\_d2
+% (sleep)
+% and positive examples based on more severe manifestations of nms\_d2,
+% despite the means of these nonmotor symptoms being quite similar according to
+% the boxplots.  However, accuracy on the final nodes are quite poor, which could
+% be an indicator that the cluster is not well defined.
 
-\subsubsection{1 (nonmotor-predominant)}
-Quite characteristically, this OVA decision tree clusters first on the severity
-of bradykinesia. When mild (i.e.\ $< 2.5$), all of the subsequent decision
-nodes ask whether the patient has correspondingly severe forms of primarily
-nms\_d3 (mood/cognition), then nms\_d7 (urinary) and nms\_d9 (miscellaneous).
+\subsubsection{2 (nonmotor-predominant)}
+The decision tree for the nonmotor-predominant subtype is quite simple.
+Interestingly, although nms\_d9 (miscellaneous) is not the most important
+nonmotor symptom, since the information gain is less than nms\_d2 and nms\_d3
+and it does not appear very high in the 4-class decision tree, it is used as
+the root node of this decision tree, classifying over half of the negative
+examples based on whether the subject has a low severity of miscellaneous
+symptoms (nms\_d9 $<$ 7.5)\footnote{Recall that 0 $<$ nms\_d9 $<$ 48.}. This could be an indication that nonmotor-predominant PD patients do
+indeed have a wide manifestation and variety of nonmotor symptoms. After
+classifying on nms\_d9, the tree then classifies negatiave examples as having
+rigidity $\geq$ 3.5, an example of how subtype 2 patients have relatively low motor
+symptoms. Finally, the tree classifies on the nonmotor symptom with the most
+information gain, nms\_d2, where patients $\geq$ 7.5 are classified as falling into
+subtype 2.
 
-When bradykinesia (and all motor symptoms) are relatively severe, however,
-there is still a small subset of patients who classify into subtype 1 by having
-severe nms\_d2 (sleep) symptoms. While I am not sure if the sample size is
-large enough here (9/34), I propose this could be one of the ``subtypes'' of
-the nonmotor-predominant subtype, i.e.\ a group that, when accompanied with
-high motor symptoms, generally will have high nonmotor symptoms manifest
-primarily in the form of sleep disorders. This aligns with the findings
-previously mentioned in Section~\ref{sub:nms-interp} a disjunct between
-symptoms nms\_d2 and nms\_d3. As briefly mentioned in that section, axial motor
-symptom severity also plays a role. In this tree, mildness of axial symptoms is
-the main classifier of 280 negative examples when identifying
-nonmotor-predominant
-subtypes, indicating it is an important distinguishing factor of this unique
-group of 34 nonmotor-predominant PD patients.
+% Quite characteristically, this OVA decision tree clusters first on the severity
+% of bradykinesia. When mild (i.e.\ bradykin $< 2.5$), all of the subsequent decision
+% nodes ask whether the patient has correspondingly severe forms of primarily
+% nms\_d3 (mood/cognition), then nms\_d7 (urinary) and nms\_d9 (miscellaneous).
 
-More discussion in the
-conclusion.
+% When bradykinesia (and all motor symptoms) are relatively severe, however,
+% there is still a small subset of patients who classify into subtype 2 by having
+% severe nms\_d2 (sleep) symptoms. While I am not sure if the sample size is
+% large enough here (9/34), I propose this could be one of the ``subtypes'' of
+% the nonmotor-predominant subtype, i.e.\ a group that, when accompanied with
+% high motor symptoms, generally will have high nonmotor symptoms manifest
+% primarily in the form of sleep disorders. This aligns with the findings
+% previously mentioned in Section~\ref{sub:nms-interp} a disjunct between
+% symptoms nms\_d2 and nms\_d3. As briefly mentioned in that section, axial motor
+% symptom severity also plays a role. In this tree, mildness of axial symptoms is
+% the main classifier of 280 negative examples when identifying
+% nonmotor-predominant
+% subtypes, indicating it is an important distinguishing factor of this unique
+% group of 34 nonmotor-predominant PD patients.
+
+% More discussion on this decision tree, synthesized with the other results of
+% this research, is in the conclusion.
 
 \subsubsection{3 (motor-predominant)}
 
@@ -437,81 +530,92 @@ quite complex, but generally, nodes check again for severity of motor
 symptoms (tremor is the next node) and end up classifying positive examples
 based on both mildness of nonmotor symptoms and severity of motor symptoms. For
 example, in the furthest right branch, once nms\_d2 (as we know, an important
-feature) is established to be relatively mild (< 12), the test for subtype 3
-involves two more nodes verifying the severity of rigidty and tremor. Similar
-behavior can be found in the tree branch testing nms\_d7 and nms\_d6, then
-rigidity and axial.
+feature) is established to be relatively mild ($<$ 12), the test for subtype 3
+involves several more nodes verifying the severity of rigidty, tremor, and
+axial, and the mildness of nms\_d7 (urinary).
 
-\subsubsection{2 (severe)}
+\subsubsection{4 (severe)}
 
-The OVA tree for severely affected in all areas is predictable, testing
+The OVA tree for patients severely affected in all areas is predictable, testing
 entirely on whether or not symptoms (both motor and nonmotor) are relatively
-severe. Ppositive nodes always appear to the right (no) of less-than checks.
+severe. Positive nodes always appear to the right (no) of less-than checks.
 Interestingly, however, nms\_d4 (percep/hallucinations), previously not of note, is used twice as the
 root node of a tree and again further down. As the boxplot display in
-Figure~\ref{fig:kmeans-dtree-4} shows, nms\_d4 is perhaps the most
-distinguishing symptom of subtype 4 against nonmotor-predominant subtype 1 in
-particular, as subtype 1 is relatively mild, in contrast to relatively
-comparable levels of severity for other nonmotor symptoms. This shows that
-issues with
-perception and hallucinations generally occur in only the most severe cases of
-PD, and are relatively rare when a patient exhibits a nonmotor-predominant form
-of PD.
+Figure~\ref{fig:kmeans-summaries-4} shows, nms\_d4 is perhaps the most
+distinguishing symptom of subtype 4 against nonmotor-predominant
+subtype 2 in particular, as subtype 2 has relatively mild percep/hallucination
+symptoms, in contrast to the comparable levels of severity for other nonmotor
+symptoms in both groups. This shows that issues with perception and
+hallucinations generally occur in only the most severe cases of PD, and are
+relatively rare when a patient exhibits a nonmotor-predominant form of PD.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{dtree-4va-pruned.pdf}
-  \caption{Cluster 4 (mild) vs all}
-  \label{fig:4va}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{dtree-1va-pruned.pdf}
-  \caption{Cluster 1 (nonmotor-dominated) vs all}
+  \includegraphics[width=0.6\linewidth]{dtree-1va-pruned.pdf}
+  \caption{Cluster 1 (mild) vs all}
   \label{fig:1va}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{dtree-3va-pruned.pdf}
+  \includegraphics[width=0.6\linewidth]{dtree-2va-pruned.pdf}
+  \caption{Cluster 2 (nonmotor-dominated) vs all}
+  \label{fig:2va}
+\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\linewidth]{dtree-3va-pruned.pdf}
   \caption{Cluster 3 (motor-dominated) vs all}
   \label{fig:3va}
+\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\linewidth]{dtree-4va-pruned.pdf}
+  \caption{Cluster 4 (severe) vs all}
+  \label{fig:4va}
+\end{figure}
+
+\subsection{Different angles of exploration: 2 and 4, 2 and 3 vs rest}
+
+There are many more interesting questions to be asked when examining the
+relationship between these clusters. One thing that may be helpful in
+understanding the relationship between the clusters is exploring different
+groupings of clusters for decision trees. The trees in
+Figure~\ref{fig:dtree-2and4va-pruned} and~\ref{fig:dtree-2and3va-pruned} are
+preliminary examples of this kind
+of exploration.
+
+\subsubsection{2 and 4 vs rest}
+In this tree, the node classifying examples as subtype 4 is
+localized to the furthest right branch. Predictably, examples in this node have
+scored relatively higher in rigidity ($\geq$ 3.5). Interestingly, a classification
+decision that is replicated in the 4 versus all decision tree is the decision
+to use nms\_d7 (urinary) as a node, where subtype 4 is classified as having
+relatively high nms\_d7 components ($\geq$ 12). Indeed, as shown in
+Figure~\ref{fig:kmeans-summaries-4}, the mean of nms\_d7 severity is similar to
+nms\_d4 in that it is especially higher in cluster 4 than in cluster 2.
+
+\subsubsection{2 and 3 vs rest}
+In this tree, classification of patients in subtype 3 is primarily dependent on
+asserting bradykin $\geq$ 2.5 then splitting on tremor $<$ 3.5 is considered.
+Interestingly, the two nonmotor symptoms that differentiate cluster 3 are
+nms\_d5 (attention/memory) and nms\_d7 (urinary). Additionally, nms\_d2, a
+quite important symptom, does not appear in the classification tree for this
+task.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\linewidth]{dtree-2and4va-pruned.pdf}
+  \caption{Clusters 2 (nms) and 4 (severe) vs rest (1 and 3)}
+  \label{fig:dtree-2and4va-pruned}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{dtree-2va-pruned.pdf}
-  \caption{Cluster 2 (severe) vs all}
-  \label{fig:2va}
+  \includegraphics[width=0.6\linewidth]{dtree-2and3va-pruned.pdf}
+  \caption{Clusters 2 (nms) and 3 (motor) vs rest (1 and 4)}
+  \label{fig:dtree-2and3va-pruned}
 \end{figure}
-
-\section{Conclusion}
-
-$k$-means clustering on this Parkinsons' Disease data set reveals clusters that
-confirm previous computationally-based findings in the field
-\cite{vanrooden10}, mainly concerning the identification of four subtypes of
-Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.
-The most important nonmotor symptoms in determining these clusters were nms\_d2
-(sleep) and nms\_d3 (mood/cognition), which echo findings of Fereshtehnejad's
-longitudinal study \cite{fereshtehnejad15}. More work
-
-Nonmotor symptoms nms\_d2 and nms\_d3 became critical not only in
-classification trees distinguishing between the various symptoms but in the
-nonmotor-predominant subgroup itself, where both standard $k$-means analysis
-and decision tree branches show two possible trends in the
-manifestation of nonmotor-predominant PD:
-
-\begin{itemize}
-  \item[1.] Axial and sleep-severe PD
-  \item[2.] mood/cognition-severe PD
-\end{itemize}
-
-I am, however, not sure if these groups hae enough members to warrant a
-subtype, or whether this could just be chance or noise.
-
-It remains to be seen whether these classification models, especially the
-one-vs-all decision trees, are useful in clinical practice.
 
 \subsection{Bayesian Networks}
 
@@ -529,7 +633,7 @@ the exact name of the Bayesian search implementation, but it was the default
 method used by GeNIe. GeNIe files will be attached electronically.
 
 I assume these models are to be looked at by Dr. Mart\'in. I have not done too
-much investigation myself, as I'm not exactly sure what I'm looking for).
+much investigation myself, as I'm not exactly sure what I'm looking for.
 
 \subsubsection{On nms-dominated data}
 I tried to construct Bayesian networks based on the nms-dominated subtype, but
@@ -537,11 +641,96 @@ the data was too sparse to create a very informative network, even when leaving
 the information continuous. However, I'm not sure this is necessary. If it is,
 I can work on this problem more.
 
+
+\section{Preliminary Conclusions}
+
+\subsection{Overall clustering}
+$k$-means clustering on this Parkinsons' Disease data set reveals clusters that
+confirm previous computationally-based findings in the field, mainly van Rooden
+et al. \cite{vanrooden10} and the identification of four subtypes of
+Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.
+van Rooden's work was done with a separate dataset using a different
+modeling method (expectation-maximization), and this investigation
+independently confirms these subtype classifications. Unlike van Rooden, mean
+disease durations differences do exist between subtypes 1 (mild) and 4
+(severe), likely due to further development of the disease, although the
+differences between 2 and 3 (nonmotor/motor predominated) subtypes are
+insignificant (Table~\ref{tab:tukeyhsd}), suggesting different developmental paths of the disease.
+
+Overall, little information was found in pdonset,
+durat\_pd, or current age, according to Tables~\ref{tab:tukeyhsd}
+and~\ref{tab:info_gain}.  Mean ages were similar for subgroups 1, 2, and 3 ($p >
+0.05$, but different for the severe subtype 4, which makes sense given that
+patients in 4 also have longer disease durations. Specifically, clusters 1 and
+4 seem to be phenotypically quite similar, except at different stages of
+disease progression, given cluster 4's higher age and durat\_pd scores.
+
+However, clusters 2 and 3 clearly show different disease progression, one in
+the motor direction, and one in the nonmotor. Both groups have similar age,
+pdonset, and durat\_pd scores, but differ wildly in symptomatic expression.
+Cluster 2 is dominated by a high prevalence of nonmotor symptoms, such as
+nms\_d2, nms\_d3, nms\_d7, and nms\_d9. Cluster 3, however, is dominated by a
+high prevalence of motor symptoms, while most motor symptoms are similar to the
+mild cluster 1. Of note is that the tremor population mean
+is the highest cluster mean, even higher than the severe subtype 4. This
+motor-dominant cluster may thus overlap with Ma's tremor dominant/slow
+progression cluster \cite{ma15}.
+
+Generally, given stable pdonset scores and predictably increasing durat\_pd
+scores for clusters 1 and 4, Ma et al's rapid disease
+progression/late onset and tremor dominant/slow progression clusters
+\cite{ma15} were mostly not found in this dataset, save for the tremor-dominant
+motor cluster.
+
+The most important nonmotor symptoms in determining these clusters were nms\_d2
+(sleep) and nms\_d3 (mood/cognition), which echo findings of Fereshtehnejad's
+longitudinal study \cite{fereshtehnejad15} and are similar to Sauerbier's
+identification of sleep dominant and cognitive dominant clinical NMS subtypes
+\cite{sauerbier15}. Compared to Erro et al. \cite{erro13}, nonmotor/motor
+dominant subtypes were indeed found, but an additional subgroup with relatively
+severe levels of both motor and nonmotor symptoms were found. Erro's benign
+subtype groups possibly overlap with the mild cluster 1 found in this
+investigation.
+
+\subsection{Nonmotor subtype: clustering and modeling}
+Nonmotor symptoms nms\_d2 and nms\_d3 became critical not only in
+classification trees distinguishing between the various symptoms but in the
+nonmotor-predominant subgroup itself. In $k$-means subdivision of the
+nonmotor-dominant subtype where $k = 2$ and $k = 3$, opposite trends were
+confirmed with nms\_d2 and nms\_d3 symptoms. Similarly, in the 2 and 4 vs rest
+decision tree (Figure~\ref{fig:dtree-2and4va-pruned}), nms\_d2 and nms\_d3 nodes were
+used to differentiate various categories of nomotor-dominant patients.
+When $k = 3$, the subtype with the highest nms\_d2 scores and lowest
+nms\_d3 scores had by far the highest axial scores, nms\_d6 (gastrointestinal)
+scores, and nms\_d7 (urinary) scores. Thus subtype 3 of the nonmotor-dominated
+group could include patients falling into the cognitive/depression-dominant or
+autonomic dominant subtypes.
+
+Despite the variety in symptomatic expression in this nonmotor group, what
+seems most consistent is the presence of nms\_d9 (miscellaneous) nonmotor
+symptoms, as it is used as the root node of the 2 vs all decision tree
+(Figure~\ref{fig:2va}) and the 2 and 4 vs rest decision tree
+(Figure~\ref{fig:dtree-2and4va-pruned}).
+
+It remains to be seen whether these classification models, especially the
+one-vs-all decision trees, are useful in clinical practice.
+
 \begin{thebibliography}{9}
 
+\bibitem{erro13}
+Erro et al (2013). The Heterogeneity of Early Parkinson’s Disease: A Cluster
+Analysis on Newly Diagnosed Untreated Patients
+
 \bibitem{fereshtehnejad15}
-Fereshtehnejad et al (June 15, 2015). New Clinical Subtypes of Parkinson
+Fereshtehnejad et al (2015). New Clinical Subtypes of Parkinson
 Disease and Their Longitudinal Progression
+
+\bibitem{ma15}
+Ma et al (2015). Heterogeneity among patients with Parkinson's disease: Cluster
+analysis and genetic association
+
+\bibitem{sauerbier15}
+Sauerbier et al (2015). Non motor subtypes and Parkinson's disease.
 
 \bibitem{vanrooden10}
 van Rooden et al (2010). The Identification of Parkinson's Disease Subtypes
