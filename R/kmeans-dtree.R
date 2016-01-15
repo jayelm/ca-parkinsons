@@ -95,37 +95,37 @@ if (SAVE.EXPLORE.PLOTS) {
 #NOTE - changed 20151020 - commented to speed up calc
 # PAM ESTIMATION FOR OPTIMAL K ====
 # Estimates 2
-# pam_sils <- c()
-# for (i in 1:15) {
-  # pam_sils <- c(pam_sils, pam(raw.filtered, k=i)$silinfo$avg.width)
-# }
-# plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
-# if (SAVE.EXPLORE.PLOTS) {
-  # dev.copy(pdf, "../figures/asw.pdf")
-  # dev.off()
-# }
+pam_sils <- c()
+for (i in 1:15) {
+  pam_sils <- c(pam_sils, pam(raw.filtered, k=i)$silinfo$avg.width)
+}
+plot(x=1:14, y=pam_sils, xlab="Clusters", ylab="Average Silhouette Width", type="b")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/asw.pdf")
+  dev.off()
+}
 
-# library(fpc)
-# pamk.best <- pamk(raw.filtered)
-# cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
-# plot(pam(raw.filtered, pamk.best$nc))
+library(fpc)
+pamk.best <- pamk(raw.filtered)
+cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
+plot(pam(raw.filtered, pamk.best$nc))
 
 # GAP STATISTIC ESTIMATION ====
-# gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
-# plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
-# if (SAVE.EXPLORE.PLOTS) {
-  # dev.copy(pdf, "../figures/gap-statistic.pdf")
-  # dev.off()
-# }
+gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
+plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/gap-statistic.pdf")
+  dev.off()
+}
 
 # Affinity propagation ====
 # Auto commented out because this takes a while
-# library(apcluster)
-# raw.filtered.apclus <- apcluster(negDistMat(r=2), raw.filtered,
-#           details = TRUE, q = 0, lam = 0.98,
-#           maxits=10000, convits=1000)
-# cat("affinity propogation optimal number of clusters:",
-#     length(raw.filtered.apclus@clusters), "\n")
+library(apcluster)
+raw.filtered.apclus <- apcluster(negDistMat(r=2), raw.filtered,
+          details = TRUE, q = 0, lam = 0.98,
+          maxits=10000, convits=1000)
+cat("affinity propogation optimal number of clusters:",
+    length(raw.filtered.apclus@clusters), "\n")
 # # 4
 # heatmap(raw.filtered.apclus)
 # plot(raw.filtered.apclus, raw.filtered)
