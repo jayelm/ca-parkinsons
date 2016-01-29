@@ -7,7 +7,11 @@ library(FactoMineR)
 library(psych)
 library(mclust)
 library(tidyr)
+library(cluster)
 library(ggplot2)
+library(fpc)
+library(biclust)
+library(subspace)
 
 # GLOBAL CONSTANTS ====
 SAVE.PREPROCESSING.PLOTS <- FALSE
@@ -104,9 +108,9 @@ if (SAVE.EXPLORE.PLOTS) {
 # Number - 14!!! (?)
 # d_clust <- Mclust(as.matrix(raw.filtered), G=1:20)
 # m.best <- dim(d_clust$z)[2]
-cat("model-based optimal number of clusters:", m.best, "\n")
+# cat("model-based optimal number of clusters:", m.best, "\n")
 # 3 clusters
-plot(d_clust)
+# plot(d_clust)
 
 # NBCLUST ESTIMATION FOR OPTIMAL K (30 metrics) ====
 # This is taking a long time
@@ -128,7 +132,6 @@ if (SAVE.EXPLORE.PLOTS) {
   dev.off()
 }
 
-library(fpc)
 pamk.best <- pamk(raw.filtered)
 cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
 plot(pam(raw.filtered, pamk.best$nc))
@@ -167,3 +170,13 @@ p <- ggplot(raw.kmeans.long, aes(x = factor(cluster), y = measurement, fill = fa
   guides(fill = FALSE) +
   facet_wrap( ~ variable, scales = "free")
 print(p)
+
+# Biclustering ====
+# Review of biclustering algorithms: http://www.cs.rpi.edu/~zaki/www-new/uploads/CompbioCourse/Reading/biclustering.pdf
+
+
+# Spectral - coherent values, simultaneous, greedy
+bc = biclust(as.matrix(raw.filtered), method = BCXmotifs())
+
+# Subspace clustering ====
+cq <- CLIQUE(raw.filtered)
