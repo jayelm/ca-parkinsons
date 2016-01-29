@@ -2,9 +2,14 @@
 library(cluster)
 library(rpart)
 library(rpart.plot)
+library(corrplot)
 library(plyr)
 library(fpc)
 library(NbClust)
+library(MASS)
+library(scatterplot3d)
+library(rgl)
+library(car)
 # library for TODO: BIC
 library(mclust)
 library(ggplot2)
@@ -16,18 +21,12 @@ my.palette = brewer.pal(8, "Pastel1")
 
 
 # CONSTANTS ====
-# INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot")
-INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
-                 "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
-                 "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial")
-
 # Remember - PDFs can vary even if the (seeded) clusters don't
 # So this should be false unless I've changed something about the
 # kmeans analysis
 # explore plots is the determining clusters plots
 SAVE.EXPLORE.PLOTS <- FALSE
-SAVE.DTREES <- TRUE
+SAVE.DTREES <- FALSE
 SAVE.OVA.DTREES <- FALSE
 SAVE.BOXPLOTS <- FALSE
 SAVE.ARFF <- FALSE
@@ -55,6 +54,7 @@ rename.clusters <- function(cl) {
 
   }
 }
+
 # VISUALIZE WSS ERROR TO FIND OPTIMAL K ====
 # NOTE: Doesn't work well, there isn't any elbow
 
@@ -93,6 +93,7 @@ if (SAVE.EXPLORE.PLOTS) {
 # hist(nb$Best.nc[1,], breaks = max(na.omit(nb$Best.nc[1,])))
 
 #NOTE - changed 20151020 - commented to speed up calc
+
 # PAM ESTIMATION FOR OPTIMAL K ====
 # Estimates 2
 pam_sils <- c()
@@ -120,19 +121,19 @@ if (SAVE.EXPLORE.PLOTS) {
 
 # Affinity propagation ====
 # Auto commented out because this takes a while
-library(apcluster)
-raw.filtered.apclus <- apcluster(negDistMat(r=2), raw.filtered,
-          details = TRUE, q = 0, lam = 0.98,
-          maxits=10000, convits=1000)
-cat("affinity propogation optimal number of clusters:",
-    length(raw.filtered.apclus@clusters), "\n")
+# library(apcluster)
+# raw.filtered.apclus <- apcluster(negDistMat(r=2), raw.filtered,
+#           details = TRUE, q = 0, lam = 0.98,
+#           maxits=10000, convits=1000)
+# cat("affinity propogation optimal number of clusters:",
+#     length(raw.filtered.apclus@clusters), "\n")
 # # 4
 # heatmap(raw.filtered.apclus)
 # plot(raw.filtered.apclus, raw.filtered)
 
 # INITIAL KMEANS CLUSTERING ====
 splits = splitdf(raw.filtered)
-str(splits)
+# str(splits)
 # NOTE: We're not splitting yet! (Don't know what the learning task is!)
 # so override this and use everything!
 splits$trainset = raw.filtered
@@ -435,12 +436,23 @@ for (i in 2:4) {
   clusters.raw[[paste(i)]] <- clusters.csv
 }
 
+clusters.raw.nmsonly <- lapply(c("2", "3", "4"), function(i) {
+  clusters.raw[[i]][, c(NMS.30, 'cisitot', 'cluster')]
+})
+names(clusters.raw.nmsonly) <- c("2", "3", "4")
+
 # CLUSTERS RAW WIDE -> LONG ====
 # NOTE: This lapply conversion hasn't been tested fully yet!
 clusters.raw.long <- lapply(c("2", "3", "4"), function(i) {
   gather(clusters.raw[[i]], variable, measurement, age:axial)
 })
 names(clusters.raw.long) <- c("2", "3", "4")
+# ADDED 01/20/16: shouldn't be through axial now, should be through nms30
+# But we also add cisitot so we can do some factor reordering
+clusters.raw.long.nmsonly <- lapply(c("2", "3", "4"), function(i) {
+  gather(clusters.raw.nmsonly[[i]], variable, measurement, nms1:cisitot)
+})
+names(clusters.raw.long.nmsonly) <- c("2", "3", "4")
 
 # REORDER FACTORS BY INCREASING CISITOT ====
 for (i in c("2", "3", "4")) {
@@ -449,6 +461,15 @@ for (i in c("2", "3", "4")) {
     mean(cisitot[cisitot$cluster == i, ]$measurement)
   })
   clusters.raw.long[[i]]$cluster <- factor(clusters.raw.long[[i]]$cluster,
+                                           levels = order(cisitot.means))
+}
+
+for (i in c("2", "3", "4")) {
+  cisitot <- clusters.raw.long.nmsonly[[i]][clusters.raw.long.nmsonly[[i]]$variable == "cisitot", ]
+  cisitot.means <- sapply(factor(1:as.integer(i)), function(i) {
+    mean(cisitot[cisitot$cluster == i, ]$measurement)
+  })
+  clusters.raw.long.nmsonly[[i]]$cluster <- factor(clusters.raw.long.nmsonly[[i]]$cluster,
                                            levels = order(cisitot.means))
 }
 
@@ -464,10 +485,211 @@ for (i in c("2", "3", "4")) {
     guides(fill = FALSE) +
     facet_wrap( ~ variable, scales = "free")
   print(p)
-  if (SAVE.BOXPLOTS || TRUE) {
+  if (SAVE.BOXPLOTS) {
     ggsave(paste("../figures/kmeans-summaries-", i, ".pdf", sep=""))
   }
 }
+
+# PLOT NMSONLY PLOTS ====
+# Try just k = 4
+p <- ggplot(clusters.raw.long.nmsonly[["4"]],
+            aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
+  geom_boxplot() +
+  guides(fill = FALSE) +
+  facet_wrap( ~ variable, scales = "free")
+print(p)
+
+
+# Conclusions:
+# Most prevalent differences seen along sleep/fatigue and mood/cognit
+# Also interesting is nms23, nms24, *nms28??*
+# nms24 especially is revelant - nocturia
+# nms23 - frequent urination
+# 28 - change in perceiving flavors?
+
+# NMSD2 / NMSD3 plot ====
+# Plot nmsd2 and nmsd3 against each other, first for all clusters,
+# then cluster 2 only
+# All clusters
+p <- ggplot(clusters.raw[["4"]], aes(x=nms_d2, y=nms_d3, color=factor(cluster))) +
+  geom_point(position=position_jitter(width=0.5, height=0.5))
+print(p)
+
+# Cluster 2 only
+# temp2 because I don't know how many times I'll need to make these things
+temp2 <- clusters.raw[["4"]][clusters.raw[["4"]]$cluster == 2, ]
+p <- ggplot(temp2,
+       aes(x=nms_d2, y=nms_d3)) +
+  geom_point(position=position_jitter(width=0.5, height=0.5),
+             colour = 'green3') +
+  geom_smooth(method = 'lm')
+print(p)
+
+# 3d plot, just looking at nms28, for fun
+with(temp2,
+     scatter3d(nms_d2, nms28, nms_d3, surface=TRUE, grid=TRUE, residuals=FALSE)
+)
+
+# OTHER NMSONLY SUBSET PLOTS ====
+# Visualizing individual domains with parallel coordinates and 3d plots,
+# where dimensionality is low enough
+# NOTE: This overwrites clus4.wide below, be careful
+clus4.wide <- clusters.raw[["4"]][, c(NMS.30, 'cluster')]
+clus4.wide.wocluster <- clus4.wide
+clus4.wide.wocluster$cluster <- NULL
+
+c2 <- clus4.wide[clus4.wide$cluster == 2, ]
+c2.wocluster <- c2
+c2.wocluster$cluster <- NULL
+
+# 1 is black, 2 is red, 3 is green, 4 is blue
+parcoord(clus4.wide.wocluster[, c('nms1', 'nms2')],
+         col = as.numeric(clus4.wide$cluster))
+
+# Cardiovascular
+clus4.wide.cfactor <- clus4.wide
+clus4.wide.cfactor$cluster <- as.factor(clus4.wide.cfactor$cluster)
+ggplot(clus4.wide.cfactor[, c('cluster', 'nms1', 'nms2')],
+       aes(x=nms1, y=nms2, color=cluster)) +
+  geom_point(position=position_jitter(width=1, height=1), size=3)
+
+# Hallucinations
+with(clus4.wide.cfactor[, c('cluster', 'nms13', 'nms14', 'nms15')],
+     scatter3d(nms13, nms14, nms15, surface=FALSE, ellipsoid = TRUE, grid = FALSE,
+               groups = cluster)
+)
+dim(clus4.wide.cfactor[, c('cluster', 'nms13', 'nms14', 'nms15')])
+ggplot(clus4.wide.cfactor[, c('cluster', 'nms1', 'nms2')],
+       aes(x=nms1, y=nms2, color=cluster)) +
+  geom_point(position=position_jitter(width=1, height=1), size=3)
+
+
+# Looks like nms10 is the biggest difference - so let's construct a table
+# of the differences we're looking for
+
+# SLEEP/FATIGUE indivi results ====
+sleep.fatigue <- clus4.wide[, c('nms3', 'nms4', 'nms5', 'nms6', 'cluster')]
+disp.sf.results <- function() {
+  cat('sleep/fatigue\n')
+  cat('symp\tclus1\tclus2\tclus3\tclus4\t4 - 2\t2 - 3\n')
+  for (symptom in c('nms3', 'nms4', 'nms5', 'nms6')) {
+    cat(symptom)
+    for (c in 1:4) {
+      cat('\t',
+          round(mean(sleep.fatigue[sleep.fatigue$cluster == c, symptom]), 3),
+          sep='')
+    }
+    cat('\t',
+      round(
+        mean(sleep.fatigue[sleep.fatigue$cluster == 4, symptom]) -
+        mean(sleep.fatigue[sleep.fatigue$cluster == 2, symptom]),
+        3
+      ), sep=''
+    )
+    cat('\t',
+      round(
+        mean(sleep.fatigue[sleep.fatigue$cluster == 2, symptom]) -
+        mean(sleep.fatigue[sleep.fatigue$cluster == 3, symptom]),
+        3
+      ), sep=''
+    )
+    cat('\n')
+  }
+}
+disp.sf.results()
+
+# MOOD/COGNITION indivi results ====
+mood.cognition <- clus4.wide[, c('nms7', 'nms8', 'nms9',
+                                 'nms10', 'nms11', 'nms12', 'cluster')]
+disp.mc.results <- function() {
+  cat('mood/cognition\n')
+  cat('symp\tclus1\tclus2\tclus3\tclus4\t4 - 2\t2 - 3\n')
+  for (symptom in c('nms7', 'nms8', 'nms9', 'nms10', 'nms11', 'nms12')) {
+    cat(symptom)
+    for (c in 1:4) {
+      cat('\t',
+          round(mean(mood.cognition[mood.cognition$cluster == c, symptom]), 3),
+          sep='')
+    }
+    # Display some other helpful statistics -
+    # 2v4 - mean of clus4 minus mean of clus2. For especially pronounced
+    # symptoms for nonmotor-dom, this will be low
+    cat('\t',
+      round(
+        mean(mood.cognition[mood.cognition$cluster == 4, symptom]) -
+        mean(mood.cognition[mood.cognition$cluster == 2, symptom]),
+        3
+      ), sep=''
+    )
+    # 2v3 - mean of clus2 minus mean of clus3. For pronounced nonmotor-dom,
+    # this should be high. Chose clus3 over clus4 because clus3 (motor-dom) is
+    # more progressed PD and thus has higher likelihood of having higher
+    # nms
+    cat('\t',
+      round(
+        mean(mood.cognition[mood.cognition$cluster == 2, symptom]) -
+        mean(mood.cognition[mood.cognition$cluster == 3, symptom]),
+        3
+      ), sep=''
+    )
+    cat('\n')
+  }
+}
+disp.mc.results()
+
+# NMS30 CORRPLOTS ====
+# All clusters
+corrplot(cor(clus4.wide), method="ellipse", order="hclust")
+# Cluster 2 only
+c2.cor.wocluster <- clus4.wide[clus4.wide$cluster == 2,]
+c2.cor.wocluster$cluster <- NULL
+#  Ify you want nms.
+# c2.cor.wocluster[, c('bradykin', 'rigidity', 'tremor', 'axial')] <- cor.nms.raw2
+corrplot(cor(c2.cor.wocluster), method="ellipse", order="hclust", main="2")
+
+# 1, 3, 4
+c1.cor.wocluster <- clus4.wide[clus4.wide$cluster == 1,]
+c1.cor.wocluster$cluster <- NULL
+corrplot(cor(c1.cor.wocluster), method="ellipse", order="hclust", main="1")
+c3.cor.wocluster <- clus4.wide[clus4.wide$cluster == 3,]
+c3.cor.wocluster$cluster <- NULL
+corrplot(cor(c3.cor.wocluster), method="ellipse", order="hclust", main="3")
+c4.cor.wocluster <- clus4.wide[clus4.wide$cluster == 4,]
+c4.cor.wocluster$cluster <- NULL
+corrplot(cor(c4.cor.wocluster), method="ellipse", order="hclust", main="4")
+# Regular correlation, again ====
+
+# set up subsets, remove clusters
+cor.nms.raw <- trainset.labeled
+cor.nms.raw1 <- cor.nms.raw[trainset.labeled$cluster == 1, ]
+cor.nms.raw1$cluster <- NULL
+cor.nms.raw2 <- cor.nms.raw[trainset.labeled$cluster == 2, ]
+cor.nms.raw2$cluster <- NULL
+cor.nms.raw3 <- cor.nms.raw[trainset.labeled$cluster == 3, ]
+cor.nms.raw3$cluster <- NULL
+cor.nms.raw4 <- cor.nms.raw[trainset.labeled$cluster == 4, ]
+cor.nms.raw4$cluster <- NULL
+cor.nms.raw$cluster <- NULL
+
+scatterplotMatrix(~nms_d1+nms_d2+nms_d3+nms_d4+nms_d5+nms_d6, cor.nms.raw2)
+corrplot(cor(cor.nms.raw), method="ellipse", order="hclust", main="All")
+corrplot(cor(cor.nms.raw1), method="ellipse", order="hclust", main="1")
+corrplot(cor(cor.nms.raw2), method="ellipse", order="hclust", main="2")
+corrplot(cor(cor.nms.raw3), method="ellipse", order="hclust", main="3")
+corrplot(cor(cor.nms.raw4), method="ellipse", order="hclust", main="4")
+
+corrplot(cor(cor.nms.raw2), method="ellipse", order="hclust", main="2")
+
+# 2016 update - some better cluster validation ====
+clres.stability <- clValid(obj = cor.nms.raw, nClust = 2:8, clMethods = "kmeans",
+                 validation = "stability", maxitems=1000)
+stab.measures <- as.data.frame(clres.stability@measures)
+colnames(stab.measures) <- 2:8
+clres.internal <- clValid(obj = cor.nms.raw, nClust = 2:8, clMethods = "kmeans",
+                 validation = "internal", maxitems=1000)
+stab.measures
+# Stability measures look good for 4, surprisingly
+# http://bioinformatics.oxfordjournals.org/content/19/4/459.full.pdf
 
 # GENDER STATS ====
 # TODO: Calculate for all k
@@ -478,6 +700,7 @@ cluster.genders <- sapply(1:4, function(i) {
 
 # BIG VERSIONS OF CLUS4 ====
 clus4 <- clusters.raw.long[["4"]]
+clus4.nmsonly <- clus4[, c(NMS.30, 'cluster')]
 # Manually save these!
 p <- ggplot(clus4, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
   geom_boxplot() +

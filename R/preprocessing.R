@@ -24,10 +24,18 @@ MOTOR.SYMPTOMS <- c("tremor",
                    "bradykin",
                    "rigidity",
                    "axial")
+NMS.30 <- c(
+  "nms1", "nms2", "nms3", "nms4", "nms5", "nms6",
+  "nms7", "nms8", "nms9", "nms10", "nms11", "nms12",
+  "nms13", "nms14", "nms15", "nms16", "nms17", "nms18",
+  "nms19", "nms20", "nms21", "nms22", "nms23", "nms24",
+  "nms25", "nms26", "nms27", "nms28", "nms29", "nms30"
+)
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial")
+                 "tremor", "bradykin", "rigidity", "axial",
+                 NMS.30)
 # Change this variable to change symptoms
 SYMPTOMS.TO.USE <- ALL.SYMPTOMS
 
@@ -47,7 +55,7 @@ raw <- read.csv(DB_FILE)
 # Study is irrelevant
 raw$study <- NULL
 # Get rid of NAs (later may use some kind of missing value compensation method
-# This only brings it down to 901, rather than ~700 something!
+# This only brings it down to 904, rather than ~700 something!
 raw.omitted <- raw[, INTERPRETED]
 raw.omitted <- na.omit(raw.omitted)
 
