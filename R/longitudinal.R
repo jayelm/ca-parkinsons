@@ -3,6 +3,7 @@
 
 library(ggplot2)
 library(gridExtra)
+library(grid)
 
 library(ggthemes)
 source('./pubtheme.R')
@@ -19,19 +20,39 @@ qplot(raw.omitted[trainset.labeled$cluster == 2, ]$durat_pd)
 qplot(raw.omitted[trainset.labeled$cluster == 3, ]$durat_pd)
 qplot(raw.omitted[trainset.labeled$cluster == 4, ]$durat_pd)
 
-# Bind durat_pd to 30 nms, ===
+# Bind durat_pd to 30 nms, CLUSTER PARAM===
+# MAKE SURE clus4.wide is correct!!
+# I don't think nms_d and nms1 are aligned right now!!!
+# TODO: Figure that out!!
+clus4.wide$cluster <- clusters.raw[]
 everything.wide <- clus4.wide
 everything.wide$durat_pd <- raw.omitted$durat_pd
 nms.d <- c("nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5", "nms_d6",
            "nms_d7", "nms_d8", "nms_d9")
 everything.wide[, nms.d] <- raw.omitted[, nms.d]
 
-# Divide data into bins. This is ALL observations ====
+# Change this if you want to examine a different cluster!
+# use NULL if everything, and comment out subsetting
+CURR.CLUSTER <- NULL
+# everything.wide <- everything.wide[everything.wide$cluster == CURR.CLUSTER, ]
+summary(everything.wide)
+
+
+# Either: Divide data into bins. ====
+
 se <- function(x) sqrt(var(x)/length(x))
+# Optimal - for N, seems like best bin size is N
+# Code for ALL
 BIN_SIZE = 20
 binned <- data.frame(matrix(ncol = 0, nrow = BIN_SIZE))
 breaks <- hist(everything.wide$durat_pd, BIN_SIZE, plot=F)$breaks
 
+# Code for K - specify the breaks more specifically
+# breaks <- seq(from = 0, to = max(everything.wide$durat_pd), by = 2)
+# hist(everything.wide$durat_pd, breaks = breaks, plot=T)
+# binned <- data.frame(matrix(ncol = 0, nrow = length(breaks) - 1))
+
+# COMMON CODE
 all.breaks <- cut(everything.wide$durat_pd, breaks)
 rownames(binned) <- levels(all.breaks)
 
@@ -48,6 +69,124 @@ for (col in colnames(everything.wide)) {
 # Remove rows with too few counts. We'll assume <5
 binned <- binned[!(binned$counts < 5), ]
 
+# Or: Divide data into bins, by cluster ====
+breaks <- seq(from = 0, to = max(everything.wide$durat_pd), by = 2)
+binned <- data.frame(matrix(ncol = 0, nrow = length(breaks) - 1))
+for (k in 1:4) {
+  all.breaks.k <- cut(everything.wide[everything.wide$cluster == k, ]$durat_pd, breaks)
+  rownames(binned) <- levels(all.breaks.k)  # Redundant
+  binned[[paste("counts_k", k, sep="")]] <- as.numeric(table(all.breaks.k))
+}
+binned$counts_total <- binned$counts_k1 + binned$counts_k2 + binned$counts_k3 + binned$counts_k4
+
+# Keep only counts where all of the subclusters have >= 5
+for (col in colnames(everything.wide)) {
+  if (col %in% c("breaks", "durat_pd", "cluster")) {
+    next
+  }
+  for (k in 1:4) {
+    c_lvector <- everything.wide$cluster == k
+    binned[, paste(col, "_k", k, sep="")] <- tapply(everything.wide[c_lvector, col], all.breaks[c_lvector], mean);
+    binned[, paste(col, "_sd", "_k", k, sep="")] <- tapply(everything.wide[c_lvector, col], all.breaks[c_lvector], se)
+  }
+}
+
+binned <- binned[!(binned$counts_k1 < 5 | binned$counts_k2 < 5 | binned$counts_k3 < 5 | binned$counts_k4 < 5), ]
+
+# Plot MULTI obs: setup ====
+
+# Emulate ggplot palette
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length=n+1)
+  hcl(h=hues, l=65, c=100)[1:n]
+}
+
+library(reshape2)
+# Melt to long format for stacked bar chart
+binned.copy <- binned
+binned.copy$names <- rownames(binned.copy)
+binned.wide.pbar <- melt(binned.copy[, c("counts_k1", "counts_k2", "counts_k3", "counts_k4", "names")], id.var="names")
+rm(binned.copy)
+binned.wide.pbar$names <- factor(binned.wide.pbar$names, levels=rownames(binned))
+p.bar <- ggplot(binned.wide.pbar, aes(x = factor(names), y = value, fill = variable)) + 
+  geom_bar(stat = "identity") +
+  labs(x = "PD Duration") +
+  guides(fill = FALSE) +  # Guide already present in plot.nms
+  theme_pub() +
+  theme(plot.margin = unit(c(0.5,1,1,1), "cm"))
+
+plot.nms <- function(nms_str, save=FALSE, means=FALSE) {
+  p <- ggplot(binned, aes(x = factor(1:nrow(binned))))
+  subclus.means <- c()
+  for (k in 1:4) {
+    k.factor <- as.factor(k)
+    aes_nms <- aes_string(x = "factor(1:nrow(binned))", y=paste(nms_str, "_k", k, sep=""), colour=k.factor)
+    aes_smooth <- aes_string(x = "as.numeric(factor(1:nrow(binned)))", y=paste(nms_str, "_k", k, sep=""), colour=k.factor)
+    aes_sd <- aes_string(
+      ymin=paste(paste(nms_str, "_k", k, sep=""), "-", nms_str, "_sd_k", k, sep=""),
+      ymax=paste(paste(nms_str, "_k", k, sep=""), "+", nms_str, "_sd_k", k, sep=""),
+      colour=k.factor
+    )
+    subclus.means <- c(subclus.means, mean(everything.wide[everything.wide$cluster == k, nms_str]))
+    p <- p +
+      geom_errorbar(aes_sd, width=0.25) +
+      geom_point(aes_nms) +
+      geom_smooth(aes_smooth, method="loess", se=FALSE)
+  }
+  # Subclus means
+  
+  # Offset. Might need to tweak it
+  mean.offset <- .1
+  if (means) {
+    abline.df <- data.frame(intercept=subclus.means, slope=rep(0, 4), colour=as.factor(1:4), text.x=rep(nrow(binned) - 0.5, 4))
+    p <- p +
+      geom_abline(aes(intercept = intercept, slope=slope, colour=colour), data=abline.df, linetype='dashed') +
+      annotate("text", x=abline.df$text.x, y=abline.df$intercept + mean.offset,
+               label=paste("µ = ", round(abline.df$intercept, 2), sep=""), size=6, colour=gg_color_hue(4))
+  }
+  
+  # Global mean
+  mean.nms <- mean(raw.omitted[[nms_str]])
+  p <- p +
+    geom_abline(aes(intercept=mean.nms, slope=0), linetype='dashed') +
+    annotate("text", x=nrow(binned) - 0.5, y=mean.nms + mean.offset, label=paste("µ = ", round(mean.nms, 2), sep=""), size=6)
+  
+  # Formatting
+  p <- p +
+    theme_pub() +
+    blank.theme +
+    ggtitle(nms_str) +
+    theme(plot.margin = unit(c(1,1,0,1), "cm")) +
+    scale_x_discrete(breaks=1:nrow(binned), labels = rownames(binned)) +
+    labs(colour="Subtype")
+  
+  if (save) {
+    dev.copy(pdf, paste('../figures/longitudinal/', nms_str, '-ALL-durat', '.pdf', sep=''),
+             width=14, height=10)
+    dev.off()
+  }
+  p
+}
+
+plot.nms.with.counts <- function(nms_str, save=FALSE, means=FALSE) {
+  nms.plot <- plot.nms(nms_str, means=means)
+  gA=ggplot_gtable(ggplot_build(nms.plot))
+  gB=ggplot_gtable(ggplot_build(p.bar))
+  maxWidth = grid::unit.pmax(gA$widths[2:5], gB$widths[2:5])
+  gA$widths[2:5] <- as.list(maxWidth)
+  gB$widths[2:5] <- as.list(maxWidth)
+  grid.newpage()
+  grid.arrange(
+    arrangeGrob(gA, gB, ncol=1, heights=c(.8,.3))
+  )
+  if (save) {
+    dev.copy(pdf, paste('../figures/longitudinal/', nms_str, '-ALL-durat-counts', '.pdf', sep=''),
+             width=14, height=10)
+    dev.off()
+  }
+}
+
+
 # Plot ALL obs: setup ====
 blank.theme <- theme(axis.text.x = element_blank(),
                      axis.ticks = element_blank(),
@@ -59,7 +198,6 @@ p.bar <- ggplot(binned, aes(x=factor(1:nrow(binned)), y=counts)) +
   labs(x="PD Duration") +
   theme_pub() +
   theme(plot.margin = unit(c(0.5,1,1,1), "cm")) +
-  theme(axis.title.text=element_text(vjust=3)) +
   scale_x_discrete(breaks=1:nrow(binned), labels = rownames(binned))
 
 plot.nms <- function(nms_str, save=FALSE) {
@@ -70,13 +208,26 @@ plot.nms <- function(nms_str, save=FALSE) {
   )
   aes_smooth <- aes_string(x = "as.numeric(factor(1:nrow(binned)))", y=nms_str)
   mean.nms <- mean(raw.omitted[[nms_str]])
+  # raw.omitted essentially the same as everything.wide
+  mean.subclus <- ifelse(!is.null(CURR.CLUSTER), mean(everything.wide[everything.wide$cluster == CURR.CLUSTER, nms_str]), Inf)
+  print(mean.subclus)
   p <- ggplot(binned, aes_nms) +
     geom_errorbar(aes_sd, width=0.25) +
     geom_point() +
-    geom_smooth(aes_smooth, method="lm", se=T) +
+    geom_smooth(aes_smooth, method="loess", se=T) +
     # Mean line
     geom_abline(aes(intercept=mean.nms, slope=0, colour='mean'), linetype='dashed') +
     annotate("text", x=nrow(binned) - 0.5, y=mean.nms + 0.5, label=paste("µ = ", round(mean.nms, 2), sep=""), size=6, colour='red') +
+    # Subclus mean line
+    # IF curr.cluster null, mean.subclus Inf
+    geom_abline(aes(intercept=mean.subclus, slope=0, colour='subclusmean'), linetype='dashed') +
+    # This one needs to be turned off, though
+    # FIXME: Not working! Not sure why 
+    # TODO: One graph, stacked bar chart, multiple horizontal lines that show timeline of disease
+    # progression for the various subclusters. Would be super interesting
+#     ifelse(!is.null(mean.subclus),
+#            annotate("text", x=nrow(binned) - 0.5, y=mean.subclus + 0.5, label=paste("µ = ", round(mean.subclus, 2), sep=""), size=6, colour='cyan'),
+#            annotate("text", x=0, y=0, label="")) +
     theme_pub() +
     blank.theme +
     ggtitle(nms_str) +
@@ -157,6 +308,7 @@ plot.nms.seg <- function(nms_str, save=FALSE) {
          length=0.05, angle=90, code=3)
   plot(nms.segmod, add=T)
   abline(a=mean(raw.omitted[[nms_str]]), 0, col="red", lty=2)
+  abline(a=mean(raw.omitted[[nms_str]]), 0, col="red", lty=2)
   cat("Mean for ", nms_str, ":", mean(raw.omitted[[nms_str]]), "\n", sep="")
   cat("Estimated breakpoints: \n")
   print(nms.segmod$psi)
@@ -199,9 +351,10 @@ ggplot(correlations.df, aes(x=names, y=r, fill=variable)) +
   theme_pub() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("Correlation with PD duration")
-if (SAVE.LONG.PLOTS) {
-  ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=10)
-}
+# Only save with different names!
+# if (SAVE.LONG.PLOTS) {
+#   ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=10)
+# }
 
 # SEGMENTED regression ====
 library(segmented)
