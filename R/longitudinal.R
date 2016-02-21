@@ -7,6 +7,7 @@ library(grid)
 library(gtable)
 library(reshape2)
 library(plyr)
+library(corrplot)
 
 library(ggthemes)
 source('./pubtheme.R')
@@ -25,6 +26,7 @@ qplot(raw.omitted[trainset.labeled$cluster == 4, ]$durat_pd)
 
 # Bind durat_pd to 30 nms, CLUSTER PARAM===
 everything.wide <- raw.omitted
+everything.wide$durat_pd <- raw.omitted$durat_pd
 everything.wide$cluster <- trainset.labeled$cluster
 nms.d <- c("nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5", "nms_d6",
            "nms_d7", "nms_d8", "nms_d9")
@@ -60,7 +62,7 @@ for (col in colnames(everything.wide)) {
   if (col %in% c("breaks", "durat_pd", "cluster")) {
     next
   }
-  binned[, col] <- tapply(everything.wide[, col], all.breaks, mean);
+  binned[, col] <- tapply(everything.wide[, col], all.breaks, mean)
   binned[, paste(col, "_sd", sep="")] <- tapply(everything.wide[, col], all.breaks, se)
 }
 
@@ -68,6 +70,7 @@ for (col in colnames(everything.wide)) {
 binned <- binned[!(binned$counts < 5), ]
 
 # Or: Divide data into bins, by cluster ====
+# TODO: make this binned_multi?
 breaks <- seq(from = 0, to = max(everything.wide$durat_pd), by = 2)
 binned <- data.frame(matrix(ncol = 0, nrow = length(breaks) - 1))
 for (k in 1:4) {
@@ -222,7 +225,7 @@ blank.theme <- theme(axis.text.x = element_blank(),
                      axis.ticks = element_blank(),
                      axis.title.x = element_blank())
 
-p.bar <- ggplot(binned, aes(x=factor(1:nrow(binned)), y=counts)) +
+p.bar.solo <- ggplot(binned, aes(x=factor(1:nrow(binned)), y=counts)) +
   geom_bar(stat="identity") +
   geom_text(aes(label=counts), position=position_dodge(width=0.9), vjust=-0.25) +
   labs(x="PD Duration") +
@@ -244,7 +247,7 @@ plot.nms <- function(nms_str, save=FALSE) {
   p <- ggplot(binned, aes_nms) +
     geom_errorbar(aes_sd, width=0.25) +
     geom_point() +
-    geom_smooth(aes_smooth, method="loess", se=T) +
+    geom_smooth(aes_smooth, method="loess", se=F) +
     # Mean line
     geom_abline(aes(intercept=mean.nms, slope=0, colour='mean'), linetype='dashed') +
     annotate("text", x=nrow(binned) - 0.5, y=mean.nms + 0.5, label=paste("µ = ", round(mean.nms, 2), sep=""), size=6, colour='red') +
@@ -276,7 +279,7 @@ plot.nms <- function(nms_str, save=FALSE) {
 plot.nms.with.counts <- function(nms_str, save=FALSE) {
   nms.plot <- plot.nms(nms_str)
   gA=ggplot_gtable(ggplot_build(nms.plot))
-  gB=ggplot_gtable(ggplot_build(p.bar))
+  gB=ggplot_gtable(ggplot_build(p.bar.solo))
   maxWidth = grid::unit.pmax(gA$widths[2:5], gB$widths[2:5])
   gA$widths[2:5] <- as.list(maxWidth)
   gB$widths[2:5] <- as.list(maxWidth)
@@ -352,8 +355,13 @@ plot.nms.seg <- function(nms_str, save=FALSE) {
 # First look at with durat_pd to find interesting things ====
 par(mfrow=c(1, 1))
 binned.no.sd <- binned[, grep("_sd$", colnames(binned), invert=TRUE)]
+binned.no.sd <- binned.no.sd[, -which(names(binned.no.sd) %in% c('counts', 'pdonset', 'age', 'sex'))]
 if (!is.null(binned$n)) binned$n <- NULL
 corrplot(cor(binned.no.sd), order="hclust")
+if (SAVE.LONG.PLOTS) {
+  dev.copy(pdf, '../figures/longitudinal/corr-binned.pdf', width=10, height=10)
+  dev.off()
+}
 durat.cor <- function(arr) cor(1:nrow(binned), arr)
 correlations <- sapply(binned.no.sd, durat.cor)
 correlations <- correlations[which(names(correlations) != "counts")]  # Lose counts
@@ -363,6 +371,7 @@ correlations <- sort(correlations)  # Sort ascending
 is_d <- grepl("d", names(correlations))
 is_d[which(is_d == TRUE)] <- "nms_d{1-9}"
 is_d[which(is_d == FALSE)] <- "nms{1-30}"
+is_d[grep("nms.*", names(correlations), invert=TRUE)] <- "motor"
 correlations.df <- data.frame(
   names=names(correlations),
   r=correlations,
@@ -382,9 +391,9 @@ ggplot(correlations.df, aes(x=names, y=r, fill=variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("Correlation with PD duration")
 # Only save with different names!
-# if (SAVE.LONG.PLOTS) {
-#   ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=10)
-# }
+if (SAVE.LONG.PLOTS) {
+  ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=10)
+}
 
 # Everything: without binning ====
 durat.cor.everything <- function(symptom) cor(everything.wide$durat_pd, everything.wide[[symptom]])
@@ -422,6 +431,8 @@ ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
 library(segmented)
 
 # nms10 depression ====
+# Add n
+binned$n <- 1:nrow(binned)
 linear.mod <- lm(nms10 ~ n, binned)
 segmented.mod <- segmented(linear.mod, seg.Z = ~ n)
 
