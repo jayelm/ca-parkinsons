@@ -71,14 +71,14 @@ binned <- binned[!(binned$counts < 5), ]
 
 # Or: Divide data into bins, by cluster ====
 # TODO: make this binned_multi?
-breaks <- seq(from = 0, to = max(everything.wide$durat_pd), by = 2)
-binned <- data.frame(matrix(ncol = 0, nrow = length(breaks) - 1))
+breaks.m <- seq(from = 0, to = max(everything.wide$durat_pd), by = 2)
+binned.m <- data.frame(matrix(ncol = 0, nrow = length(breaks.m) - 1))
 for (k in 1:4) {
-  all.breaks.k <- cut(everything.wide[everything.wide$cluster == k, ]$durat_pd, breaks)
-  rownames(binned) <- levels(all.breaks.k)  # Redundant
-  binned[[paste("counts_k", k, sep="")]] <- as.numeric(table(all.breaks.k))
+  all.breaks.k.m <- cut(everything.wide[everything.wide$cluster == k, ]$durat_pd, breaks.m)
+  rownames(binned.m) <- levels(all.breaks.k.m)  # Redundant
+  binned.m[[paste("counts_k", k, sep="")]] <- as.numeric(table(all.breaks.k.m))
 }
-binned$counts_total <- binned$counts_k1 + binned$counts_k2 + binned$counts_k3 + binned$counts_k4
+binned.m$counts_total <- binned.m$counts_k1 + binned.m$counts_k2 + binned.m$counts_k3 + binned.m$counts_k4
 
 # Keep only counts where all of the subclusters have >= 5
 for (col in colnames(everything.wide)) {
@@ -87,12 +87,12 @@ for (col in colnames(everything.wide)) {
   }
   for (k in 1:4) {
     c_lvector <- everything.wide$cluster == k
-    binned[, paste(col, "_k", k, sep="")] <- tapply(everything.wide[c_lvector, col], all.breaks[c_lvector], mean);
-    binned[, paste(col, "_sd", "_k", k, sep="")] <- tapply(everything.wide[c_lvector, col], all.breaks[c_lvector], se)
+    binned.m[, paste(col, "_k", k, sep="")] <- tapply(everything.wide[c_lvector, col], all.breaks[c_lvector], mean);
+    binned.m[, paste(col, "_sd", "_k", k, sep="")] <- tapply(everything.wide[c_lvector, col], all.breaks[c_lvector], se)
   }
 }
 
-binned <- binned[!(binned$counts_k1 < 4 | binned$counts_k2 < 4 | binned$counts_k3 < 4 | binned$counts_k4 < 4), ]
+binned.m <- binned.m[!(binned.m$counts_k1 < 4 | binned.m$counts_k2 < 4 | binned.m$counts_k3 < 4 | binned.m$counts_k4 < 4), ]
 
 # Plot MULTI obs: setup ====
 
@@ -103,15 +103,15 @@ gg_color_hue <- function(n) {
 }
 
 # Melt to long format for multi.nms stacked bar chart ====
-binned.copy <- binned
-binned.copy$names <- rownames(binned.copy)
-binned.wide.pbar <- melt(binned.copy[, c("counts_k1", "counts_k2", "counts_k3", "counts_k4", "names")], id.var="names")
+binned.copy.m <- binned.m
+binned.copy.m$names <- rownames(binned.copy.m)
+binned.wide.pbar.m <- melt(binned.copy.m[, c("counts_k1", "counts_k2", "counts_k3", "counts_k4", "names")], id.var="names")
 # Rename factor, subtype
-levels(binned.wide.pbar$variable) <- c('1', '2', '3', '4')
-binned.wide.pbar <- rename(binned.wide.pbar, c('variable'='Subtype', 'value'='Counts'))
-rm(binned.copy)
-binned.wide.pbar$names <- factor(binned.wide.pbar$names, levels=rownames(binned))
-p.bar <- ggplot(binned.wide.pbar, aes(x = factor(names), y = Counts, fill = Subtype)) + 
+levels(binned.wide.pbar.m$variable) <- c('1', '2', '3', '4')
+binned.wide.pbar.m <- rename(binned.wide.pbar.m, c('variable'='Subtype', 'value'='Counts'))
+rm(binned.copy.m)
+binned.wide.pbar.m$names <- factor(binned.wide.pbar.m$names, levels=rownames(binned.m))
+p.bar.m <- ggplot(binned.wide.pbar.m, aes(x = factor(names), y = Counts, fill = Subtype)) + 
   geom_bar(stat = "identity") +
   labs(x = "PD Duration") +
   # guides(fill = FALSE) +  # Guide already present in plot.nms
@@ -119,12 +119,12 @@ p.bar <- ggplot(binned.wide.pbar, aes(x = factor(names), y = Counts, fill = Subt
   theme(plot.margin = unit(c(0.5,1,1,1), "cm"))
 
 # Melt to long format for multi.nms ====
-binned.copy <- binned
-binned.copy$names <- rownames(binned.copy)
+binned.copy.m <- binned.m
+binned.copy.m$names <- rownames(binned.copy.m)
 # Get variables we want
-measures <- names(binned.copy)[grep('.*sd.*|(names)', names(binned.copy), invert=T)]
+measures <- names(binned.copy.m)[grep('.*sd.*|(names)', names(binned.copy.m), invert=T)]
 binned.wide.multi <- melt(
-  binned.copy,
+  binned.copy.m,
   id.var='names',
   variable.name='Subtype',
   value.name='Score',
@@ -134,10 +134,10 @@ binned.wide.multi <- melt(
 # Get ymin, ymax for all of these variables
 binned.wide.multi$ymin <- rep(NA, nrow(binned.wide.multi))
 binned.wide.multi$ymax <- rep(NA, nrow(binned.wide.multi))
-for (i in grep('nms.*sd.*', names(binned.copy))) {
+for (i in grep('nms.*sd.*', names(binned.copy.m))) {
   # Get rid of _sd_ to get the real name
-  name <- names(binned.copy)[[i]]
-  vals <- binned.copy[[name]]
+  name <- names(binned.copy.m)[[i]]
+  vals <- binned.copy.m[[name]]
   orig <- gsub('_sd', '', name)
   ymins <- binned.wide.multi[binned.wide.multi$Subtype == orig, ]$Score - vals
   ymins[ymins < 0] <- 0
@@ -147,7 +147,7 @@ for (i in grep('nms.*sd.*', names(binned.copy))) {
 }
 # Assume 9 categories here.
 binned.wide.multi$names <- rep(1:length(unique(binned.wide.multi$names)), nrow(binned.wide.multi) / 9)
-rm(binned.copy)
+rm(binned.copy.m)
 
 # Create multi.nms, multi.nms.with.counts funcs ====
 multi.nms <- function(nms_str, save=FALSE, means=FALSE) {
@@ -164,7 +164,7 @@ multi.nms <- function(nms_str, save=FALSE, means=FALSE) {
     geom_point(position=pd) +
     geom_smooth(se=FALSE) +
     geom_errorbar(aes(ymin=ymin, ymax=ymax), position=pd) +
-    scale_x_continuous(breaks=1:9, labels=rownames(binned))
+    scale_x_continuous(breaks=1:9, labels=rownames(binned.m))
   # TODO: Melt to different format like above for p.bar; then position_dodge
   # http://stats.stackexchange.com/questions/103393/how-can-i-dodge-the-position-of-geom-point-in-ggplot2
   
@@ -182,7 +182,7 @@ multi.nms <- function(nms_str, save=FALSE, means=FALSE) {
   mean.nms <- mean(raw.omitted[[nms_str]])
   p <- p +
     geom_abline(aes(intercept=mean.nms, slope=0), linetype='dashed') +
-    annotate("text", x=nrow(binned) - 0.5, y=mean.nms + mean.offset, label=paste("µ = ", round(mean.nms, 2), sep=""), size=6)
+    annotate("text", x=nrow(binned.m) - 0.5, y=mean.nms + mean.offset, label=paste("µ = ", round(mean.nms, 2), sep=""), size=6)
   
   # Formatting
   p <- p +
@@ -204,7 +204,7 @@ multi.nms <- function(nms_str, save=FALSE, means=FALSE) {
 multi.nms.with.counts <- function(nms_str, save=FALSE, means=FALSE) {
   nms.plot <- multi.nms(nms_str, means=means)
   gA <- ggplot_gtable(ggplot_build(nms.plot))
-  gB <- ggplot_gtable(ggplot_build(p.bar))
+  gB <- ggplot_gtable(ggplot_build(p.bar.m))
   maxWidth = grid::unit.pmax(gA$widths[2:5], gB$widths[2:5])
   gA$widths[2:5] <- as.list(maxWidth)
   gB$widths[2:5] <- as.list(maxWidth)
@@ -383,7 +383,7 @@ correlations.df$names <- factor(correlations.df$names,
 ggplot(correlations.df, aes(x=names, y=r, fill=variable)) +
   geom_bar(stat="identity", position="identity") +
   geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df$r < 0) - .5) +
-  scale_y_continuous(limits = c(-1, 1)) +
+  scale_y_continuous(limits = c(0, 1)) +
   ylab("r") +
   xlab("Variable") +
   guides(guides(fill=guide_legend(title="Variable Type"))) +
@@ -392,10 +392,10 @@ ggplot(correlations.df, aes(x=names, y=r, fill=variable)) +
   ggtitle("Correlation with PD duration")
 # Only save with different names!
 if (SAVE.LONG.PLOTS) {
-  ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=10)
+  ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=7)
 }
 
-# Everything: without binning ====
+# Durat cor correlation NO BINNING ====
 durat.cor.everything <- function(symptom) cor(everything.wide$durat_pd, everything.wide[[symptom]])
 correlations.everything <- sapply(c(ALL.SYMPTOMS, NMS.30), durat.cor.everything)
 correlations.everything <- sort(correlations.everything)  # Sort ascending
@@ -415,7 +415,7 @@ correlations.df.e$names <- factor(correlations.df.e$names,
 ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
   geom_bar(stat="identity", position="identity") +
   geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df.e$r < 0) - .5) +
-  scale_y_continuous(limits = c(-1, 1)) +
+  scale_y_continuous(limits = c(0, 1)) +
   ylab("r") +
   xlab("Variable") +
   guides(guides(fill=guide_legend(title="Variable Type"))) +
@@ -423,9 +423,9 @@ ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("Correlation with PD duration")
 # Only save with different names!
-# if (SAVE.LONG.PLOTS) {
-#   ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=10)
-# }
+if (SAVE.LONG.PLOTS) {
+  ggsave('../figures/longitudinal/pd-durat-cor-unbinned.pdf', width=14, height=10)
+}
 
 # SEGMENTED regression ====
 library(segmented)
