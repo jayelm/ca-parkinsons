@@ -134,7 +134,7 @@ binned.wide.multi <- melt(
 # Get ymin, ymax for all of these variables
 binned.wide.multi$ymin <- rep(NA, nrow(binned.wide.multi))
 binned.wide.multi$ymax <- rep(NA, nrow(binned.wide.multi))
-for (i in grep('nms.*sd.*', names(binned.copy.m))) {
+for (i in grep('(nms.*sd.*)|((tremor|cisitot).*sd.*)', names(binned.copy.m))) {
   # Get rid of _sd_ to get the real name
   name <- names(binned.copy.m)[[i]]
   vals <- binned.copy.m[[name]]
