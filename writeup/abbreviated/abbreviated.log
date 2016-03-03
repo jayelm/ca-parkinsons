@@ -1,15 +1,16 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.6)  23 OCT 2015 04:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  3 MAR 2016 10:25
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **abbreviated.tex
 (./abbreviated.tex
-LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 2 languages loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2015/01/01>
+Babel <3.9l> and hyphenation patterns for 21 languages loaded.
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -23,7 +24,7 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip43
 \f@ncyO@elh=\skip44
 \f@ncyO@erh=\skip45
@@ -34,24 +35,24 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \f@ncyO@olf=\skip50
 \f@ncyO@orf=\skip51
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip52
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen104
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
@@ -92,29 +93,29 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
-Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2014/10/28 v1.1c Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
 \symboldletters=\mathgroup7
 \symboldsymbols=\mathgroup8
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
-LaTeX Info: Redefining \bm on input line 204.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
+LaTeX Info: Redefining \bm on input line 207.
 )
-(/home/jayelm/texmf/tex/latex/numprint/numprint.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/numprint/numprint.sty
 Package: numprint 2012/08/20 v1.39 Print numbers (HH)
 
-(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen112
 \extrarowheight=\dimen113
 \NC@list=\toks19
@@ -140,27 +141,35 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \c@nprt@cntprint=\count108
 
 No configuration file `numprint.cfg' found.)
-(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count109
+\float@exts=\toks23
+\float@box=\box28
+\@float@everytoks=\toks24
+\@floatcapt=\box29
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks23
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks25
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count109
-\Gm@cntv=\count110
-\c@Gm@tempcnt=\count111
+\Gm@cnth=\count110
+\Gm@cntv=\count111
+\c@Gm@tempcnt=\count112
 \Gm@bindingoffset=\dimen114
 \Gm@wd@mp=\dimen115
 \Gm@odd@mp=\dimen116
@@ -169,81 +178,80 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutheight=\dimen119
 \Gm@layouthoffset=\dimen120
 \Gm@layoutvoffset=\dimen121
-\Gm@dimlist=\toks24
+\Gm@dimlist=\toks26
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 94.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count112
+\Gread@gobject=\count113
 ))
 \Gin@req@height=\dimen122
 \Gin@req@width=\dimen123
 )
-(/home/jayelm/texmf/tex/latex/wrapfig/wrapfig.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen124
 \WF@size=\dimen125
-\c@WF@wrappedlines=\count113
-\WF@box=\box28
-\WF@everypar=\toks25
+\c@WF@wrappedlines=\count114
+\WF@box=\box30
+\WF@everypar=\toks27
 Package: wrapfig 2003/01/31  v 3.6
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/rotating/rotating.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/rotating/rotating.sty
 Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@r@tfl@t=\count114
+\c@r@tfl@t=\count115
 \rotFPtop=\skip61
 \rotFPbot=\skip62
-\rot@float@box=\box29
-\rot@mess@toks=\toks26
+\rot@float@box=\box31
+\rot@mess@toks=\toks28
 )
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/epstopdf.sty
 Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
 
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+)) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -252,7 +260,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -265,47 +273,42 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
-(/home/jayelm/texmf/tex/latex/tablefootnote/tablefootnote.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/tablefootnote/tablefootnote.
+sty
 Package: tablefootnote 2014/01/26 v1.1c Table foot notes (HMM)
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/letltxmacro.sty
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/letltxmacro.sty
 Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
-)
-(/home/jayelm/texmf/tex/latex/xifthen/xifthen.sty
-Package: xifthen 2009/04/17 v1.3 Extended ifthen features
+) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/xifthen/xifthen.sty
+Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
 
-(/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
-Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
-\et@xins=\count115
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count116
 \calc@Bcount=\count117
 \calc@Adimen=\dimen126
 \calc@Bdimen=\dimen127
 \calc@Askip=\skip63
 \calc@Bskip=\skip64
-LaTeX Info: Redefining \setlength on input line 76.
-LaTeX Info: Redefining \addtolength on input line 77.
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count118
 \calc@Cskip=\skip65
 )
-(/home/jayelm/texmf/tex/latex/ifmtarg/ifmtarg.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 ))
-(/home/jayelm/texmf/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count119
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count120
-\lst@gtempboxa=\box30
-\lst@token=\toks27
+\lst@gtempboxa=\box32
+\lst@token=\toks29
 \lst@length=\count121
 \lst@currlwidth=\dimen128
 \lst@column=\count122
@@ -316,21 +319,21 @@ Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
 \lst@lineno=\count125
 \lst@maxwidth=\dimen131
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 \c@lstnumber=\count126
 \lst@skipnumbers=\count127
-\lst@framebox=\box31
+\lst@framebox=\box33
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2013/08/26 1.5b listings configuration
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
-Package: listings 2013/08/26 1.5b (Carsten Heinz)
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen132
@@ -342,40 +345,92 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \caption@hangindent=\dimen138
 )
 \c@ContinuedFloat=\count128
+Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
+\c@tracingmulticols=\count129
+\mult@box=\box34
+\multicol@leftmargin=\dimen139
+\c@unbalance=\count130
+\c@collectmore=\count131
+\doublecol@number=\count132
+\multicoltolerance=\count133
+\multicolpretolerance=\count134
+\full@width=\dimen140
+\page@free=\dimen141
+\premulticols=\dimen142
+\postmulticols=\dimen143
+\multicolsep=\skip66
+\multicolbaselineskip=\skip67
+\partial@page=\box35
+\last@line=\box36
+\maxbalancingoverflow=\dimen144
+\mult@rightbox=\box37
+\mult@grightbox=\box38
+\mult@gfirstbox=\box39
+\mult@firstbox=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\@tempa=\box50
+\@tempa=\box51
+\@tempa=\box52
+\@tempa=\box53
+\@tempa=\box54
+\@tempa=\box55
+\@tempa=\box56
+\@tempa=\box57
+\c@columnbadness=\count135
+\c@finalcolumnbadness=\count136
+\last@try=\dimen145
+\multicolovershoot=\dimen146
+\multicolundershoot=\dimen147
+\mult@nat@firstbox=\box58
+\colbreak@box=\box59
+\mc@col@check@num=\count137
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
-\c@KVtest=\count129
-\sf@farskip=\skip66
-\sf@captopadj=\dimen139
-\sf@capskip=\skip67
-\sf@nearskip=\skip68
-\c@subfigure=\count130
-\c@subfigure@save=\count131
-\c@lofdepth=\count132
-\c@subtable=\count133
-\c@subtable@save=\count134
-\c@lotdepth=\count135
-\sf@top=\skip69
-\sf@bottom=\skip70
-) (./abbreviated.aux)
+\c@KVtest=\count138
+\sf@farskip=\skip68
+\sf@captopadj=\dimen148
+\sf@capskip=\skip69
+\sf@nearskip=\skip70
+\c@subfigure=\count139
+\c@subfigure@save=\count140
+\c@lofdepth=\count141
+\c@subtable=\count142
+\c@subtable@save=\count143
+\c@lotdepth=\count144
+\sf@top=\skip71
+\sf@bottom=\skip72
+)
+(./abbreviated.aux)
 \openout1 = `abbreviated.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -384,15 +439,15 @@ LaTeX Font Info:    ... okay on input line 31.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
-* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* h-part:(L,W,R)=(54.2025pt, 505.89pt, 54.2025pt)
+* v-part:(T,H,B)=(54.2025pt, 686.56499pt, 54.2025pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=469.75502pt
-* \textheight=650.43001pt
-* \oddsidemargin=0.0pt
-* \evensidemargin=0.0pt
-* \topmargin=-37.0pt
+* \textwidth=505.89pt
+* \textheight=686.56499pt
+* \oddsidemargin=-18.06749pt
+* \evensidemargin=-18.06749pt
+* \topmargin=-55.06749pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -410,275 +465,385 @@ LaTeX Font Info:    ... okay on input line 31.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count136
-\scratchdimen=\dimen140
-\scratchbox=\box32
-\nofMPsegments=\count137
-\nofMParguments=\count138
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count139
-\MPscratchDim=\dimen141
-\MPnumerator=\count140
-\makeMPintoPDFobject=\count141
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count145
+\scratchdimen=\dimen149
+\scratchbox=\box60
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen150
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks31
 )
-\c@lstlisting=\count142
+\c@lstlisting=\count151
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 35.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+LaTeX Font Info:    Try loading font information for U+msa on input line 34.
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 35.
+LaTeX Font Info:    Try loading font information for U+msb on input line 34.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+(./abbreviated.toc [1
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+\tf@toc=\write3
+\openout3 = `abbreviated.toc'.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-kmeans-pruned-unscaled-4.pdf, id=1, 505.89pt x 505.89pt>
+ [2]
+<../../figures/dtree-kmeans-pruned-unscaled-4.pdf, id=16, 505.89pt x 505.89pt>
 File: ../../figures/dtree-kmeans-pruned-unscaled-4.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-kmeans-pruned-unscaled-4.pdf>
 Package pdftex.def Info: ../../figures/dtree-kmeans-pruned-unscaled-4.pdf used 
-on input line 144.
-(pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
- [1
+on input line 151.
+(pdftex.def)             Requested size: 247.94499pt x 247.95001pt.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/kmeans-summaries-4.pdf, id=15, 609.27625pt x 361.35pt>
+<../../figures/kmeans-summaries-4.pdf, id=17, 609.27625pt x 361.35pt>
 File: ../../figures/kmeans-summaries-4.pdf Graphic file (type pdf)
 
 <use ../../figures/kmeans-summaries-4.pdf>
 Package pdftex.def Info: ../../figures/kmeans-summaries-4.pdf used on input lin
-e 157.
-(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+e 164.
+(pdftex.def)             Requested size: 505.89pt x 300.04173pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Package multicol Warning: I moved some lines to the next page.
+(multicol)                Footnotes on page 3 might be wrong on input line 178.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2]
-Overfull \hbox (0.58484pt too wide) in paragraph at lines 245--257
-[]\OT1/cmr/m/n/10 The most in-for-ma-tive non-mo-tor symp-toms are nms[]d2 (sle
-ep-/-fa-tigue) at 2, along with nms[]d3 (mood/cog-
+[3] [4 <../../figures/kmeans-summaries-4.pdf> <../../figures/dtree-kmeans-prune
+d-unscaled-4.pdf>]
+Underfull \hbox (badness 6016) in paragraph at lines 252--264
+\OT1/cmr/m/n/10 nms[]d2 (sleep-/-fa-tigue) at 2, along with nms[]d3
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/bradykin-v-cisitot.pdf, id=25, 609.27625pt x 361.35pt>
+<../../figures/bradykin-v-cisitot.pdf, id=41, 609.27625pt x 361.35pt>
 File: ../../figures/bradykin-v-cisitot.pdf Graphic file (type pdf)
 
 <use ../../figures/bradykin-v-cisitot.pdf>
 Package pdftex.def Info: ../../figures/bradykin-v-cisitot.pdf used on input lin
-e 339.
-(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
+e 346.
+(pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
-<../../figures/rigidity-v-cisitot.pdf, id=27, 609.27625pt x 361.35pt>
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 346--347
+ [][] 
+ []
+
+<../../figures/rigidity-v-cisitot.pdf, id=43, 609.27625pt x 361.35pt>
 File: ../../figures/rigidity-v-cisitot.pdf Graphic file (type pdf)
 
 <use ../../figures/rigidity-v-cisitot.pdf>
 Package pdftex.def Info: ../../figures/rigidity-v-cisitot.pdf used on input lin
-e 344.
-(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
+e 351.
+(pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 351--354
+ [][] 
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/bradykin-v-nms_d6.pdf, id=29, 609.27625pt x 361.35pt>
+[5] <../../figures/bradykin-v-nms_d6.pdf, id=48, 609.27625pt x 361.35pt>
 File: ../../figures/bradykin-v-nms_d6.pdf Graphic file (type pdf)
 
 <use ../../figures/bradykin-v-nms_d6.pdf>
 Package pdftex.def Info: ../../figures/bradykin-v-nms_d6.pdf used on input line
- 356.
-(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
+ 363.
+(pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
-<../../figures/rigidity-v-nms_d6.pdf, id=31, 609.27625pt x 361.35pt>
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 363--364
+ [][] 
+ []
+
+<../../figures/rigidity-v-nms_d6.pdf, id=50, 609.27625pt x 361.35pt>
 File: ../../figures/rigidity-v-nms_d6.pdf Graphic file (type pdf)
 
 <use ../../figures/rigidity-v-nms_d6.pdf>
 Package pdftex.def Info: ../../figures/rigidity-v-nms_d6.pdf used on input line
- 361.
-(pdftex.def)             Requested size: 375.80544pt x 222.88782pt.
+ 368.
+(pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 368--371
+ [][] 
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/corrplots.pdf, id=33, 505.89pt x 505.89pt>
+<../../figures/corrplots.pdf, id=52, 505.89pt x 505.89pt>
 File: ../../figures/corrplots.pdf Graphic file (type pdf)
 
 <use ../../figures/corrplots.pdf>
-Package pdftex.def Info: ../../figures/corrplots.pdf used on input line 369.
-(pdftex.def)             Requested size: 319.42996pt x 319.43799pt.
+Package pdftex.def Info: ../../figures/corrplots.pdf used on input line 376.
+(pdftex.def)             Requested size: 247.94499pt x 247.95001pt.
+ [6 <../../figures/bradykin-v-cisitot.pdf> <../../figures/rigidity-v-cisitot.pd
+f> <../../figures/bradykin-v-nms_d6.pdf> <../../figures/rigidity-v-nms_d6.pdf>]
 
+Underfull \hbox (badness 10000) in paragraph at lines 381--381
+[]\OT1/cmr/bx/n/14.4 Nonmotor-predominant sub-
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/c2-summaries-2.pdf, id=34, 609.27625pt x 361.35pt>
+<../../figures/c2-summaries-2.pdf, id=98, 609.27625pt x 361.35pt>
 File: ../../figures/c2-summaries-2.pdf Graphic file (type pdf)
 
 <use ../../figures/c2-summaries-2.pdf>
-Package pdftex.def Info: ../../figures/c2-summaries-2.pdf used on input line 42
-5.
-(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+Package pdftex.def Info: ../../figures/c2-summaries-2.pdf used on input line 43
+2.
+(pdftex.def)             Requested size: 328.82541pt x 195.02684pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/c2-summaries-3.pdf, id=35, 609.27625pt x 361.35pt>
+<../../figures/c2-summaries-3.pdf, id=99, 609.27625pt x 361.35pt>
 File: ../../figures/c2-summaries-3.pdf Graphic file (type pdf)
 
 <use ../../figures/c2-summaries-3.pdf>
 Package pdftex.def Info: ../../figures/c2-summaries-3.pdf used on input line 43
-1.
-(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+8.
+(pdftex.def)             Requested size: 328.82541pt x 195.02684pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/c2-summaries-4.pdf, id=36, 609.27625pt x 361.35pt>
+<../../figures/c2-summaries-4.pdf, id=100, 609.27625pt x 361.35pt>
 File: ../../figures/c2-summaries-4.pdf Graphic file (type pdf)
 
 <use ../../figures/c2-summaries-4.pdf>
-Package pdftex.def Info: ../../figures/c2-summaries-4.pdf used on input line 43
-7.
-(pdftex.def)             Requested size: 469.75502pt x 278.60979pt.
+Package pdftex.def Info: ../../figures/c2-summaries-4.pdf used on input line 44
+4.
+(pdftex.def)             Requested size: 328.82541pt x 195.02684pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Package multicol Warning: I moved some lines to the next page.
+(multicol)                Footnotes on page 7 might be wrong on input line 508.
 
-[4] [5] <../../figures/dtree-1va-pruned.pdf, id=47, 505.89pt x 505.89pt>
+
+[7 <../../figures/corrplots.pdf>] [8 <../../figures/c2-summaries-2.pdf> <../../
+figures/c2-summaries-3.pdf> <../../figures/c2-summaries-4.pdf>]
+<../../figures/dtree-1va-pruned.pdf, id=134, 505.89pt x 505.89pt>
 File: ../../figures/dtree-1va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-1va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-1va-pruned.pdf used on input line 
-554.
-(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+561.
+(pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-2va-pruned.pdf, id=48, 505.89pt x 505.89pt>
+<../../figures/dtree-2va-pruned.pdf, id=135, 505.89pt x 505.89pt>
 File: ../../figures/dtree-2va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2va-pruned.pdf used on input line 
-561.
-(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+568.
+(pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-3va-pruned.pdf, id=49, 505.89pt x 505.89pt>
+<../../figures/dtree-3va-pruned.pdf, id=136, 505.89pt x 505.89pt>
 File: ../../figures/dtree-3va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-3va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-3va-pruned.pdf used on input line 
-567.
-(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+574.
+(pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-4va-pruned.pdf, id=50, 505.89pt x 505.89pt>
+<../../figures/dtree-4va-pruned.pdf, id=137, 505.89pt x 505.89pt>
 File: ../../figures/dtree-4va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-4va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-4va-pruned.pdf used on input line 
-573.
-(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-2and4va-pruned.pdf, id=51, 505.89pt x 505.89pt>
+580.
+(pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
+ [9 <../../figures/dtree-1va-pruned.pdf> <../../figures/dtree-2va-pruned.pdf> <
+../../figures/dtree-3va-pruned.pdf>]
+<../../figures/dtree-2and4va-pruned.pdf, id=163, 505.89pt x 505.89pt>
 File: ../../figures/dtree-2and4va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2and4va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2and4va-pruned.pdf used on input l
-ine 608.
-(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+ine 615.
+(pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/dtree-2and3va-pruned.pdf, id=52, 505.89pt x 505.89pt>
+<../../figures/dtree-2and3va-pruned.pdf, id=164, 505.89pt x 505.89pt>
 File: ../../figures/dtree-2and3va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2and3va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2and3va-pruned.pdf used on input l
-ine 615.
-(pdftex.def)             Requested size: 281.85587pt x 281.86067pt.
+ine 622.
+(pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
+ [10 <../../figures/dtree-4va-pruned.pdf> <../../figures/dtree-2and4va-pruned.p
+df> <../../figures/dtree-2and3va-pruned.pdf>]
+<../../figures/longitudinal/pd-durat-cor.pdf, id=189, 1011.78pt x 505.89pt>
+File: ../../figures/longitudinal/pd-durat-cor.pdf Graphic file (type pdf)
+
+<use ../../figures/longitudinal/pd-durat-cor.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/pd-durat-cor.pdf used on in
+put line 670.
+(pdftex.def)             Requested size: 455.2979pt x 227.64839pt.
+
+<../../figures/longitudinal/nms9-durat-counts.pdf, id=190, 1011.78pt x 722.7pt>
+File: ../../figures/longitudinal/nms9-durat-counts.pdf Graphic file (type pdf)
+<use ../../figures/longitudinal/nms9-durat-counts.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/nms9-durat-counts.pdf used 
+on input line 685.
+(pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
+
+<../../figures/longitudinal/nms9-multi-durat-counts.pdf, id=191, 1011.78pt x 72
+2.7pt>
+File: ../../figures/longitudinal/nms9-multi-durat-counts.pdf Graphic file (type
+ pdf)
+ <use ../../figures/longitudinal/nms9-multi-durat-counts.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/nms9-multi-durat-counts.pdf
+ used on input line 693.
+(pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
+
+<../../figures/longitudinal/nms10-durat-counts.pdf, id=192, 1011.78pt x 722.7pt
+>
+File: ../../figures/longitudinal/nms10-durat-counts.pdf Graphic file (type pdf)
+
+ <use ../../figures/longitudinal/nms10-durat-counts.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/nms10-durat-counts.pdf used
+ on input line 705.
+(pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
+
+<../../figures/longitudinal/nms10-multi-durat-counts.pdf, id=193, 1011.78pt x 7
+22.7pt>
+File: ../../figures/longitudinal/nms10-multi-durat-counts.pdf Graphic file (typ
+e pdf)
+ <use ../../figures/longitudinal/nms10-multi-durat-counts.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/nms10-multi-durat-counts.pd
+f used on input line 713.
+(pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
+
+<../../figures/longitudinal/cisitot-multi-durat-counts.pdf, id=194, 1011.78pt x
+ 722.7pt>
+File: ../../figures/longitudinal/cisitot-multi-durat-counts.pdf Graphic file (t
+ype pdf)
+ <use ../../figures/longitudinal/cisitot-multi-durat-counts.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/cisitot-multi-durat-counts.
+pdf used on input line 728.
+(pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
+
+<../../figures/longitudinal/tremor-multi-durat-counts.pdf, id=195, 1011.78pt x 
+722.7pt>
+File: ../../figures/longitudinal/tremor-multi-durat-counts.pdf Graphic file (ty
+pe pdf)
+ <use ../../figures/longitudinal/tremor-multi-durat-counts.pdf>
+Package pdftex.def Info: ../../figures/longitudinal/tremor-multi-durat-counts.p
+df used on input line 742.
+(pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 758.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 758.
 
-[6]
-Overfull \hbox (2.71106pt too wide) in paragraph at lines 648--659
-$\OML/cmm/m/it/10 k$\OT1/cmr/m/n/10 -means clus-ter-ing on this Parkin-sons' Di
-s-ease data set re-veals clus-ters that con-firm pre-vi-ous computationally-
- []
+<d9to30.png, id=196, 998.73125pt x 939.51pt>
+File: d9to30.png Graphic file (type png)
+ <use d9to30.png>
+Package pdftex.def Info: d9to30.png used on input line 764.
+(pdftex.def)             Requested size: 505.89pt x 475.88954pt.
 
-[7]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- [8] [9 <../../figures/dtree-kmeans-pruned-unscaled-4.pdf>] [10 <../../figures/
-kmeans-summaries-4.pdf>] [11 <../../figures/bradykin-v-cisitot.pdf> <../../figu
-res/rigidity-v-cisitot.pdf>] [12 <../../figures/bradykin-v-nms_d6.pdf> <../../f
-igures/rigidity-v-nms_d6.pdf>] [13 <../../figures/corrplots.pdf> <../../figures
-/c2-summaries-2.pdf>] [14 <../../figures/c2-summaries-3.pdf> <../../figures/c2-
-summaries-4.pdf>] [15 <../../figures/dtree-1va-pruned.pdf> <../../figures/dtree
--2va-pruned.pdf>] [16 <../../figures/dtree-3va-pruned.pdf> <../../figures/dtree
--4va-pruned.pdf>] [17 <../../figures/dtree-2and4va-pruned.pdf> <../../figures/d
-tree-2and3va-pruned.pdf>] (./abbreviated.aux) ) 
+<../../figures/nms30only-eigs.pdf, id=198, 542.025pt x 361.35pt>
+File: ../../figures/nms30only-eigs.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30only-eigs.pdf>
+Package pdftex.def Info: ../../figures/nms30only-eigs.pdf used on input line 78
+2.
+(pdftex.def)             Requested size: 247.94499pt x 165.2967pt.
+
+<../../figures/nms30only-eigscorr.pdf, id=199, 578.16pt x 361.35pt>
+File: ../../figures/nms30only-eigscorr.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30only-eigscorr.pdf>
+Package pdftex.def Info: ../../figures/nms30only-eigscorr.pdf used on input lin
+e 796.
+(pdftex.def)             Requested size: 505.89pt x 316.18048pt.
+ [11 <../../figures/nms30only-eigs.pdf>] <../../figures/nms30only-colhc.pdf, id
+=212, 722.7pt x 433.62pt>
+File: ../../figures/nms30only-colhc.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30only-colhc.pdf>
+Package pdftex.def Info: ../../figures/nms30only-colhc.pdf used on input line 8
+13.
+(pdftex.def)             Requested size: 505.89pt x 303.53192pt.
+
+<../../figures/nms30m-colhc.pdf, id=213, 722.7pt x 433.62pt>
+File: ../../figures/nms30m-colhc.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-colhc.pdf>
+Package pdftex.def Info: ../../figures/nms30m-colhc.pdf used on input line 826.
+
+(pdftex.def)             Requested size: 505.89pt x 303.53192pt.
+
+<../../figures/nms30m-k4-heatmap-improved.png, id=214, 530.98375pt x 774.895pt>
+File: ../../figures/nms30m-k4-heatmap-improved.png Graphic file (type png)
+<use ../../figures/nms30m-k4-heatmap-improved.png>
+Package pdftex.def Info: ../../figures/nms30m-k4-heatmap-improved.png used on i
+nput line 853.
+(pdftex.def)             Requested size: 303.53708pt x 442.97173pt.
+
+<../../figures/nms30m-bic.pdf, id=215, 643.40375pt x 430.60875pt>
+File: ../../figures/nms30m-bic.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-bic.pdf>
+Package pdftex.def Info: ../../figures/nms30m-bic.pdf used on input line 917.
+(pdftex.def)             Requested size: 247.94499pt x 165.93927pt.
+ [12 <../../figures/longitudinal/pd-durat-cor.pdf>] [13 <../../figures/longitud
+inal/nms9-durat-counts.pdf> <../../figures/longitudinal/nms9-multi-durat-counts
+.pdf>] [14 <../../figures/longitudinal/nms10-durat-counts.pdf> <../../figures/l
+ongitudinal/nms10-multi-durat-counts.pdf>]
+<../../figures/nms30m-mclust-heatmap-improved.png, id=255, 512.91624pt x 615.29
+875pt>
+File: ../../figures/nms30m-mclust-heatmap-improved.png Graphic file (type png)
+ <use ../../figures/nms30m-mclust-heatmap-improved.png>
+Package pdftex.def Info: ../../figures/nms30m-mclust-heatmap-improved.png used 
+on input line 951.
+(pdftex.def)             Requested size: 354.12144pt x 424.81009pt.
+
+<../../figures/nms30m-dtree-all.pdf, id=256, 867.24pt x 722.7pt>
+File: ../../figures/nms30m-dtree-all.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-dtree-all.pdf>
+Package pdftex.def Info: ../../figures/nms30m-dtree-all.pdf used on input line 
+963.
+(pdftex.def)             Requested size: 505.89pt x 421.58131pt.
+ [15 <../../figures/longitudinal/cisitot-multi-durat-counts.pdf> <../../figures
+/nms30m-bic.pdf>] [16 <../../figures/longitudinal/tremor-multi-durat-counts.pdf
+>] [17 <./d9to30.png>]
+(./abbreviated.bbl) [18 <../../figures/nms30only-eigscorr.pdf>] [19 <../../figu
+res/nms30only-colhc.pdf> <../../figures/nms30m-colhc.pdf>] [20 <../../figures/n
+ms30m-k4-heatmap-improved.png>] [21 <../../figures/nms30m-mclust-heatmap-improv
+ed.png>] [22 <../../figures/nms30m-dtree-all.pdf>] [23] (./abbreviated.aux) ) 
 Here is how much of TeX's memory you used:
- 6640 strings out of 495028
- 97868 string characters out of 6181498
- 188256 words of memory out of 5000000
- 9704 multiletter control sequences out of 15000+600000
- 16760 words of font info for 62 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 42i,14n,47p,799b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmti10.pfb>
-Output written on abbreviated.pdf (17 pages, 639655 bytes).
+ 6872 strings out of 494501
+ 105152 string characters out of 6167031
+ 203048 words of memory out of 5000000
+ 9975 multiletter control sequences out of 15000+600000
+ 17287 words of font info for 64 fonts, out of 8000000 for 9000
+ 319 hyphenation exceptions out of 8191
+ 42i,14n,47p,799b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
+</
+usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
+b></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+2.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbxti10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015basic/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2015basic/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015basic/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015basic/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on abbreviated.pdf (23 pages, 1316814 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
+ 385 PDF objects out of 1000 (max. 8388607)
+ 272 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 105 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 185 words of extra memory for PDF output out of 10000 (max. 10000000)
 

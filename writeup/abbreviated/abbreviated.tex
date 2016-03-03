@@ -4,7 +4,8 @@
 \usepackage{amssymb}
 \usepackage{bm}
 \usepackage{numprint}
-\usepackage[margin=1in]{geometry}
+\usepackage{float}
+\usepackage[margin=0.75in]{geometry}
 \usepackage{graphicx}
 % Random packages from
 % http://tex.stackexchange.com/questions/50070/landscape-figure-in-latex
@@ -17,15 +18,13 @@
 % for word wrap verbatim
 \usepackage{listings}
 \usepackage{caption}
+\usepackage{multicol}
 \usepackage{subfig}
 \lstset{
    breaklines=true,
    basicstyle=\ttfamily}
-% \pagestyle{fancy}
-% \lhead{Jesse Mu}
-% \rhead{CSCI339 Term Project}
-% One more .. since we're in the abbreviated subdir
-\graphicspath{ {../../figures/} }
+% Include longitudinal
+\graphicspath{ {../../figures/} {../../figures/longitudinal/} }
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
 
 \begin{document}
@@ -33,6 +32,15 @@
 \title{Cluster Analysis: Identifying Parkinson's Disease Subtypes}
 \author{Jesse Mu}
 \maketitle
+
+\tableofcontents
+\newpage
+
+\begin{multicols}{2}
+
+\section{New Content}
+
+Section~\ref{sec:longitudinal} on longitudinal analysis; section~\ref{sec:nms30} on
 
 \section{Preprocessing}
 
@@ -48,7 +56,7 @@ It was decided to not impute the data. Data was scaled to $\mu = 0, \sigma =
 Combination of non-motor scale (NMS) symptoms and standard motor symptoms.
 PIGD was deleted after 2015-07-16 meeting.
 
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{l|l|l}
     Name & Type & Description \\
@@ -73,7 +81,7 @@ PIGD was deleted after 2015-07-16 meeting.
   \label{tab:selected-features}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{l|l|l|l}
   Name  &       $\mu$ & $\sigma$ & min-max \\
@@ -99,12 +107,12 @@ axial&    3.25&  2.68&   0-12 \\
 \section{Clustering}
 
 $k$-means clustering with $k = 4$ was tried. Statistics for determining the
-optimal number of clusters were used, but were inconclusive: results in
+optimal number of clusters were used, but were generally inconclusive: results in
 Figure~\ref{tab:numclus}. This probably indicates that the data is not very
 well clustered. $k = 2, 3$ provided models that were too simplistic. $k = 5$
 did not provide any new information, but rather just fragmented existing
 groups.
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{l|l}
     Criterion & Optimal $k$ \\
@@ -114,15 +122,14 @@ groups.
     SSE Scree Plot & Inconclusive \\
     Gap Statistic & 4 \\
     Affinity Propagation & 8 \\%\tablefootnote{$\lambda = 0.98$, q = 0, maxits = 1000, %convits = 100} & 8 \\
-
-
+    clValid stability measures & 4 \\
   \end{tabular}
   \caption{Results of various techniques for determining $k$}
   \label{tab:numclus}
 \end{table}
 
 \subsection{Decision tree}
-% \begin{table}[h]
+% \begin{table}[H]
   % \centering
   % \begin{tabular}{l|l|l|l|l|l}
     % $k$ & CP\tablefootnote{Complexity Parameter} & CV Xerror\tablefootnote{10-fold cross
@@ -139,7 +146,7 @@ Decision tree for $k = 4$ created via recursive partitioning is available in
 Figure~\ref{fig:kmeans-dtree-4}. More discussion about the decision tree is
 located in Section~\ref{feature-importance}.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{dtree-kmeans-pruned-unscaled-4.pdf}
   \caption{Decision Tree from $k$-means clustering, 4 clusters}
@@ -152,7 +159,7 @@ located in Section~\ref{feature-importance}.
 
 Available in Figure~\ref{fig:kmeans-summaries-4}. Error bar is standard error.
 
-\begin{figure*}[h]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=\linewidth]{kmeans-summaries-4.pdf}
   \caption{Cluster Summaries, $k = 4$}
@@ -187,7 +194,7 @@ differences between individual means is available in Table~\ref{tab:tukeyhsd}.
 For brevity, only statistically insignificant relations are provided; all other
 relations are significant with $p < 0.05$.
 
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{l|l|l}
   Variable & Cluster Relation & $p$ \\
@@ -261,7 +268,7 @@ time of onset of PD or sex is largely irrelevant provides an important negative 
 clinically-relevant questions about the demographic sources of these different
 subtypes.
 
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{r|l|l}
     rank & variable & information gain \\
@@ -302,7 +309,7 @@ illustrated in Figure~\ref{fig:corrxy-d6}. These differences are statistically
 significant; correlation tests are located in Table~\ref{tab:cortests}. I am
 unsure of the significance or proper interpretation of these results.
 
-\begin{table*}[h]
+\begin{table*}[t]
   \centering
   \begin{tabular}{l|l|l|l}
  Cluster & Variables & 95\% CI & $p$ \\
@@ -331,15 +338,15 @@ unsure of the significance or proper interpretation of these results.
   \label{tab:cortests}
 \end{table*}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \subfloat[][]{%
-  \includegraphics[clip,width=0.8\linewidth]{bradykin-v-cisitot.pdf}
+  \includegraphics[clip,width=\linewidth]{bradykin-v-cisitot.pdf}
   \label{bradyv}
 }
 
 \subfloat[][]{%
-  \includegraphics[clip,width=0.8\linewidth]{rigidity-v-cisitot.pdf}
+  \includegraphics[clip,width=\linewidth]{rigidity-v-cisitot.pdf}
   \label{rigidv}
 }
   \caption{Relationship between \protect\subref{bradyv} bradykinesia,
@@ -348,15 +355,15 @@ is 95\% confidence interval.}
   \label{fig:corrxy-br}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \subfloat[][]{%
-  \includegraphics[clip,width=0.8\linewidth]{bradykin-v-nms_d6.pdf}
+  \includegraphics[clip,width=\linewidth]{bradykin-v-nms_d6.pdf}
   \label{brady6}
 }
 
 \subfloat[][]{%
-  \includegraphics[clip,width=0.8\linewidth]{rigidity-v-nms_d6.pdf}
+  \includegraphics[clip,width=\linewidth]{rigidity-v-nms_d6.pdf}
   \label{rigid6}
 }
   \caption{Relationship between \protect\subref{brady6} bradykinesia,
@@ -364,9 +371,9 @@ is 95\% confidence interval.}
 is 95\% confidence interval.}
   \label{fig:corrxy-d6}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.68\linewidth]{corrplots.pdf}
+  \includegraphics[width=\linewidth]{corrplots.pdf}
   \caption{Correlation plots}
   \label{fig:corrplots}
 \end{figure}
@@ -385,7 +392,7 @@ examine any possible patterns.
 The same $k$-determining tests were run on subtype 2 and are displayed
 in Table~\ref{tab:numclus-nms}.
 
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{l|l}
     Criterion & Optimal $k$ \\
@@ -420,24 +427,24 @@ trend are nms\_d2, tremor, and rigidity scores, where patients in the 3rd
 subtype exhibit lower severities. nms\_d4 and nms\_d9 differences turn out to be
 not as pronounced.
 
-\begin{figure}[h]
+\begin{figure*}[p]
   \centering
-  \includegraphics[width=\linewidth]{c2-summaries-2.pdf}
+  \includegraphics[width=0.65\linewidth]{c2-summaries-2.pdf}
   \caption{Clustering on nonmotor group: $k = 2$}
   \label{fig:c2-summaries-2}
-\end{figure}
-\begin{figure}[h]
+\end{figure*}
+\begin{figure*}[p]
   \centering
-  \includegraphics[width=\linewidth]{c2-summaries-3.pdf}
+  \includegraphics[width=0.65\linewidth]{c2-summaries-3.pdf}
   \caption{Clustering on nonmotor group: $k = 3$}
   \label{fig:c2-summaries-3}
-\end{figure}
-\begin{figure}[h]
+\end{figure*}
+\begin{figure*}[p]
   \centering
-  \includegraphics[width=\linewidth]{c2-summaries-4.pdf}
+  \includegraphics[width=0.65\linewidth]{c2-summaries-4.pdf}
   \caption{Clustering on nonmotor group: $k = 4$}
   \label{fig:c2-summaries-4}
-\end{figure}
+\end{figure*}
 
 
 \section{Further modeling}
@@ -549,28 +556,28 @@ symptoms in both groups. This shows that issues with perception and
 hallucinations generally occur in only the most severe cases of PD, and are
 relatively rare when a patient exhibits a nonmotor-predominant form of PD.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{dtree-1va-pruned.pdf}
+  \includegraphics[width=0.75\linewidth]{dtree-1va-pruned.pdf}
   \caption{Cluster 1 (mild) vs all}
   \label{fig:1va}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{dtree-2va-pruned.pdf}
+  \includegraphics[width=0.75\linewidth]{dtree-2va-pruned.pdf}
   \caption{Cluster 2 (nonmotor-dominated) vs all}
   \label{fig:2va}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{dtree-3va-pruned.pdf}
+  \includegraphics[width=0.75\linewidth]{dtree-3va-pruned.pdf}
   \caption{Cluster 3 (motor-dominated) vs all}
   \label{fig:3va}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{dtree-4va-pruned.pdf}
+  \includegraphics[width=0.75\linewidth]{dtree-4va-pruned.pdf}
   \caption{Cluster 4 (severe) vs all}
   \label{fig:4va}
 \end{figure}
@@ -603,16 +610,16 @@ nms\_d5 (attention/memory) and nms\_d7 (urinary). Additionally, nms\_d2, a
 quite important symptom, does not appear in the classification tree for this
 task.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{dtree-2and4va-pruned.pdf}
+  \includegraphics[width=0.75\linewidth]{dtree-2and4va-pruned.pdf}
   \caption{Clusters 2 (nms) and 4 (severe) vs rest (1 and 3)}
   \label{fig:dtree-2and4va-pruned}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{dtree-2and3va-pruned.pdf}
+  \includegraphics[width=0.75\linewidth]{dtree-2and3va-pruned.pdf}
   \caption{Clusters 2 (nms) and 3 (motor) vs rest (1 and 4)}
   \label{fig:dtree-2and3va-pruned}
 \end{figure}
@@ -642,20 +649,334 @@ the information continuous. However, I'm not sure this is necessary. If it is,
 I can work on this problem more.
 
 
+
+\section{Longitudinal Analysis}
+\label{sec:longitudinal}
+
+I wanted to observe the progression of nonmotor symptoms of Parkinson's disease akin to work done
+by various studies (e.g.\ \cite{onsetpd,vu12,zahodne12}). The data was a little bit too noisy when
+I tried to examine correlations, so I decided to average the values into bins for
+\texttt{durat\_pd}: 0-2 years, 2-4 years, 4-6 years, etc. First, the correlation based on PD
+duration for each symptom is displayed in Figure~\ref{fig:longcorr}.
+
+\begin{quote}
+  Note: I have not included all of the graphs I have, just those I found interesting. If you would
+  like all of the graphs, I can send those to you in a separate email.
+\end{quote}
+
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{pd-durat-cor.pdf}
+  \caption{Correlation of variables according to PD Duration}
+  \label{fig:longcorr}
+\end{figure*}
+
+Most symptoms have at least a minor positive correlation. Interestingly, tremor, nms9 (anxiety)
+and nms10 (depression) do not have a strong correlation with PD duration.
+% This could give evidence that whether or not someone has high tremor is a distinct subtype?
+
+\subsection{Anxiety}
+I plotted the mean nms\_9 (anxiety) score for each durat\_pd bin in
+Figures~\ref{fig:nms9-long} and ~\ref{fig:nms9-multi}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.8\linewidth]{nms9-durat-counts.pdf}
+  \caption{Mean anxiety (nms\_9) score by PD duration, with number of patients in each group at
+  bottom.}
+  \label{fig:nms9-long}
+\end{figure*}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.8\linewidth]{nms9-multi-durat-counts.pdf}
+  \caption{Mean anxiety (nms\_9) score per subtype, with number of patients in each group at
+  bottom.}
+  \label{fig:nms9-multi}
+\end{figure*}
+
+\subsection{Depression}
+I plotted the mean nms\_10 (depression) score for each durat\_pd bin in
+Figures~\ref{fig:nms10-long} and ~\ref{fig:nms10-multi}.
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.8\linewidth]{nms10-durat-counts.pdf}
+  \caption{Mean depression (nms\_10) score by PD duration, with number of patients in each group at
+  bottom.}
+  \label{fig:nms10-long}
+\end{figure*}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.8\linewidth]{nms10-multi-durat-counts.pdf}
+  \caption{Mean depression (nms\_10) score per subtype, with number of patients in each group at
+  bottom.}
+  \label{fig:nms10-multi}
+\end{figure*}
+
+\subsection{Cisitot}
+
+Note that cisitot has the highest correlation of all of the PD symptoms. I plotted cisitot per
+subtype in Figure~\ref{fig:cisitot-multi}. Interestingly, subtypes 2, 3, and 4 generally start from
+the same mean motor symptom score, suggesting different paths of disease progression.
+% same global mean motor symptom score. % TODO: This is important.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{cisitot-multi-durat-counts.pdf}
+  \caption{Mean cisitot score per subtype, with number of patients in each group at
+  bottom.}
+  \label{fig:cisitot-multi}
+\end{figure*}
+
+\subsection{Tremor}
+
+I plotted tremor symptoms in Figure~\ref{fig:tremor-multi}. Notice how in this group, subtype 3
+(motor-dom) is higher than all groups towards the beginning of disease progression. This supports
+the idea that Subtype 3 is Ma's \cite{ma15} tremor-dominant cluster.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{tremor-multi-durat-counts.pdf}
+  \caption{Mean tremor score per subtype, with number of patients in each group at
+  bottom.}
+  \label{fig:tremor-multi}
+\end{figure*}
+
+% TODO: Maybe later
+% \subsection{By \texttt{pdonset}}
+
+\section{Extended Nonmotor Symptoms}
+\label{sec:nms30}
+
+\subsection{Adding nonmotor symptoms to original $k$-means clustering}
+
+First, I used the clustering with the original 9 nms symptoms, but plotted the original 30 symptoms
+instead. The reason for this was to treat the clustering of the 9 symptoms as a form of
+dimensionality reduction, since we know each symptom of nms\{1-30\} is colinear with several other
+symptoms, and they form the broader nms\_d\{1-9\} symptoms. The results are in
+Figure~\ref{fig:d9to30}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\linewidth]{d9to30.png}
+  \caption{All symptoms (nms\{1-30\}) plotted with the original clustering results of the the 9
+broader symptoms. Interesting parts of the figure are are labeled in red.}
+  \label{fig:d9to30}
+\end{figure*}
+
+\subsection{\emph{New} clustering with 30 symptoms}
+
+\subsubsection{Principal Component Analysis}
+
+I ran PCA on the dataset with solely the 30 nonmotor symptoms. A plot of various metrics for
+determining the optimal number of eigenvectors is in Figure~\ref{fig:nms30only-eigs}. Most metrics agree
+Nthat the optimal number of eigenvalues is around 6, but notice how one component has by far the
+highest eigenvalue; this component can be interpreted as a general ``nonmotor severity'' measure,
+indicating that much of the general nonmotor symptomatic expression falls along the same dimension.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{nms30only-eigs.pdf}
+  \caption{Eigenvalues and other metrics for Principal Component Analysis applied to the NMS30 data.}
+  \label{fig:nms30only-eigs}
+\end{figure}
+
+This principal component can be shown more clearly in the correlation plot of each symptom with the
+first 5 components located in Figure~\ref{fig:nms30only-eigscorr}. In the first component, all of the
+symptoms have at least a minor positive correlation. The remaining components are composed
+primarily of dimensionality reduction in domain 3 (mood/cognition), domain 5 (attention/memory),
+domain 7 (urinary), and domain 9 (misc). It is once again demonstrated that mood/cognition symptoms
+are very important parts of this dataset.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\linewidth]{nms30only-eigscorr.pdf}
+  \caption{Correlation of each nonmotor symptom with the first 6 components}
+  \label{fig:nms30only-eigscorr}
+\end{figure*}
+
+\subsubsection{Symptoms clustering}
+
+\paragraph{Nonmotor only}
+
+I used hierarchical clustering to cluster the 30 symptoms of the dataset using complete linkage.
+Results are in Figure~\ref{fig:nms30only-colhc}. Naturally, symptoms that belong to the same domain are
+clustered together. But the hierarchical clustering also shows how some symptomatic domains are
+closely related; for example, d6 (gastro), d7 (urinary), and d8(sexual). Additionally,
+miscellaneous symptoms are quite distinct from the other symptoms.
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\linewidth]{nms30only-colhc.pdf} \caption{Hierarchical clustering of symptoms.
+    Dendrogram colored with 5 clusters. Naming is: d\{1-9\}-\{1-30\}-description}
+  \label{fig:nms30only-colhc}
+\end{figure*}
+
+\paragraph{With motor symptoms}
+
+In Figure~\ref{fig:nms30m-colhc}, the results are similar to the original hierarchical
+clustering; but notice that motor symptoms are clustered together \emph{except} for tremor. In
+fact, tremor is the most dissimilar symptom of them all!
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\linewidth]{nms30m-colhc.pdf} \caption{Hierarchical clustering of symptoms
+  including motor symptoms.  Dendrogram colored with 4 clusters.}
+  \label{fig:nms30m-colhc}
+\end{figure*}
+
+\subsubsection{$k$-means}
+
+More so than previously, metrics for identifying the number of clusters proved inconclusive. Most
+metrics suggested 2 clusters, which isn't a useful clustering. I decided to stick with $k = 4$ to
+compare the results of this new clustering with the previous run. All 30 NMS symptoms were included
+as well as the four motor symptoms axial, rigidity, bradykinesia, and tremor.
+In this clustering, 4 slightly different subtypes are identified:
+
+\begin{enumerate}
+  \item ($n = 509$) Mildly affected in all domains.
+  \item ($n = 97$) Higher than average nonmotor symptoms, but severely affected in depressive
+    symptoms especially.
+  \item ($n = 249$) Averagely affected in all domains.
+  \item ($n = 49$) Severely affected in all domains.
+\end{enumerate}
+
+Because the number of symptoms is high, I don't provide the boxplots I have previously provided;
+instead, I provide a heatmap of $z$-scores in Figure~\ref{fig:nms30m-k4-heatmap-improved} and a
+table of results in Table~\ref{tab:nms30_k4}.
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.6\linewidth]{nms30m-k4-heatmap-improved.png}
+  \caption{Heatmap for $k$-means clustering, $k = 4$, with the 30 nonmotor symptoms. Notice that
+  subtype 2 is a ``Depression-Dominant'' subtype.} \label{fig:nms30m-k4-heatmap-improved}
+\end{figure*}
+
+\begin{table*}[b]
+  \centering
+  \caption{Mean symptom scores for the centers of the $k$-means clustering where $k = 4$. In
+  this case, a Depression-Dominant subtype has been identified.}
+  \label{tab:nms30_k4}
+  \begin{tabular}{l|l|l|l|l}
+cluster & 1 & 2 & 3 & 4 \\
+\hline
+d1-1-lightheaded & 2.08 & 2.43 & 0.55 & 5.18 \\
+d1-2-fainting & 0.17 & 0.53 & 0.13 & 2.45 \\
+d2-3-drowsiness & 2.51 & 2.77 & 0.97 & 7 \\
+d2-4-fatigue & 4.84 & 6.29 & 1.3 & 7.31 \\
+d2-5-insomnia & 3.16 & 5.46 & 1.2 & 4.22 \\
+d2-6-rls & 1.88 & 2.31 & 0.66 & 3.88 \\
+d3-7-loss\_interest & 1.04 & \textbf{6.08} & 0.41 & 4.59 \\
+d3-8-loss\_activities & 1.7 & \textbf{7.14} & 0.7 & 5.37 \\
+d3-9-anxiety & 1.97 & \textbf{6.63} & 0.91 & 4.57 \\
+d3-10-depression & 2.35 & \textbf{7.81} & 0.81 & 4.29 \\
+d3-11-flat\_affect & 0.91 & \textbf{4.95} & 0.39 & 2.71 \\
+d3-12-loss\_pleasure & 1.09 & \textbf{6.82} & 0.36 & 3.43 \\
+d4-13-hallucination & 0.58 & 0.82 & 0.2 & 4.63 \\
+d4-14-delusion & 0.16 & 1.49 & 0.11 & 3.14 \\
+d4-15-diplopia & 0.56 & 1.01 & 0.16 & 4.39 \\
+d5-16-loss\_concentration & 2.47 & 4.02 & 0.91 & 6.55 \\
+d5-17-forget\_explicit & 2.18 & 3.77 & 0.86 & 6.69 \\
+d5-18-forget\_implicit & 1.76 & 3.12 & 0.68 & 6.65 \\
+d6-19-drooling & 3 & 2.99 & 0.67 & 6.1 \\
+d6-20-swallowing & 1.74 & 1.24 & 0.37 & 4.53 \\
+d6-21-constipation & 3.31 & 3.63 & 1.65 & 6.96 \\
+d7-22-urinary\_urgency & 3.84 & 3.49 & 0.99 & 7.8 \\
+d7-23-urinary\_frequency & 3.79 & 3.98 & 0.94 & 6.51 \\
+d7-24-nocturia & 5.13 & 4.99 & 1.67 & 7.65 \\
+d8-25-sex\_drive & 2.34 & 4.46 & 0.76 & 5.16 \\
+d8-26-sex\_dysfunction & 2.39 & 3.21 & 0.79 & 4.61 \\
+d9-27-unexplained\_pain & 2.98 & 2.48 & 0.7 & 4.24 \\
+d9-28-gust\_olfact & 3.18 & 3.57 & 1.49 & 4.73 \\
+d9-29-weight\_change & 1.86 & 2.54 & 0.88 & 3.92 \\
+d9-30-sweating & 2.77 & 2.2 & 0.68 & 3.18 \\
+\hline
+tremor & 2.59 & 2.12 & 2.53 & 4.1 \\
+bradykin & 2.83 & 2.76 & 1.98 & 3.86 \\
+rigidity & 2.61 & 2.42 & 1.87 & 3.61 \\
+axial & 4.22 & 4.4 & 2.17 & 7.24 \\
+  \end{tabular}
+\end{table*}
+
+\subsubsection{Model-based expectation-maximization}
+
+Because the dimensionality is quite high in this case; $k$-means may not have provided particularly
+accurate results; thus, I tried using a Gaussian mixture model-based clustering package. Various
+models were tried, with Bayesian Information Criterion (BIC) plotted in
+Figure~\ref{fig:nms30m-bic}. The best
+fitting model(s) that maximized the Bayesian Information Criterion include the diagonal, varying
+volume, equal shape Gaussian mixture model (VEI) at 11 clusters and the ellipsoidal, equal shape
+model (VEV) with 3 clusters. However, the VEV model wasn't interesting; it simply partitioned
+individuals into low, medium, and high overall severity.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{nms30m-bic.pdf}
+  \caption{Bayesian Information Criterion for various Gaussian mixture models, plotted against the
+  number of clusters in each model. The best model found is the diagonal, varying volume, equal
+shape Gaussian mixture model (VEI) at 11 clusters; notice also that the ellipsoidal, equal shape
+model (VEV) is able to achieve a relatively high BIC with only 3 clusters. The VEV model, however,
+is not particularly informative.}
+  \label{fig:nms30m-bic}
+\end{figure}
+
+The VEI model, with 11 clusters, is more interesting. There are many clusters in the data that are
+expected, including a few generally mild clusters and a few generally severe clusters.  But, by
+isolating more ``interesting'' clusters, we begin to see smaller, more specific proportions of PD
+patients. These clusters seem to clarify and expand upon the results found in previous analyses.
+The clusters, summarized, are:
+
+\begin{itemize}
+  \item[1-3.] ($n = 41,\; 77,\; 150$) Mild in all domains. Cluster 1 is especially mild in motor
+    symptoms (see cisitot).
+  \item[4.] ($n = 38$) Insomnia-dominant.
+  \item[5.] ($n = 43$) Motor-dominant.
+  \item[6.] ($n = 163$) Average.
+  \item[7.] ($n = 54$) Urinary-dominant.
+  \item[8.] ($n = 177$) Above-average in all domains.
+  \item[9.] ($n = 67$) Depression-dominant.
+  \item[10.] ($n = 81$) Nonmotor-dominant.
+  \item[11.] ($n = 13$) Severe in all domains.
+% 1	2  3	4   5  6    7  8    9   10  11
+% 41  77 150  38  43 163  54 177  67  81  13
+\end{itemize}
+
+A heatmap of all 11 clusters found is located in Figure~\ref{fig:nms30m-mclust-heatmap-improved}.
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.7\linewidth]{nms30m-mclust-heatmap-improved.png}
+  \caption{Heatmap of clusters found using the VEI Gaussian Mixture Model.}
+  \label{fig:nms30m-mclust-heatmap-improved}
+\end{figure*}
+
+\subsection{Decision Trees}
+
+I created decision trees for the $k$-means $k = 4$ clustering, located in
+Figure~\ref{fig:nms30m-dtree-all}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\linewidth]{nms30m-dtree-all.pdf}
+  \caption{Pruned decision tree for one vs all, clustered on nms\{1-30\}}
+  \label{fig:nms30m-dtree-all}
+\end{figure*}
+
 \section{Preliminary Conclusions}
 
 \subsection{Overall clustering}
-$k$-means clustering on this Parkinsons' Disease data set reveals clusters that
-confirm previous computationally-based findings in the field, mainly van Rooden
-et al. \cite{vanrooden10} and the identification of four subtypes of
-Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.
-van Rooden's work was done with a separate dataset using a different
-modeling method (expectation-maximization), and this investigation
-independently confirms these subtype classifications. Unlike van Rooden, mean
-disease durations differences do exist between subtypes 1 (mild) and 4
-(severe), likely due to further development of the disease, although the
-differences between 2 and 3 (nonmotor/motor predominated) subtypes are
-insignificant (Table~\ref{tab:tukeyhsd}), suggesting different developmental paths of the disease.
+$k$-means clustering on this Parkinsons' Disease data set reveals clusters that confirm previous
+findings in the field, mainly van Rooden et al. \cite{vanrooden10} and the identification of four
+subtypes of Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.  van
+Rooden's work was done with a separate dataset using a different modeling method
+(expectation-maximization), and this investigation independently confirms these subtype
+classifications. Unlike van Rooden, mean disease durations differences do exist between subtypes 1
+(mild) and 4 (severe), likely due to further development of the disease, although the differences
+between 2 and 3 (nonmotor/motor predominated) subtypes are insignificant
+(Table~\ref{tab:tukeyhsd}), suggesting different developmental paths of the disease.
 
 Overall, little information was found in pdonset,
 durat\_pd, or current age, according to Tables~\ref{tab:tukeyhsd}
@@ -712,30 +1033,11 @@ symptoms, as it is used as the root node of the 2 vs all decision tree
 (Figure~\ref{fig:2va}) and the 2 and 4 vs rest decision tree
 (Figure~\ref{fig:dtree-2and4va-pruned}).
 
-It remains to be seen whether these classification models, especially the
-one-vs-all decision trees, are useful in clinical practice.
+It remains to be seen whether these classification models, especially the one-vs-all decision
+trees, are useful in clinical practice.
 
-\begin{thebibliography}{9}
+\bibliographystyle{Science}
+\bibliography{abbreviated}
 
-\bibitem{erro13}
-Erro et al (2013). The Heterogeneity of Early Parkinson’s Disease: A Cluster
-Analysis on Newly Diagnosed Untreated Patients
-
-\bibitem{fereshtehnejad15}
-Fereshtehnejad et al (2015). New Clinical Subtypes of Parkinson
-Disease and Their Longitudinal Progression
-
-\bibitem{ma15}
-Ma et al (2015). Heterogeneity among patients with Parkinson's disease: Cluster
-analysis and genetic association
-
-\bibitem{sauerbier15}
-Sauerbier et al (2015). Non motor subtypes and Parkinson's disease.
-
-\bibitem{vanrooden10}
-van Rooden et al (2010). The Identification of Parkinson's Disease Subtypes
-Using Cluster Analysis: A Systematic Review
-
-\end{thebibliography}
-
+\end{multicols}
 \end{document}
