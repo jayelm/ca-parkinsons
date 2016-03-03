@@ -24,6 +24,38 @@ MOTOR.SYMPTOMS <- c("tremor",
                    "bradykin",
                    "rigidity",
                    "axial")
+NMS.30.NAMES <- c(
+  'd1-1-lightheaded',
+  'd1-2-fainting',
+  'd2-3-drowsiness',
+  'd2-4-fatigue',
+  'd2-5-insomnia',
+  'd2-6-rls',
+  'd3-7-loss_interest',
+  'd3-8-loss_activities',
+  'd3-9-anxiety',
+  'd3-10-depression',
+  'd3-11-flat_affect',
+  'd3-12-loss_pleasure',
+  'd4-13-hallucination',
+  'd4-14-delusion',
+  'd4-15-diplopia',
+  'd5-16-loss_concentration',
+  'd5-17-forget_explicit',
+  'd5-18-forget_implicit',
+  'd6-19-drooling',
+  'd6-20-swallowing',
+  'd6-21-constipation',
+  'd7-22-urinary_urgency',
+  'd7-23-urinary_frequency',
+  'd7-24-nocturia',
+  'd8-25-sex_drive',
+  'd8-26-sex_dysfunction',
+  'd9-27-unexplained_pain',
+  'd9-28-gust_olfact',
+  'd9-29-weight_change',
+  'd9-30-sweating'
+)
 NMS.30 <- c(
   "nms1", "nms2", "nms3", "nms4", "nms5", "nms6",
   "nms7", "nms8", "nms9", "nms10", "nms11", "nms12",
@@ -31,6 +63,8 @@ NMS.30 <- c(
   "nms19", "nms20", "nms21", "nms22", "nms23", "nms24",
   "nms25", "nms26", "nms27", "nms28", "nms29", "nms30"
 )
+ALL.BUT.NMS <- c('age', 'sex', 'pdonset', 'durat_pd', 'cisitot',
+                 'tremor', 'bradykin', 'rigidity', 'axial')
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
