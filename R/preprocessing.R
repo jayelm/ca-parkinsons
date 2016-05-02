@@ -56,6 +56,38 @@ NMS.30.NAMES <- c(
   'd9-29-weight_change',
   'd9-30-sweating'
 )
+NMS.30.NAMES.PUB <- c(
+  'Lightheadedness',
+  'Fainting',
+  'Drowsiness',
+  'Fatigue',
+  'Insomnia',
+  'RLS',
+  'Loss_interest',
+  'Loss_activities',
+  'Anxiety',
+  'Depression',
+  'Flat_affect',
+  'Loss_pleasure',
+  'Hallucination',
+  'Delusion',
+  'Diplopia',
+  'Loss_concentration',
+  'Forget_explicit',
+  'Forget_implicit',
+  'Drooling',
+  'Swallowing',
+  'Constipation',
+  'Urinary_urgency',
+  'Urinary_frequency',
+  'Nocturia',
+  'Sex_drive',
+  'Sex_dysfunction',
+  'Unexplained_pain',
+  'Gustation/olfacttion',
+  'Weight_change',
+  'Sweating'
+)
 NMS.30 <- c(
   "nms1", "nms2", "nms3", "nms4", "nms5", "nms6",
   "nms7", "nms8", "nms9", "nms10", "nms11", "nms12",
@@ -63,6 +95,29 @@ NMS.30 <- c(
   "nms19", "nms20", "nms21", "nms22", "nms23", "nms24",
   "nms25", "nms26", "nms27", "nms28", "nms29", "nms30"
 )
+NMS.D <- c(
+  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5", "nms_d6", "nms_d7", "nms_d8", "nms_d9"
+)
+NMS.D.NAMES <- c(
+  "Cardiovascular", "Sleep_fatigue", "Mood_cognition", "Perception_hallucination", "Attention_memory",
+  "Gastrointestinal", "Urinary", "Sexual", "Miscellaneous"
+)
+NMS.D.MAP.PUB <- setNames(NMS.D.NAMES, NMS.D)
+NMS.30.MAP.PUB <- setNames(NMS.30.NAMES.PUB, NMS.30)
+MISC.MAP <- c(
+  'age' = 'Age',
+  'sex' = 'Sex',
+  'pdonset' = 'PD_Onset',
+  'durat_pd' = 'PD_Duration',
+  'cisitot' = 'CISI_Total',
+  'tremor' = 'Tremor',
+  'bradykin' = 'Bradykinesia',
+  'rigidity' = 'Rigidity',
+  'axial' = 'Axial',
+  'ldopa' = 'ldopa',
+  'surgery' = 'Surgery'
+)
+PUB.MAP <- c(NMS.D.MAP.PUB, NMS.30.MAP.PUB, MISC.MAP)
 ALL.BUT.NMS <- c('age', 'sex', 'pdonset', 'durat_pd', 'cisitot',
                  'tremor', 'bradykin', 'rigidity', 'axial')
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
@@ -92,6 +147,12 @@ raw$study <- NULL
 # This only brings it down to 904, rather than ~700 something!
 raw.omitted <- raw[, INTERPRETED]
 raw.omitted <- na.omit(raw.omitted)
+raw.omitted.full <- cbind(
+  raw.omitted,
+  # Now get the rownames from the raw
+  raw[rownames(raw.omitted), -which(names(raw) %in% INTERPRETED)]
+)
+raw.omitted[rownames(raw.omitted), ]
 
 # raw with only select nms and motor symptoms
 raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
