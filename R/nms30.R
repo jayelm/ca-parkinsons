@@ -120,8 +120,9 @@ if (SAVE.NMS30.PLOTS) {
 
 # Motor
 ctd.m <- cutree(hm.m$colDendrogram, 4)
+ctk.m <- hm.m$colDendrogram %>% set("branches_k_color", k = 4)
 ColorDendrogram(as.hclust(hm.m$colDendrogram), y = ctd.m, labels = names(ctd.m),
-                main = "NMS + Motor Hierarchical Clustering",
+                main = "Nonmotor + Motor Hierarchical Clustering",
                 xlab = "Symptom",
                 sub = "",
                 branchlength = 5)
@@ -327,6 +328,36 @@ if (SAVE.NMS30.PLOTS) {
   dev.off()
 }
 
+# one vs all ====
+gg_color_list <- function(i) {
+  c(gg_color_hue(i)[i], '#FFFFFF')
+}
+ova.counts <- c(509, 97, 249, 49)
+for (ONE in 1:4) {
+  set.seed(0)
+  nms30.ova <- nms30.dtree
+  nms30.ova$newcluster <- NA
+  nms30.ova[nms30.ova$cluster == ONE, ]$newcluster <- T
+  nms30.ova[nms30.ova$cluster != ONE, ]$newcluster <- F
+  this.count = length(nms30.ova[nms30.ova$newcluster == T, ]$newcluster)
+  if (this.count != ova.counts[ONE]) stop("Lengths not equal")
+  nms30.ova$cluster <- factor(nms30.ova$newcluster, levels=c(T, F))
+  nms30.ova$newcluster <- NULL
+  tree.nms30.ova <- rpart(cluster ~ ., nms30.ova)
+  cp <- tree.nms30.ova$cptable[which.min(tree.nms30.ova$cptable[,"xerror"]),"CP"]
+  if (ONE == 4 || ONE == 2) {
+    pruned.tree.nms30.ova <- tree.nms30.ova
+  } else {
+    pruned.tree.nms30.ova <- prune(tree.nms30.ova, cp = cp)
+  }
+  prp(pruned.tree.nms30.ova, extra = 1, varlen=0,
+      box.col = gg_color_list(ONE)[pruned.tree.nms30.ova$frame$yval],
+      main = paste(ONE, ' vs all decision tree', sep = ''))
+  if (SAVE.NMS30.PLOTS) {
+    dev.copy(pdf, paste('../figures/nms30m-dtree-', ONE, 'va.pdf', sep=''), width=10, height=10)
+    dev.off()
+  }
+}
 
 # Mahalnobis distnace, hc, AP ====
 nms30.s.dist <- dist(nms30.s, method = 'Mahalanobis')
@@ -364,3 +395,50 @@ p <- ggplot(nms30.apc.long, aes(x = factor(cluster), y = measurement, fill = fac
   guides(fill = FALSE) +
   facet_wrap( ~ variable, scales = "free")
 print(p)
+
+# Tukey's HSD
+oneways <- lapply(colnames(nms30.k4[, -31]), function(col) {
+  fm <- substitute(i ~ cluster, list(i = as.name(col)))
+  oneway.test(fm, nms30.k4)
+})
+for (test in oneways) {
+  if (test$p.value < 0.05) {
+    cat('sig\n')
+  } else {
+    cat('INSIG:\n')
+    cat(test$data.name, '\n')
+  }
+}
+
+# Factor clusters
+
+# ova.counts <- c(509, 97, 249, 49)
+nms30.k4.hsd <- nms30.k4
+nms30.k4.hsd$cluster <- factor(nms30.k4.hsd$cluster)
+nms30.k4.hsd$cluster <- revalue(nms30.k4.hsd$cluster, c('3'='1', '2'='2', '1'='3', '4'='4'))
+nms30.k4.hsd$cluster <- factor(nms30.k4.hsd$cluster, levels = c('1', '2', '3', '4'))
+table(nms30.k4.hsd$cluster)
+tukeys <- lapply(colnames(nms30.k4.hsd[, -31]), function(col) {
+  # Doesn't work the oneway way for some reason!
+  fm <- eval(substitute(i ~ cluster, list(i = as.name(col))))
+  TukeyHSD(aov(fm, nms30.k4.hsd))
+  # tryCatch(TukeyHSD(aov(fm, nms30.k4.hsd)), error = function(e) print(col))
+})
+names(tukeys) <- colnames(nms30.k4[, -31])
+
+for (v in names(tukeys)) {
+  test <- tukeys[[v]]$cluster
+  # Check for nonsignificant, since there are more significant
+  sigs <- test[test[, "p adj"] > 0.05, ]
+  if (!identical(logical(0), as.logical(sigs))) {
+    # Super hacky to figure out if null matrix without type error
+    cat(v, ' insignificant differences', ':', '\n', sep='')
+    if (class(sigs) == 'numeric') {  # If returned just a single vector, can't do anything
+      # Print em all, don't know how to get around this
+      print(test)
+    }
+    print(sigs)
+  } else {
+    cat(v, 'nothing', '\n')
+  }
+}
