@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  3 MAR 2016 10:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  3 MAR 2016 17:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -504,7 +504,7 @@ File: ../../figures/dtree-kmeans-pruned-unscaled-4.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-kmeans-pruned-unscaled-4.pdf>
 Package pdftex.def Info: ../../figures/dtree-kmeans-pruned-unscaled-4.pdf used 
-on input line 151.
+on input line 152.
 (pdftex.def)             Requested size: 247.94499pt x 247.95001pt.
 
 <../../figures/kmeans-summaries-4.pdf, id=17, 609.27625pt x 361.35pt>
@@ -512,17 +512,17 @@ File: ../../figures/kmeans-summaries-4.pdf Graphic file (type pdf)
 
 <use ../../figures/kmeans-summaries-4.pdf>
 Package pdftex.def Info: ../../figures/kmeans-summaries-4.pdf used on input lin
-e 164.
+e 165.
 (pdftex.def)             Requested size: 505.89pt x 300.04173pt.
 
 
 Package multicol Warning: I moved some lines to the next page.
-(multicol)                Footnotes on page 3 might be wrong on input line 178.
+(multicol)                Footnotes on page 3 might be wrong on input line 170.
 
 
 [3] [4 <../../figures/kmeans-summaries-4.pdf> <../../figures/dtree-kmeans-prune
 d-unscaled-4.pdf>]
-Underfull \hbox (badness 6016) in paragraph at lines 252--264
+Underfull \hbox (badness 6016) in paragraph at lines 253--265
 \OT1/cmr/m/n/10 nms[]d2 (sleep-/-fa-tigue) at 2, along with nms[]d3
  []
 
@@ -531,10 +531,10 @@ File: ../../figures/bradykin-v-cisitot.pdf Graphic file (type pdf)
 
 <use ../../figures/bradykin-v-cisitot.pdf>
 Package pdftex.def Info: ../../figures/bradykin-v-cisitot.pdf used on input lin
-e 346.
+e 347.
 (pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
-Overfull \hbox (3.33333pt too wide) in paragraph at lines 346--347
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 347--348
  [][] 
  []
 
@@ -543,10 +543,10 @@ File: ../../figures/rigidity-v-cisitot.pdf Graphic file (type pdf)
 
 <use ../../figures/rigidity-v-cisitot.pdf>
 Package pdftex.def Info: ../../figures/rigidity-v-cisitot.pdf used on input lin
-e 351.
+e 352.
 (pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
-Overfull \hbox (3.33333pt too wide) in paragraph at lines 351--354
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 352--355
  [][] 
  []
 
@@ -555,10 +555,10 @@ File: ../../figures/bradykin-v-nms_d6.pdf Graphic file (type pdf)
 
 <use ../../figures/bradykin-v-nms_d6.pdf>
 Package pdftex.def Info: ../../figures/bradykin-v-nms_d6.pdf used on input line
- 363.
+ 364.
 (pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
-Overfull \hbox (3.33333pt too wide) in paragraph at lines 363--364
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 364--365
  [][] 
  []
 
@@ -567,10 +567,10 @@ File: ../../figures/rigidity-v-nms_d6.pdf Graphic file (type pdf)
 
 <use ../../figures/rigidity-v-nms_d6.pdf>
 Package pdftex.def Info: ../../figures/rigidity-v-nms_d6.pdf used on input line
- 368.
+ 369.
 (pdftex.def)             Requested size: 247.94499pt x 147.05171pt.
 
-Overfull \hbox (3.33333pt too wide) in paragraph at lines 368--371
+Overfull \hbox (3.33333pt too wide) in paragraph at lines 369--372
  [][] 
  []
 
@@ -578,12 +578,12 @@ Overfull \hbox (3.33333pt too wide) in paragraph at lines 368--371
 File: ../../figures/corrplots.pdf Graphic file (type pdf)
 
 <use ../../figures/corrplots.pdf>
-Package pdftex.def Info: ../../figures/corrplots.pdf used on input line 376.
+Package pdftex.def Info: ../../figures/corrplots.pdf used on input line 377.
 (pdftex.def)             Requested size: 247.94499pt x 247.95001pt.
  [6 <../../figures/bradykin-v-cisitot.pdf> <../../figures/rigidity-v-cisitot.pd
 f> <../../figures/bradykin-v-nms_d6.pdf> <../../figures/rigidity-v-nms_d6.pdf>]
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--381
+Underfull \hbox (badness 10000) in paragraph at lines 382--382
 []\OT1/cmr/bx/n/14.4 Nonmotor-predominant sub-
  []
 
@@ -592,7 +592,7 @@ File: ../../figures/c2-summaries-2.pdf Graphic file (type pdf)
 
 <use ../../figures/c2-summaries-2.pdf>
 Package pdftex.def Info: ../../figures/c2-summaries-2.pdf used on input line 43
-2.
+3.
 (pdftex.def)             Requested size: 328.82541pt x 195.02684pt.
 
 <../../figures/c2-summaries-3.pdf, id=99, 609.27625pt x 361.35pt>
@@ -600,7 +600,7 @@ File: ../../figures/c2-summaries-3.pdf Graphic file (type pdf)
 
 <use ../../figures/c2-summaries-3.pdf>
 Package pdftex.def Info: ../../figures/c2-summaries-3.pdf used on input line 43
-8.
+9.
 (pdftex.def)             Requested size: 328.82541pt x 195.02684pt.
 
 <../../figures/c2-summaries-4.pdf, id=100, 609.27625pt x 361.35pt>
@@ -608,12 +608,12 @@ File: ../../figures/c2-summaries-4.pdf Graphic file (type pdf)
 
 <use ../../figures/c2-summaries-4.pdf>
 Package pdftex.def Info: ../../figures/c2-summaries-4.pdf used on input line 44
-4.
+5.
 (pdftex.def)             Requested size: 328.82541pt x 195.02684pt.
 
 
 Package multicol Warning: I moved some lines to the next page.
-(multicol)                Footnotes on page 7 might be wrong on input line 508.
+(multicol)                Footnotes on page 7 might be wrong on input line 509.
 
 
 [7 <../../figures/corrplots.pdf>] [8 <../../figures/c2-summaries-2.pdf> <../../
@@ -623,7 +623,7 @@ File: ../../figures/dtree-1va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-1va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-1va-pruned.pdf used on input line 
-561.
+562.
 (pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
 <../../figures/dtree-2va-pruned.pdf, id=135, 505.89pt x 505.89pt>
@@ -631,7 +631,7 @@ File: ../../figures/dtree-2va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2va-pruned.pdf used on input line 
-568.
+569.
 (pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
 <../../figures/dtree-3va-pruned.pdf, id=136, 505.89pt x 505.89pt>
@@ -639,7 +639,7 @@ File: ../../figures/dtree-3va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-3va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-3va-pruned.pdf used on input line 
-574.
+575.
 (pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
 <../../figures/dtree-4va-pruned.pdf, id=137, 505.89pt x 505.89pt>
@@ -647,7 +647,7 @@ File: ../../figures/dtree-4va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-4va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-4va-pruned.pdf used on input line 
-580.
+581.
 (pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
  [9 <../../figures/dtree-1va-pruned.pdf> <../../figures/dtree-2va-pruned.pdf> <
 ../../figures/dtree-3va-pruned.pdf>]
@@ -656,7 +656,7 @@ File: ../../figures/dtree-2and4va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2and4va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2and4va-pruned.pdf used on input l
-ine 615.
+ine 616.
 (pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
 
 <../../figures/dtree-2and3va-pruned.pdf, id=164, 505.89pt x 505.89pt>
@@ -664,7 +664,7 @@ File: ../../figures/dtree-2and3va-pruned.pdf Graphic file (type pdf)
 
 <use ../../figures/dtree-2and3va-pruned.pdf>
 Package pdftex.def Info: ../../figures/dtree-2and3va-pruned.pdf used on input l
-ine 622.
+ine 623.
 (pdftex.def)             Requested size: 185.95874pt x 185.95671pt.
  [10 <../../figures/dtree-4va-pruned.pdf> <../../figures/dtree-2and4va-pruned.p
 df> <../../figures/dtree-2and3va-pruned.pdf>]
@@ -673,14 +673,14 @@ File: ../../figures/longitudinal/pd-durat-cor.pdf Graphic file (type pdf)
 
 <use ../../figures/longitudinal/pd-durat-cor.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/pd-durat-cor.pdf used on in
-put line 670.
+put line 671.
 (pdftex.def)             Requested size: 455.2979pt x 227.64839pt.
 
 <../../figures/longitudinal/nms9-durat-counts.pdf, id=190, 1011.78pt x 722.7pt>
 File: ../../figures/longitudinal/nms9-durat-counts.pdf Graphic file (type pdf)
 <use ../../figures/longitudinal/nms9-durat-counts.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/nms9-durat-counts.pdf used 
-on input line 685.
+on input line 686.
 (pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
 
 <../../figures/longitudinal/nms9-multi-durat-counts.pdf, id=191, 1011.78pt x 72
@@ -689,7 +689,7 @@ File: ../../figures/longitudinal/nms9-multi-durat-counts.pdf Graphic file (type
  pdf)
  <use ../../figures/longitudinal/nms9-multi-durat-counts.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/nms9-multi-durat-counts.pdf
- used on input line 693.
+ used on input line 694.
 (pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
 
 <../../figures/longitudinal/nms10-durat-counts.pdf, id=192, 1011.78pt x 722.7pt
@@ -698,7 +698,7 @@ File: ../../figures/longitudinal/nms10-durat-counts.pdf Graphic file (type pdf)
 
  <use ../../figures/longitudinal/nms10-durat-counts.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/nms10-durat-counts.pdf used
- on input line 705.
+ on input line 706.
 (pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
 
 <../../figures/longitudinal/nms10-multi-durat-counts.pdf, id=193, 1011.78pt x 7
@@ -707,7 +707,7 @@ File: ../../figures/longitudinal/nms10-multi-durat-counts.pdf Graphic file (typ
 e pdf)
  <use ../../figures/longitudinal/nms10-multi-durat-counts.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/nms10-multi-durat-counts.pd
-f used on input line 713.
+f used on input line 714.
 (pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
 
 <../../figures/longitudinal/cisitot-multi-durat-counts.pdf, id=194, 1011.78pt x
@@ -716,7 +716,7 @@ File: ../../figures/longitudinal/cisitot-multi-durat-counts.pdf Graphic file (t
 ype pdf)
  <use ../../figures/longitudinal/cisitot-multi-durat-counts.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/cisitot-multi-durat-counts.
-pdf used on input line 728.
+pdf used on input line 729.
 (pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
 
 <../../figures/longitudinal/tremor-multi-durat-counts.pdf, id=195, 1011.78pt x 
@@ -725,21 +725,21 @@ File: ../../figures/longitudinal/tremor-multi-durat-counts.pdf Graphic file (ty
 pe pdf)
  <use ../../figures/longitudinal/tremor-multi-durat-counts.pdf>
 Package pdftex.def Info: ../../figures/longitudinal/tremor-multi-durat-counts.p
-df used on input line 742.
+df used on input line 743.
 (pdftex.def)             Requested size: 404.71353pt x 289.0859pt.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 758.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 759.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 758.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 759.
 
 <d9to30.png, id=196, 998.73125pt x 939.51pt>
 File: d9to30.png Graphic file (type png)
  <use d9to30.png>
-Package pdftex.def Info: d9to30.png used on input line 764.
+Package pdftex.def Info: d9to30.png used on input line 765.
 (pdftex.def)             Requested size: 505.89pt x 475.88954pt.
 
 <../../figures/nms30only-eigs.pdf, id=198, 542.025pt x 361.35pt>
@@ -747,7 +747,7 @@ File: ../../figures/nms30only-eigs.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30only-eigs.pdf>
 Package pdftex.def Info: ../../figures/nms30only-eigs.pdf used on input line 78
-2.
+3.
 (pdftex.def)             Requested size: 247.94499pt x 165.2967pt.
 
 <../../figures/nms30only-eigscorr.pdf, id=199, 578.16pt x 361.35pt>
@@ -755,7 +755,7 @@ File: ../../figures/nms30only-eigscorr.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30only-eigscorr.pdf>
 Package pdftex.def Info: ../../figures/nms30only-eigscorr.pdf used on input lin
-e 796.
+e 797.
 (pdftex.def)             Requested size: 505.89pt x 316.18048pt.
  [11 <../../figures/nms30only-eigs.pdf>] <../../figures/nms30only-colhc.pdf, id
 =212, 722.7pt x 433.62pt>
@@ -763,14 +763,14 @@ File: ../../figures/nms30only-colhc.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30only-colhc.pdf>
 Package pdftex.def Info: ../../figures/nms30only-colhc.pdf used on input line 8
-13.
+14.
 (pdftex.def)             Requested size: 505.89pt x 303.53192pt.
 
 <../../figures/nms30m-colhc.pdf, id=213, 722.7pt x 433.62pt>
 File: ../../figures/nms30m-colhc.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30m-colhc.pdf>
-Package pdftex.def Info: ../../figures/nms30m-colhc.pdf used on input line 826.
+Package pdftex.def Info: ../../figures/nms30m-colhc.pdf used on input line 827.
 
 (pdftex.def)             Requested size: 505.89pt x 303.53192pt.
 
@@ -778,72 +778,107 @@ Package pdftex.def Info: ../../figures/nms30m-colhc.pdf used on input line 826.
 File: ../../figures/nms30m-k4-heatmap-improved.png Graphic file (type png)
 <use ../../figures/nms30m-k4-heatmap-improved.png>
 Package pdftex.def Info: ../../figures/nms30m-k4-heatmap-improved.png used on i
-nput line 853.
+nput line 860.
 (pdftex.def)             Requested size: 303.53708pt x 442.97173pt.
 
 <../../figures/nms30m-bic.pdf, id=215, 643.40375pt x 430.60875pt>
 File: ../../figures/nms30m-bic.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30m-bic.pdf>
-Package pdftex.def Info: ../../figures/nms30m-bic.pdf used on input line 917.
+Package pdftex.def Info: ../../figures/nms30m-bic.pdf used on input line 1005.
 (pdftex.def)             Requested size: 247.94499pt x 165.93927pt.
  [12 <../../figures/longitudinal/pd-durat-cor.pdf>] [13 <../../figures/longitud
 inal/nms9-durat-counts.pdf> <../../figures/longitudinal/nms9-multi-durat-counts
 .pdf>] [14 <../../figures/longitudinal/nms10-durat-counts.pdf> <../../figures/l
 ongitudinal/nms10-multi-durat-counts.pdf>]
-<../../figures/nms30m-mclust-heatmap-improved.png, id=255, 512.91624pt x 615.29
+[15]
+<../../figures/nms30m-mclust-heatmap-improved.png, id=258, 512.91624pt x 615.29
 875pt>
 File: ../../figures/nms30m-mclust-heatmap-improved.png Graphic file (type png)
  <use ../../figures/nms30m-mclust-heatmap-improved.png>
 Package pdftex.def Info: ../../figures/nms30m-mclust-heatmap-improved.png used 
-on input line 951.
+on input line 1039.
 (pdftex.def)             Requested size: 354.12144pt x 424.81009pt.
 
-<../../figures/nms30m-dtree-all.pdf, id=256, 867.24pt x 722.7pt>
+<../../figures/nms30m-dtree-all.pdf, id=259, 867.24pt x 722.7pt>
 File: ../../figures/nms30m-dtree-all.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30m-dtree-all.pdf>
 Package pdftex.def Info: ../../figures/nms30m-dtree-all.pdf used on input line 
-963.
+1051.
 (pdftex.def)             Requested size: 505.89pt x 421.58131pt.
- [15 <../../figures/longitudinal/cisitot-multi-durat-counts.pdf> <../../figures
-/nms30m-bic.pdf>] [16 <../../figures/longitudinal/tremor-multi-durat-counts.pdf
->] [17 <./d9to30.png>]
-(./abbreviated.bbl) [18 <../../figures/nms30only-eigscorr.pdf>] [19 <../../figu
-res/nms30only-colhc.pdf> <../../figures/nms30m-colhc.pdf>] [20 <../../figures/n
-ms30m-k4-heatmap-improved.png>] [21 <../../figures/nms30m-mclust-heatmap-improv
-ed.png>] [22 <../../figures/nms30m-dtree-all.pdf>] [23] (./abbreviated.aux) ) 
+
+<../../figures/nms30m-dtree-1va.pdf, id=260, 722.7pt x 722.7pt>
+File: ../../figures/nms30m-dtree-1va.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-dtree-1va.pdf>
+Package pdftex.def Info: ../../figures/nms30m-dtree-1va.pdf used on input line 
+1062.
+(pdftex.def)             Requested size: 303.53708pt x 303.53192pt.
+
+<../../figures/nms30m-dtree-2va.pdf, id=261, 722.7pt x 722.7pt>
+File: ../../figures/nms30m-dtree-2va.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-dtree-2va.pdf>
+Package pdftex.def Info: ../../figures/nms30m-dtree-2va.pdf used on input line 
+1069.
+(pdftex.def)             Requested size: 303.53708pt x 303.53192pt.
+
+<../../figures/nms30m-dtree-3va.pdf, id=262, 722.7pt x 722.7pt>
+File: ../../figures/nms30m-dtree-3va.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-dtree-3va.pdf>
+Package pdftex.def Info: ../../figures/nms30m-dtree-3va.pdf used on input line 
+1076.
+(pdftex.def)             Requested size: 505.89pt x 505.88655pt.
+
+<../../figures/nms30m-dtree-4va.pdf, id=263, 722.7pt x 722.7pt>
+File: ../../figures/nms30m-dtree-4va.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-dtree-4va.pdf>
+Package pdftex.def Info: ../../figures/nms30m-dtree-4va.pdf used on input line 
+1083.
+(pdftex.def)             Requested size: 303.53708pt x 303.53192pt.
+ [16 <../../figures/longitudinal/cisitot-multi-durat-counts.pdf> <../../figures
+/nms30m-bic.pdf>] [17 <../../figures/longitudinal/tremor-multi-durat-counts.pdf
+>] [18 <./d9to30.png>] [19 <../../figures/nms30only-eigscorr.pdf>] [20 <../../f
+igures/nms30only-colhc.pdf> <../../figures/nms30m-colhc.pdf>] [21 <../../figure
+s/nms30m-k4-heatmap-improved.png>]
+[22 <../../figures/nms30m-mclust-heatmap-improved.png>] [23 <../../figures/nms3
+0m-dtree-all.pdf>] [24 <../../figures/nms30m-dtree-1va.pdf> <../../figures/nms3
+0m-dtree-2va.pdf>] [25 <../../figures/nms30m-dtree-3va.pdf>] (./abbreviated.bbl
+) [26] [27 <../../figures/nms30m-dtree-4va.pdf>] (./abbreviated.aux) ) 
 Here is how much of TeX's memory you used:
- 6872 strings out of 494501
- 105152 string characters out of 6167031
- 203048 words of memory out of 5000000
- 9975 multiletter control sequences out of 15000+600000
+ 6897 strings out of 494501
+ 105954 string characters out of 6167031
+ 199099 words of memory out of 5000000
+ 9996 multiletter control sequences out of 15000+600000
  17287 words of font info for 64 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  42i,14n,47p,799b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
-</
-usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
-b></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
-2.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbxti10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015basic/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2015basic/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015basic/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015bas
-ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on abbreviated.pdf (23 pages, 1316814 bytes).
+</usr/loc
+al/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr
+/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
+/usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10
+.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015basic/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on abbreviated.pdf (27 pages, 1346362 bytes).
 PDF statistics:
- 385 PDF objects out of 1000 (max. 8388607)
- 272 compressed objects within 3 object streams
+ 431 PDF objects out of 1000 (max. 8388607)
+ 305 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
- 185 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

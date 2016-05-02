@@ -39,7 +39,8 @@
 \contentsline {paragraph}{With motor symptoms}{12}
 \contentsline {subsubsection}{\numberline {7.2.3}$k$-means}{12}
 \contentsline {subsubsection}{\numberline {7.2.4}Model-based expectation-maximization}{12}
-\contentsline {subsection}{\numberline {7.3}Decision Trees}{15}
-\contentsline {section}{\numberline {8}Preliminary Conclusions}{16}
-\contentsline {subsection}{\numberline {8.1}Overall clustering}{16}
-\contentsline {subsection}{\numberline {8.2}Nonmotor subtype: clustering and modeling}{18}
+\contentsline {subsection}{\numberline {7.3}Decision Trees}{16}
+\contentsline {section}{\numberline {8}Preliminary Conclusions}{17}
+\contentsline {subsection}{\numberline {8.1}Overall clustering}{17}
+\contentsline {subsection}{\numberline {8.2}Nonmotor subtype: clustering and modeling}{19}
+\contentsline {subsection}{\numberline {8.3}New conclusions}{19}

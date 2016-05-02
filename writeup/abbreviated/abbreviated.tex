@@ -40,7 +40,8 @@
 
 \section{New Content}
 
-Section~\ref{sec:longitudinal} on longitudinal analysis; section~\ref{sec:nms30} on
+Section~\ref{sec:longitudinal} on longitudinal analysis; section~\ref{sec:nms30} on Extended
+Nonmotor Symptoms; Section~\ref{ssec:newconc} on new conclusions from these sections.
 
 \section{Preprocessing}
 
@@ -757,7 +758,7 @@ First, I used the clustering with the original 9 nms symptoms, but plotted the o
 instead. The reason for this was to treat the clustering of the 9 symptoms as a form of
 dimensionality reduction, since we know each symptom of nms\{1-30\} is colinear with several other
 symptoms, and they form the broader nms\_d\{1-9\} symptoms. The results are in
-Figure~\ref{fig:d9to30}
+Figure~\ref{fig:d9to30}.
 
 \begin{figure*}[p]
   \centering
@@ -773,7 +774,7 @@ broader symptoms. Interesting parts of the figure are are labeled in red.}
 
 I ran PCA on the dataset with solely the 30 nonmotor symptoms. A plot of various metrics for
 determining the optimal number of eigenvectors is in Figure~\ref{fig:nms30only-eigs}. Most metrics agree
-Nthat the optimal number of eigenvalues is around 6, but notice how one component has by far the
+that the optimal number of eigenvalues is around 6, but notice how one component has by far the
 highest eigenvalue; this component can be interpreted as a general ``nonmotor severity'' measure,
 indicating that much of the general nonmotor symptomatic expression falls along the same dimension.
 
@@ -848,17 +849,23 @@ Because the number of symptoms is high, I don't provide the boxplots I have prev
 instead, I provide a heatmap of $z$-scores in Figure~\ref{fig:nms30m-k4-heatmap-improved} and a
 table of results in Table~\ref{tab:nms30_k4}.
 
-\begin{figure*}[p]
+Using one-way ANOVA for multiple means, only one variable had no significant interaction with the
+cluster ($p > 0.05$): pdonset.
+
+% Post-hoc analysis using Tukey's HSD is available in
+% Table~\ref{tab:tukeyhsd30}. For brevity, only insignificant differences are included.
+
+ibegin{figure*}[p]
   \centering
   \includegraphics[width=0.6\linewidth]{nms30m-k4-heatmap-improved.png}
   \caption{Heatmap for $k$-means clustering, $k = 4$, with the 30 nonmotor symptoms. Notice that
   subtype 2 is a ``Depression-Dominant'' subtype.} \label{fig:nms30m-k4-heatmap-improved}
 \end{figure*}
 
-\begin{table*}[b]
+\begin{table*}[p]
   \centering
-  \caption{Mean symptom scores for the centers of the $k$-means clustering where $k = 4$. In
-  this case, a Depression-Dominant subtype has been identified.}
+  \caption{Mean symptom scores for the centers of the $k$-means clustering on nms\{1-30\} where $k
+= 4$. In this case, a Depression-Dominant subtype has been identified.}
   \label{tab:nms30_k4}
   \begin{tabular}{l|l|l|l|l}
 cluster & 1 & 2 & 3 & 4 \\
@@ -900,6 +907,87 @@ rigidity & 2.61 & 2.42 & 1.87 & 3.61 \\
 axial & 4.22 & 4.4 & 2.17 & 7.24 \\
   \end{tabular}
 \end{table*}
+
+% \begin{table*}[p]
+  % \centering
+  % \caption{Tukey's HSD for $k$-means clustering on nms\{1-30\}, $k = 4$. For brevity, only insignificant differences ($p > 0.05$) are included.}
+  % \label{tab:tukeyhsd30}
+  % \begin{tabular}{l|l|l}
+    % Variable & Cluster Relation & p \\
+    % \hline
+% d1-1-lightheaded & 3-2 & 0.572 \\
+% \hline
+% d1-2-fainting & 3-1 & 0.974 \\
+% \hline
+% d2-3-drowsiness & 3-2 & 0.814 \\
+% \hline
+% d2-4-fatigue & 4-2 & 0.213 \\
+% \hline
+% d2-5-insomnia & 4-2 & 0.143 \\
+% & 4-3 & 0.168 \\
+% \hline
+% d2-6-rls & 3-2 & 0.504 \\
+% \hline
+% d4-13-hallucination & 3-2 & 0.553 \\
+% \hline
+% d4-14-delusion & 3-1 & 0.977 \\
+% \hline
+% d4-15-diplopia & 3-2 & 0.0843 \\
+% \hline
+% d6-19-drooling & 3-2 & 1.00 \\
+% \hline
+% d6-20-swallowing & 3-2 & 0.167 \\
+% \hline
+% d6-21-constipation & 3-2 & 0.877 \\
+% \hline
+% d7-22-urinary\_urgency & 3-2 & 0.758 \\
+% \hline
+% d7-23-urinary\_frequency & 3-2 & 0.952 \\
+% \hline
+% d7-24-nocturia & 3-2  & 0.983 \\
+% \hline
+% d8-25-sex\_drive & 4-2 & 0.575 \\
+% \hline
+% d8-26-sex\_dysfunction & 3-2 & 0.147 \\
+% & 4-2 & 0.0635 \\
+% \hline
+% d9-27-unexplained\_pain & 3-2 & 0.513 \\
+% \hline
+% d9-28-gust\_olfact & 3-2 & 0.794 \\
+% & 4-2 & 0.220 \\
+% \hline
+% d9-29-weight\_change & 3-2 & 0.105 \\
+% \hline
+% d9-30-sweating & 3-2 & 0.359 \\
+% & 4-2 & 0.215 \\
+% & 4-3 & 0.797 \\
+% \hline
+% age & 2-1 & 0.352 \\
+% & 3-2 & 0.570 \\
+% \hline
+% sex & 3-1 & 0.443 \\
+% & 4-1 & 0.991 \\
+% & 3-2 & 0.373 \\
+% & 4-2 & 0.436 \\
+% & 4-3 & 0.969 \\
+% \hline
+% durat\_pd & 2-1 & 0.067 \\
+ % & 3-2 & 0.436 \\
+% \hline
+% cisitot & 3-2 & 0.428 \\
+% \hline
+% tremor & 2-1 & 0.484 \\
+% & 3-1 & 0.990 \\
+% & 3-2 & 0.429 \\
+% \hline
+% bradykin & 3-2 & 0.972 \\
+% \hline
+% rigidity & 3-2 & 0.610  \\
+% \hline
+% axial & 3-2 & 0.912
+  % \end{tabular}
+% \end{table*}
+
 
 \subsubsection{Model-based expectation-maximization}
 
@@ -956,15 +1044,46 @@ A heatmap of all 11 clusters found is located in Figure~\ref{fig:nms30m-mclust-h
 \subsection{Decision Trees}
 
 I created decision trees for the $k$-means $k = 4$ clustering, located in
-Figure~\ref{fig:nms30m-dtree-all}
+Figure~\ref{fig:nms30m-dtree-all}.
 
 \begin{figure*}[p]
   \centering
   \includegraphics[width=\linewidth]{nms30m-dtree-all.pdf}
-  \caption{Pruned decision tree for one vs all, clustered on nms\{1-30\}}
+  \caption{Pruned decision tree, clustered on nms\{1-30\}}
   \label{fig:nms30m-dtree-all}
 \end{figure*}
 
+One vs all decision trees are located in
+Figures~\ref{fig:nms30m-dtree-1va}, \ref{fig:nms30m-dtree-2va}, \ref{fig:nms30m-dtree-3va},
+and \ref{fig:nms30m-dtree-4va}.
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.6\linewidth]{nms30m-dtree-1va.pdf}
+  \caption{Pruned 1 vs all decision tree.}
+  \label{fig:nms30m-dtree-1va}
+\end{figure*}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.6\linewidth]{nms30m-dtree-2va.pdf}
+  \caption{Unpruned 2 vs all decision tree. (Pruned was too simple).}
+  \label{fig:nms30m-dtree-2va}
+\end{figure*}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\linewidth]{nms30m-dtree-3va.pdf}
+  \caption{Pruned 3 vs all decision tree.}
+  \label{fig:nms30m-dtree-3va}
+\end{figure*}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.6\linewidth]{nms30m-dtree-4va.pdf}
+  \caption{Unpruned 4 vs all decision tree. (Pruned was too simple).}
+  \label{fig:nms30m-dtree-4va}
+\end{figure*}
 \section{Preliminary Conclusions}
 
 \subsection{Overall clustering}
@@ -1035,6 +1154,46 @@ symptoms, as it is used as the root node of the 2 vs all decision tree
 
 It remains to be seen whether these classification models, especially the one-vs-all decision
 trees, are useful in clinical practice.
+
+\subsection{New conclusions}
+\label{ssec:newconc}
+
+First, the longitudinal analysis gives more insight into the clusters found when clustering on
+nms\_d\{1-9\}. According to Figure~\ref{fig:longcorr}, most symptoms are highly correlated, with PD
+duration, but notably, mood/cognition symptoms (nms9, nms10, nms12) and tremor are not correlated
+highly with PD duration. The differences in disease progression can be seen by the corresponding
+graphs, Figures~\ref{fig:nms9-multi} and~\ref{fig:nms10-multi}. In both graphs, what is interesting
+is that Subtype 2 (Nonmotor-Dominant) starts at higher scores for nms\_9 and nms\_10, thus
+indicating that these patients' subtype is can be determined early in PD duration from depressive
+symptom score. Similarly, when examining Subtype 3 (Motor-dominant) in
+Figure~\ref{fig:tremor-multi}, the mean tremor score is substantially higher from PD onset.
+Interestingly, Subtype 4 (Severe) generally starts at lower tremor and motor scores during disease
+onset (Figure~\ref{fig:cisitot-multi}), but then rises sharply, exceeding other Subtypes. More evidence
+that tremor is a unique motor symptom is located in Figure~\ref{fig:nms30m-colhc}, where it is the most
+distant symptom from all other symptoms.
+
+When examining all 30 symptoms, more evidence is given that the previously-discovered Subtype
+2 (Nonmotor-Dominant) may be primarily characterized by high depressive symptoms. By graphing the
+30 subtypes attached to the original clustering, as in Figure~\ref{fig:d9to30}, the mean scores of
+nms8, nms9, and nms10 for Subtype 2 are substantially higher than Subtypes 1 and 3.
+
+Indeed, PCA on the 30 nonmotor symptoms identifies the second-most prominent component as a general
+mood/cognition component, and $k$-means clustering on the 30 symptoms only
+(Figure~\ref{fig:nms30m-k4-heatmap-improved}) divides the 1000 patients into four slightly
+different groups, a mild, average, depression-dominant, and severe group.
+
+The Gaussian mixture model identified in Figure~\ref{fig:nms30m-mclust-heatmap-improved} fragments
+the previously-discovered clusters into more groups. Here, a wide variety of specialized subtypes
+of PD are displayed, including insomnia, urinary, motor, nonmotor, and depression-dominant groups,
+as well as the expected mild, average, and severe subtypes. It is likely that the previous analysis
+with only nms\_d\{1-9\} combined most of those specialized groups into the more general
+nonmotor-dominant Subtype 2.
+
+It's intuitive that a Depression-Dominant group emerges when clustering on nms\{1-30\}, since
+domain 3 consists of 5 separate measures. Thus, any high expression of depressive symptoms is
+magnified in clustering, since the symptoms are highly similar (Figure~\ref{fig:nms30m-colhc}) and
+treated with equal weight. Once again reinforcing what was discovered previously, depressive
+symptoms have been shown to be very important in determining subtypes of PD.
 
 \bibliographystyle{Science}
 \bibliography{abbreviated}
