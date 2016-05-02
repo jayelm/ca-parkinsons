@@ -1,5 +1,7 @@
 # LOAD LIBRARIES ====
 library(cluster)
+library(reshape2)
+library(clValid)
 library(rpart)
 library(rpart.plot)
 library(corrplot)
@@ -681,12 +683,22 @@ corrplot(cor(cor.nms.raw4), method="ellipse", order="hclust", main="4")
 corrplot(cor(cor.nms.raw2), method="ellipse", order="hclust", main="2")
 
 # 2016 update - some better cluster validation ====
-clres.stability <- clValid(obj = cor.nms.raw, nClust = 2:8, clMethods = "kmeans",
+clres.stability <- clValid(obj = raw.filtered, nClust = 2:8, clMethods = "kmeans",
                  validation = "stability", maxitems=1000)
+plot(clres.stability, measure = c("APN", "AD", "ADM"))
+optimalScores(clres.stability)
 stab.measures <- as.data.frame(clres.stability@measures)
 colnames(stab.measures) <- 2:8
-clres.internal <- clValid(obj = cor.nms.raw, nClust = 2:8, clMethods = "kmeans",
+stab.measures$measure <- rownames(stab.measures)
+stab.measures.long <- melt(stab.measures, id.vars = c("measure"),
+                           variable.name = "clusters",
+                           value.name = c("value"))
+ggplot(stab.measures.long) +
+  geom_line(aes(x = clusters, y = value, group = measure, color = measure)) +
+  theme_bw()
+clres.internal <- clValid(obj = raw.filtered, nClust = 2:8, clMethods = "kmeans",
                  validation = "internal", maxitems=1000)
+plot(clres.internal)
 stab.measures
 # Stability measures look good for 4, surprisingly
 # http://bioinformatics.oxfordjournals.org/content/19/4/459.full.pdf
