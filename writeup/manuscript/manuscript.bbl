@@ -1,0 +1,68 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\eprint}[1]{\href{http://arxiv.org/abs/#1}{\path{#1}}}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\BIBand}{and}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\undefined \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{van Rooden et~al.(2010)van Rooden, Heiser, Kok, Verbaan, van Hilten
+  and Marinus}]{vanrooden10}
+\bibinfo{author}{van Rooden\xfnm[ S.M.]}, \bibinfo{author}{Heiser\xfnm[ W.J.]},
+  \bibinfo{author}{Kok\xfnm[ J.N.]}, \bibinfo{author}{Verbaan\xfnm[ D.]},
+  \bibinfo{author}{van Hilten\xfnm[ J.J.]}, \bibinfo{author}{Marinus\xfnm[
+  J.]}.
+\newblock \bibinfo{title}{The identification of parkinson's disease subtypes
+  using cluster analysis: a systematic review}.
+\newblock \bibinfo{journal}{Movement Disorders}
+  \bibinfo{year}{2010};\bibinfo{volume}{25}(\bibinfo{number}{8}):\bibinfo{pages}{969--978}.
+%Type = Article
+\bibitem[{Ma et~al.(2015)Ma, Chan, Gu, Li and Feng}]{ma15}
+\bibinfo{author}{Ma\xfnm[ L.Y.]}, \bibinfo{author}{Chan\xfnm[ P.]},
+  \bibinfo{author}{Gu\xfnm[ Z.Q.]}, \bibinfo{author}{Li\xfnm[ F.F.]},
+  \bibinfo{author}{Feng\xfnm[ T.]}.
+\newblock \bibinfo{title}{Heterogeneity among patients with parkinson's
+  disease: Cluster analysis and genetic association}.
+\newblock \bibinfo{journal}{Journal of the neurological sciences}
+  \bibinfo{year}{2015};\bibinfo{volume}{351}(\bibinfo{number}{1}):\bibinfo{pages}{41--45}.
+%Type = Article
+\bibitem[{Fereshtehnejad et~al.(2015)Fereshtehnejad, Romenets, Anang,
+  Latreille, Gagnon and Postuma}]{fereshtehnejad15}
+\bibinfo{author}{Fereshtehnejad\xfnm[ S.M.]}, \bibinfo{author}{Romenets\xfnm[
+  S.R.]}, \bibinfo{author}{Anang\xfnm[ J.B.]}, \bibinfo{author}{Latreille\xfnm[
+  V.]}, \bibinfo{author}{Gagnon\xfnm[ J.F.]}, \bibinfo{author}{Postuma\xfnm[
+  R.B.]}.
+\newblock \bibinfo{title}{New clinical subtypes of parkinson disease and their
+  longitudinal progression: a prospective cohort comparison with other
+  phenotypes}.
+\newblock \bibinfo{journal}{JAMA neurology}
+  \bibinfo{year}{2015};\bibinfo{volume}{72}(\bibinfo{number}{8}):\bibinfo{pages}{863--873}.
+%Type = Article
+\bibitem[{Sauerbier et~al.(2016)Sauerbier, Jenner, Todorova and
+  Chaudhuri}]{sauerbier15}
+\bibinfo{author}{Sauerbier\xfnm[ A.]}, \bibinfo{author}{Jenner\xfnm[ P.]},
+  \bibinfo{author}{Todorova\xfnm[ A.]}, \bibinfo{author}{Chaudhuri\xfnm[
+  K.R.]}.
+\newblock \bibinfo{title}{Non motor subtypes and parkinson's disease}.
+\newblock \bibinfo{journal}{Parkinsonism \& related disorders}
+  \bibinfo{year}{2016};\bibinfo{volume}{22}:\bibinfo{pages}{S41--S46}.
+%Type = Article
+\bibitem[{Erro et~al.(2013)Erro, Vitale, Amboni, Picillo, Moccia, Longo
+  et~al.}]{erro13}
+\bibinfo{author}{Erro\xfnm[ R.]}, \bibinfo{author}{Vitale\xfnm[ C.]},
+  \bibinfo{author}{Amboni\xfnm[ M.]}, \bibinfo{author}{Picillo\xfnm[ M.]},
+  \bibinfo{author}{Moccia\xfnm[ M.]}, \bibinfo{author}{Longo\xfnm[ K.]}, et~al.
+\newblock \bibinfo{title}{The heterogeneity of early parkinson’s disease: a
+  cluster analysis on newly diagnosed untreated patients}.
+\newblock \bibinfo{journal}{PLoS One}
+  \bibinfo{year}{2013};\bibinfo{volume}{8}(\bibinfo{number}{8}):\bibinfo{pages}{e70244}.
+
+\end{thebibliography}
