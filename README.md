@@ -1,12 +1,13 @@
 # ca-parkinsons
 
 ![PD Analysis](./analysis.png)
+![Hierarchical clustering](./hc.png)
 
 This repository contains exploratory work done by me at the Polytechnic
 University of Madrid in Summer 2015. The objective is to apply cluster analysis
 to data collected from Parkinson's disease patients to identify relevant
-subtypes and important clinical features. A summary of my results so far is
-located in writeup/parkinsons.pdf.
+subtypes and important clinical features. Manuscript in preparation is located
+in located in writeup/manuscript/manuscript.pdf
 
 Related work (those that are freely available are also saved in the papers folder):
 
