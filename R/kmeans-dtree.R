@@ -114,12 +114,16 @@ cat("number of clusters estimated by optimum average silhouette width:", pamk.be
 plot(pam(raw.filtered, pamk.best$nc))
 
 # GAP STATISTIC ESTIMATION ====
+set.seed(0)
 gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
-plot(x=1:14, y=gaps$Tab[, "gap"], xlab="Clusters", ylab="Gap Statitsic", type="b")
+par(mar = c(4.5, 4.5, 4.5, 4.5), ps = 18)
+plot(gaps)
 if (SAVE.EXPLORE.PLOTS) {
-  dev.copy(pdf, "../figures/gap-statistic.pdf")
+  dev.copy(pdf, "../figures/gap-statistic.pdf", width = 6, height = 5)
   dev.off()
 }
+print(gaps, method = "firstSEmax", SE.factor = 1)
+
 
 # Affinity propagation ====
 # Auto commented out because this takes a while
@@ -488,7 +492,7 @@ for (i in c("2", "3", "4")) {
     facet_wrap( ~ variable, scales = "free")
   print(p)
   if (SAVE.BOXPLOTS) {
-    ggsave(paste("../figures/kmeans-summaries-", i, ".pdf", sep=""))
+    ggsave(paste("../figuresekmeans-summaries-", i, ".pdf", sep=""))
   }
 }
 
@@ -685,7 +689,12 @@ corrplot(cor(cor.nms.raw2), method="ellipse", order="hclust", main="2")
 # 2016 update - some better cluster validation ====
 clres.stability <- clValid(obj = raw.filtered, nClust = 2:8, clMethods = "kmeans",
                  validation = "stability", maxitems=1000)
-plot(clres.stability, measure = c("APN", "AD", "ADM"))
+par(mfrow=c(2, 2), mar = c(4.5, 4.5, 4.5, 4.5), oma = c(0, 0, 0, 0))
+plot(clres.stability, main = "", legend = FALSE, pch = 1)
+if (SAVE.EXPLORE.PLOTS) {
+  dev.copy(pdf, "../figures/stability-measures.pdf", width = 8, height = 6)
+  dev.off()
+}
 optimalScores(clres.stability)
 stab.measures <- as.data.frame(clres.stability@measures)
 colnames(stab.measures) <- 2:8

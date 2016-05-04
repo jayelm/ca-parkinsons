@@ -103,6 +103,7 @@ NMS.D.NAMES <- c(
   "Gastrointestinal", "Urinary", "Sexual", "Miscellaneous"
 )
 NMS.D.MAP.PUB <- setNames(NMS.D.NAMES, NMS.D)
+NMS.D.MAP.PUB.N <- setNames(sapply(1:length(NMS.D.NAMES), function(i) paste(i, NMS.D.NAMES[i], sep = "-")), NMS.D)
 NMS.30.MAP.PUB <- setNames(NMS.30.NAMES.PUB, NMS.30)
 MISC.MAP <- c(
   'age' = 'Age',
@@ -118,6 +119,7 @@ MISC.MAP <- c(
   'surgery' = 'Surgery'
 )
 PUB.MAP <- c(NMS.D.MAP.PUB, NMS.30.MAP.PUB, MISC.MAP)
+PUB.MAP.N <- c(NMS.D.MAP.PUB.N, NMS.30.MAP.PUB, MISC.MAP)  # This one just has n
 ALL.BUT.NMS <- c('age', 'sex', 'pdonset', 'durat_pd', 'cisitot',
                  'tremor', 'bradykin', 'rigidity', 'axial')
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",

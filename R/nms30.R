@@ -9,6 +9,7 @@ library(nFactors)
 library(gplots) # For heatmaps
 # Better dendrograms
 library(dendextend)
+library(dendsort)
 library(dynamicTreeCut)
 # Trying to get some color here
 library(colorspace)
@@ -94,7 +95,7 @@ for (i in 2:15) {
 
 # Large heatmap, clustering for rows and cols ====
 hm <- heatmap.2(as.matrix(nms30.s),
-                hclustfun = function(x) hclust(x, method='complete'),
+                hclustfun = function(x) hclust(x, method='average'),
                 trace='none')
 colD <- as.ggdend(hm$colDendrogram)
 rowD <- as.ggdend(hm$rowDendrogram)
@@ -106,8 +107,13 @@ hm.m <- heatmap.2(as.matrix(nms30m.s),
                   trace='none')
 colD.m <- as.ggdend(hm.m$colDendrogram)
 
+# Average is hella different
+asdf <- hclust(dist(t(nms30m.s)), method='average')
+plot(asdf)
+
 # Plot column dendrogram, visualize dynamic clusters with cutreeDynamic
 ctd <- cutree(hm$colDendrogram, 5)
+par(mfrow = c(1, 1))
 ColorDendrogram(as.hclust(hm$colDendrogram), y = ctd, labels = names(ctd),
                 main = "NMS Hierarchical Clustering",
                 xlab = "Symptom",
@@ -130,6 +136,8 @@ if (SAVE.NMS30.PLOTS) {
   dev.copy(pdf, '../figures/nms30m-colhc.pdf', width=10, height=6)
   dev.off()
 }
+
+# A slightly better plot
 
 # Individuals: Determining k ====
 set.seed(0)

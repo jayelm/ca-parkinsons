@@ -1,17 +1,27 @@
 % PREAMBLE ====
-\documentclass[preprint,3p]{elsarticle} % TODO: What model?
+\documentclass[preprint,3p,twocolumn]{elsarticle} % TODO: What model?
 
-% Tables
+% Use times font
+\usepackage{pslatex}
+
+% Math
+\usepackage{amsmath}
+
+% Tables, Figures
 \usepackage{booktabs}
 \usepackage{threeparttable}
+\usepackage{float}
+\usepackage{caption}
 \setlength{\tabcolsep}{10pt}
 
 % Graphics
 \usepackage{graphicx}
 \DeclareGraphicsExtensions{.pdf,.png}
+\graphicspath{{../../figures/}}
 
 % References
 \usepackage{numcompress}
+\biboptions{super}
 \bibliographystyle{model3-num-names}
 
 % DOCUMENT ====
@@ -19,7 +29,6 @@
 % FRONTMATTER ====
 \begin{frontmatter}
 \title{Parkinson's disease cluster analysis}
-
 \author[c3]{Pablo Martinez-Martin}
 \ead{pmartinez@isciii.es}
 \author[bc]{Jesse Mu}
@@ -33,43 +42,102 @@
 \address[cig]{Computational Intelligence Group, Polytechnic University of Madrid, Madrid, Spain}
 
 \begin{abstract}
-\paragraph{Background}
-\paragraph{Methods}
-\paragraph{Findings}
-\paragraph{Interpretation}
-\paragraph{Funding}
+\emph{Background} \quad This is the background. \\
+\emph{Methods} \quad  These are methods. \\
+\emph{Findings} \quad These are findings. \\
+\emph{Interpretation} \quad This is interpretation. \\
+\emph{Funding} \quad This is funding.
 \end{abstract}
-
 \journal{The Lancet Neurology}
-
 \end{frontmatter}
 
 % BODY ====
 
 \section{Introduction}
+
 \section{Methods}
 
+\subsection{Statistical analysis}
+
+Out of the 951 patients in the study, we used listwise deletion to exclude 50 patients due to
+missing measurements in the variables of interest, resulting in 901 remaining patients. All
+symptoms were scaled to $z$-scores ($\mu = 0$, $\sigma = 1$) before clustering, and unscaled
+afterwards. Analysis was conducted in R 3.2.4 (www.r-project.org).
+
+\subsubsection{Cluster analysis}
+
+$k$-means was used for cluster analysis. We performed two analyses on the
+patients in the dataset: the first on the nine aggregate nonmotor symptom
+domains and the four motor symptoms, and the second on the 30 individual
+nonmotor symptoms collected with the four motor symptoms. Complete-linkage
+hierarchical clustering on the 30 nonmotor symptoms was also performed to observe the
+categorization of symptoms.
+
+\subsubsection{Determining $k$}
+
+Various formal measures were used to determine the optimal number of
+clusters for the dataset. First, the optimal $k$ according to the Gap Statistic and the
+1-standard-error method\cite{tibshirani01gap} was $k = 4$ (Figure~\ref{fig:gap}). Second, although
+the globally-optimal clusters reported from stability measures of the clValid R package
+\cite{brock11clvalid} stability are 2, 6, and 8 (Figure~\ref{fig:stability}), there appeared to be
+consensus that $k = 4$ is a locally-optimal number of clusters which supported the gap statistic
+result.
+
+Other cluster validation methods (SSE scree plot, minimum average silhouette width) generally
+suggested 2 clusters. As a consequence, $k = 2, 3, 4$ was tried, where $k = 2, 3$ simply divided
+the data uninformatively into groups with varying levels of overall PD severity. Thus $k = 4$ was
+selected to offer a good blend of model fit, informativeness, and parsimony.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{gap-statistic.pdf}
+  \caption{Plot of gap statistic versus number of clusters with $k$-means on 100 bootstrapped
+    samples. Error bars are standard error. Per the method described in\cite{tibshirani01gap}, 4 is the smallest $k$ such
+    that $\text{Gap}(k) \geq \text{Gap}(k + 1) - \text{se}_{k + 1}$.}
+  \label{fig:gap}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{stability-measures.pdf}
+  \caption{Average proportion of non-overlap (APN), average distance (AD), average distance
+    between means (ADM), and figure of merit (FOM) stability measures\cite{datta2006methods,
+    yeung2001validating}. Statistics should be minimized; notice the local optima at $k = 4$ for
+  APN, AD, and ADM.}
+  \label{fig:stability}
+\end{figure}
+
+\subsubsection{Interpretation}
+
+For the clustering on nonmotor domains, we displayed the distribution of each symptom for the four
+clusters using boxplots, which allowed us to visualize the center and spread of each cluster. Since
+the number of variables was larger for the clustering on the individual symptoms, we visualized
+results for the second analysis with a heatmap. Finally, for the hierarchical clustering on the
+symptoms themselves, we displayed results in a dendrogram and clustered the symptoms into four
+interpretable clusters.
+
+For each symptom in both clusterings, we used one-way ANOVA to test the equality of symptom means
+across the clusters found, using Bonferroni correction for multiple testing with corrected $p <
+0.05$ considered significant. Differences among pairwise clusters were tested post-hoc using
+Tukey's range test.
 
 \section{Results}
 
-$k$-means clustering was used.
-
-\subsection{Clustering on nonmotor domains}
+\subsection{Clustering with nonmotor domains}
 
 $k$-means clustering on the nine nonmotor domains and the four motor symptoms found four clusters,
-available in Table~\ref{tab:nmd}. Using one-way ANOVA, symptom means for all clusters were found to
-be different with $p < 0.05$, and the differences among pairwise clusters were tested post-hoc
-using Tukey's range test. On average, cluster 1 ($n = 406$) patients were mildly affected in all
-domains, cluster 2 ($n = 189$) patients were severely affected in nonmotor domains but mildly
-affected in motor domains (Nonmotor-Dom), cluster 3 ($n = 221$) patients were severely affected in
-motor domains but mildly affected in nonmotor domains (Motor-Dom), and cluster 4 ($n = 88$)
-patients were severely affected in all domains.
-Additionally, statistics for variables not used in the clustering were explored in
-Table~\ref{tab:nmd_extra}. Like before, one-way ANOVA was used to test equality of means across all
-groups, and all variables were found to be different except PD onset. Tukey's range test was used
-again to compare individual differences in means.
+available in Table~\ref{tab:nmd} with boxplots in Figure~\ref{fig:box}. Cluster means for all
+symptoms were found to be statistically different, with specific pairwise differences noted in the table.
 
-\begin{table}[t]
+Cluster 1 ($n = 406$) patients were mildly affected in all domains.
+
+Cluster 2 ($n = 189$) patients were severely
+affected in nonmotor domains but mildly affected in motor domains (Nonmotor-Dom), cluster 3 ($n =
+221$) patients were severely affected in motor domains but mildly affected in nonmotor domains
+(Motor-Dom), and cluster 4 ($n = 88$) patients were severely affected in all domains. Statistics
+for variables not used in the clustering were explored in Table~\ref{tab:nmd_extra}.
+
+\begin{table*}[t]
   \centering
   \caption{Summaries of clustering on nonmotor domains. Bold indicates the highest score for that
   symptom out of the four clusters.}
@@ -120,9 +188,20 @@ again to compare individual differences in means.
     \item[\textdagger] Another footnote.
   \end{tablenotes}
   \end{threeparttable}
-\end{table}
+\end{table*}
 
-\begin{table}[t]
+\begin{figure*}[b]
+  \centering
+  \includegraphics[width=\linewidth]{kmeans-summaries-4-pub.pdf}
+  \vspace{-7.5em}
+  \captionsetup{justification=raggedleft,
+    singlelinecheck=false
+  }
+  \caption{Boxplot summaries for clusters found \\ when clustering with nonmotor domains.}
+  \label{fig:box}
+\end{figure*}
+
+\begin{table*}[t]
   \centering
   \caption{Cluster statistics for variables not used in the analysis}
   \label{tab:nmd_extra}
@@ -131,13 +210,12 @@ again to compare individual differences in means.
     \toprule
     & 1 & 2 & 3 & 4 \\
     \midrule
-      Age & 62.7 (9.7) & 64 (9) & 65 (10.2) & 70.5 (8.9) \\ 
-      Sex & 0.4 (0.5) & 0.5 (0.5) & 0.3 (0.5) & 0.4 (0.5) \\ 
-      PD\_Onset & 56 (10.6) & 55.2 (10.1) & 56.9 (11.1) & 58.2 (11.4) \\ 
-      PD\_Duration & 6.7 (4.8) & 8.7 (5.7) & 8 (5.5) & 12.3 (8.1) \\ 
-      CISI\_Total & 5.7 (3.2) & 9.2 (3.9) & 9.7 (3.5) & 14.8 (5.1) \\ 
-      ldopa & NA (NA) & NA (NA) & NA (NA) & NA (NA) \\ 
-      Surgery & 0 (0.2) & 0.1 (0.2) & 0 (0.2) & 0 (0.1) \\ 
+      Age & 62.7 (9.7) & 64 (9) & 65 (10.2) & 70.5 (8.9) \\
+      Sex & 0.4 (0.5) & 0.5 (0.5) & 0.3 (0.5) & 0.4 (0.5) \\
+      PD\_Onset & 56 (10.6) & 55.2 (10.1) & 56.9 (11.1) & 58.2 (11.4) \\
+      PD\_Duration & 6.7 (4.8) & 8.7 (5.7) & 8 (5.5) & 12.3 (8.1) \\
+      CISI\_Total & 5.7 (3.2) & 9.2 (3.9) & 9.7 (3.5) & 14.8 (5.1) \\
+      Surgery & 0 (0.2) & 0.1 (0.2) & 0 (0.2) & 0 (0.1) \\
     \bottomrule
   \end{tabular}
   \begin{tablenotes}
@@ -149,14 +227,29 @@ again to compare individual differences in means.
     \item[\textdagger] Another footnote.
   \end{tablenotes}
   \end{threeparttable}
-\end{table}
-\subsection{Clustering on nonmotor symptoms}
-% From 931 to 904 patients
+\end{table*}
+\subsection{Clustering with nonmotor symptoms}
+
+\subsection{Hierarchical clustering on symptoms}
+
+Hierarchical clustering on the 30 nonmotor symptoms and the four motor symptoms produced the
+dendrogram in Figure~\ref{fig:hc}. Predictably, symptoms in the same nonmotor domains tended to
+cluster together, with the exceptions of diplopia (domain 4), drowsiness (domain 2), and the
+symptoms in domain 9 (miscellaneous). Notably, tremor was the most dissimilar symptom, occupying a single branch at the
+top of the tree.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\linewidth]{nms30m-colhc-pub.pdf}
+  \caption{Hierarchical clustering of motor (blue) and nonmotor (black) symptoms. Symptoms are
+  labeled with their name and corresponding domain number. Dendrogram colored with 4 clusters.}
+  \label{fig:hc}
+\end{figure*}
 
 \section{Discussion}
 
 $k$-means clustering on this Parkinsons' Disease data set reveals clusters that confirm previous
-findings in the field, mainly van Rooden et al. \cite{vanrooden10} and the identification of four
+findings in the field, mainly van Rooden et al.\cite{vanrooden10} and the identification of four
 subtypes of Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.  van
 Rooden's work was done with a separate dataset using a different modeling method
 (expectation-maximization), and this investigation independently confirms these subtype
@@ -182,7 +275,7 @@ high prevalence of motor symptoms, while most motor symptoms are similar to the
 mild cluster 1. Of note is that the tremor population mean
 is the highest cluster mean, even higher than the severe subtype 4. This
 motor-dominant cluster may thus overlap with Ma's tremor dominant/slow
-progression cluster \cite{ma15}.
+progression cluster\cite{ma15}.
 
 Generally, given stable pdonset scores and predictably increasing durat\_pd
 scores for clusters 1 and 4, Ma et al's rapid disease
@@ -192,9 +285,9 @@ motor cluster.
 
 The most important nonmotor symptoms in determining these clusters were nms\_d2
 (sleep) and nms\_d3 (mood/cognition), which echo findings of Fereshtehnejad's
-longitudinal study \cite{fereshtehnejad15} and are similar to Sauerbier's
-identification of sleep dominant and cognitive dominant clinical NMS subtypes
-\cite{sauerbier15}. Compared to Erro et al. \cite{erro13}, nonmotor/motor
+longitudinal study\cite{fereshtehnejad15} and are similar to Sauerbier's
+identification of sleep dominant and cognitive dominant clinical NMS subtypes\cite{sauerbier15}.
+Compared to Erro et al.\cite{erro13}, nonmotor/motor
 dominant subtypes were indeed found, but an additional subgroup with relatively
 severe levels of both motor and nonmotor symptoms were found. Erro's benign
 subtype groups possibly overlap with the mild cluster 1 found in this

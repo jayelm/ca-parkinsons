@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  1 MAY 2016 17:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  3 MAY 2016 20:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -127,32 +127,161 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen115
 \Gm@layoutvoffset=\dimen116
 \Gm@dimlist=\toks17
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 2015/03/31 v1.1i Standard LaTeX option (flush left equations)
+\mathindent=\dimen117
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
 ))
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/pslatex/pslatex.sty
+Package: pslatex 1996/07/24 v1.2 pslatex emulation (DPC)
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 65.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ptmcm/m/n on input line 65.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptmcm/m/n on input line 65.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 66.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ptmcm/m/it on input line 66.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ptmcm/m/it on input line 66.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 67.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/pzccm/m/n on input line 67.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/pzccm/m/n on input line 67.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 68.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/psycm/m/n on input line 68.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/psycm/m/n on input line 68.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 74.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 74.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 74.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 75.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 75.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 75.
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip47
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks18
+\ex@=\dimen118
+))
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen119
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count98
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count99
+\leftroot@=\count100
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count101
+\DOTSCASE@=\count102
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box30
+\strutbox@=\box31
+\big@size=\dimen120
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
+\dotsspace@=\muskip10
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
+\tag@help=\toks19
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
+\andhelp@=\toks20
+\eqnshift@=\dimen121
+\alignsep@=\dimen122
+\tagshift@=\dimen123
+\tagwidth@=\dimen124
+\totwidth@=\dimen125
+\lineht@=\dimen126
+\@envbody=\toks21
+\multlinegap=\skip48
+\multlinetaggap=\skip49
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
-\heavyrulewidth=\dimen117
-\lightrulewidth=\dimen118
-\cmidrulewidth=\dimen119
-\belowrulesep=\dimen120
-\belowbottomsep=\dimen121
-\aboverulesep=\dimen122
-\abovetopsep=\dimen123
-\cmidrulesep=\dimen124
-\cmidrulekern=\dimen125
-\defaultaddspace=\dimen126
-\@cmidla=\count98
-\@cmidlb=\count99
-\@aboverulesep=\dimen127
-\@belowrulesep=\dimen128
-\@thisruleclass=\count100
-\@lastruleclass=\count101
-\@thisrulewidth=\dimen129
+\heavyrulewidth=\dimen127
+\lightrulewidth=\dimen128
+\cmidrulewidth=\dimen129
+\belowrulesep=\dimen130
+\belowbottomsep=\dimen131
+\aboverulesep=\dimen132
+\abovetopsep=\dimen133
+\cmidrulesep=\dimen134
+\cmidrulekern=\dimen135
+\defaultaddspace=\dimen136
+\@cmidla=\count110
+\@cmidlb=\count111
+\@aboverulesep=\dimen137
+\@belowrulesep=\dimen138
+\@thisruleclass=\count112
+\@lastruleclass=\count113
+\@thisrulewidth=\dimen139
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/threeparttable/threeparttabl
 e.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box30
-) (./numcompress.sty
+\@tempboxb=\box32
+) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count114
+\float@exts=\toks23
+\float@box=\box33
+\@float@everytoks=\toks24
+\@floatcapt=\box34
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen140
+\captionmargin@=\dimen141
+\captionwidth=\dimen142
+\caption@tempdima=\dimen143
+\caption@indent=\dimen144
+\caption@parindent=\dimen145
+\caption@hangindent=\dimen146
+)
+\c@ContinuedFloat=\count115
+Package caption Info: float package is loaded.
+Package caption Info: threeparttable package is loaded.
+)
+(./numcompress.sty
 Package: numcompress 2012/08/18 187 numcompress (CVR)
 
 
@@ -164,32 +293,38 @@ Package numcompress Warning: ****************************************
 ) (./manuscript.aux)
 \openout1 = `manuscript.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 28.
+LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 28
+.
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/omspzccm.fd
+File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
+)
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count102
-\scratchdimen=\dimen130
-\scratchbox=\box31
-\nofMPsegments=\count103
-\nofMParguments=\count104
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count105
-\MPscratchDim=\dimen131
-\MPnumerator=\count106
-\makeMPintoPDFobject=\count107
-\everyMPtoPDFconversion=\toks19
+\scratchcounter=\count116
+\scratchdimen=\dimen147
+\scratchbox=\box35
+\nofMPsegments=\count117
+\nofMParguments=\count118
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count119
+\MPscratchDim=\dimen148
+\MPnumerator=\count120
+\makeMPintoPDFobject=\count121
+\everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -255,145 +390,256 @@ e
 * \headsep=12.0pt
 * \topskip=10.0pt
 * \footskip=18.0pt
-* \marginparwidth=65.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
 * \columnsep=24.0pt
 * \skip\footins=24.0pt plus 2.0pt minus 12.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
-* \@twocolumnfalse
+* \@twocolumntrue
 * \@twosidefalse
 * \@mparswitchfalse
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 45.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 45.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 45.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 45.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 116.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 120.
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 44.
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 52
+.
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
+File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 120.
- [1
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 52
+.
 
-{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/omlptmcm.fd
+File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
+)
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 52
+.
 
-LaTeX Warning: Reference `tab:tukeyhsd' on page 2 undefined on input line 166.
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/omxpsycm.fd
+File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
 
 
-LaTeX Warning: Reference `tab:tukeyhsd' on page 2 undefined on input line 169.
+LaTeX Warning: there is no bold Symbol font on input line 56.
+
+<../../figures/gap-statistic.pdf, id=1, 433.62pt x 361.35pt>
+File: ../../figures/gap-statistic.pdf Graphic file (type pdf)
+
+<use ../../figures/gap-statistic.pdf>
+Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 93.
+
+(pdftex.def)             Requested size: 222.0pt x 185.00285pt.
 
 
-LaTeX Warning: Reference `tab:info_gain' on page 2 undefined on input line 170.
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../../figures/stability-measures.pdf, id=2, 578.16pt x 433.62pt>
+File: ../../figures/stability-measures.pdf Graphic file (type pdf)
+
+<use ../../figures/stability-measures.pdf>
+Package pdftex.def Info: ../../figures/stability-measures.pdf used on input lin
+e 102.
+(pdftex.def)             Requested size: 222.0pt x 166.4976pt.
 
 
-[2]
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 2005) has occurred while \output is active []
+
+ [1{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 184.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 184.
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 188.
+
+
+<../../figures/kmeans-summaries-4-pub.pdf, id=15, 1011.78pt x 722.7pt>
+File: ../../figures/kmeans-summaries-4-pub.pdf Graphic file (type pdf)
+
+<use ../../figures/kmeans-summaries-4-pub.pdf>
+Package pdftex.def Info: ../../figures/kmeans-summaries-4-pub.pdf used on input
+ line 195.
+(pdftex.def)             Requested size: 468.0pt x 334.28763pt.
+
+<../../figures/nms30m-colhc-pub.pdf, id=16, 1084.05pt x 505.89pt>
+File: ../../figures/nms30m-colhc-pub.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-colhc-pub.pdf>
+Package pdftex.def Info: ../../figures/nms30m-colhc-pub.pdf used on input line 
+243.
+(pdftex.def)             Requested size: 468.0pt x 218.40073pt.
+
+
+LaTeX Warning: Reference `tab:tukeyhsd' on page 2 undefined on input line 259.
+
+
+Underfull \hbox (badness 1147) in paragraph at lines 251--260
+\OT1/ptm/m/n/10 predominant, motor-predominant, and se-vere. van
+ []
+
+
+LaTeX Warning: Reference `tab:tukeyhsd' on page 2 undefined on input line 262.
+
+
+LaTeX Warning: Reference `tab:info_gain' on page 2 undefined on input line 263.
+
+
+[2 <../../figures/gap-statistic.pdf> <../../figures/stability-measures.pdf>]
+Underfull \hbox (badness 1661) in paragraph at lines 280--285
+[]\OT1/ptm/m/n/10 Generally, given sta-ble pdon-set scores and pre-
+ []
+
+
+Underfull \hbox (badness 1728) in paragraph at lines 280--285
+\OT1/ptm/m/n/10 4, Ma et al's rapid dis-ease pro-gres-sion/late on-set
+ []
+
 
 LaTeX Warning: Reference `fig:dtree-2and4va-pruned' on page 3 undefined on inpu
-t line 209.
+t line 302.
 
 
-LaTeX Warning: Reference `fig:2va' on page 3 undefined on input line 220.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+LaTeX Warning: Reference `fig:2va' on page 3 undefined on input line 313.
 
 
 LaTeX Warning: Reference `fig:dtree-2and4va-pruned' on page 3 undefined on inpu
-t line 221.
+t line 314.
 
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 230.
+[3]
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 323.
 
-LaTeX Warning: Reference `fig:longcorr' on page 3 undefined on input line 230.
 
 
-LaTeX Warning: Reference `fig:nms9-multi' on page 3 undefined on input line 233
+LaTeX Warning: Reference `fig:longcorr' on page 4 undefined on input line 323.
+
+
+LaTeX Warning: Reference `fig:nms9-multi' on page 4 undefined on input line 326
 .
 
 
-LaTeX Warning: Reference `fig:nms10-multi' on page 3 undefined on input line 23
-3.
+LaTeX Warning: Reference `fig:nms10-multi' on page 4 undefined on input line 32
+6.
 
 
-LaTeX Warning: Reference `fig:tremor-multi' on page 3 undefined on input line 2
-37.
+LaTeX Warning: Reference `fig:tremor-multi' on page 4 undefined on input line 3
+30.
 
 
-LaTeX Warning: Reference `fig:cisitot-multi' on page 3 undefined on input line 
-239.
+LaTeX Warning: Reference `fig:cisitot-multi' on page 4 undefined on input line 
+332.
 
 
-LaTeX Warning: Reference `fig:nms30m-colhc' on page 3 undefined on input line 2
-40.
+LaTeX Warning: Reference `fig:nms30m-colhc' on page 4 undefined on input line 3
+33.
 
 
-Overfull \hbox (4.22208pt too wide) in paragraph at lines 229--242
-\OT1/cmr/m/n/10 Ac-cord-ing to Fig-ure [], most symp-toms are highly cor-re-lat
-ed, with PD du-ra-tion, but no-tably, mood/cognition
+LaTeX Warning: Reference `fig:d9to30' on page 4 undefined on input line 338.
+
+
+Underfull \hbox (badness 2189) in paragraph at lines 336--340
+\OT1/ptm/m/n/10 is given that the previously-discovered Sub-type 2
  []
-
-[3]
-
-LaTeX Warning: Reference `fig:d9to30' on page 4 undefined on input line 245.
 
 
 LaTeX Warning: Reference `fig:nms30m-k4-heatmap-improved' on page 4 undefined o
-n input line 250.
+n input line 343.
 
 
 LaTeX Warning: Reference `fig:nms30m-mclust-heatmap-improved' on page 4 undefin
-ed on input line 253.
+ed on input line 346.
 
 
-LaTeX Warning: Reference `fig:nms30m-colhc' on page 4 undefined on input line 2
-62.
+LaTeX Warning: Reference `fig:nms30m-colhc' on page 4 undefined on input line 3
+55.
+
+
+Underfull \hbox (badness 2762) in paragraph at lines 353--358
+[]\OT1/ptm/m/n/10 It's in-tu-itive that a Depression-Dominant group
+ []
 
 (./manuscript.bbl
-Missing character: There is no â in font cmr8!
-Missing character: There is no € in font cmr8!
-Missing character: There is no ™ in font cmr8!
-) [4] (./manuscript.aux)
+Underfull \hbox (badness 10000) in paragraph at lines 28--37
+[]\OT1/ptm/m/n/8 Brock G, Pi-hur V, Datta S, Datta S.  clvalid:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--37
+\OT1/ptm/m/n/8 An r pack-age for clus-ter val-i-da-tion.  Jour-nal
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--37
+\OT1/ptm/m/n/8 of Sta-tis-ti-cal Soft-ware 2008;25(1):1--22.  URL:
+ []
+
+
+Overfull \hbox (39.12714pt too wide) in paragraph at lines 28--37
+\OT1/pcr/m/n/8 https://www.jstatsoft.org/index.php/jss/article/view/v025i04\OT1
+/ptm/m/n/8 .
+ []
+
+[4]
+Underfull \hbox (badness 1616) in paragraph at lines 73--84
+[]\OT1/ptm/m/n/8 Fereshtehnejad SM, Romenets SR, Anang JB, La-treille V,
+ []
+
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ™ in font ptmr7t!
+) [5
+
+] [6 <../../figures/kmeans-summaries-4-pub.pdf> <../../figures/nms30m-colhc-pub
+.pdf>] (./manuscript.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2817 strings out of 494501
- 38946 string characters out of 6167031
- 116431 words of memory out of 5000000
- 6056 multiletter control sequences out of 15000+600000
- 8886 words of font info for 31 fonts, out of 8000000 for 9000
+ 4793 strings out of 494501
+ 70230 string characters out of 6167031
+ 153318 words of memory out of 5000000
+ 7964 multiletter control sequences out of 15000+600000
+ 47203 words of font info for 95 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,14n,30p,240b,373s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
-0.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi9.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2015basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basic/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2015basic/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2015basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on manuscript.pdf (4 pages, 186218 bytes).
+ 38i,14n,44p,404b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/lo
+cal/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+</usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/
+local/texlive/2015basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local
+/texlive/2015basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texl
+ive/2015basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on manuscript.pdf (6 pages, 136241 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 83 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
