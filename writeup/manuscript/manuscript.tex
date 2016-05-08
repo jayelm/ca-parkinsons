@@ -2,7 +2,8 @@
 \documentclass[preprint,3p,twocolumn]{elsarticle} % TODO: What model?
 
 % Use times font
-\usepackage{pslatex}
+\usepackage{mathptmx}
+\usepackage{lmodern}
 
 % Math
 \usepackage{amsmath}
@@ -10,6 +11,9 @@
 % Tables, Figures
 \usepackage{booktabs}
 \usepackage{threeparttable}
+% For line-breaking cells
+\newcommand{\spc}[2][c]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
 \usepackage{float}
 \usepackage{caption}
 \setlength{\tabcolsep}{10pt}
@@ -59,8 +63,8 @@
 
 \subsection{Statistical analysis}
 
-Out of the 951 patients in the study, we used listwise deletion to exclude 50 patients due to
-missing measurements in the variables of interest, resulting in 901 remaining patients. All
+Out of the 951 patients in the study, we used listwise deletion to exclude 47 patients due to
+missing measurements in the variables of interest, resulting in 904 remaining patients. All
 symptoms were scaled to $z$-scores ($\mu = 0$, $\sigma = 1$) before clustering, and unscaled
 afterwards. Analysis was conducted in R 3.2.4 (www.r-project.org).
 
@@ -116,10 +120,11 @@ results for the second analysis with a heatmap. Finally, for the hierarchical cl
 symptoms themselves, we displayed results in a dendrogram and clustered the symptoms into four
 interpretable clusters.
 
-For each symptom in both clusterings, we used one-way ANOVA to test the equality of symptom means
-across the clusters found, using Bonferroni correction for multiple testing with corrected $p <
-0.05$ considered significant. Differences among pairwise clusters were tested post-hoc using
-Tukey's range test.
+For each symptom in both clusterings, we used one-way ANOVA and $\chi^2$ tests to test the equality
+of symptom means and proportions across the clusters found, using Bonferroni correction for
+multiple testing with corrected $p < 0.05$ considered significant. Differences among pairwise
+clusters were tested post-hoc using Tukey's range test for continuous means, or pairwise $\chi^2$
+tests with Bonferroni correction for proportions.
 
 \section{Results}
 
@@ -127,26 +132,41 @@ Tukey's range test.
 
 $k$-means clustering on the nine nonmotor domains and the four motor symptoms found four clusters,
 available in Table~\ref{tab:nmd} with boxplots in Figure~\ref{fig:box}. Cluster means for all
-symptoms were found to be statistically different, with specific pairwise differences noted in the table.
+symptoms were found to be statistically different $(p < 0.05 / 13 \approx 0.003)$, with specific
+pairwise differences noted in the table. Additionally, statistics for variables not used in the
+clustering were explored similarly in Table~\ref{tab:nmd_extra}; cluster means for all variables
+were found to be statistically different, except for PD onset.
 
-Cluster 1 ($n = 406$) patients were mildly affected in all domains.
+Cluster 1 ($n = 406$) patients were mildly affected in all domains. This cluster was characterized
+by relatively lower disease durations and ages.
 
-Cluster 2 ($n = 189$) patients were severely
-affected in nonmotor domains but mildly affected in motor domains (Nonmotor-Dom), cluster 3 ($n =
-221$) patients were severely affected in motor domains but mildly affected in nonmotor domains
-(Motor-Dom), and cluster 4 ($n = 88$) patients were severely affected in all domains. Statistics
-for variables not used in the clustering were explored in Table~\ref{tab:nmd_extra}.
+Cluster 2 ($n = 189$) patients were severely affected in nonmotor domains but mildly affected in
+motor domains. This cluster had an incidence of motor symptoms relatively similar to the Cluster 1
+(mild) subtype especially in tremor, but generally expressed significantly higher scores for
+nonmotor symptoms than Clusters 1 and 3, especially in the sleep/fatigue, mood/cognition and
+miscellaneous domains.
+% But also high variability
+
+Cluster 3 ($n = 221$) patients were severely affected in motor domains but mildly affected in
+nonmotor domains. Mean motor scores were greater than the means of clusters 1 and 2, but less than
+4, with the exception of tremor, which was especially high.
+
+Cluster 4 ($n = 88$) patients were severely affected in all domains, having the greatest symptom
+mean out of all four clusters with the exception of tremor. Consequently, patients in Cluster 4 had
+the longest average PD duration and oldest ages, but did not have a significantly different age of
+PD onset.
 
 \begin{table*}[t]
   \centering
-  \caption{Summaries of clustering on nonmotor domains. Bold indicates the highest score for that
-  symptom out of the four clusters.}
+  \caption{Summaries of clustering on nonmotor domains. Unless otherwise specified, statistics are
+    reported as mean (sd). \textbf{Bold} indicates the highest score for that symptom out of the
+  four clusters.}
   \label{tab:nmd}
   \begin{threeparttable}
   \begin{tabular}{l r r r r}
     \toprule
     Cluster & 1 & 2 & 3 & 4 \\
-    $n$ & 406 (44.9\%) & 189 (20.9\%) & 221 (24.4\%) & 88 (9.7\%) \\
+    $n$ & 406 (45\%) & 189 (21\%) & 221 (24\%) & 88 (10\%) \\
     \midrule
     \textbf{Nonmotor} (Domains) & & & & \\
     Cardiovascular (0--24) & 0.7 (1.6)\tnote{24} & 2.3 (2.9)\tnote{134} & 1.1 (2.0)\tnote{24} &
@@ -181,10 +201,10 @@ for variables not used in the clustering were explored in Table~\ref{tab:nmd_ext
   \end{tabular}
   \begin{tablenotes}
     \small
-    \item[1] Significant difference with cluster 1 ($p < 0.05$)
-    \item[2] Significant difference with cluster 2 ($p < 0.05$)
-    \item[3] Significant difference with cluster 3 ($p < 0.05$)
-    \item[4] Significant difference with cluster 4 ($p < 0.05$)
+    \item[1] Significant difference with cluster 1 (adjusted $p < 0.05$)
+    \item[2] Significant difference with cluster 2 (adjusted $p < 0.05$)
+    \item[3] Significant difference with cluster 3 (adjusted $p < 0.05$)
+    \item[4] Significant difference with cluster 4 (adjusted $p < 0.05$)
     \item[\textdagger] Another footnote.
   \end{tablenotes}
   \end{threeparttable}
@@ -208,35 +228,136 @@ for variables not used in the clustering were explored in Table~\ref{tab:nmd_ext
   \begin{threeparttable}
   \begin{tabular}{l r r r r}
     \toprule
-    & 1 & 2 & 3 & 4 \\
+    Cluster & 1 & 2 & 3 & 4 \\
     \midrule
-      Age & 62.7 (9.7) & 64 (9) & 65 (10.2) & 70.5 (8.9) \\
-      Sex & 0.4 (0.5) & 0.5 (0.5) & 0.3 (0.5) & 0.4 (0.5) \\
+      Sex (\% male) & 63 & 53\tnote{3} & 71\tnote{2} & 58 \\
+      Age & 62.7 (9.7)\tnote{34} & 64 (9.0)\tnote{4} & 65 (10.2)\tnote{14} & 70.5 (8.9)\tnote{123} \\
       PD\_Onset & 56 (10.6) & 55.2 (10.1) & 56.9 (11.1) & 58.2 (11.4) \\
-      PD\_Duration & 6.7 (4.8) & 8.7 (5.7) & 8 (5.5) & 12.3 (8.1) \\
-      CISI\_Total & 5.7 (3.2) & 9.2 (3.9) & 9.7 (3.5) & 14.8 (5.1) \\
-      Surgery & 0 (0.2) & 0.1 (0.2) & 0 (0.2) & 0 (0.1) \\
+      PD\_Duration & 6.7 (4.8)\tnote{234} & 8.7 (5.7)\tnote{14} & 8 (5.5)\tnote{14} & 12.3
+      (8.1)\tnote{123} \\
+      CISI\_Total & 5.7 (3.2)\tnote{234} & 9.2 (3.9)\tnote{14} & 9.7 (3.5)\tnote{14} & 14.8
+      (5.1)\tnote{123} \\
     \bottomrule
   \end{tabular}
   \begin{tablenotes}
     \small
-    \item[1] Significant difference with cluster 1 ($p < 0.05$)
-    \item[2] Significant difference with cluster 2 ($p < 0.05$)
-    \item[3] Significant difference with cluster 3 ($p < 0.05$)
-    \item[4] Significant difference with cluster 4 ($p < 0.05$)
-    \item[\textdagger] Another footnote.
+    \item[1] Significant difference with cluster 1 (adjusted $p < 0.05$)
+    \item[2] Significant difference with cluster 2 (adjusted $p < 0.05$)
+    \item[3] Significant difference with cluster 3 (adjusted $p < 0.05$)
+    \item[4] Significant difference with cluster 4 (adjusted $p < 0.05$)
   \end{tablenotes}
   \end{threeparttable}
 \end{table*}
+
 \subsection{Clustering with nonmotor symptoms}
 
-\subsection{Hierarchical clustering on symptoms}
+$k$-means clustering performed on the 30 individual nonmotor symptoms found similar patterns to the
+first clustering (Table~\ref{tab:nms30}, heatmap in Figure~\ref{fig:nms30-hm}). Means of all symptoms were found to
+differ across clusters except for PD\_Onset and tremor.
 
-Hierarchical clustering on the 30 nonmotor symptoms and the four motor symptoms produced the
-dendrogram in Figure~\ref{fig:hc}. Predictably, symptoms in the same nonmotor domains tended to
-cluster together, with the exceptions of diplopia (domain 4), drowsiness (domain 2), and the
-symptoms in domain 9 (miscellaneous). Notably, tremor was the most dissimilar symptom, occupying a single branch at the
-top of the tree.
+Clusters 1 ($n = 509$) and 4 ($n = 49$), the mild and severe subtypes of the previous clustering,
+retain their characteristics here, while clusters 2 ($n = 97$) and 3 ($n = 249$) are different. 2
+is a mood/cognition-dominant cluster, with relatively higher proportion of female patients and
+additionally a relatively more severe incidence of insomnia. 3 is not characterized by any
+especially high symptoms and is thus an ``average'' group of patients.
+% Once again, CISI TOTAL...
+
+% Perhaps this table belongs in appendix?
+\begin{table*}[t]
+  \centering
+  \caption{Summaries of clustering on individual nonmotor domains. Unless otherwise specified,
+    statistics are reported as mean (sd). \textbf{Bold} indicates the highest score for that
+  symptom out of the four clusters.}
+  \label{tab:nms30}
+  \begin{threeparttable}
+  \small
+\begin{tabular}{lrllll}
+  \toprule
+    & Cluster & 1 & 2 & 3 & 4 \\
+    & $n$ & 509 (56.3\%) & 97 (10.7\%) & 249 (27.5\%) & 49 (5.4\%) \\
+  \midrule
+  1.\ Cardiovascular &
+  Lightheadedness & 0.6 (1.3)\tnote{234} & 2.4 (3.0)\tnote{14} & 2.1 (2.9)\tnote{14} & \textbf{5.2}
+  (4.2)\tnote{123} \\
+  &Fainting & 0.1 (0.7)\tnote{24} & 0.5 (1.4)\tnote{134} & 0.2 (0.6)\tnote{24} & \textbf{2.4}
+  (3.5)\tnote{123} \\
+  \midrule
+  2.\ Sleep/fatigue &
+  Drowsiness & 1.0 (1.9)\tnote{234} & 2.8 (3.3)\tnote{14} & 2.5 (3.0)\tnote{14} & \textbf{7.0}
+  (3.8)\tnote{123} \\
+  &Fatigue & 1.3 (2.0)\tnote{234} & 6.3 (4.2)\tnote{13} & 4.8 (3.9)\tnote{124} & \textbf{7.3} (3.5)\tnote{13} \\
+  &Insomnia & 1.2 (2.6)\tnote{234} & \textbf{5.5} (4.8)\tnote{13} & 3.2 (3.8)\tnote{12} & 4.2
+  (3.9)\tnote{1} \\
+  &RLS & 0.7 (1.6)\tnote{234} & 2.3 (3.5)\tnote{14} & 1.9 (3.2)\tnote{14} & \textbf{3.9}
+  (3.9)\tnote{123} \\
+  \midrule
+  3.\ Mood/cognition &
+  Loss\_interest & 0.4 (1.1)\tnote{234} & \textbf{6.1} (3.8)\tnote{134} & 1.0 (1.8)\tnote{124} & 4.6 (3.7)\tnote{123} \\
+  &Loss\_activities & 0.7 (1.6)\tnote{234} & \textbf{7.1} (4.1)\tnote{134} & 1.7 (2.4)\tnote{124} &
+  5.4 (4.0)\tnote{123} \\
+  &Anxiety & 0.9 (1.8)\tnote{234} & \textbf{6.6} (4.3)\tnote{134} & 2.0 (2.8)\tnote{124} & 4.6 (3.9)\tnote{123} \\
+  &Depression & 0.8 (1.6)\tnote{234} & \textbf{7.8} (3.7)\tnote{134} & 2.3 (3.0)\tnote{124} & 4.3 (3.7)\tnote{123} \\
+  &Flat\_affect & 0.4 (1.1)\tnote{234} & \textbf{4.9} (4.3)\tnote{134} & 0.9 (1.9)\tnote{124} & 2.7 (3.0)\tnote{123} \\
+  &Loss\_pleasure & 0.4 (1.2)\tnote{234} & \textbf{6.8} (4.1)\tnote{134} & 1.1 (2.1)\tnote{124} & 3.4 (3.3)\tnote{123} \\
+  \midrule
+  % This one is spread across multiple cells
+  4.\ Perception/ & Hallucination & 0.2 (1.0)\tnote{234} & 0.8 (1.9)\tnote{14} & 0.6 (1.6)\tnote{14} & \textbf{4.6} (3.6)\tnote{123} \\
+  hallucination &Delusion & 0.1 (0.7)\tnote{24} & 1.5 (3.1)\tnote{124} & 0.2 (1.0)\tnote{24} &
+  \textbf{3.1} (3.8)\tnote{123} \\
+  &Diplopia & 0.2 (0.7)\tnote{234} & 1.0 (2.5)\tnote{14} & 0.6 (1.4)\tnote{14} & \textbf{4.4}
+  (4.3)\tnote{123} \\
+  \midrule
+  5.\ Attention/ & Loss\_concentration & 0.9 (1.8)\tnote{234} & 4.0 (3.6)\tnote{134} & 2.5 (3.1)\tnote{124} & \textbf{6.6} (3.9)\tnote{123} \\
+  memory &Forget\_explicit & 0.9 (1.6)\tnote{234} & 3.8 (3.9)\tnote{134} & 2.2 (2.9)\tnote{124} & \textbf{6.7} (3.6)\tnote{123} \\
+  &Forget\_implicit & 0.7 (1.6)\tnote{234} & 3.1 (3.7)\tnote{134} & 1.8 (2.6)\tnote{124} & \textbf{6.7} (4.0)\tnote{123} \\
+  \midrule
+  6.\ Gastrointestinal &
+  Drooling & 0.7 (1.6)\tnote{234} & 3.0 (4.1)\tnote{14} & 3.0 (3.8)\tnote{14} & \textbf{6.1} (4.4)\tnote{123} \\
+  &Swallowing & 0.4 (1.2)\tnote{234} & 1.2 (2.1)\tnote{14} & 1.7 (2.8)\tnote{14} & \textbf{4.5} (3.9)\tnote{123} \\
+  &Constipation & 1.6 (2.9)\tnote{234} & 3.6 (4.3)\tnote{14} & 3.3 (4.1)\tnote{14} & \textbf{7.0} (5.1)\tnote{123} \\
+  \midrule
+  7.\ Urinary &
+  Urinary\_urgency & 1.0 (1.8)\tnote{234} & 3.5 (4.1)\tnote{14} & 3.8 (3.8)\tnote{14} & \textbf{7.8} (4.0)\tnote{123} \\
+  &Urinary\_frequency & 0.9 (1.9)\tnote{234} & 4.0 (4.1)\tnote{14} & 3.8 (4.0)\tnote{14} & \textbf{6.5} (4.0)\tnote{123} \\
+  &Nocturia & 1.7 (2.3)\tnote{234} & 5.0 (4.3)\tnote{14} & 5.1 (4.1)\tnote{14} & \textbf{7.7} (3.9)\tnote{123} \\
+  \midrule
+  8.\ Sexual &
+  Sex\_drive & 0.8 (1.9)\tnote{234} & 4.5 (4.9)\tnote{13} & 2.3 (3.6)\tnote{124} & \textbf{5.2} (5.4)\tnote{13} \\
+  &Sex\_dysfunction & 0.8 (2.2)\tnote{234} & 3.2 (4.7)\tnote{1} & 2.4 (3.8)\tnote{14} &
+  \textbf{4.6} (5.4)\tnote{13} \\
+  \midrule
+  9.\ Miscellaneous &
+  Unexplained\_pain & 0.7 (1.9)\tnote{234} & 2.5 (3.7)\tnote{14} & 3.0 (4.1)\tnote{14} & \textbf{4.2} (4.3)\tnote{123} \\
+  &Gustation\_olfaction & 1.5 (2.9)\tnote{234} & 3.6 (4.3)\tnote{1} & 3.2 (3.9)\tnote{14} &
+  \textbf{4.7} (4.8)\tnote{13} \\
+  &Weight\_change & 0.9 (1.7)\tnote{234} & 2.5 (3.4)\tnote{14} & 1.9 (3.0)\tnote{14} & \textbf{3.9} (4.2)\tnote{123} \\
+  &Sweating & 0.7 (1.8)\tnote{234} & 2.2 (3.5)\tnote{1} & 2.8 (4.1)\tnote{1} & \textbf{3.2}
+  (3.8)\tnote{1} \\
+  \midrule
+  Motor &
+  Tremor & 2.5 (2.3) & 2.1 (2.4) & 2.6 (2.6) & \textbf{4.1} (4.3) \\
+  &Bradykinesia & 2.0 (1.2)\tnote{234} & 2.8 (1.4)\tnote{14} & 2.8 (1.4)\tnote{14} & \textbf{3.9} (1.8)\tnote{123} \\
+  &Rigidity & 1.9 (1.2)\tnote{234} & 2.4 (1.3)\tnote{14} & 2.6 (1.4)\tnote{14} & \textbf{3.6} (1.6)\tnote{123} \\
+  &Axial & 2.2 (1.8)\tnote{234} & 4.4 (2.8)\tnote{14} & 4.2 (2.7)\tnote{14} & \textbf{7.2} (3.2)\tnote{123} \\
+  \midrule
+  Variables not & Age & 62.7 (9.9)\tnote{34} & 64.5 (9.6)\tnote{4} & 66 (9.2)\tnote{14} & 71.5
+  (8.1)\tnote{123} \\
+  used in analysis & Sex (\% Male) & 65\tnote{2} & 51\tnote{1} & 60 & 63 \\
+  & PD\_Onset & 55.9 (10.8) & 56.2 (10.4) & 56.7 (10.5) & 57.8 (11.0) \\
+  & PD\_Duration & 6.8 (4.8)\tnote{34} & 8.3 (5.3)\tnote{4} & 9.3 (6.3)\tnote{14} & 13.8
+  (8.2)\tnote{123} \\
+  & CISI\_Total & 6.3 (3.4)\tnote{234} & 10.8 (4.7)\tnote{14} & 10 (4.0)\tnote{14} & 15.1 (5.7)\tnote{123} \\
+   \bottomrule
+\end{tabular}
+  \begin{tablenotes}
+    \small
+    \item[1] Significant difference with cluster 1 (adjusted $p < 0.05$)
+    \item[2] Significant difference with cluster 2 (adjusted $p < 0.05$)
+    \item[3] Significant difference with cluster 3 (adjusted $p < 0.05$)
+    \item[4] Significant difference with cluster 4 (adjusted $p < 0.05$)
+  \end{tablenotes}
+  \end{threeparttable}
+\end{table*}
 
 \begin{figure*}[t]
   \centering
@@ -246,9 +367,31 @@ top of the tree.
   \label{fig:hc}
 \end{figure*}
 
+% TODO: If the outline of the paper is good enough it might be possible to have this inline
+% in the paper somewhere. If so, change figure* -> figure, make h! (force horizontal?), and switch
+% 0.8 linewidth to full linewidth
+% Also, I'm going to include this AFTER nms30m-colhc, so that colhc/boxplots fits nicely on one
+% page
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.7\linewidth]{nms30-hm-pub.pdf}
+  % TODO: Variables not used in analysis? Label color - black nms, blue nonmotor, grey ?
+  \caption{Heatmap of clusters found when clustering with nonmotor symptoms. Color indicates
+    cluster mean as a $z$-score for the given symptom; red is higher, green is lower.}
+  \label{fig:nms30-hm}
+\end{figure*}
+
+\subsection{Hierarchical clustering on symptoms}
+
+Hierarchical clustering on the 30 nonmotor symptoms and the four motor symptoms produced the
+dendrogram in Figure~\ref{fig:hc}. Predictably, symptoms in the same nonmotor domains tended to
+cluster together, with the exceptions of diplopia (domain 4), drowsiness (domain 2), and the
+symptoms in domain 9 (miscellaneous). Notably, tremor was the most dissimilar symptom, occupying a
+single branch at the top of the tree.
+
 \section{Discussion}
 
-$k$-means clustering on this Parkinsons' Disease data set reveals clusters that confirm previous
+$k$-means clustering on this dataset reveals clusters that confirm previous
 findings in the field, mainly van Rooden et al.\cite{vanrooden10} and the identification of four
 subtypes of Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.  van
 Rooden's work was done with a separate dataset using a different modeling method
@@ -312,12 +455,6 @@ seems most consistent is the presence of nms\_d9 (miscellaneous) nonmotor
 symptoms, as it is used as the root node of the 2 vs all decision tree
 (Figure~\ref{fig:2va}) and the 2 and 4 vs rest decision tree
 (Figure~\ref{fig:dtree-2and4va-pruned}).
-
-It remains to be seen whether these classification models, especially the one-vs-all decision
-trees, are useful in clinical practice.
-
-\subsection{New conclusions}
-\label{ssec:newconc}
 
 First, the longitudinal analysis gives more insight into the clusters found when clustering on
 nms\_d\{1-9\}. According to Figure~\ref{fig:longcorr}, most symptoms are highly correlated, with PD

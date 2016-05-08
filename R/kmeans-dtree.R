@@ -750,6 +750,8 @@ clus4.wide.st <- clusters.raw[["4"]]
 # Why isn't this already a factor? Really confused
 # Because it wasn't set in clusters.raw - if this is a bad thing lmk
 clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
+# Just NMS pls
+clus4.wide.st <- clus4.wide.st[, ]
 # Assuming 1st column is cluster (which it should be)
 oneways <- lapply(colnames(clus4.wide.st[, -1]), function(col) {
   fm <- substitute(i ~ cluster, list(i = as.name(col)))

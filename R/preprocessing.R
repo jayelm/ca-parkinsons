@@ -24,6 +24,10 @@ MOTOR.SYMPTOMS <- c("tremor",
                    "bradykin",
                    "rigidity",
                    "axial")
+MOTOR.PUB <- c("Tremor",
+                   "Bradykinesia",
+                   "Rigidity",
+                   "Axial")
 NMS.30.NAMES <- c(
   'd1-1-lightheaded',
   'd1-2-fainting',
@@ -84,7 +88,7 @@ NMS.30.NAMES.PUB <- c(
   'Sex_drive',
   'Sex_dysfunction',
   'Unexplained_pain',
-  'Gustation/olfacttion',
+  'Gustation_olfaction',
   'Weight_change',
   'Sweating'
 )
@@ -105,6 +109,7 @@ NMS.D.NAMES <- c(
 NMS.D.MAP.PUB <- setNames(NMS.D.NAMES, NMS.D)
 NMS.D.MAP.PUB.N <- setNames(sapply(1:length(NMS.D.NAMES), function(i) paste(i, NMS.D.NAMES[i], sep = "-")), NMS.D)
 NMS.30.MAP.PUB <- setNames(NMS.30.NAMES.PUB, NMS.30)
+NMS.30.LONG.SHORT.MAP <- setNames(NMS.30.NAMES.PUB, NMS.30.NAMES)
 MISC.MAP <- c(
   'age' = 'Age',
   'sex' = 'Sex',
@@ -116,7 +121,8 @@ MISC.MAP <- c(
   'rigidity' = 'Rigidity',
   'axial' = 'Axial',
   'ldopa' = 'ldopa',
-  'surgery' = 'Surgery'
+  'surgery' = 'Surgery',
+  'cluster' = 'Cluster'
 )
 PUB.MAP <- c(NMS.D.MAP.PUB, NMS.30.MAP.PUB, MISC.MAP)
 PUB.MAP.N <- c(NMS.D.MAP.PUB.N, NMS.30.MAP.PUB, MISC.MAP)  # This one just has n

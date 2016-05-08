@@ -30,9 +30,6 @@
 \newblock \bibinfo{title}{clvalid: An r package for cluster validation}.
 \newblock \bibinfo{journal}{Journal of Statistical Software}
   \bibinfo{year}{2008};\bibinfo{volume}{25}(\bibinfo{number}{1}):\bibinfo{pages}{1--22}.
-\newblock \URLprefix
-  \url{https://www.jstatsoft.org/index.php/jss/article/view/v025i04}.
-  \DOIprefix\doi{10.18637/jss.v025.i04}.
 %Type = Article
 \bibitem[{Datta and Datta(2006)}]{datta2006methods}
 \bibinfo{author}{Datta\xfnm[ S.]}, \bibinfo{author}{Datta\xfnm[ S.]}.

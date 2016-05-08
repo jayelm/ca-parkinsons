@@ -107,7 +107,7 @@ hm.m <- heatmap.2(as.matrix(nms30m.s),
                   trace='none')
 colD.m <- as.ggdend(hm.m$colDendrogram)
 
-# Average is hella different
+# Average is different
 asdf <- hclust(dist(t(nms30m.s)), method='average')
 plot(asdf)
 

@@ -3,6 +3,8 @@
 library(doBy)
 library(xtable)
 library(reshape)
+library(plyr)
+library(infotheo)
 
 nmsd.symptoms <- c(
   NMS.D.NAMES,
@@ -29,10 +31,36 @@ nmsd.extra <- c(
 #   1   2   3  4
 # 406 189 221 88
 
+# V-measure ====
+# always useful...
+v.measure <- function(a, b) {
+  mi <- mutinformation(a, b)
+  entropy.a <- entropy(a)
+  entropy.b <- entropy(b)
+  if (entropy.a == 0.0) {
+    homogeneity <- 1.0
+  } else {
+    homogeneity <- mi / entropy.a
+  }
+  if (entropy.b == 0.0) {
+    completeness <- 1.0
+  } else {
+    completeness <- mi / entropy.b
+  }
+  if (homogeneity + completeness == 0.0) {
+    v.measure.score <- 0.0
+  } else {
+    v.measure.score <- (2.0 * homogeneity * completeness
+                        / (homogeneity + completeness))
+  }
+  # Can also return homogeneity and completeness if wanted
+  c(homogeneity, completeness, v.measure.score)
+}
+
 # ON NONMOTOR DOMAINS ====
 # Somewhat oddly, the correct clustering vector lies in trees$clusters4$clustering$cluster
-present <- rename(raw.omitted, PUB.MAP)
-present.full <- rename(raw.omitted.full, PUB.MAP)
+present <- reshape::rename(raw.omitted, PUB.MAP)
+present.full <- reshape::rename(raw.omitted.full, PUB.MAP)
 present$Cluster <- trees$clusters4$clustering$cluster
 present.full$Cluster <- trees$clusters4$clustering$cluster
 
@@ -58,7 +86,15 @@ to.latex(present[, nmsd.symptoms], "../writeup/manuscript/include/nmsd_summaries
 to.latex(present.full[, nmsd.extra], "../writeup/manuscript/include/nmsd_extra.tex")
 
 # Publication-ready dendrogram ====
-labels.wo.d <- unname(sapply(labels(hm.m$colDendrogram), function(s) {
+remove.domain.n <- function(s) {
+  splitted <- strsplit(s, '-')[[1]]
+  if (length(splitted) == 1) {
+    s
+  } else {
+    splitted[3]
+  }
+}
+rid.of.middle <- function(s) {
   splitted <- strsplit(s, '-')[[1]]
   if (length(splitted) == 1) {
     s  # No -, leave it alone
@@ -69,7 +105,9 @@ labels.wo.d <- unname(sapply(labels(hm.m$colDendrogram), function(s) {
     symp <- splitted[3]
     paste(domain, symp, sep = '-')
   }
-}))
+}
+
+labels.wo.d <- unname(sapply(labels(hm.m$colDendrogram), rid.of.middle))
 # TODO: Capitalize map if necessary
 par(mar=c(3, 4, 0.5, 0))
 hm.m$colDendrogram %>%
@@ -85,7 +123,7 @@ hm.m$colDendrogram %>%
 dev.copy(pdf, "../figures/nms30m-colhc-pub.pdf", width = 15, height = 7)
 dev.off()
 
-# Pub-ready boxplot graph
+# Pub-ready boxplot graph ====
 dev.off()
 clus <- clusters.raw.long[["4"]]
 # Get rid of extra
@@ -160,3 +198,213 @@ grid.draw(new_plot)
 
 dev.copy(pdf, "../figures/kmeans-summaries-4-pub.pdf", width = 14, height = 10)
 dev.off()
+
+# Anova with bonferroni correction on c1====
+clus4.wide.st <- clusters.raw[["4"]]
+# Why isn't this already a factor? Really confused
+# Because it wasn't set in clusters.raw - if this is a bad thing lmk
+clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
+# Just NMS
+clus4.wide.st <- clus4.wide.st[, c(NMS.D, "axial", "rigidity", "bradykin", "tremor", "cluster")]
+# Assuming 1st column is cluster (which it should be)
+oneways <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
+  fm <- substitute(i ~ cluster, list(i = as.name(col)))
+  oneway.test(fm, clus4.wide.st)
+})
+for (test in oneways) {
+  if (test$p.value < (0.05 / length(oneways))) { # BONFERRONI CORRECTION!
+    cat('sig\n')
+  } else {
+    cat('INSIG:\n')
+    cat(test$data.name, '\n')
+  }
+}
+
+# Redo tukey's for sanity
+tukeys <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
+  # Doesn't work the oneway way for some reason!
+  fm <- as.formula(paste(col, '~ cluster'))
+  TukeyHSD(aov(fm, clus4.wide.st))$cluster
+})
+names(tukeys) <- colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))])
+
+# Now output the insignificant diferences only
+. <- sapply(names(tukeys), function(name) {
+  tkdf <- as.data.frame(tukeys[name][[1]])
+  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05, ])
+  if (length(sigs) > 0) {
+    cat(name, ": ", sep = "")
+    cat(sigs, "\n")
+  }
+})
+
+# Redo for age/sex/pdonset/duratpd/cisitot on c1 ====
+clus4.wide.st <- clusters.raw[["4"]]
+# Why isn't this already a factor? Really confused
+# Because it wasn't set in clusters.raw - if this is a bad thing lmk
+clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
+clus4.wide.st <- clus4.wide.st[, c("age", "sex", "pdonset", "durat_pd", "cisitot", "cluster")]
+# Assuming 1st column is cluster (which it should be)
+oneways <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
+  fm <- substitute(i ~ cluster, list(i = as.name(col)))
+  oneway.test(fm, clus4.wide.st)
+})
+for (test in oneways) {
+  if (test$p.value < (0.05 / length(oneways))) { # BONFERRONI CORRECTION!
+    cat('sig\n')
+  } else {
+    cat('INSIG:\n')
+    cat(test$data.name, '\n')
+  }
+}
+tukeys <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
+  # Doesn't work the oneway way for some reason!
+  fm <- as.formula(paste(col, '~ cluster'))
+  TukeyHSD(aov(fm, clus4.wide.st))$cluster
+})
+names(tukeys) <- colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))])
+. <- sapply(names(tukeys), function(name) {
+  tkdf <- as.data.frame(tukeys[name][[1]])
+  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05, ])
+  if (length(sigs) > 0) {
+    cat(name, ": ", sep = "")
+    cat(sigs, "\n")
+  }
+})
+
+# From nms30 ====
+# Assert that we have
+# c(509, 97, 249, 49)
+nms30.present <- nms30.k4.hsd
+# nms30.k4.hsd$cluster <- factor(nms30.k4.hsd$cluster)
+# nms30.k4.hsd$cluster <- revalue(nms30.k4.hsd$cluster, c('3'='1', '2'='2', '1'='3', '4'='4'))
+# nms30.k4.hsd$cluster <- factor(nms30.k4.hsd$cluster, levels = c('1', '2', '3', '4'))
+nms30.present <- reshape::rename(nms30.present, PUB.MAP)
+nms30.present <- reshape::rename(nms30.present, NMS.30.LONG.SHORT.MAP)
+
+nms30.extra.cols <- c("Age", "Sex", "PD_Onset", "PD_Duration", "CISI_Total", "Cluster")
+to.latex(nms30.present[, c(NMS.30.NAMES.PUB, MOTOR.PUB, "Cluster")],
+         "../writeup/manuscript/include/nms30_summaries.tex")
+to.latex(nms30.present[, nms30.extra.cols],
+         "../writeup/manuscript/include/nms30_extra.tex")
+
+# nms30 same drill, anova + tukey ====
+# NOTE: cluster is captalized here since I'm using the PUB df
+oneways <- lapply(colnames(nms30.present[, -which(colnames(nms30.present) %in% c("Cluster"))]), function(col) {
+  fm <- substitute(i ~ Cluster, list(i = as.name(col)))
+  oneway.test(fm, nms30.present)
+})
+for (test in oneways) {
+  if (test$p.value < (0.05 / length(oneways))) { # BONFERRONI CORRECTION!
+    cat('sig\n')
+  } else {
+    cat('INSIG:\n')
+    cat(test$data.name, '\n')
+  }
+}
+
+# Redo tukey's for sanity
+tukeys <- lapply(colnames(nms30.present[, -which(colnames(nms30.present) %in% c("Cluster"))]), function(col) {
+  # Doesn't work the oneway way for some reason!
+  fm <- as.formula(paste(col, '~ Cluster'))
+  TukeyHSD(aov(fm, nms30.present))$Cluster
+})
+names(tukeys) <- colnames(nms30.present[, -which(colnames(nms30.present) %in% c("Cluster"))])
+
+# Now output the insignificant diferences only
+. <- sapply(names(tukeys), function(name) {
+  tkdf <- as.data.frame(tukeys[name][[1]])
+  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05, ])
+  if (length(sigs) > 0) {
+    cat(name, ": ", sep = "")
+    cat(sigs, "\n")
+  }
+})
+
+# Gender binomial tests ====
+print.proportions <- function(mat) {
+  cat("Sex (\\% Male) ")
+  sapply(1:dim(mat)[1], function(i) {
+    v <- mat[i, ]
+    cat("& ", round(v[1] / (v[1] + v[2]), 2) * 100, " ", sep = "")
+  })
+  cat("\\\\\n")
+}
+combs.1to4 <- combn(1:4, 2)
+
+# For nmsd
+present.sex <- table(present[c("Cluster", "Sex")])
+print.proportions(present.sex)
+chisq.test(present.sex)
+# Welp, pairwise prop test is a much easier way to do this
+# pairwise.prop.test(present.sex, p.adjust = "bonferroni")
+. <- apply(combs.1to4, MARGIN = 2, FUN = function(comb) {
+  pt <- prop.test(nms30.sex[comb, ])
+  if (pt$p.value < (0.05 / dim(combs.1to4)[2])) { # Bonferroni correction
+    cat("SIG:\n")
+    cat("Cluster ", comb[1], " and ", comb[2], "\n", sep = "")
+    print(pt)
+  }
+})
+
+# For nms30
+nms30.sex <- table(nms30.present[c("Cluster", "Sex")])
+print.proportions(nms30.sex)
+chisq.test(nms30.sex)
+# pairwise.prop.test(nms30.sex, p.adjust = "bonferroni")
+. <- apply(combs.1to4, MARGIN = 2, FUN = function(comb) {
+  pt <- prop.test(nms30.sex[comb, ])
+  if (pt$p.value < (0.05 / dim(combs.1to4)[2])) { # Bonferroni correction
+    cat("SIG:\n")
+    cat("Cluster ", comb[1], " and ", comb[2], "\n", sep = "")
+    print(pt)
+  }
+})
+
+# Correct nms30 heatmap ====
+hm.nms30.raw.scaled <- nms30.present
+# Gender no need
+hm.nms30.raw.scaled$Sex <- NULL
+# Nullify cluster then reattach once you've scaled
+hm.nms30.raw.scaled$Cluster <- NULL
+hm.nms30.raw.scaled <- as.data.frame(scale(hm.nms30.raw.scaled))
+hm.nms30.raw.scaled$Cluster <- nms30.present$Cluster
+hm.nms30.data <- summaryBy(. ~ Cluster, hm.nms30.raw.scaled, keep.names = T)
+hm.nms30.data$Cluster <- NULL
+# Re-add the domain number to the first 30
+names(hm.nms30.data)[1:30] <- sapply(NMS.30.NAMES, rid.of.middle)
+hm.nms30.data.t <- as.data.frame(t(hm.nms30.data))
+# Reorder
+hm.nms30.data.t <- hm.nms30.data.t[rownames(hm.nms30.data.t)[c(1:30, 35:38, 31:34)], ]
+plot.new()
+heatmap.2(as.matrix(hm.nms30.data.t), Rowv = FALSE, Colv = FALSE, dendrogram = 'none', trace = 'none',
+          # cellnote = as.matrix(hm.nms30.data.t),
+          col = colorRampPalette(c('green', 'black', 'red'))(n = 1000),
+          # RowSideColors = c(rep(gch[1], 2), rep(gch[2], 4), rep(gch[3], 6), rep(gch[4], 3), rep(gch[5], 3),
+          #                   rep(gch[6], 3), rep(gch[7], 3), rep(gch[8], 2), rep(gch[9], 4), rep(gch[10], 4)),
+          xlab = 'Cluster', key.xlab = 'z-score',
+          cexCol = 1.5, cexRow = 1.2, srtCol = 0,
+          margins = c(5, 18),
+          # Draw lines to separate categories
+          rowsep = c(2, 6, 12, 15, 18, 21, 24, 26, 30, 34),
+          sepcolor = "#cccccc",
+          sepwidth = c(0.1, 0.1),
+          lmat = rbind(c(0,3),c(2,1),c(0,4)),
+          lwid = c(0.3,2),
+          lhei = c(0.1,4,1),
+          keysize = 0.5,
+          key.par = list(mar = c(7, 8, 3, 12)),
+          density.info = 'none'
+          )
+if (TRUE) {
+  # Always write, for now
+  # NOTE: I crop this in preview afterwards because it still has some
+  # dead space
+  dev.copy(pdf, "../figures/nms30-hm-pub.pdf", width = 7, height = 10)
+  dev.off()
+}
+
+# Compute homogeneity/completeness/v-measure ====
+v.measure(nms30.present$Cluster, present$Cluster)
+# It's actually quite poor!
+c(0.3988046,0.4661785,0.4298677)
