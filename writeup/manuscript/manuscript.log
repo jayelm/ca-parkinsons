@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  8 MAY 2016 02:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  9 MAY 2016 03:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -411,22 +411,22 @@ e
 * hratio: 1:1
 * vratio: 1:1
 * modes: 
-* h-part:(L,W,R)=(64.75394pt, 468.0pt, 64.75394pt)
-* v-part:(T,H,B)=(111.52342pt, 622.0pt, 111.52342pt)
+* h-part:(L,W,R)=(37.75394pt, 522.0pt, 37.75394pt)
+* v-part:(T,H,B)=(81.52342pt, 682.0pt, 81.52342pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=468.0pt
-* \textheight=622.0pt
-* \oddsidemargin=-7.51605pt
-* \evensidemargin=-7.51605pt
-* \topmargin=-22.74657pt
+* \textwidth=522.0pt
+* \textheight=682.0pt
+* \oddsidemargin=-34.51605pt
+* \evensidemargin=-34.51605pt
+* \topmargin=-52.74657pt
 * \headheight=50.0pt
 * \headsep=12.0pt
 * \topskip=10.0pt
 * \footskip=18.0pt
-* \marginparwidth=4.0pt
-* \marginparsep=10.0pt
-* \columnsep=24.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=18.0pt
 * \skip\footins=24.0pt plus 2.0pt minus 12.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
@@ -439,55 +439,42 @@ e
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 56.
+
+Package mathptmx Warning: There are no bold math fonts on input line 60.
+
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 68.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 56.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 68.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 56.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 68.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 56.
+(Font)              <10> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7.4> on input line 56.
+(Font)              <7.4> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 56.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 56.
+(Font)              <6> on input line 68.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 68.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 56.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 56.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 56.
-
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-
-Package mathptmx Warning: There are no bold math fonts on input line 60.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
 
 <../../figures/gap-statistic.pdf, id=1, 433.62pt x 361.35pt>
 File: ../../figures/gap-statistic.pdf Graphic file (type pdf)
@@ -495,7 +482,15 @@ File: ../../figures/gap-statistic.pdf Graphic file (type pdf)
 <use ../../figures/gap-statistic.pdf>
 Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 97.
 
-(pdftex.def)             Requested size: 222.0pt x 185.00285pt.
+(pdftex.def)             Requested size: 252.0pt x 210.00218pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 100.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 100.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 100.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 100.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -506,7 +501,7 @@ File: ../../figures/stability-measures.pdf Graphic file (type pdf)
 <use ../../figures/stability-measures.pdf>
 Package pdftex.def Info: ../../figures/stability-measures.pdf used on input lin
 e 106.
-(pdftex.def)             Requested size: 222.0pt x 166.4976pt.
+(pdftex.def)             Requested size: 252.0pt x 189.00032pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -514,159 +509,118 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
+ <../../figures/gap-statistic.pdf>]
+Overfull \hbox (4.86482pt too wide) in paragraph at lines 141--147
+\OT1/lmr/m/n/10 were found to be sta-tis-ti-cally dif-fer-ent $(\OML/lmm/m/it/1
+0 p < \OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 05\OML/lmm/m/it/10 =\O
+T1/lmr/m/n/10 13 \OMS/lmsy/m/n/10 ^^Y \OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/l
+mr/m/n/10 003)$,
+ []
+
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 204.
+(Font)              <9> on input line 213.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 204.
+(Font)              <7> on input line 213.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 204.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 213.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 204.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 208.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 213.
+<../../figures/kmeans-summaries-4-pub.pdf, id=26, 1011.78pt x 722.7pt>
+File: ../../figures/kmeans-summaries-4-pub.pdf Graphic file (type pdf)
+
+<use ../../figures/kmeans-summaries-4-pub.pdf>
+Package pdftex.def Info: ../../figures/kmeans-summaries-4-pub.pdf used on input
+ line 223.
+(pdftex.def)             Requested size: 522.0pt x 372.86182pt.
+
+<../../figures/cluster-alignment.pdf, id=27, 722.7pt x 361.35pt>
+File: ../../figures/cluster-alignment.pdf Graphic file (type pdf)
+
+<use ../../figures/cluster-alignment.pdf>
+Package pdftex.def Info: ../../figures/cluster-alignment.pdf used on input line
+ 283.
+(pdftex.def)             Requested size: 252.0pt x 126.00021pt.
+
+<../../figures/nms30m-colhc-pub.pdf, id=28, 1084.05pt x 505.89pt>
+File: ../../figures/nms30m-colhc-pub.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30m-colhc-pub.pdf>
+Package pdftex.def Info: ../../figures/nms30m-colhc-pub.pdf used on input line 
+389.
+(pdftex.def)             Requested size: 522.0pt x 243.60408pt.
+
+<../../figures/nms30-hm-pub.pdf, id=29, 417.99495pt x 683.54045pt>
+File: ../../figures/nms30-hm-pub.pdf Graphic file (type pdf)
+
+<use ../../figures/nms30-hm-pub.pdf>
+Package pdftex.def Info: ../../figures/nms30-hm-pub.pdf used on input line 402.
+
+(pdftex.def)             Requested size: 365.3984pt x 597.56448pt.
+ [2 <../../figures/stability-measures.pdf> <../../figures/cluster-alignment.pdf
+>]
+<../../figures/cor-unbinned.pdf, id=52, 1084.05pt x 578.16pt>
+File: ../../figures/cor-unbinned.pdf Graphic file (type pdf)
+
+<use ../../figures/cor-unbinned.pdf>
+Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 426.
+
+(pdftex.def)             Requested size: 522.0pt x 278.40466pt.
+
+<../../figures/long4-d.pdf, id=53, 821.0675pt x 643.40375pt>
+File: ../../figures/long4-d.pdf Graphic file (type pdf)
+
+<use ../../figures/long4-d.pdf>
+Package pdftex.def Info: ../../figures/long4-d.pdf used on input line 433.
+(pdftex.def)             Requested size: 417.6016pt x 327.23817pt.
+ [3]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 530.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <7> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 208.
-
-<../../figures/kmeans-summaries-4-pub.pdf, id=18, 1011.78pt x 722.7pt>
-File: ../../figures/kmeans-summaries-4-pub.pdf Graphic file (type pdf)
-
-<use ../../figures/kmeans-summaries-4-pub.pdf>
-Package pdftex.def Info: ../../figures/kmeans-summaries-4-pub.pdf used on input
- line 215.
-(pdftex.def)             Requested size: 468.0pt x 334.28763pt.
- [2 <../../figures/gap-statistic.pdf> <../../figures/stability-measures.pdf>]
-<../../figures/nms30m-colhc-pub.pdf, id=39, 1084.05pt x 505.89pt>
-File: ../../figures/nms30m-colhc-pub.pdf Graphic file (type pdf)
-
-<use ../../figures/nms30m-colhc-pub.pdf>
-Package pdftex.def Info: ../../figures/nms30m-colhc-pub.pdf used on input line 
-364.
-(pdftex.def)             Requested size: 468.0pt x 218.40073pt.
-
-<../../figures/nms30-hm-pub.pdf, id=40, 417.99495pt x 683.54045pt>
-File: ../../figures/nms30-hm-pub.pdf Graphic file (type pdf)
-
-<use ../../figures/nms30-hm-pub.pdf>
-Package pdftex.def Info: ../../figures/nms30-hm-pub.pdf used on input line 377.
-
-(pdftex.def)             Requested size: 327.59857pt x 535.74603pt.
-
-
-LaTeX Warning: Reference `tab:tukeyhsd' on page 3 undefined on input line 402.
-
-
-LaTeX Warning: Reference `tab:tukeyhsd' on page 3 undefined on input line 405.
-
-
-LaTeX Warning: Reference `tab:info_gain' on page 3 undefined on input line 406.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3]
-
-LaTeX Warning: Reference `fig:dtree-2and4va-pruned' on page 4 undefined on inpu
-t line 445.
-
-
-LaTeX Warning: Reference `fig:2va' on page 4 undefined on input line 456.
-
-
-LaTeX Warning: Reference `fig:dtree-2and4va-pruned' on page 4 undefined on inpu
-t line 457.
-
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 460.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 530.
 
-LaTeX Warning: Reference `fig:longcorr' on page 4 undefined on input line 460.
+Overfull \hbox (3.86127pt too wide) in paragraph at lines 530--535
+[]\OT1/lmr/m/n/10 It's in-tu-itive that a Depression-Dominant group emerges
+ []
 
-
-LaTeX Warning: Reference `fig:nms9-multi' on page 4 undefined on input line 463
-.
-
-
-LaTeX Warning: Reference `fig:nms10-multi' on page 4 undefined on input line 46
-3.
-
-
-LaTeX Warning: Reference `fig:tremor-multi' on page 4 undefined on input line 4
-67.
-
-
-LaTeX Warning: Reference `fig:cisitot-multi' on page 4 undefined on input line 
-469.
-
-
-LaTeX Warning: Reference `fig:nms30m-colhc' on page 4 undefined on input line 4
-70.
-
-
-LaTeX Warning: Reference `fig:d9to30' on page 4 undefined on input line 475.
-
-
-Underfull \vbox (badness 5064) has occurred while \output is active []
-
- [4]
-
-LaTeX Warning: Reference `fig:nms30m-k4-heatmap-improved' on page 5 undefined o
-n input line 480.
-
-
-LaTeX Warning: Reference `fig:nms30m-mclust-heatmap-improved' on page 5 undefin
-ed on input line 483.
-
-
-LaTeX Warning: Reference `fig:nms30m-colhc' on page 5 undefined on input line 4
-92.
-
-(./manuscript.bbl) [5] [6 <../../figures/kmeans-summaries-4-pub.pdf> <../../fig
-ures/nms30m-colhc-pub.pdf>] [7] [8 <../../figures/nms30-hm-pub.pdf>]
-(./manuscript.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+(./manuscript.bbl) [4] [5 <../../figures/kmeans-summaries-4-pub.pdf> <../../fig
+ures/nms30m-colhc-pub.pdf>] [6] [7 <../../figures/nms30-hm-pub.pdf>] [8 <../../
+figures/cor-unbinned.pdf> <../../figures/long4-d.pdf>] (./manuscript.aux) ) 
 Here is how much of TeX's memory you used:
- 4762 strings out of 494501
- 70878 string characters out of 6167031
- 170628 words of memory out of 5000000
- 7927 multiletter control sequences out of 15000+600000
- 61961 words of font info for 60 fonts, out of 8000000 for 9000
+ 4734 strings out of 494501
+ 70658 string characters out of 6167031
+ 172255 words of memory out of 5000000
+ 7901 multiletter control sequences out of 15000+600000
+ 66722 words of font info for 68 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,14n,44p,404b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/l
-ocal/texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/
-texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texli
-ve/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}</usr/local/texlive/2015
-basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2015basic
-/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2015basic/texmf
--dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2015basic/texmf-dist/
-fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts
-/type1/public/lm/lmmi6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1
-/public/lm/lmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publi
-c/lm/lmmi9.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/l
-mr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr12.p
-fb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr6.pfb></us
-r/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local
-/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texliv
-e/2015basic/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015b
-asic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015basic/
-texmf-dist/fonts/type1/public/lm/lmri7.pfb></usr/local/texlive/2015basic/texmf-
-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2015basic/texmf-dist/f
-onts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/
-type1/public/lm/lmsy7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/
-public/lm/lmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public
-/lm/lmtt8.pfb>
-Output written on manuscript.pdf (8 pages, 435383 bytes).
+ 38i,14n,44p,406b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/us
+r/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/t
+exlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texliv
+e/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/201
+5basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2015basi
+c/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2015basic/texm
+f-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2015basic/texmf-dist
+/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/font
+s/type1/public/lm/lmmi6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type
+1/public/lm/lmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publ
+ic/lm/lmmi9.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/
+lmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr12.
+pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr6.pfb></u
+sr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/loca
+l/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texli
+ve/2015basic/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015
+basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015basic
+/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2015basic/texmf
+-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015basic/texmf-dist
+/fonts/type1/public/lm/lmsy8.pfb>
+Output written on manuscript.pdf (8 pages, 729460 bytes).
 PDF statistics:
- 166 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
+ 183 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

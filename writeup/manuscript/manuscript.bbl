@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{8}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -45,6 +45,21 @@
 \newblock \bibinfo{journal}{Bioinformatics}
   \bibinfo{year}{2001};\bibinfo{volume}{17}(\bibinfo{number}{4}):\bibinfo{pages}{309--318}.
 %Type = Article
+\bibitem[{Hubert and Arabie(1985)}]{hubert1985}
+\bibinfo{author}{Hubert\xfnm[ L.]}, \bibinfo{author}{Arabie\xfnm[ P.]}.
+\newblock \bibinfo{title}{Comparing partitions}.
+\newblock \bibinfo{journal}{Journal of Classification}
+  \bibinfo{year}{1985};\bibinfo{volume}{2}(\bibinfo{number}{1}):\bibinfo{pages}{193--218}.
+%Type = Inproceedings
+\bibitem[{Rosenberg and Hirschberg(2007)}]{rosenberg07vmeasure}
+\bibinfo{author}{Rosenberg\xfnm[ A.]}, \bibinfo{author}{Hirschberg\xfnm[ J.]}.
+\newblock \bibinfo{title}{{V}-measure: A conditional entropy-based external
+  cluster evaluation measure}.
+\newblock In: \bibinfo{booktitle}{Proceedings of the 2007 Joint Conference on
+  Empirical Methods in Natural Language Processing and Computational Natural
+  Language Learning (EMNLP-CoNLL)}. \bibinfo{year}{2007}, p.
+  \bibinfo{pages}{410--420}.
+%Type = Article
 \bibitem[{van Rooden et~al.(2010)van Rooden, Heiser, Kok, Verbaan, van Hilten
   and Marinus}]{vanrooden10}
 \bibinfo{author}{van Rooden\xfnm[ S.M.]}, \bibinfo{author}{Heiser\xfnm[ W.J.]},
@@ -64,36 +79,5 @@
   disease: Cluster analysis and genetic association}.
 \newblock \bibinfo{journal}{Journal of the neurological sciences}
   \bibinfo{year}{2015};\bibinfo{volume}{351}(\bibinfo{number}{1}):\bibinfo{pages}{41--45}.
-%Type = Article
-\bibitem[{Fereshtehnejad et~al.(2015)Fereshtehnejad, Romenets, Anang,
-  Latreille, Gagnon and Postuma}]{fereshtehnejad15}
-\bibinfo{author}{Fereshtehnejad\xfnm[ S.M.]}, \bibinfo{author}{Romenets\xfnm[
-  S.R.]}, \bibinfo{author}{Anang\xfnm[ J.B.]}, \bibinfo{author}{Latreille\xfnm[
-  V.]}, \bibinfo{author}{Gagnon\xfnm[ J.F.]}, \bibinfo{author}{Postuma\xfnm[
-  R.B.]}.
-\newblock \bibinfo{title}{New clinical subtypes of parkinson disease and their
-  longitudinal progression: a prospective cohort comparison with other
-  phenotypes}.
-\newblock \bibinfo{journal}{JAMA neurology}
-  \bibinfo{year}{2015};\bibinfo{volume}{72}(\bibinfo{number}{8}):\bibinfo{pages}{863--873}.
-%Type = Article
-\bibitem[{Sauerbier et~al.(2016)Sauerbier, Jenner, Todorova and
-  Chaudhuri}]{sauerbier15}
-\bibinfo{author}{Sauerbier\xfnm[ A.]}, \bibinfo{author}{Jenner\xfnm[ P.]},
-  \bibinfo{author}{Todorova\xfnm[ A.]}, \bibinfo{author}{Chaudhuri\xfnm[
-  K.R.]}.
-\newblock \bibinfo{title}{Non motor subtypes and parkinson's disease}.
-\newblock \bibinfo{journal}{Parkinsonism \& related disorders}
-  \bibinfo{year}{2016};\bibinfo{volume}{22}:\bibinfo{pages}{S41--S46}.
-%Type = Article
-\bibitem[{Erro et~al.(2013)Erro, Vitale, Amboni, Picillo, Moccia, Longo
-  et~al.}]{erro13}
-\bibinfo{author}{Erro\xfnm[ R.]}, \bibinfo{author}{Vitale\xfnm[ C.]},
-  \bibinfo{author}{Amboni\xfnm[ M.]}, \bibinfo{author}{Picillo\xfnm[ M.]},
-  \bibinfo{author}{Moccia\xfnm[ M.]}, \bibinfo{author}{Longo\xfnm[ K.]}, et~al.
-\newblock \bibinfo{title}{The heterogeneity of early parkinson’s disease: a
-  cluster analysis on newly diagnosed untreated patients}.
-\newblock \bibinfo{journal}{PLoS One}
-  \bibinfo{year}{2013};\bibinfo{volume}{8}(\bibinfo{number}{8}):\bibinfo{pages}{e70244}.
 
 \end{thebibliography}

@@ -1,5 +1,5 @@
 % PREAMBLE ====
-\documentclass[preprint,3p,twocolumn]{elsarticle} % TODO: What model?
+\documentclass[preprint,5p]{elsarticle} % TODO: What model?
 
 % Use times font
 \usepackage{mathptmx}
@@ -33,17 +33,17 @@
 % FRONTMATTER ====
 \begin{frontmatter}
 \title{Parkinson's disease cluster analysis}
-\author[c3]{Pablo Martinez-Martin}
-\ead{pmartinez@isciii.es}
-\author[bc]{Jesse Mu}
-\ead{muj@bc.edu}
-\author[cig]{Concha Bielza}
-\ead{mcbielza@fi.upm.es}
-\author[cig]{Pedro Larra\~naga}
-\ead{plarranaga@fi.upm.es}
-\address[c3]{Area of Applied Epidemiology, National Centre of Epidemiology and CIBERNED, Carlos III Institute of Health, Madrid, Spain}
-\address[bc]{Department of Computer Science, Boston College, Chestnut Hill, Massachusetts, USA}
-\address[cig]{Computational Intelligence Group, Polytechnic University of Madrid, Madrid, Spain}
+% \author[c3]{Pablo Martinez-Martin}
+% \ead{pmartinez@isciii.es}
+% \author[bc]{Jesse Mu}
+% \ead{muj@bc.edu}
+% \author[cig]{Concha Bielza}
+% \ead{mcbielza@fi.upm.es}
+% \author[cig]{Pedro Larra\~naga}
+% \ead{plarranaga@fi.upm.es}
+% \address[c3]{Area of Applied Epidemiology, National Centre of Epidemiology and CIBERNED, Carlos III Institute of Health, Madrid, Spain}
+% \address[bc]{Department of Computer Science, Boston College, Chestnut Hill, Massachusetts, USA}
+% \address[cig]{Computational Intelligence Group, Polytechnic University of Madrid, Madrid, Spain}
 
 \begin{abstract}
 \emph{Background} \quad This is the background. \\
@@ -66,14 +66,14 @@
 Out of the 951 patients in the study, we used listwise deletion to exclude 47 patients due to
 missing measurements in the variables of interest, resulting in 904 remaining patients. All
 symptoms were scaled to $z$-scores ($\mu = 0$, $\sigma = 1$) before clustering, and unscaled
-afterwards. Analysis was conducted in R 3.2.4 (www.r-project.org).
+afterwards for interpretation. Analyses were conducted in R 3.2.4 (www.r-project.org).
 
 \subsubsection{Cluster analysis}
 
 $k$-means was used for cluster analysis. We performed two analyses on the
 patients in the dataset: the first on the nine aggregate nonmotor symptom
-domains and the four motor symptoms, and the second on the 30 individual
-nonmotor symptoms collected with the four motor symptoms. Complete-linkage
+domains and the four motor symptoms (``domains clustering''), and the second on the 30 individual
+nonmotor symptoms collected with the four motor symptoms (``symptoms clustering''). Complete-linkage
 hierarchical clustering on the 30 nonmotor symptoms was also performed to observe the
 categorization of symptoms.
 
@@ -83,7 +83,7 @@ Various formal measures were used to determine the optimal number of
 clusters for the dataset. First, the optimal $k$ according to the Gap Statistic and the
 1-standard-error method\cite{tibshirani01gap} was $k = 4$ (Figure~\ref{fig:gap}). Second, although
 the globally-optimal clusters reported from stability measures of the clValid R package
-\cite{brock11clvalid} stability are 2, 6, and 8 (Figure~\ref{fig:stability}), there appeared to be
+\cite{brock11clvalid} stability were 2, 6, and 8 (Figure~\ref{fig:stability}), there appeared to be
 consensus that $k = 4$ is a locally-optimal number of clusters which supported the gap statistic
 result.
 
@@ -96,7 +96,7 @@ selected to offer a good blend of model fit, informativeness, and parsimony.
   \centering
   \includegraphics[width=\linewidth]{gap-statistic.pdf}
   \caption{Plot of gap statistic versus number of clusters with $k$-means on 100 bootstrapped
-    samples. Error bars are standard error. Per the method described in\cite{tibshirani01gap}, 4 is the smallest $k$ such
+    samples. Error bars are standard error. Per the method described in Tibshirani\cite{tibshirani01gap}, 4 is the smallest $k$ such
     that $\text{Gap}(k) \geq \text{Gap}(k + 1) - \text{se}_{k + 1}$.}
   \label{fig:gap}
 \end{figure}
@@ -113,12 +113,12 @@ selected to offer a good blend of model fit, informativeness, and parsimony.
 
 \subsubsection{Interpretation}
 
-For the clustering on nonmotor domains, we displayed the distribution of each symptom for the four
+For the domains clustering, we displayed the distribution of each symptom for the four
 clusters using boxplots, which allowed us to visualize the center and spread of each cluster. Since
-the number of variables was larger for the clustering on the individual symptoms, we visualized
-results for the second analysis with a heatmap. Finally, for the hierarchical clustering on the
-symptoms themselves, we displayed results in a dendrogram and clustered the symptoms into four
-interpretable clusters.
+the number of variables was larger for the symptoms clustering, we visualized results for the
+second analysis with a heatmap. Finally, for the hierarchical clustering on the symptoms
+themselves, we displayed results in a dendrogram and clustered the symptoms into four interpretable
+clusters.
 
 For each symptom in both clusterings, we used one-way ANOVA and $\chi^2$ tests to test the equality
 of symptom means and proportions across the clusters found, using Bonferroni correction for
@@ -126,12 +126,20 @@ multiple testing with corrected $p < 0.05$ considered significant. Differences a
 clusters were tested post-hoc using Tukey's range test for continuous means, or pairwise $\chi^2$
 tests with Bonferroni correction for proportions.
 
+To compare the clusterings, we computed the adjusted rand index\cite{hubert1985} (ARI) and
+$v$-measure\cite{rosenberg07vmeasure} to evaluate similarity between the two clusterings, and used
+stacked barplots to visualize the alignment of the clusters.
+
+Lastly, to explore the relationship between symptom severity and disease duration, we computed the
+linear correlation for each symptom with PD duration and fitted smoothed loess curves to the
+data both globally and for each cluster found in the previous analyses.
+
 \section{Results}
 
-\subsection{Clustering with nonmotor domains}
+\subsection{Domains clustering}
 
-$k$-means clustering on the nine nonmotor domains and the four motor symptoms found four clusters,
-available in Table~\ref{tab:nmd} with boxplots in Figure~\ref{fig:box}. Cluster means for all
+$k$-means clustering on the nine nonmotor domains and the four motor symptoms found four clusters
+(Table~\ref{tab:nmd}; boxplots in Figure~\ref{fig:box}). Cluster means for all
 symptoms were found to be statistically different $(p < 0.05 / 13 \approx 0.003)$, with specific
 pairwise differences noted in the table. Additionally, statistics for variables not used in the
 clustering were explored similarly in Table~\ref{tab:nmd_extra}; cluster means for all variables
@@ -144,7 +152,8 @@ Cluster 2 ($n = 189$) patients were severely affected in nonmotor domains but mi
 motor domains. This cluster had an incidence of motor symptoms relatively similar to the Cluster 1
 (mild) subtype especially in tremor, but generally expressed significantly higher scores for
 nonmotor symptoms than Clusters 1 and 3, especially in the sleep/fatigue, mood/cognition and
-miscellaneous domains.
+miscellaneous domains. This group also had a statistically higher percentage of females than
+Cluster 3.
 % But also high variability
 
 Cluster 3 ($n = 221$) patients were severely affected in motor domains but mildly affected in
@@ -158,7 +167,7 @@ PD onset.
 
 \begin{table*}[t]
   \centering
-  \caption{Summaries of clustering on nonmotor domains. Unless otherwise specified, statistics are
+  \caption{Summaries of domains clustering. Unless otherwise specified, statistics are
     reported as mean (sd). \textbf{Bold} indicates the highest score for that symptom out of the
   four clusters.}
   \label{tab:nmd}
@@ -205,7 +214,6 @@ PD onset.
     \item[2] Significant difference with cluster 2 (adjusted $p < 0.05$)
     \item[3] Significant difference with cluster 3 (adjusted $p < 0.05$)
     \item[4] Significant difference with cluster 4 (adjusted $p < 0.05$)
-    \item[\textdagger] Another footnote.
   \end{tablenotes}
   \end{threeparttable}
 \end{table*}
@@ -217,7 +225,7 @@ PD onset.
   \captionsetup{justification=raggedleft,
     singlelinecheck=false
   }
-  \caption{Boxplot summaries for clusters found \\ when clustering with nonmotor domains.}
+  \caption{Boxplot cluster summaries \\ for domains clustering.}
   \label{fig:box}
 \end{figure*}
 
@@ -249,18 +257,35 @@ PD onset.
   \end{threeparttable}
 \end{table*}
 
-\subsection{Clustering with nonmotor symptoms}
+\subsection{Symptoms clustering}
 
 $k$-means clustering performed on the 30 individual nonmotor symptoms found similar patterns to the
-first clustering (Table~\ref{tab:nms30}, heatmap in Figure~\ref{fig:nms30-hm}). Means of all symptoms were found to
-differ across clusters except for PD\_Onset and tremor.
+first clustering (Table~\ref{tab:nms30}, heatmap in Figure~\ref{fig:nms30-hm}). Means of all
+symptoms were found to differ across clusters except for PD\_Onset and tremor.
 
 Clusters 1 ($n = 509$) and 4 ($n = 49$), the mild and severe subtypes of the previous clustering,
-retain their characteristics here, while clusters 2 ($n = 97$) and 3 ($n = 249$) are different. 2
-is a mood/cognition-dominant cluster, with relatively higher proportion of female patients and
-additionally a relatively more severe incidence of insomnia. 3 is not characterized by any
-especially high symptoms and is thus an ``average'' group of patients.
+retained their characteristics here, while clusters 2 ($n = 97$) and 3 ($n = 249$) were different.
+2 was a mood/cognition-dominant cluster, with a relatively higher proportion of female patients and
+additionally a more severe incidence of insomnia. 3 was not characterized by any especially high
+symptoms and was thus classified as a group of patients with average severity.
 % Once again, CISI TOTAL...
+
+\subsection{Comparison between clusterings}
+
+The two clusterings are somewhat similar ($\text{ARI} = 0.46$; $\text{$v$-measure} = 0.43$).
+Alignment of the clusters is visualized in Figure~\ref{fig:align}. While clusters 1 and 4 of both
+clusterings align well with each other, main differences in the clusters occur in the mixing of
+clusters 2 and 3 of both clusterings; for example, domains cluster 3 (motor-dominant) is somewhat
+evenly split among symptoms clusters 1 (mild) and 3 (average).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{cluster-alignment.pdf}
+  \caption{Bar chart indicating the distribution of opposite cluster membership for the patients of
+  a given cluster. For example, the bar furthest left indicates that close to 100\% of patients in
+domains cluster 1 are in symptoms cluster 1, with the rest in symptoms cluster 3.}
+  \label{fig:align}
+\end{figure}
 
 % Perhaps this table belongs in appendix?
 \begin{table*}[t]
@@ -376,8 +401,8 @@ especially high symptoms and is thus an ``average'' group of patients.
   \centering
   \includegraphics[width=0.7\linewidth]{nms30-hm-pub.pdf}
   % TODO: Variables not used in analysis? Label color - black nms, blue nonmotor, grey ?
-  \caption{Heatmap of clusters found when clustering with nonmotor symptoms. Color indicates
-    cluster mean as a $z$-score for the given symptom; red is higher, green is lower.}
+  \caption{Heatmap of symptoms clustering. Color indicates cluster mean as a $z$-score for the
+  given symptom.}
   \label{fig:nms30-hm}
 \end{figure*}
 
@@ -389,36 +414,56 @@ cluster together, with the exceptions of diplopia (domain 4), drowsiness (domain
 symptoms in domain 9 (miscellaneous). Notably, tremor was the most dissimilar symptom, occupying a
 single branch at the top of the tree.
 
+\subsection{Longitudinal analysis}
+
+Most variables had little to no correlation with PD duration (Figure~\ref{fig:corr}). Variables
+with the highest correlation include symptoms urinary frequency, swallowing, and drooling; domains
+miscellaneous, urinary, and gastrointestinal; and total CISI score. Scatterplots for CISI Total,
+Tremor, Anxiety, and Depression appear in Figure~\ref{fig:long4}.
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\linewidth]{cor-unbinned.pdf}
+  \caption{Linear correlation of each symptom with PD duration.}
+  \label{fig:corr}
+\end{figure*}
+
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=0.8\linewidth]{long4-d.pdf}
+  \caption{Selected symptoms for 901 patients plotted against PD duration. Smoothed loess curves for each cluster
+  are drawn in their respective colors; the black curve is the curve for the entire population.}
+  \label{fig:long4}
+\end{figure*}
+
 \section{Discussion}
 
-$k$-means clustering on this dataset reveals clusters that confirm previous
+Domains clustering reveals clusters that confirm previous
 findings in the field, mainly van Rooden et al.\cite{vanrooden10} and the identification of four
-subtypes of Parkinson's disease: mild, nonmotor-predominant, motor-predominant, and severe.  van
-Rooden's work was done with a separate dataset using a different modeling method
+subtypes of Parkinson's disease: mild, nonmotor-dominant, motor-dominant, and severe. van
+Rooden's work was conducted with a separate dataset using a different modeling method
 (expectation-maximization), and this investigation independently confirms these subtype
 classifications. Unlike van Rooden, mean disease durations differences do exist between subtypes 1
 (mild) and 4 (severe), likely due to further development of the disease, although the differences
 between 2 and 3 (nonmotor/motor predominated) subtypes are insignificant
-(Table~\ref{tab:tukeyhsd}), suggesting different developmental paths of the disease.
+(Table~\ref{tab:nmd}), importantly suggesting different developmental paths of the disease.
 
 Overall, little information was found in pdonset,
-durat\_pd, or current age, according to Tables~\ref{tab:tukeyhsd}
-and~\ref{tab:info_gain}.  Mean ages were similar for subgroups 1, 2, and 3 ($p >
-0.05$), but different for the severe subtype 4, which makes sense given that
-patients in 4 also have longer disease durations. Specifically, clusters 1 and
-4 seem to be phenotypically quite similar, except at different stages of
-disease progression, given cluster 4's higher age and durat\_pd scores.
+durat\_pd, or current age. Mean ages were similar for clusters 1, 2, and 3 ($p >
+0.05$), but different for the severe cluster 4, intuitively since cluster 4 represents a more
+advanced stage of the disease.  Specifically, clusters 1 and 4 seem to be phenotypically quite
+similar, except at different stages of disease progression, given cluster 4's higher age and
+durat\_pd scores.
 
 However, clusters 2 and 3 clearly show different disease progression, one in
 the motor direction, and one in the nonmotor. Both groups have similar age,
-pdonset, and durat\_pd scores, but differ wildly in symptomatic expression.
-Cluster 2 is dominated by a high prevalence of nonmotor symptoms, such as
-nms\_d2, nms\_d3, nms\_d7, and nms\_d9. Cluster 3, however, is dominated by a
-high prevalence of motor symptoms, while most motor symptoms are similar to the
-mild cluster 1. Of note is that the tremor population mean
-is the highest cluster mean, even higher than the severe subtype 4. This
-motor-dominant cluster may thus overlap with Ma's tremor dominant/slow
-progression cluster\cite{ma15}.
+PD onset, and PD duration scores, but differ significantly in symptomatic expression.
+Cluster 2 is dominated by a high severity of nonmotor domains, especially Sleep/Fatigue,
+Mood/Cognition, Urinary, and Miscellaneous.  Cluster 3, however, is dominated by a high prevalence
+of motor symptoms, where most motor symptoms are similar to the mild cluster 1. Of note is that the
+tremor population mean is the highest cluster mean, even higher than the severe subtype 4. This
+motor-dominant cluster may thus overlap with Ma's tremor dominant/slow progression
+cluster\cite{ma15}.
 
 Generally, given stable pdonset scores and predictably increasing durat\_pd
 scores for clusters 1 and 4, Ma et al's rapid disease
@@ -426,74 +471,72 @@ progression/late onset and tremor dominant/slow progression clusters
 \cite{ma15} were mostly not found in this dataset, save for the tremor-dominant
 motor cluster.
 
-The most important nonmotor symptoms in determining these clusters were nms\_d2
-(sleep) and nms\_d3 (mood/cognition), which echo findings of Fereshtehnejad's
-longitudinal study\cite{fereshtehnejad15} and are similar to Sauerbier's
-identification of sleep dominant and cognitive dominant clinical NMS subtypes\cite{sauerbier15}.
-Compared to Erro et al.\cite{erro13}, nonmotor/motor
-dominant subtypes were indeed found, but an additional subgroup with relatively
-severe levels of both motor and nonmotor symptoms were found. Erro's benign
-subtype groups possibly overlap with the mild cluster 1 found in this
-investigation.
+% The most important nonmotor symptoms in determining these clusters were nms\_d2
+% (sleep) and nms\_d3 (mood/cognition), which echo findings of Fereshtehnejad's
+% longitudinal study\cite{fereshtehnejad15} and are similar to Sauerbier's
+% identification of sleep dominant and cognitive dominant clinical NMS subtypes\cite{sauerbier15}.
+% Compared to Erro et al.\cite{erro13}, nonmotor/motor
+% dominant subtypes were indeed found, but an additional subgroup with relatively
+% severe levels of both motor and nonmotor symptoms were found. Erro's benign
+% subtype groups possibly overlap with the mild cluster 1 found in this
+% investigation.
 
-\subsection{Nonmotor subtype: clustering and modeling}
-Nonmotor symptoms nms\_d2 and nms\_d3 became critical not only in
-classification trees distinguishing between the various symptoms but in the
-nonmotor-predominant subgroup itself. In $k$-means subdivision of the
-nonmotor-dominant subtype where $k = 2$ and $k = 3$, opposite trends were
-confirmed with nms\_d2 and nms\_d3 symptoms. Similarly, in the 2 and 4 vs rest
-decision tree (Figure~\ref{fig:dtree-2and4va-pruned}), nms\_d2 and nms\_d3 nodes were
-used to differentiate various categories of nomotor-dominant patients.
-When $k = 3$, the subtype with the highest nms\_d2 scores and lowest
-nms\_d3 scores had by far the highest axial scores, nms\_d6 (gastrointestinal)
-scores, and nms\_d7 (urinary) scores. Thus subtype 3 of the nonmotor-dominated
-group could include patients falling into the cognitive/depression-dominant or
-autonomic dominant subtypes.
+% \subsection{Nonmotor subtype: clustering and modeling}
 
-Despite the variety in symptomatic expression in this nonmotor group, what
-seems most consistent is the presence of nms\_d9 (miscellaneous) nonmotor
-symptoms, as it is used as the root node of the 2 vs all decision tree
-(Figure~\ref{fig:2va}) and the 2 and 4 vs rest decision tree
-(Figure~\ref{fig:dtree-2and4va-pruned}).
+% Nonmotor symptoms nms\_d2 and nms\_d3 became critical not only in
+% classification trees distinguishing between the various symptoms but in the
+% nonmotor-predominant subgroup itself. In $k$-means subdivision of the
+% nonmotor-dominant subtype where $k = 2$ and $k = 3$, opposite trends were
+% confirmed with nms\_d2 and nms\_d3 symptoms. Similarly, in the 2 and 4 vs rest
+% decision tree (Figure~\ref{fig:dtree-2and4va-pruned}), nms\_d2 and nms\_d3 nodes were
+% used to differentiate various categories of nomotor-dominant patients.
+% When $k = 3$, the subtype with the highest nms\_d2 scores and lowest
+% nms\_d3 scores had by far the highest axial scores, nms\_d6 (gastrointestinal)
+% scores, and nms\_d7 (urinary) scores. Thus subtype 3 of the nonmotor-dominated
+% group could include patients falling into the cognitive/depression-dominant or
+% autonomic dominant subtypes.
 
-First, the longitudinal analysis gives more insight into the clusters found when clustering on
-nms\_d\{1-9\}. According to Figure~\ref{fig:longcorr}, most symptoms are highly correlated, with PD
-duration, but notably, mood/cognition symptoms (nms9, nms10, nms12) and tremor are not correlated
-highly with PD duration. The differences in disease progression can be seen by the corresponding
-graphs, Figures~\ref{fig:nms9-multi} and~\ref{fig:nms10-multi}. In both graphs, what is interesting
-is that Subtype 2 (Nonmotor-Dominant) starts at higher scores for nms\_9 and nms\_10, thus
-indicating that these patients' subtype is can be determined early in PD duration from depressive
-symptom score. Similarly, when examining Subtype 3 (Motor-dominant) in
-Figure~\ref{fig:tremor-multi}, the mean tremor score is substantially higher from PD onset.
-Interestingly, Subtype 4 (Severe) generally starts at lower tremor and motor scores during disease
-onset (Figure~\ref{fig:cisitot-multi}), but then rises sharply, exceeding other Subtypes. More evidence
-that tremor is a unique motor symptom is located in Figure~\ref{fig:nms30m-colhc}, where it is the most
-distant symptom from all other symptoms.
+% Despite the variety in symptomatic expression in this nonmotor group, what
+% seems most consistent is the presence of nms\_d9 (miscellaneous) nonmotor
+% symptoms, as it is used as the root node of the 2 vs all decision tree
+% (Figure~\ref{fig:2va}) and the 2 and 4 vs rest decision tree
+% (Figure~\ref{fig:dtree-2and4va-pruned}).
 
-When examining all 30 symptoms, more evidence is given that the previously-discovered Subtype
-2 (Nonmotor-Dominant) may be primarily characterized by high depressive symptoms. By graphing the
-30 subtypes attached to the original clustering, as in Figure~\ref{fig:d9to30}, the mean scores of
-nms8, nms9, and nms10 for Subtype 2 are substantially higher than Subtypes 1 and 3.
+Our longitudinal analysis gives more insight into the clusters found in the previous analyses.
+According to Figure~\ref{fig:corr}, most symptoms are uncorrelated with PD duration, especially
+mood/cognition symptoms (anxiety, depression) and tremor.
+The differences in disease progression for each cluster can be seen by the corresponding graphs in
+Figure~\ref{fig:long4}. Cluster 2 (Nonmotor-Dominant) starts at higher
+scores for anxiety and depression, and actually decreases with increasing PD duration, thus indicating that these patients' subtype can be determined
+early after PD onset from the depressive symptom score. Similarly, when examining cluster 3
+(Motor-dominant), the mean tremor score is substantially higher from PD onset.
+Interestingly, cluster 4 (Severe) generally starts at lower tremor and motor scores during disease,
+but then rises sharply, exceeding other clusters. More evidence that tremor is a unique motor
+symptom is located in Figure~\ref{fig:hc}, where it is the most distant symptom from all other
+symptoms.
 
-Indeed, PCA on the 30 nonmotor symptoms identifies the second-most prominent component as a general
-mood/cognition component, and $k$-means clustering on the 30 symptoms only
-(Figure~\ref{fig:nms30m-k4-heatmap-improved}) divides the 1000 patients into four slightly
-different groups, a mild, average, depression-dominant, and severe group.
+% Indeed, PCA on the 30 nonmotor symptoms identifies the second-most prominent component as a general
+% mood/cognition component, and $k$-means clustering on the 30 symptoms only
+% (Figure~\ref{fig:nms30m-k4-heatmap-improved}) divides the 1000 patients into four slightly
+% different groups, a mild, average, depression-dominant, and severe group.
 
-The Gaussian mixture model identified in Figure~\ref{fig:nms30m-mclust-heatmap-improved} fragments
-the previously-discovered clusters into more groups. Here, a wide variety of specialized subtypes
-of PD are displayed, including insomnia, urinary, motor, nonmotor, and depression-dominant groups,
-as well as the expected mild, average, and severe subtypes. It is likely that the previous analysis
-with only nms\_d\{1-9\} combined most of those specialized groups into the more general
-nonmotor-dominant Subtype 2.
+% The Gaussian mixture model identified in Figure~\ref{fig:nms30m-mclust-heatmap-improved} fragments
+% the previously-discovered clusters into more groups. Here, a wide variety of specialized subtypes
+% of PD are displayed, including insomnia, urinary, motor, nonmotor, and depression-dominant groups,
+% as well as the expected mild, average, and severe subtypes. It is likely that the previous analysis
+% with only nms\_d\{1-9\} combined most of those specialized groups into the more general
+% nonmotor-dominant Subtype 2.
 
 It's intuitive that a Depression-Dominant group emerges when clustering on nms\{1-30\}, since
 domain 3 consists of 5 separate measures. Thus, any high expression of depressive symptoms is
-magnified in clustering, since the symptoms are highly similar (Figure~\ref{fig:nms30m-colhc}) and
+magnified in clustering, since the symptoms are highly similar (Figure~\ref{fig:hc}) and
 treated with equal weight. Once again reinforcing what was discovered previously, depressive
 symptoms have been shown to be very important in determining subtypes of PD.
 
 \section{Supplementary Material}
+
+Probably the large table goes here?
+
 \section{References}
 
 \bibliography{manuscript}

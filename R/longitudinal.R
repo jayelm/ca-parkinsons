@@ -362,6 +362,8 @@ if (SAVE.LONG.PLOTS) {
   dev.copy(pdf, '../figures/longitudinal/corr-binned.pdf', width=10, height=10)
   dev.off()
 }
+
+# Correlation with PD Duration BINNING ====
 durat.cor <- function(arr) cor(1:nrow(binned), arr)
 correlations <- sapply(binned.no.sd, durat.cor)
 correlations <- correlations[which(names(correlations) != "counts")]  # Lose counts
@@ -385,24 +387,32 @@ ggplot(correlations.df, aes(x=names, y=r, fill=variable)) +
   geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df$r < 0) - .5) +
   scale_y_continuous(limits = c(0, 1)) +
   ylab("r") +
-  xlab("Variable") +
+  xlab("")+ 
   guides(guides(fill=guide_legend(title="Variable Type"))) +
   theme_pub() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  ggtitle("Correlation with PD duration")
+  ggtitle("Correlation with PD duration\n")
 # Only save with different names!
 if (SAVE.LONG.PLOTS) {
   ggsave('../figures/longitudinal/pd-durat-cor.pdf', width=14, height=7)
 }
 
 # Durat cor correlation NO BINNING ====
-durat.cor.everything <- function(symptom) cor(everything.wide$durat_pd, everything.wide[[symptom]])
-correlations.everything <- sapply(c(ALL.SYMPTOMS, NMS.30), durat.cor.everything)
+durat.cor.everything <- function(symptom) cor(everything.wide$durat_pd, as.numeric(everything.wide[[symptom]]))
+durat.cor.test <- function(symptom) cor.test(everything.wide$durat_pd, everything.wide[[symptom]])
+correlations.everything <- sapply(names(everything.wide),
+                                  durat.cor.everything)
+# Get rid of cluster, sex, durat_pd
+to.remove <- c("cluster", "sex", "durat_pd", "pdonset")
+correlations.everything <- correlations.everything[!names(correlations.everything) %in% to.remove]
+names(correlations.everything) <- sapply(names(correlations.everything), function(v) c(NMS.D.MAP.PUB.N, NMS.NUM.TO.PUB, MISC.MAP)[[v]])
 correlations.everything <- sort(correlations.everything)  # Sort ascending
 # Pretty meaningless - no negative correlations!!
 is_d.e <- grepl("d", names(correlations.everything))
-is_d.e[which(is_d.e == TRUE)] <- "nms_d{1-9}"
-is_d.e[which(is_d.e == FALSE)] <- "nms{1-30}"
+is_d.e[which(is_d.e == TRUE)] <- "Domain"
+is_d.e[which(is_d.e == FALSE)] <- "Symptom"
+is_d.e[which(names(correlations.everything) %in% c("Axial", "Bradykinesia", "Rigidity", "Tremor"))] <- "Motor"
+is_d.e[which(names(correlations.everything) %in% c("CISI_Total", "Age", "PD_Onset"))] <- "Other"
 
 correlations.df.e <- data.frame(
   names=names(correlations.everything),
@@ -412,20 +422,23 @@ correlations.df.e <- data.frame(
 
 correlations.df.e$names <- factor(correlations.df.e$names,
                                   levels=names(sort(correlations.everything)))
+# correlations.test.e <- lapply(c(ALL.SYMPTOMS, NMS.30), durat.cor.test)
+# names(correlations.test.e) <- c(ALL.SYMPTOMS, NMS.30)
 ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
   geom_bar(stat="identity", position="identity") +
-  geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df.e$r < 0) - .5) +
+  # geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df.e$r < 0) - .5) +
   scale_y_continuous(limits = c(0, 1)) +
-  ylab("r") +
+  ylab("r\n") +
   xlab("Variable") +
   guides(guides(fill=guide_legend(title="Variable Type"))) +
   theme_pub() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  ggtitle("Correlation with PD duration")
+  ggtitle("Correlation with PD duration\n")
 # Only save with different names!
-if (SAVE.LONG.PLOTS) {
-  ggsave('../figures/longitudinal/pd-durat-cor-unbinned.pdf', width=14, height=10)
+if (TRUE) {
+  ggsave('../figures/cor-unbinned.pdf', width=16, height=8)
 }
+
 
 # SEGMENTED regression ====
 library(segmented)
@@ -471,5 +484,81 @@ if (SAVE.LONG.PLOTS) {
   dev.off()
 }
 
+# Multiplot func ====
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
 # Stop binning. Just plot normal stuff ====
-ggplot(everything.wide, aes(x=durat_pd))
+# ggplot(everything.wide, aes(x=durat_pd))
+facts.of.int <- c("\nAnxiety\n" = "nms9", "\nDepression\n" = "nms10",
+                  "\nCISI Total\n" = "cisitot", "\nTremor\n" = "tremor")
+
+el <- melt(everything.wide, id.var = c("cluster", "durat_pd"))
+# Filter only less than 30s, for lack of
+el <- el[el$durat_pd < 30, ]
+el.sub <- el[el$variable %in% facts.of.int, ]
+# No better way to switch the names?
+el.sub$variable <- revalue(factor(el.sub$variable), setNames(names(facts.of.int), facts.of.int))
+  
+mean_vals <- data.frame(
+  variable = names(facts.of.int),
+  value = sapply(names(facts.of.int), function(f) {
+    mean(el.sub[el.sub$variable == f, ]$value)
+  })
+)
+ggplot(el.sub, aes(x=durat_pd, y=value, color = cluster)) +
+  geom_point() +
+  geom_hline(aes(yintercept = value), mean_vals, linetype='dashed') +
+  geom_smooth(aes(color = "Overall"), se = FALSE, color = "black") +
+  geom_smooth(se = FALSE) +
+  geom_jitter(width = 0.7, height = 0.7) +
+  facet_wrap(~ variable, nrow = 2, ncol = 2, scales = "free_y") +
+  theme_bw() +
+  ylab("Symptom Score\n") +
+  xlab("\nPD Duration") +
+  labs(color = "Cluster") +
+  theme_pub() +
+  theme(strip.text = element_text(lineheight = 0.5))

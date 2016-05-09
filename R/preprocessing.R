@@ -106,8 +106,12 @@ NMS.D.NAMES <- c(
   "Cardiovascular", "Sleep_fatigue", "Mood_cognition", "Perception_hallucination", "Attention_memory",
   "Gastrointestinal", "Urinary", "Sexual", "Miscellaneous"
 )
+NMS.NUM.TO.PUB <- setNames(sapply(NMS.30.NAMES, function(s) paste(strsplit(s, "-")[[1]][c(1, 3)], collapse = "-")),
+                           NMS.30)
+NMS.D.TO.NUM <- setNames(sapply(1:length(NMS.D), function(i) paste(i, "-", NMS.D[i]), sep = ""), NMS.D)
 NMS.D.MAP.PUB <- setNames(NMS.D.NAMES, NMS.D)
-NMS.D.MAP.PUB.N <- setNames(sapply(1:length(NMS.D.NAMES), function(i) paste(i, NMS.D.NAMES[i], sep = "-")), NMS.D)
+NMS.D.MAP.PUB.N <- setNames(sapply(1:length(NMS.D),
+                                   function(i) paste(i, NMS.D.NAMES[i], sep = "-")), NMS.D)
 NMS.30.MAP.PUB <- setNames(NMS.30.NAMES.PUB, NMS.30)
 NMS.30.LONG.SHORT.MAP <- setNames(NMS.30.NAMES.PUB, NMS.30.NAMES)
 MISC.MAP <- c(
@@ -194,3 +198,4 @@ if (SAVE.PREPROCESSING.PLOTS) {
 
 # Elbow appears around 3 factors
 # Reset par for the rest of the script
+

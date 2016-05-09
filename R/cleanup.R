@@ -5,6 +5,9 @@ library(xtable)
 library(reshape)
 library(plyr)
 library(infotheo)
+library(ggplot2)
+library(reshape2)
+library(scales)
 
 nmsd.symptoms <- c(
   NMS.D.NAMES,
@@ -404,7 +407,219 @@ if (TRUE) {
   dev.off()
 }
 
-# Compute homogeneity/completeness/v-measure ====
-v.measure(nms30.present$Cluster, present$Cluster)
-# It's actually quite poor!
-c(0.3988046,0.4661785,0.4298677)
+# Compute homogeneity/completeness/v-measure and alignment ====
+# cl.s$cluster, cl$cluster
+redux.30 <- cl.s$cluster
+redux.30 <- factor(redux.30, levels = c("3", "2", "1", "4"))
+redux.30 <- revalue(redux.30, c("3" = "1", "1" = "3"))
+
+redux.d <- cl$cluster
+redux.d <- factor(redux.d, levels = c("4", "1", "3", "2"))
+redux.d <- revalue(redux.d, c("4" = "1", "1" = "2", "2" = "4"))
+
+cat("Homogeneity/completeness/V-measure: ",
+    v.measure(nms30.present$Cluster, present$Cluster), "\n")
+cat("Adjusted rand index: ",
+    mclust::adjustedRandIndex(nms30.present$Cluster, present$Cluster), "\n")
+
+# Bar plots
+# Distribution of nmsd cluster assignments for those who are in nms30
+nmsd.per.nms30 <- data.frame(t(rbind(sapply(1:4, function(i) {
+    cat("Cluster ", i, "\n")
+    present.dist <- table(redux.d[redux.30 == i])
+    round(sapply(present.dist, function(n) n / sum(present.dist)), 2)
+  }))),
+  compcluster = c("\n1", "\n2", "\n3", "\n4"),
+  comparison = rep("\nSymptoms cluster\n", 4)
+)
+names(nmsd.per.nms30) <- c("1", "2", "3", "4", "compcluster", "comparison")
+ndpn30 <- melt(nmsd.per.nms30, id = c("compcluster", "comparison"))
+
+# Distribution of nms30 cluster assignments for those who are in nmsd
+nms30.per.nmsd <- data.frame(t(rbind(sapply(1:4, function(i) {
+    cat("Cluster ", i, "\n")
+    present.dist <- table(redux.30[redux.d == i])
+    round(sapply(present.dist, function(n) n / sum(present.dist)), 2)
+  }))),
+  compcluster = c("\n1", "\n2", "\n3", "\n4"),
+  comparison = rep("\nDomains cluster\n", 4)
+)
+names(nms30.per.nmsd) <- c("1", "2", "3", "4", "compcluster", "comparison")
+n30pnd <- melt(nms30.per.nmsd, id = c("compcluster", "comparison"))
+
+comb <- rbind.fill(n30pnd, ndpn30)
+# Calculate midpoints of bars
+# Bind and plot as one
+
+comb$pos <- as.numeric(sapply(c(1:4, 17:20), function(i) {
+  heights <- comb[seq(i, i + 12, by = 4), "value"]
+  cum.heights <- cumsum(heights)
+  cum.heights - ((heights) / 2)
+}))[as.integer(sapply(c(1:4, 17:20), function(i) seq(i, i + 12, length.out = 4)))]
+
+ggplot(comb, aes(x = compcluster, y = value, fill = variable)) +
+  facet_wrap( ~ comparison, switch = "x", drop = T) +
+  geom_bar(position = "fill", stat = "identity") +
+#   geom_text(aes(label = ifelse(value != 0, paste((value * 100), "%", sep = ""), ""), y = pos),
+#             color = "black", size = 4) +
+  xlab("") + ylab("") +
+  labs(fill = "Opposite\nclustering") +
+  scale_y_continuous(labels = percent_format()) +
+  theme_bw() +
+  theme_pub() +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_text(size=20, lineheight = 0.5),
+        plot.title = element_text(size=20, lineheight = 0.5),
+        axis.text.y = element_text(size=18),
+        axis.text.x = element_text(colour = gg_color_hue(4), size = 18, lineheight = 0.5),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 17)) +
+  ggtitle(" Symptoms cluster distribution      Domains cluster distribution   \n")
+
+if (TRUE) {
+  dev.copy(pdf, "../figures/cluster-alignment.pdf", width = 10, height = 5)
+  dev.off()
+}
+
+
+# Correlation plots without bins ====
+
+ALPH <- 1/5
+SPAN <- 1
+XPOS <- 36
+
+# ggplot(everything.wide, aes(x=durat_pd))
+facts.of.int <- c("\nAnxiety\n" = "nms9", "\nDepression\n" = "nms10",
+                  "\nCISI Total\n" = "cisitot", "\nTremor\n" = "tremor")
+
+el <- melt(everything.wide, id.var = c("cluster", "durat_pd"))
+# Filter only less than 30s, for lack of
+# el <- el[el$durat_pd < 30.1, ]
+el.sub <- el[el$variable %in% facts.of.int, ]
+# No better way to switch the names?
+el.sub$variable <- revalue(factor(el.sub$variable), setNames(names(facts.of.int), facts.of.int))
+  
+mean_vals <- data.frame(
+  variable = names(facts.of.int),
+  value = sapply(names(facts.of.int), function(f) {
+    mean(el.sub[el.sub$variable == f, ]$value)
+  })
+)
+mean_cors <- sapply(names(facts.of.int), function(f) {
+  el.of.int <- el.sub[el.sub$variable == f, ]
+  cor(el.of.int$durat_pd, el.of.int$value)
+})
+mean_text <- data.frame(
+  label = sapply(1:4, function(i) {
+    v <- round(mean_vals$value[i], 2)
+    r <- round(mean_cors[i], 2)
+    paste("µ = ", v, "\nr = ", r, sep = "")
+  }),
+  variable = mean_vals$variable,
+  x = XPOS,
+  y = sapply(facts.of.int, function(i) max(el[el$variable == i, ]$value - max(el[el$variable == i, ]$value) / 13))
+  # y = sapply(facts.of.int, function(i) mean(el[el$variable == i, ]$value + max(el[el$variable == i, ]$value/13)))
+)
+ggplot(el.sub, aes(x=durat_pd, y=value, color = cluster)) +
+  geom_point(alpha = ALPH) +
+  stat_smooth(aes(color = "Overall"), se = FALSE, color = "black", span = SPAN) +
+  stat_smooth(se = FALSE, span = SPAN) +
+  geom_jitter(width = 0.7, height = 0.7, alpha = ALPH) +
+  geom_hline(aes(yintercept = value), mean_vals, linetype='dashed') +
+  geom_label(data = mean_text, aes(x, y, label = label), inherit.aes = FALSE, size = 6, color = "black", alpha = 0.5) +
+  facet_wrap(~ variable, nrow = 2, ncol = 2, scales = "free_y") +
+  theme_bw() +
+  ylab("Symptom Score\n") +
+  xlab("\nPD Duration (years)") +
+  labs(color = "Cluster") +
+  theme_pub() +
+  theme(strip.text = element_text(lineheight = 0.5)) +
+ggsave("../figures/long4-d.pdf")
+
+# Do the same thing, but on nms30 ====
+everything.wide.30 <- everything.wide
+everything.wide.30$cluster <- nms30.present$Cluster
+el.30 <- melt(everything.wide.30, id.var = c("cluster", "durat_pd"))
+# Filter only less than 30s, for lack of
+# el.30 <- el.30[el.30$durat_pd < 30.1, ]
+el.30.sub <- el.30[el.30$variable %in% facts.of.int, ]
+# No better way to switch the names?
+el.30.sub$variable <- revalue(factor(el.30.sub$variable), setNames(names(facts.of.int), facts.of.int))
+  
+mean_vals.30 <- data.frame(
+  variable = names(facts.of.int),
+  value = sapply(names(facts.of.int), function(f) {
+    mean(el.30.sub[el.30.sub$variable == f, ]$value)
+  })
+)
+mean_cors.30 <- sapply(names(facts.of.int), function(f) {
+  el.of.int <- el.30.sub[el.30.sub$variable == f, ]
+  cor(el.of.int$durat_pd, el.of.int$value)
+})
+mean_text.30 <- data.frame(
+  label = sapply(1:4, function(i) {
+    v <- round(mean_vals.30$value[i], 2)
+    r <- round(mean_cors.30[i], 2)
+    paste("µ = ", v, "\nr = ", r, sep = "")
+  }),
+  variable = mean_vals.30$variable,
+  x = XPOS,
+  y = sapply(facts.of.int, function(i) max(el.30[el.30$variable == i, ]$value - max(el.30[el.30$variable == i, ]$value) / 13))
+)
+ggplot(el.30.sub, aes(x=durat_pd, y=value, color = cluster)) +
+  geom_point(alpha = ALPH) +
+  stat_smooth(aes(color = "Overall"), se = FALSE, color = "black", span = SPAN) +
+  stat_smooth(se = FALSE, span = SPAN) +
+  geom_jitter(width = 0.7, height = 0.7, alpha = ALPH) +
+  geom_hline(aes(yintercept = value), mean_vals.30, linetype='dashed') +
+  geom_label(data = mean_text.30, aes(x, y, label = label), inherit.aes = FALSE,
+             size = 6, color = "black", alpha = 0.5) +
+  facet_wrap(~ variable, nrow = 2, ncol = 2, scales = "free_y") +
+  theme_bw() +
+  ylab("Symptom Score\n") +
+  xlab("\nPD Duration (years)") +
+  labs(color = "Cluster") +
+  theme_pub() +
+  theme(strip.text = element_text(lineheight = 0.5)) +
+ggsave("../figures/long4-30.pdf")
+
+# Final correlation, unbinned ====
+durat.cor.everything <- function(symptom) cor(everything.wide$durat_pd, as.numeric(everything.wide[[symptom]]))
+durat.cor.test <- function(symptom) cor.test(everything.wide$durat_pd, everything.wide[[symptom]])
+correlations.everything <- sapply(names(everything.wide),
+                                  durat.cor.everything)
+# Get rid of cluster, sex, durat_pd
+to.remove <- c("cluster", "sex", "durat_pd", "pdonset", "age")
+correlations.everything <- correlations.everything[!names(correlations.everything) %in% to.remove]
+names(correlations.everything) <- sapply(names(correlations.everything), function(v) c(NMS.D.MAP.PUB.N, NMS.NUM.TO.PUB, MISC.MAP)[[v]])
+correlations.everything <- sort(correlations.everything)  # Sort ascending
+# Pretty meaningless - no negative correlations!!
+is_d.e <- grepl("d", names(correlations.everything))
+is_d.e[which(is_d.e == TRUE)] <- "Domain"
+is_d.e[which(is_d.e == FALSE)] <- "Symptom"
+is_d.e[which(names(correlations.everything) %in% c("Axial", "Bradykinesia", "Rigidity", "Tremor"))] <- "Motor"
+is_d.e[which(names(correlations.everything) %in% c("CISI_Total", "Age", "PD_Onset"))] <- "Other"
+
+correlations.df.e <- data.frame(
+  names=names(correlations.everything),
+  r=correlations.everything,
+  variable=is_d.e
+)
+
+correlations.df.e$names <- factor(correlations.df.e$names,
+                                  levels=names(sort(correlations.everything)))
+# correlations.test.e <- lapply(c(ALL.SYMPTOMS, NMS.30), durat.cor.test)
+# names(correlations.test.e) <- c(ALL.SYMPTOMS, NMS.30)
+ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
+  geom_bar(stat="identity", position="identity") +
+  # geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df.e$r < 0) - .5) +
+  scale_y_continuous(limits = c(0, 1)) +
+  ylab("r\n") +
+  xlab("") +
+  guides(guides(fill=guide_legend(title="Variable type"))) +
+  theme_pub() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# Only save with different names!
+if (TRUE) {
+  ggsave('../figures/cor-unbinned.pdf', width=15, height=8)
+}
