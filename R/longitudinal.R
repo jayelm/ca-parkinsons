@@ -5,6 +5,7 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 library(gtable)
+library(RColorBrewer)
 library(reshape2)
 library(plyr)
 library(corrplot)
@@ -403,16 +404,18 @@ durat.cor.test <- function(symptom) cor.test(everything.wide$durat_pd, everythin
 correlations.everything <- sapply(names(everything.wide),
                                   durat.cor.everything)
 # Get rid of cluster, sex, durat_pd
-to.remove <- c("cluster", "sex", "durat_pd", "pdonset")
+to.remove <- c("cluster", "sex", "durat_pd")
 correlations.everything <- correlations.everything[!names(correlations.everything) %in% to.remove]
 names(correlations.everything) <- sapply(names(correlations.everything), function(v) c(NMS.D.MAP.PUB.N, NMS.NUM.TO.PUB, MISC.MAP)[[v]])
 correlations.everything <- sort(correlations.everything)  # Sort ascending
 # Pretty meaningless - no negative correlations!!
 is_d.e <- grepl("d", names(correlations.everything))
-is_d.e[which(is_d.e == TRUE)] <- "Domain"
-is_d.e[which(is_d.e == FALSE)] <- "Symptom"
-is_d.e[which(names(correlations.everything) %in% c("Axial", "Bradykinesia", "Rigidity", "Tremor"))] <- "Motor"
-is_d.e[which(names(correlations.everything) %in% c("CISI_Total", "Age", "PD_Onset"))] <- "Other"
+is_d.e[which(is_d.e == TRUE)] <- "Nonmotor symptom"
+is_d.e[which(is_d.e == FALSE)] <- "Nonmotor domain"
+is_d.e[which(names(correlations.everything) %in% c("Axial", "Bradykinesia", "Rigidity", "Tremor"))] <- "Motor symptom"
+is_d.e[which(names(correlations.everything) %in% c("CISI total", "Age", "PD onset"))] <- "Other"
+is_d.e <- factor(is_d.e, levels = c("Nonmotor domain", "Nonmotor symptom", "Motor symptom", "Other"))
+is_d.cols <- c(brewer.pal(4, "Set2")[1], brewer.pal(4, "Pastel2")[1], brewer.pal(4, "Set2")[c(3, 4)])
 
 correlations.df.e <- data.frame(
   names=names(correlations.everything),
@@ -427,10 +430,11 @@ correlations.df.e$names <- factor(correlations.df.e$names,
 ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
   geom_bar(stat="identity", position="identity") +
   # geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df.e$r < 0) - .5) +
-  scale_y_continuous(limits = c(0, 1)) +
+  scale_y_continuous(limits = c(0.0, 1)) +
   ylab("r\n") +
   xlab("Variable") +
   guides(guides(fill=guide_legend(title="Variable Type"))) +
+  scale_fill_manual(values = is_d.cols) +
   theme_pub() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("Correlation with PD duration\n")

@@ -115,14 +115,26 @@ plot(pam(raw.filtered, pamk.best$nc))
 
 # GAP STATISTIC ESTIMATION ====
 set.seed(0)
-gaps <- clusGap(raw.filtered, kmeans, 14, B = 100)
-par(mar = c(4.5, 4.5, 4.5, 4.5), ps = 18)
-plot(gaps)
+# gaps <- clusGap(raw.filtered, kmeans, 14, B = 500)
+par(mar = c(4.3, 4.7, 0.5, 0.5), ps = 18)
+plot(gaps, xlab=expression(k), ylab=expression(Gap(k)), xaxt="n")
+# Embellishments
+bestK <- 4 # Figure this out with method Tibs2001SEmax
+gapk <- as.numeric(gaps$Tab[bestK, "gap"])
+gapk1.se <- as.numeric(gaps$Tab[bestK + 1, "gap"] - gaps$Tab[bestK + 1, "SE.sim"])
+segments(x0 = 4, y0 = 0, x1 = 4, y1 = gapk, lty = 2)
+segments(x0 = 0, y0 = gapk, x1 = 4, y1 = gapk, lty = 2)
+segments(x0 = 5, y0 = 0, x1 = 5, y1 = gapk1.se, lty = 2)
+segments(x0 = 0, y0 = gapk1.se, x1 = 5, y1 = gapk1.se, lty = 2)
+axis(1, at = c(1:14))
+# mtext(expression(paste(Gap(4), phantom("|"))), side = 2, at = c(0, gapk), las = 1)
+# text(x = 5, y = gapk1.se, labels = expression(paste(Gap(5) - se[5], phantom("|"))), pos = 4)
+
 if (SAVE.EXPLORE.PLOTS) {
-  dev.copy(pdf, "../figures/gap-statistic.pdf", width = 6, height = 5)
+  dev.copy(pdf, "../figures/gap-statistic.pdf", width = 8, height = 5)
   dev.off()
 }
-print(gaps, method = "firstSEmax", SE.factor = 1)
+print(gaps, method = "Tibs2001SEmax", SE.factor = 1)
 
 
 # Affinity propagation ====

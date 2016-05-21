@@ -103,7 +103,7 @@ NMS.D <- c(
   "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5", "nms_d6", "nms_d7", "nms_d8", "nms_d9"
 )
 NMS.D.NAMES <- c(
-  "Cardiovascular", "Sleep_fatigue", "Mood_cognition", "Perception_hallucination", "Attention_memory",
+  "Cardiovascular", "Sleep/fatigue", "Mood/apathy", "Perception/hallucination", "Attention/memory",
   "Gastrointestinal", "Urinary", "Sexual", "Miscellaneous"
 )
 NMS.NUM.TO.PUB <- setNames(sapply(NMS.30.NAMES, function(s) paste(strsplit(s, "-")[[1]][c(1, 3)], collapse = "-")),
@@ -117,14 +117,14 @@ NMS.30.LONG.SHORT.MAP <- setNames(NMS.30.NAMES.PUB, NMS.30.NAMES)
 MISC.MAP <- c(
   'age' = 'Age',
   'sex' = 'Sex',
-  'pdonset' = 'PD_Onset',
-  'durat_pd' = 'PD_Duration',
-  'cisitot' = 'CISI_Total',
+  'pdonset' = 'PD onset',
+  'durat_pd' = 'PD duration',
+  'cisitot' = 'CISI total',
   'tremor' = 'Tremor',
   'bradykin' = 'Bradykinesia',
   'rigidity' = 'Rigidity',
   'axial' = 'Axial',
-  'ldopa' = 'ldopa',
+  'ldopa' = 'L-Dopa',
   'surgery' = 'Surgery',
   'cluster' = 'Cluster'
 )

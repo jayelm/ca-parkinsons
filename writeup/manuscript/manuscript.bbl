@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -24,27 +24,6 @@
   (Statistical Methodology)}
   \bibinfo{year}{2001};\bibinfo{volume}{63}(\bibinfo{number}{2}):\bibinfo{pages}{411--423}.
 %Type = Article
-\bibitem[{Brock et~al.(2008)Brock, Pihur, Datta and Datta}]{brock11clvalid}
-\bibinfo{author}{Brock\xfnm[ G.]}, \bibinfo{author}{Pihur\xfnm[ V.]},
-  \bibinfo{author}{Datta\xfnm[ S.]}, \bibinfo{author}{Datta\xfnm[ S.]}.
-\newblock \bibinfo{title}{clvalid: An r package for cluster validation}.
-\newblock \bibinfo{journal}{Journal of Statistical Software}
-  \bibinfo{year}{2008};\bibinfo{volume}{25}(\bibinfo{number}{1}):\bibinfo{pages}{1--22}.
-%Type = Article
-\bibitem[{Datta and Datta(2006)}]{datta2006methods}
-\bibinfo{author}{Datta\xfnm[ S.]}, \bibinfo{author}{Datta\xfnm[ S.]}.
-\newblock \bibinfo{title}{Methods for evaluating clustering algorithms for gene
-  expression data using a reference set of functional classes}.
-\newblock \bibinfo{journal}{BMC bioinformatics}
-  \bibinfo{year}{2006};\bibinfo{volume}{7}(\bibinfo{number}{1}):\bibinfo{pages}{397}.
-%Type = Article
-\bibitem[{Yeung et~al.(2001)Yeung, Haynor and Ruzzo}]{yeung2001validating}
-\bibinfo{author}{Yeung\xfnm[ K.Y.]}, \bibinfo{author}{Haynor\xfnm[ D.R.]},
-  \bibinfo{author}{Ruzzo\xfnm[ W.L.]}.
-\newblock \bibinfo{title}{Validating clustering for gene expression data}.
-\newblock \bibinfo{journal}{Bioinformatics}
-  \bibinfo{year}{2001};\bibinfo{volume}{17}(\bibinfo{number}{4}):\bibinfo{pages}{309--318}.
-%Type = Article
 \bibitem[{Hubert and Arabie(1985)}]{hubert1985}
 \bibinfo{author}{Hubert\xfnm[ L.]}, \bibinfo{author}{Arabie\xfnm[ P.]}.
 \newblock \bibinfo{title}{Comparing partitions}.
@@ -60,16 +39,15 @@
   Language Learning (EMNLP-CoNLL)}. \bibinfo{year}{2007}, p.
   \bibinfo{pages}{410--420}.
 %Type = Article
-\bibitem[{van Rooden et~al.(2010)van Rooden, Heiser, Kok, Verbaan, van Hilten
-  and Marinus}]{vanrooden10}
-\bibinfo{author}{van Rooden\xfnm[ S.M.]}, \bibinfo{author}{Heiser\xfnm[ W.J.]},
-  \bibinfo{author}{Kok\xfnm[ J.N.]}, \bibinfo{author}{Verbaan\xfnm[ D.]},
-  \bibinfo{author}{van Hilten\xfnm[ J.J.]}, \bibinfo{author}{Marinus\xfnm[
-  J.]}.
-\newblock \bibinfo{title}{The identification of parkinson's disease subtypes
-  using cluster analysis: a systematic review}.
+\bibitem[{van Rooden et~al.(2011)van Rooden, Colas, Mart{\'\i}nez-Mart{\'\i}n,
+  Visser, Verbaan, Marinus et~al.}]{vanrooden11}
+\bibinfo{author}{van Rooden\xfnm[ S.M.]}, \bibinfo{author}{Colas\xfnm[ F.]},
+  \bibinfo{author}{Mart{\'\i}nez-Mart{\'\i}n\xfnm[ P.]},
+  \bibinfo{author}{Visser\xfnm[ M.]}, \bibinfo{author}{Verbaan\xfnm[ D.]},
+  \bibinfo{author}{Marinus\xfnm[ J.]}, et~al.
+\newblock \bibinfo{title}{Clinical subtypes of {P}arkinson's disease}.
 \newblock \bibinfo{journal}{Movement Disorders}
-  \bibinfo{year}{2010};\bibinfo{volume}{25}(\bibinfo{number}{8}):\bibinfo{pages}{969--978}.
+  \bibinfo{year}{2011};\bibinfo{volume}{26}(\bibinfo{number}{1}):\bibinfo{pages}{51--58}.
 %Type = Article
 \bibitem[{Ma et~al.(2015)Ma, Chan, Gu, Li and Feng}]{ma15}
 \bibinfo{author}{Ma\xfnm[ L.Y.]}, \bibinfo{author}{Chan\xfnm[ P.]},
@@ -77,7 +55,7 @@
   \bibinfo{author}{Feng\xfnm[ T.]}.
 \newblock \bibinfo{title}{Heterogeneity among patients with parkinson's
   disease: Cluster analysis and genetic association}.
-\newblock \bibinfo{journal}{Journal of the neurological sciences}
+\newblock \bibinfo{journal}{Journal of the {N}eurological {S}ciences}
   \bibinfo{year}{2015};\bibinfo{volume}{351}(\bibinfo{number}{1}):\bibinfo{pages}{41--45}.
 
 \end{thebibliography}

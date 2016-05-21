@@ -3,9 +3,10 @@
 library(doBy)
 library(xtable)
 library(reshape)
-library(plyr)
-library(infotheo)
-library(ggplot2)
+library(grid)
+library(gridExtra)
+library(plyr) library(infotheo) library(ggplot2)
+
 library(reshape2)
 library(scales)
 
@@ -126,7 +127,7 @@ hm.m$colDendrogram %>%
 dev.copy(pdf, "../figures/nms30m-colhc-pub.pdf", width = 15, height = 7)
 dev.off()
 
-# Pub-ready boxplot graph ====
+# Publication-ready boxplots ====
 dev.off()
 clus <- clusters.raw.long[["4"]]
 # Get rid of extra
@@ -140,7 +141,8 @@ clus.pub$Type <- ""
 clus.pub[clus.pub$variable %in%
            sapply(NMS.D, function(s) paste("\n", PUB.MAP.N[as.character(s)][[1]], "\n", sep = "")), ]$Type <- "Nonmotor (analyzed)"
 clus.pub[clus.pub$variable %in% factor(c("\nAxial\n", "\nRigidity\n", "\nBradykinesia\n", "\nTremor\n")), ]$Type <- "Motor (analyzed)"
-clus.pub[!(clus.pub$Type %in% c("Nonmotor (analyzed)", "Motor (analyzed)")), ]$Type <- "Other"
+clus.pub[!(clus.pub$Type %in% c("Nonmotor (analyzed)", "Motor (analyzed)")), ]$Type <- "Other (not analyzed)"
+clus.pub$Type <- factor(clus.pub$Type, levels = c('Nonmotor (analyzed)', 'Motor (analyzed)', 'Other (not analyzed)'))
 p <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
   geom_boxplot() +
   guides(fill = FALSE) +
@@ -159,7 +161,7 @@ dummy <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement)) +
         legend.text = element_text(size = 14),
         legend.title = element_text(size = 16)) +
   labs(fill = "Variable Type") +
-  scale_fill_manual(values = c("#d7f6ff", "#d2c5ff", "#fed4f4")) +
+  scale_fill_manual(values = brewer.pal(4, "Pastel2")[c(1, 3, 4)]) +
   theme(legend.position = c(0.5, 0.1))
 dummy
 
@@ -208,7 +210,7 @@ clus4.wide.st <- clusters.raw[["4"]]
 # Because it wasn't set in clusters.raw - if this is a bad thing lmk
 clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
 # Just NMS
-clus4.wide.st <- clus4.wide.st[, c(NMS.D, "axial", "rigidity", "bradykin", "tremor", "cluster")]
+clus4.wide.st <- clus4.wide.st[, c(NMS.D, "axial", "rigidity", "bradykin", "tremor", "cluster")]#, "age", "sex", "pdonset", "durat_pd", "cisitot")]
 # Assuming 1st column is cluster (which it should be)
 oneways <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
   fm <- substitute(i ~ cluster, list(i = as.name(col)))
@@ -422,7 +424,7 @@ cat("Homogeneity/completeness/V-measure: ",
 cat("Adjusted rand index: ",
     mclust::adjustedRandIndex(nms30.present$Cluster, present$Cluster), "\n")
 
-# Bar plots
+# Stacked barplots bar plots bar chart barchart alignment ====
 # Distribution of nmsd cluster assignments for those who are in nms30
 nmsd.per.nms30 <- data.frame(t(rbind(sapply(1:4, function(i) {
     cat("Cluster ", i, "\n")
@@ -457,14 +459,21 @@ comb$pos <- as.numeric(sapply(c(1:4, 17:20), function(i) {
   cum.heights - ((heights) / 2)
 }))[as.integer(sapply(c(1:4, 17:20), function(i) seq(i, i + 12, length.out = 4)))]
 
-ggplot(comb, aes(x = compcluster, y = value, fill = variable)) +
-  facet_wrap( ~ comparison, switch = "x", drop = T) +
-  geom_bar(position = "fill", stat = "identity") +
+comb$fac <- c(rep(c("\n\n\n\n\n\n\n\nD[1]", "\n\n\n\n\n\n\n\nD[2]", "\n\n\n\n\n\n\n\nD[3]", "\n\n\n\n\n\n\n\nD[4]"), 4),
+              rep(c("\n\n\n\n\n\n\n\nS[1]", "\n\n\n\n\n\n\n\nS[2]", "\n\n\n\n\n\n\n\nS[3]", "\n\n\n\n\n\n\n\nS[4]"), 4))
+
+pbar <- ggplot(comb, aes(y = value, fill = variable)) +
+  geom_bar(data = subset(comb, comparison == "\nDomains cluster\n"), aes(x = compcluster), position = "fill", stat = "identity") +
+  geom_bar(data = subset(comb, comparison == "\nSymptoms cluster\n"), aes(x = as.character(compcluster)), position = "fill", stat = "identity") +
+  facet_grid(. ~ comparison, switch = "x", scales = "free_x") +
 #   geom_text(aes(label = ifelse(value != 0, paste((value * 100), "%", sep = ""), ""), y = pos),
 #             color = "black", size = 4) +
   xlab("") + ylab("") +
+  geom_text(aes(x = compcluster, y = 0, label = fac), color = rep(gg_color_hue(4), 8),
+            inherit.aes = FALSE, parse = TRUE, size = 7, vjust = 2) +
   labs(fill = "Opposite\nclustering") +
   scale_y_continuous(labels = percent_format()) +
+  scale_x_discrete(labels = c(" ", " ", " ", " ")) +
   theme_bw() +
   theme_pub() +
   theme(strip.background = element_blank(),
@@ -475,6 +484,9 @@ ggplot(comb, aes(x = compcluster, y = value, fill = variable)) +
         legend.text = element_text(size = 18),
         legend.title = element_text(size = 17)) +
   ggtitle(" Symptoms cluster distribution      Domains cluster distribution   \n")
+gtbar <- ggplot_gtable(ggplot_build(pbar))
+gtbar$layout$clip[gtbar$layout$name == "panel"] <- "off"
+grid.draw(gtbar)
 
 if (TRUE) {
   dev.copy(pdf, "../figures/cluster-alignment.pdf", width = 10, height = 5)
@@ -531,6 +543,7 @@ ggplot(el.sub, aes(x=durat_pd, y=value, color = cluster)) +
   theme_bw() +
   ylab("Symptom Score\n") +
   xlab("\nPD Duration (years)") +
+  scale_fill_manual(values = c("#d7f6ff", "#d2c5ff", "#fed4f4")) +
   labs(color = "Cluster") +
   theme_pub() +
   theme(strip.text = element_text(lineheight = 0.5)) +
