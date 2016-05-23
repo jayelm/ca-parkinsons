@@ -5,6 +5,7 @@
 \usepackage{mathptmx}
 \usepackage{lmodern}
 \usepackage{times}
+\usepackage{soul} % For highlighting
 
 % Math
 \usepackage{amsmath}
@@ -72,7 +73,8 @@
 
 Out of the 951 patients in the study, we used listwise deletion to exclude 47 patients due to
 missing measurements in the variables of interest, resulting in 904 remaining patients. All
-symptoms were standardized before clustering, and unstandardized afterwards for interpretation.
+symptoms were standardized before clustering, and unstandardized afterwards for
+interpretation.
 Analyses were conducted in R version 3.2.4 (www.r-project.org).
 
 \subsubsection{Cluster analysis}
@@ -80,16 +82,16 @@ Analyses were conducted in R version 3.2.4 (www.r-project.org).
 $k$-means was used for cluster analysis. We performed two analyses on the
 patients in the dataset: the first ``domains clustering'' on the nine aggregate nonmotor symptom
 domains and the four motor symptoms, and the second ``symptoms clustering'' on the 30 individual
-nonmotor symptoms collected with the four motor symptoms. Complete-linkage agglomerative
-hierarchical clustering on the 30 nonmotor symptoms was also performed to how the symptoms group
+nonmotor symptoms collected with the four motor symptoms. Complete-linkage
+hierarchical agglomerative clustering on the 30 nonmotor symptoms was also performed to how the symptoms group
 together.
 
 \subsubsection{Determining $k$}
 
 Various formal measures were used to determine the optimal number of clusters for the dataset. The
 optimal $k$ according to the Gap Statistic and the 1-standard-error method suggested by
-Tibshirani\cite{tibshirani01gap} was $k = 4$ (Supplementary Material Figure~\ref{fig:gap}). Other cluster validation
-methods (within sum of squares (WSS) scree plot, minimum average silhouette width) suggested $k =
+Tibshirani\cite{tibshirani01gap} was $k = 4$ (Supplementary Figure~\ref{fig:gap}). Other cluster validation
+methods (within sum of squares scree plot, minimum average silhouette width) suggested $k =
 2, 3, 4$, where $k = 2, 3$ simply divided the data uninformatively into groups with varying levels
 of overall PD severity. Thus $k = 4$ was selected to offer a good blend of model fit,
 informativeness, and parsimony.
@@ -110,7 +112,7 @@ pairwise clusters were tested post-hoc using Tukey's range test for continuous m
 $\chi^2$ tests with Bonferroni correction for proportions.
 
 To compare the clusterings, we visualized cluster alignment with stacked barplots, and computed the adjusted rand index\cite{hubert1985} (ARI) and
-Rosenberg's $v$-measure.\cite{rosenberg07vmeasure} to evaluate similarity between the two
+Rosenberg's $v$-measure\cite{rosenberg07vmeasure} to evaluate similarity between the two
 clusterings. Both measures range from 0 (no similarity) to 1 (identical), and respectively take a
 contingency table and information-theoretic approach to measuring clustering similarity.
 
@@ -223,7 +225,7 @@ PD onset.
 \subsection{Symptoms clustering}
 
 $k$-means clustering performed on the 30 individual nonmotor symptoms found similar patterns to the
-first clustering (Table~\ref{tab:nms30}, heatmap in Figure~\ref{fig:nms30-hm}). Means of all
+first clustering {(Table~\ref{tab:nms30}, heatmap in Figure~\ref{fig:nms30-hm}). Means of all
 symptoms were found to differ across clusters except for PD onset and tremor.
 
 Clusters 1 ($n = 509$) and 4 ($n = 49$), the mild and severe subtypes of the previous clustering,
@@ -236,7 +238,7 @@ symptoms and was thus classified as a group of patients with average severity.
 
 \subsection{Comparison between clusterings}
 
- The two clusterings were somewhat similar ($\text{ARI} = 0.46$; $\text{$v$-measure} = 0.43$).  To
+ The two clusterings were somewhat similar ($\text{ARI} = 0.46$; $\text{$v$-measure} = 0.43$). To
  help compare the alignment of the two clusterings, we denoted the four clusters in the domains
  clustering as $D_1, D_2, D_3, D_4$, and the clusters in the symptoms clustering as $S_1, S_2, S_3,
  S_4$.
@@ -244,7 +246,7 @@ Alignment of the clusters is visualized in Figure~\ref{fig:align}. While cluster
 $D_4/S_4$
 aligned well with each other, main differences in the clusterings occurred in the mixing of
 clusters 2 and 3; for example, $D_3$ (motor-dominant) was somewhat
-evenly split among $S_1$ (mild) and $S_3$ (average).
+evenly split among $S_1$ (mild) and $S_3$ (average).}
 
 \begin{figure}[H]
   \centering
@@ -383,10 +385,10 @@ symptom, occupying a single branch at the top of the tree.
 
 \subsection{Longitudinal analysis}
 
-Most variables had little to no correlation with PD duration (Supplementary Material Figure~\ref{fig:corr}). Variables
+Most variables had little to no correlation with PD duration (Supplementary Figure~\ref{fig:corr}). Variables
 with the highest correlation include symptoms urinary frequency, swallowing, and drooling; domains
 miscellaneous, urinary, and gastrointestinal; and total CISI score. Scatterplots for CISI Total,
-Tremor, Anxiety, and Depression appear in Supplementary Material Figure~\ref{fig:long4}.
+Tremor, Anxiety, and Depression appear in Supplementary Figure~\ref{fig:long4}.
 
 \section{Discussion}
 
@@ -453,7 +455,7 @@ dataset, save for the tremor-dominant motor cluster.
 % (Figure~\ref{fig:dtree-2and4va-pruned}).
 
 Our longitudinal analysis gives more insight into the clusters found in the previous analyses.
-According to Figure~\ref{fig:corr}, most symptoms are uncorrelated with PD duration, especially
+According to Supplementary Figure~\ref{fig:corr}, most symptoms are uncorrelated with PD duration, especially
 Mood/apathy symptoms (anxiety, depression) and tremor.
 The differences in disease progression for each cluster can be seen by the corresponding graphs in
 Figure~\ref{fig:long4}. Cluster 2 (Nonmotor-Dominant) starts at higher
@@ -506,7 +508,8 @@ symptoms have been shown to be very important in determining subtypes of PD.
 \begin{suppfigure*}[p]
   \centering
   \includegraphics[width=0.8\linewidth]{long4-d.pdf}
-  \caption{Selected symptoms for 901 patients plotted against PD duration. Smoothed loess curves for each cluster
+  % TODO: Get rid of capital T in  CISI Total
+  \caption{Selected symptoms plotted against PD duration. Smoothed loess curves for each cluster
   are drawn in their respective colors. The black curve is the curve for the entire population, and
 the global mean score is marked with a dotted line.}
   \label{fig:long4}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  21 MAY 2016 16:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  23 MAY 2016 00:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -212,9 +212,21 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 )
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/soul/soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks18
+\SOUL@lasttoken=\toks19
+\SOUL@cmds=\toks20
+\SOUL@buffer=\toks21
+\SOUL@token=\toks22
+\SOUL@spaceskip=\skip47
+\SOUL@ttwidth=\dimen118
+\SOUL@uldp=\dimen119
+\SOUL@ulht=\dimen120
+)
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
-\@mathmargin=\skip47
+\@mathmargin=\skip48
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -222,12 +234,12 @@ Package: amstext 2000/06/29 v2.01
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks18
-\ex@=\dimen118
+\@emptytoks=\toks23
+\ex@=\dimen121
 ))
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen119
+\pmbraise@=\dimen122
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
@@ -244,7 +256,7 @@ LaTeX Info: Redefining \dots on input line 381.
 LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box30
 \strutbox@=\box31
-\big@size=\dimen120
+\big@size=\dimen123
 LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count103
@@ -252,43 +264,43 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \dotsspace@=\muskip10
 \c@parentequation=\count105
 \dspbrk@lvl=\count106
-\tag@help=\toks19
+\tag@help=\toks24
 \row@=\count107
 \column@=\count108
 \maxfields@=\count109
-\andhelp@=\toks20
-\eqnshift@=\dimen121
-\alignsep@=\dimen122
-\tagshift@=\dimen123
-\tagwidth@=\dimen124
-\totwidth@=\dimen125
-\lineht@=\dimen126
-\@envbody=\toks21
-\multlinegap=\skip48
-\multlinetaggap=\skip49
-\mathdisplay@stack=\toks22
+\andhelp@=\toks25
+\eqnshift@=\dimen124
+\alignsep@=\dimen125
+\tagshift@=\dimen126
+\tagwidth@=\dimen127
+\totwidth@=\dimen128
+\lineht@=\dimen129
+\@envbody=\toks26
+\multlinegap=\skip49
+\multlinetaggap=\skip50
+\mathdisplay@stack=\toks27
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
-\heavyrulewidth=\dimen127
-\lightrulewidth=\dimen128
-\cmidrulewidth=\dimen129
-\belowrulesep=\dimen130
-\belowbottomsep=\dimen131
-\aboverulesep=\dimen132
-\abovetopsep=\dimen133
-\cmidrulesep=\dimen134
-\cmidrulekern=\dimen135
-\defaultaddspace=\dimen136
+\heavyrulewidth=\dimen130
+\lightrulewidth=\dimen131
+\cmidrulewidth=\dimen132
+\belowrulesep=\dimen133
+\belowbottomsep=\dimen134
+\aboverulesep=\dimen135
+\abovetopsep=\dimen136
+\cmidrulesep=\dimen137
+\cmidrulekern=\dimen138
+\defaultaddspace=\dimen139
 \@cmidla=\count110
 \@cmidlb=\count111
-\@aboverulesep=\dimen137
-\@belowrulesep=\dimen138
+\@aboverulesep=\dimen140
+\@belowrulesep=\dimen141
 \@thisruleclass=\count112
 \@lastruleclass=\count113
-\@thisrulewidth=\dimen139
+\@thisrulewidth=\dimen142
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/threeparttable/threeparttabl
 e.sty
@@ -297,18 +309,18 @@ Package: threeparttable 2003/06/13  v 3.0
 ) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count114
-\float@exts=\toks23
+\float@exts=\toks28
 \float@box=\box33
-\@float@everytoks=\toks24
+\@float@everytoks=\toks29
 \@floatcapt=\box34
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/newfloat.sty
 Package: newfloat 2013/05/11 v1.1-91 Defining new floating environments (AR)
 )
 Package newfloat Info: New float `suppfigure' with options `name={Supplementary
- Figure}' on input line 25.
+ Figure}' on input line 26.
 \c@suppfigure=\count115
-Package newfloat Info: float type `suppfigure'=4 on input line 25.
+Package newfloat Info: float type `suppfigure'=4 on input line 26.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
@@ -316,13 +328,13 @@ Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen140
-\captionmargin@=\dimen141
-\captionwidth=\dimen142
-\caption@tempdima=\dimen143
-\caption@indent=\dimen144
-\caption@parindent=\dimen145
-\caption@hangindent=\dimen146
+\captionmargin=\dimen143
+\captionmargin@=\dimen144
+\captionwidth=\dimen145
+\caption@tempdima=\dimen146
+\caption@indent=\dimen147
+\caption@parindent=\dimen148
+\caption@hangindent=\dimen149
 )
 \c@ContinuedFloat=\count116
 Package caption Info: float package is loaded.
@@ -340,19 +352,19 @@ Package numcompress Warning: ****************************************
 ) (./manuscript.aux)
 \openout1 = `manuscript.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -360,16 +372,16 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count117
-\scratchdimen=\dimen147
+\scratchdimen=\dimen150
 \scratchbox=\box35
 \nofMPsegments=\count118
 \nofMParguments=\count119
-\everyMPshowfont=\toks25
+\everyMPshowfont=\toks30
 \MPscratchCnt=\count120
-\MPscratchDim=\dimen148
+\MPscratchDim=\dimen151
 \MPnumerator=\count121
 \makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks26
+\everyMPtoPDFconversion=\toks31
 ) (/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -451,43 +463,43 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 55.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
 
-Package mathptmx Warning: There are no bold math fonts on input line 67.
+Package mathptmx Warning: There are no bold math fonts on input line 68.
 
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 80.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 82.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 80.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 82.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 80.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 82.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 80.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 82.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 80.
+(Font)              <10> on input line 82.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7.4> on input line 80.
+(Font)              <7.4> on input line 82.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 80.
+(Font)              <6> on input line 82.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 80.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 80.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
 
-Overfull \hbox (1.2278pt too wide) in paragraph at lines 106--111
+Overfull \hbox (1.2278pt too wide) in paragraph at lines 108--113
 \OT1/ptm/m/n/10 ANOVA and $\OML/lmm/m/it/10 ^^_[]$ \OT1/ptm/m/n/10 tests to re-
 spec-tively check the equal-ity of symp-
  []
@@ -497,24 +509,24 @@ spec-tively check the equal-ity of symp-
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 159.
+(Font)              <9> on input line 161.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 159.
+(Font)              <7> on input line 161.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 159.
+(Font)              <5> on input line 161.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 159.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 161.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 159.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 161.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 159.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 161.
 
 <../../figures/kmeans-summaries-4-pub.pdf, id=13, 1011.78pt x 722.7pt>
 File: ../../figures/kmeans-summaries-4-pub.pdf Graphic file (type pdf)
 
 <use ../../figures/kmeans-summaries-4-pub.pdf>
 Package pdftex.def Info: ../../figures/kmeans-summaries-4-pub.pdf used on input
- line 214.
+ line 216.
 (pdftex.def)             Requested size: 522.0pt x 372.86182pt.
 
 <../../figures/cluster-alignment.pdf, id=14, 695.04167pt x 337.91328pt>
@@ -522,7 +534,7 @@ File: ../../figures/cluster-alignment.pdf Graphic file (type pdf)
 
 <use ../../figures/cluster-alignment.pdf>
 Package pdftex.def Info: ../../figures/cluster-alignment.pdf used on input line
- 251.
+ 253.
 (pdftex.def)             Requested size: 252.0pt x 122.51491pt.
 
 <../../figures/nms30m-colhc-pub.pdf, id=15, 1084.05pt x 505.89pt>
@@ -530,28 +542,28 @@ File: ../../figures/nms30m-colhc-pub.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30m-colhc-pub.pdf>
 Package pdftex.def Info: ../../figures/nms30m-colhc-pub.pdf used on input line 
-356.
+358.
 (pdftex.def)             Requested size: 522.0pt x 243.60408pt.
 
 <../../figures/nms30-hm-pub.pdf, id=16, 417.99495pt x 683.54045pt>
 File: ../../figures/nms30-hm-pub.pdf Graphic file (type pdf)
 
 <use ../../figures/nms30-hm-pub.pdf>
-Package pdftex.def Info: ../../figures/nms30-hm-pub.pdf used on input line 369.
+Package pdftex.def Info: ../../figures/nms30-hm-pub.pdf used on input line 371.
 
 (pdftex.def)             Requested size: 365.3984pt x 597.56448pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 372.
+(Font)              <8> on input line 374.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 372.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 374.
  [2 <../../figures/cluster-alignment.pdf>]
-Overfull \hbox (5.68753pt too wide) in paragraph at lines 480--485
+Overfull \hbox (5.68753pt too wide) in paragraph at lines 482--487
 []\OT1/ptm/m/n/10 It's in-tu-itive that a Depression-Dominant group emerges fro
 m
  []
 
 
-Overfull \hbox (0.57727pt too wide) in paragraph at lines 480--485
+Overfull \hbox (0.57727pt too wide) in paragraph at lines 482--487
 \OT1/ptm/m/n/10 toms are highly sim-i-lar (Fig-ure 3[]) and treated with equal 
 weight.
  []
@@ -560,7 +572,7 @@ weight.
 File: ../../figures/gap-statistic.pdf Graphic file (type pdf)
 
 <use ../../figures/gap-statistic.pdf>
-Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 490
+Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 492
 .
 (pdftex.def)             Requested size: 252.0pt x 157.50026pt.
 
@@ -568,7 +580,7 @@ Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 490
 File: ../../figures/cor-unbinned.pdf Graphic file (type pdf)
 
 <use ../../figures/cor-unbinned.pdf>
-Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 501.
+Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 503.
 
 (pdftex.def)             Requested size: 522.0pt x 260.99886pt.
 
@@ -576,7 +588,7 @@ Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 501.
 File: ../../figures/long4-d.pdf Graphic file (type pdf)
 
 <use ../../figures/long4-d.pdf>
-Package pdftex.def Info: ../../figures/long4-d.pdf used on input line 508.
+Package pdftex.def Info: ../../figures/long4-d.pdf used on input line 510.
 (pdftex.def)             Requested size: 417.6016pt x 327.23817pt.
  (./manuscript.bbl [3 <../../figures/gap-statistic.pdf>] [4 <../../figures/cor-
 unbinned.pdf> <../../figures/long4-d.pdf>])
@@ -585,11 +597,11 @@ unbinned.pdf> <../../figures/long4-d.pdf>])
 ] [6 <../../figures/kmeans-summaries-4-pub.pdf> <../../figures/nms30m-colhc-pub
 .pdf>] [7] [8 <../../figures/nms30-hm-pub.pdf>] (./manuscript.aux) ) 
 Here is how much of TeX's memory you used:
- 4856 strings out of 494501
- 72682 string characters out of 6167031
- 175608 words of memory out of 5000000
- 8018 multiletter control sequences out of 15000+600000
- 61484 words of font info for 80 fonts, out of 8000000 for 9000
+ 5026 strings out of 494501
+ 74812 string characters out of 6167031
+ 180082 words of memory out of 5000000
+ 8183 multiletter control sequences out of 15000+600000
+ 61797 words of font info for 81 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  38i,14n,44p,548b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local
@@ -610,10 +622,10 @@ e/2015basic/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/201
 /texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015basic/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015basic/texmf-dis
 t/fonts/type1/urw/times/utmri8a.pfb>
-Output written on manuscript.pdf (8 pages, 621248 bytes).
+Output written on manuscript.pdf (8 pages, 647736 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 134 compressed objects within 2 object streams
+ 201 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
