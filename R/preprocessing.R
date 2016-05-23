@@ -154,7 +154,7 @@ splitdf <- function(dataframe, seed=NULL, trainfrac=0.7) {
 # IMPORT DATA, PREPROCESSING ====
 raw <- read.csv(DB_FILE)
 # Study is irrelevant
-raw$study <- NULL
+# raw$study <- NULL
 # Get rid of NAs (later may use some kind of missing value compensation method
 # This only brings it down to 904, rather than ~700 something!
 raw.omitted <- raw[, INTERPRETED]
@@ -164,7 +164,10 @@ raw.omitted.full <- cbind(
   # Now get the rownames from the raw
   raw[rownames(raw.omitted), -which(names(raw) %in% INTERPRETED)]
 )
-raw.omitted[rownames(raw.omitted), ]
+# To get identity of excluded patients: study/nident/country
+raw[!rownames(raw) %in% rownames(raw.omitted), c("study", "nident", "country")]
+# Verify they all have NAs in the things we care about
+all(apply(raw[!rownames(raw) %in% rownames(raw.omitted), INTERPRETED], MARGIN = 1, anyNA))
 
 # raw with only select nms and motor symptoms
 raw.filtered <- raw.omitted[, SYMPTOMS.TO.USE]
