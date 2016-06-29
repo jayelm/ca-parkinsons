@@ -5,11 +5,16 @@ library(xtable)
 library(reshape)
 library(grid)
 library(gridExtra)
-library(plyr) library(infotheo) library(ggplot2)
+library(plyr)
+library(infotheo)
+library(ggplot2)
+library(rtf) # For outputting to microsoft word
+library(gplots)
 
 library(reshape2)
 library(scales)
 
+# constants ====
 nmsd.symptoms <- c(
   NMS.D.NAMES,
   "Tremor",
@@ -22,9 +27,9 @@ nmsd.symptoms <- c(
 nmsd.extra <- c(
   'Age',
   'Sex',
-  'PD_Onset',
-  'PD_Duration',
-  'CISI_Total',
+  'PD_onset',
+  'PD_duration',
+  'CISI_PD_total',
   'ldopa',
   'Surgery',
   'Cluster'
@@ -63,31 +68,37 @@ v.measure <- function(a, b) {
 
 # ON NONMOTOR DOMAINS ====
 # Somewhat oddly, the correct clustering vector lies in trees$clusters4$clustering$cluster
-present <- reshape::rename(raw.omitted, PUB.MAP)
-present.full <- reshape::rename(raw.omitted.full, PUB.MAP)
-present$Cluster <- trees$clusters4$clustering$cluster
-present.full$Cluster <- trees$clusters4$clustering$cluster
+present <- reshape::rename(raw.omitted, gsub("/", "_", PUB.MAP))
+present.full <- reshape::rename(raw.omitted.full, gsub("/", "_", PUB.MAP))
+present$Cluster <- cl$cluster
+present.full$Cluster <- cl$cluster
 
 # Funcs for latex
 mean.sd <- function(data, sig = 2) {
   paste(round(mean(data), sig), " (", round(sd(data), sig), ")", sep = "")
 }
-to.latex <- function(df, file = NULL) {
+
+get.xtable <- function(df, file = NULL) {
   summary.t <- t(summaryBy(. ~ Cluster, df, FUN = function(x) mean.sd(x, sig = 1), # Only 1 decimal
                            keep.names = TRUE))
   # Get rid of "cluster" row
   summary.t <- summary.t[-which(rownames(summary.t) == 'Cluster'), ]
-  xt <- xtable(summary.t,
-               sanitize.colnames.function = function(x) gsub(pattern = '\\_', replacement = '/', x = x))
+  xtable(summary.t,
+         sanitize.colnames.function = function(x) gsub(pattern = '\\_', replacement = '/', x = x))
+}
+
+to.latex <- function(df, file = NULL) {
+  xt <- get.xtable(df, file = file)
   print(xt, type = "latex", file = file, booktabs = TRUE)
 }
+
 
 # Redo ANOVA + bonferroni correction.
 # Apparently Tukey takes care of multiple comparisons but make sure that's not a
 # setting or grouping you need to actually make happen in R.
 
-to.latex(present[, nmsd.symptoms], "../writeup/manuscript/include/nmsd_summaries.tex")
-to.latex(present.full[, nmsd.extra], "../writeup/manuscript/include/nmsd_extra.tex")
+to.latex(present, "../writeup/manuscript/include/nmsd_summaries.tex")
+to.latex(present.full[, gsub("/", "_", nmsd.extra)], "../writeup/manuscript/include/nmsd_extra.tex")
 
 # Publication-ready dendrogram ====
 remove.domain.n <- function(s) {
@@ -111,36 +122,39 @@ rid.of.middle <- function(s) {
   }
 }
 
+hm.m$colDendrogram <- hm.m$colDendrogram %>% sort(type = "nodes")
 labels.wo.d <- unname(sapply(labels(hm.m$colDendrogram), rid.of.middle))
+color.vec <- ifelse(labels.wo.d %in% MOTOR.SYMPTOMS, "blue", "black")
 # TODO: Capitalize map if necessary
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 par(mar=c(3, 4, 0.5, 0))
 hm.m$colDendrogram %>%
   set("labels", labels.wo.d) %>%
-  sort(type = "nodes") %>%
   set("branches_lwd", 2) %>%
   hang.dendrogram(hang_height = 3) %>%
-  set("branches_k_color", k = 5) %>%
+  color_branches(k = 6, col = cbPalette[2:7]) %>%
+  # set("branches_k_color", k = 5, col = brewer.pal(8, 'Dark2')[4:8]) %>%
   # Here, "1" is motor, "2" is nonmotor (sorting by nodes is convenient here)
-  color_labels(col = c(rep("blue", 4), rep("black", 30))) %>%
+  color_labels(col = color.vec) %>%
   plot(ylim = c(10, 45))#, xlab = "Symptom", ylab = "Height")
 
-dev.copy(pdf, "../figures/nms30m-colhc-pub.pdf", width = 15, height = 7)
+dev.copy(pdf, "../figures/nms30m-colhc-pub.pdf", width = 15, height = 8)
 dev.off()
 
 # Publication-ready boxplots ====
 dev.off()
-clus <- clusters.raw.long[["4"]]
+clus <- clus4.long
 # Get rid of extra
 clus.pub <- clus
 clus.pub <- clus.pub[clus.pub$variable != "sex", ]
 clus.pub$variable <- sapply(clus.pub$variable, function(s) paste("\n", PUB.MAP.N[as.character(s)][[1]], "\n", sep = ""))
 clus.pub$variable <- factor(clus.pub$variable)
-clus.pub$variable <- factor(clus.pub$variable, levels(clus.pub$variable)[c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 16, 17, 13, 10, 15, 14)])
+clus.pub$variable <- factor(clus.pub$variable, levels(clus.pub$variable)[c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 17, 18, 14, 13, 10, 16, 15)])
 # Add types. Need to do after factors have been reorganized for some reason
 clus.pub$Type <- ""
 clus.pub[clus.pub$variable %in%
            sapply(NMS.D, function(s) paste("\n", PUB.MAP.N[as.character(s)][[1]], "\n", sep = "")), ]$Type <- "Nonmotor (analyzed)"
-clus.pub[clus.pub$variable %in% factor(c("\nAxial\n", "\nRigidity\n", "\nBradykinesia\n", "\nTremor\n")), ]$Type <- "Motor (analyzed)"
+clus.pub[clus.pub$variable %in% factor(c("\nAxial\n", "\nRigidity\n", "\nBradykinesia\n", "\nTremor\n", "\nMotor_cp\n")), ]$Type <- "Motor (analyzed)"
 clus.pub[!(clus.pub$Type %in% c("Nonmotor (analyzed)", "Motor (analyzed)")), ]$Type <- "Other (not analyzed)"
 clus.pub$Type <- factor(clus.pub$Type, levels = c('Nonmotor (analyzed)', 'Motor (analyzed)', 'Other (not analyzed)'))
 p <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
@@ -150,8 +164,9 @@ p <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement, fill = factor(cl
   xlab("") +
   ylab("") +
   theme_pub() +
-  theme(strip.background = element_blank(), strip.text = element_text(lineheight = 0.4))
-print(p)
+  theme(strip.background = element_blank(), strip.text = element_text(lineheight = 0.4)) +
+  scale_fill_manual(values = brewer.pal(8, "Set2")[1:4])
+# print(p)
 
 dummy <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement)) +
   facet_wrap( ~ variable, scales = "free") +
@@ -161,9 +176,9 @@ dummy <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement)) +
         legend.text = element_text(size = 14),
         legend.title = element_text(size = 16)) +
   labs(fill = "Variable Type") +
-  scale_fill_manual(values = brewer.pal(4, "Pastel2")[c(1, 3, 4)]) +
-  theme(legend.position = c(0.5, 0.1))
-dummy
+  scale_fill_manual(values = brewer.pal(8, "Set2")[c(5:7)]) +
+  theme(legend.position = c(0.7, 0.11))
+# dummy
 
 # Terribly complicated way to add colors
 # http://stackoverflow.com/questions/19440069/ggplot2-facet-wrap-strip-color-based-on-variable-in-data-set
@@ -205,19 +220,22 @@ dev.copy(pdf, "../figures/kmeans-summaries-4-pub.pdf", width = 14, height = 10)
 dev.off()
 
 # Anova with bonferroni correction on c1====
-clus4.wide.st <- clusters.raw[["4"]]
+clus4.wide.st <- cbind(raw.omitted, cluster = cl$cluster)
+clus4.wide.st <- clus4.wide.st[, -which(names(clus4.wide.st) %in% NMS.30)]
 # Why isn't this already a factor? Really confused
 # Because it wasn't set in clusters.raw - if this is a bad thing lmk
 clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
 # Just NMS
-clus4.wide.st <- clus4.wide.st[, c(NMS.D, "axial", "rigidity", "bradykin", "tremor", "cluster")]#, "age", "sex", "pdonset", "durat_pd", "cisitot")]
+clus4.wide.st <- clus4.wide.st[, c(NMS.D, "axial", "rigidity", "bradykin", "tremor", "scmmotcp", "cluster", "cisitot", "age", "pdonset", "durat_pd")]
 # Assuming 1st column is cluster (which it should be)
 oneways <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
   fm <- substitute(i ~ cluster, list(i = as.name(col)))
   oneway.test(fm, clus4.wide.st)
 })
 for (test in oneways) {
-  if (test$p.value < (0.05 / length(oneways))) { # BONFERRONI CORRECTION!
+  # Bonferroni correction INCLUDING SEX since we need that divisor even though
+  # we're not actually testing here (binary tests later will do the same)
+  if (test$p.value < (0.05 / (length(oneways)))) { # BONFERRONI CORRECTION!
     cat('sig\n')
   } else {
     cat('INSIG:\n')
@@ -234,64 +252,50 @@ tukeys <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c(
 names(tukeys) <- colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))])
 
 # Now output the insignificant diferences only
-. <- sapply(names(tukeys), function(name) {
+throwaway <- sapply(names(tukeys), function(name) {
   tkdf <- as.data.frame(tukeys[name][[1]])
-  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05, ])
+  # Bonferroni correction needed. Notice PDONSET doesn't matter, but I divide by
+  # tukeys length anyways - just to accomodate for the extra
+  # sex chi-square comparison
+  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05 / (length(tukeys)), ])
   if (length(sigs) > 0) {
     cat(name, ": ", sep = "")
     cat(sigs, "\n")
   }
 })
 
-# Redo for age/sex/pdonset/duratpd/cisitot on c1 ====
-clus4.wide.st <- clusters.raw[["4"]]
-# Why isn't this already a factor? Really confused
-# Because it wasn't set in clusters.raw - if this is a bad thing lmk
-clus4.wide.st$cluster <- as.factor(clus4.wide.st$cluster)
-clus4.wide.st <- clus4.wide.st[, c("age", "sex", "pdonset", "durat_pd", "cisitot", "cluster")]
-# Assuming 1st column is cluster (which it should be)
-oneways <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
-  fm <- substitute(i ~ cluster, list(i = as.name(col)))
-  oneway.test(fm, clus4.wide.st)
-})
-for (test in oneways) {
-  if (test$p.value < (0.05 / length(oneways))) { # BONFERRONI CORRECTION!
-    cat('sig\n')
-  } else {
-    cat('INSIG:\n')
-    cat(test$data.name, '\n')
-  }
-}
-tukeys <- lapply(colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))]), function(col) {
-  # Doesn't work the oneway way for some reason!
-  fm <- as.formula(paste(col, '~ cluster'))
-  TukeyHSD(aov(fm, clus4.wide.st))$cluster
-})
-names(tukeys) <- colnames(clus4.wide.st[, -which(colnames(clus4.wide.st) %in% c("cluster"))])
-. <- sapply(names(tukeys), function(name) {
-  tkdf <- as.data.frame(tukeys[name][[1]])
-  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05, ])
-  if (length(sigs) > 0) {
-    cat(name, ": ", sep = "")
-    cat(sigs, "\n")
-  }
-})
+# Redo for age/sex/pdonset/duratpd/cisitot on c1 not anymore since I check them all
 
 # From nms30 ====
 # Assert that we have
 # c(509, 97, 249, 49)
-nms30.present <- nms30.k4.hsd
-# nms30.k4.hsd$cluster <- factor(nms30.k4.hsd$cluster)
-# nms30.k4.hsd$cluster <- revalue(nms30.k4.hsd$cluster, c('3'='1', '2'='2', '1'='3', '4'='4'))
-# nms30.k4.hsd$cluster <- factor(nms30.k4.hsd$cluster, levels = c('1', '2', '3', '4'))
+# nms30.present <- cbind(raw.omitted, cluster = cl.s$cluster)
+nms30.present <- cbind(raw.omitted, cluster = testing$cluster)
+# Get rid of domains
+nms30.present <- nms30.present[, -which(names(nms30.present) %in% NMS.D)]
+
+# Rearrange factors
+# How to determine order: first figure out cluster with revalue, set factor
+# levels = c(1, 2, 3, 4, 5, 6). Then observe ordering of factors, and reverse that
+nms30.present$cluster <- factor(nms30.present$cluster)
+nms30.present$cluster <- revalue(nms30.present$cluster, c("1" = "1", "6" = "2", "5" = "3", "2" = "4",
+                                                          "4" = "5", "3" = "6"))
+nms30.present$cluster <- factor(nms30.present$cluster, levels = c("1", "2", "3", "4", "5", "6"))
+
 nms30.present <- reshape::rename(nms30.present, PUB.MAP)
 nms30.present <- reshape::rename(nms30.present, NMS.30.LONG.SHORT.MAP)
 
-nms30.extra.cols <- c("Age", "Sex", "PD_Onset", "PD_Duration", "CISI_Total", "Cluster")
+nms30.extra.cols <- c("Age", "Sex", "PD_onset", "PD_duration", "CISI_PD_total", "Cluster")
+# to.latex(nms30.present[, c(NMS.30.NAMES.PUB, MOTOR.PUB, "Cluster")],
+#          "../writeup/manuscript/include/nms30_summaries.tex")
+# to.latex(nms30.present[, nms30.extra.cols],
+#          "../writeup/manuscript/include/nms30_extra.tex")
 to.latex(nms30.present[, c(NMS.30.NAMES.PUB, MOTOR.PUB, "Cluster")],
-         "../writeup/manuscript/include/nms30_summaries.tex")
+         "../writeup/manuscript/include/nms30_summaries_6.tex")
 to.latex(nms30.present[, nms30.extra.cols],
-         "../writeup/manuscript/include/nms30_extra.tex")
+         "../writeup/manuscript/include/nms30_extra_6.tex")
+to.latex(nms30.present,
+         "../writeup/manuscript/include/nms30_6.tex")
 
 # nms30 same drill, anova + tukey ====
 # NOTE: cluster is captalized here since I'm using the PUB df
@@ -300,7 +304,8 @@ oneways <- lapply(colnames(nms30.present[, -which(colnames(nms30.present) %in% c
   oneway.test(fm, nms30.present)
 })
 for (test in oneways) {
-  if (test$p.value < (0.05 / length(oneways))) { # BONFERRONI CORRECTION!
+  # Bonferroni correction but I also erroneously check sex, so subtract one
+  if (test$p.value < (0.05 / (length(oneways)))) { # BONFERRONI CORRECTION!
     cat('sig\n')
   } else {
     cat('INSIG:\n')
@@ -319,7 +324,9 @@ names(tukeys) <- colnames(nms30.present[, -which(colnames(nms30.present) %in% c(
 # Now output the insignificant diferences only
 . <- sapply(names(tukeys), function(name) {
   tkdf <- as.data.frame(tukeys[name][[1]])
-  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05, ])
+  # Tremor and PD onset aren't significant, -2. I check sex later, + 1.
+  # But sex wasn't sigificant, + 1.
+  sigs <- rownames(tkdf[tkdf[["p adj"]] >= 0.05 / length(tukeys), ])
   if (length(sigs) > 0) {
     cat(name, ": ", sep = "")
     cat(sigs, "\n")
@@ -336,30 +343,36 @@ print.proportions <- function(mat) {
   cat("\\\\\n")
 }
 combs.1to4 <- combn(1:4, 2)
+combs.1to6 <- combn(1:6, 2)
 
 # For nmsd
 present.sex <- table(present[c("Cluster", "Sex")])
 print.proportions(present.sex)
+# Is this p value less than 0.5 / 19. Nope!
 chisq.test(present.sex)
 # Welp, pairwise prop test is a much easier way to do this
-# pairwise.prop.test(present.sex, p.adjust = "bonferroni")
-. <- apply(combs.1to4, MARGIN = 2, FUN = function(comb) {
-  pt <- prop.test(nms30.sex[comb, ])
-  if (pt$p.value < (0.05 / dim(combs.1to4)[2])) { # Bonferroni correction
-    cat("SIG:\n")
-    cat("Cluster ", comb[1], " and ", comb[2], "\n", sep = "")
-    print(pt)
-  }
-})
+# We would be interested in 0.5 / 18 here
+pairwise.prop.test(present.sex, p.adjust = "bonferroni")
+# Look for those that are less than 0.5 / ?
+# . <- apply(combs.1to4, MARGIN = 2, FUN = function(comb) {
+#   pt <- prop.test(nms30.sex[comb, ])
+#   if (pt$p.value < (0.05 / dim(combs.1to4)[2])) { # Bonferroni correction
+#     cat("SIG:\n")
+#     cat("Cluster ", comb[1], " and ", comb[2], "\n", sep = "")
+#     print(pt)
+#   }
+# })
 
 # For nms30
 nms30.sex <- table(nms30.present[c("Cluster", "Sex")])
 print.proportions(nms30.sex)
 chisq.test(nms30.sex)
-# pairwise.prop.test(nms30.sex, p.adjust = "bonferroni")
-. <- apply(combs.1to4, MARGIN = 2, FUN = function(comb) {
+# For this one we use 0.05 / 40
+pairwise.prop.test(nms30.sex, p.adjust = "bonferroni")
+# Look for those that are less than 0.05 / 40 if you care about
+. <- apply(combs.1to6, MARGIN = 2, FUN = function(comb) {
   pt <- prop.test(nms30.sex[comb, ])
-  if (pt$p.value < (0.05 / dim(combs.1to4)[2])) { # Bonferroni correction
+  if (pt$p.value < (0.05 / dim(combs.1to6)[2])) { # Bonferroni correction
     cat("SIG:\n")
     cat("Cluster ", comb[1], " and ", comb[2], "\n", sep = "")
     print(pt)
@@ -377,58 +390,255 @@ hm.nms30.raw.scaled$Cluster <- nms30.present$Cluster
 hm.nms30.data <- summaryBy(. ~ Cluster, hm.nms30.raw.scaled, keep.names = T)
 hm.nms30.data$Cluster <- NULL
 # Re-add the domain number to the first 30
-names(hm.nms30.data)[1:30] <- sapply(NMS.30.NAMES, rid.of.middle)
+names(hm.nms30.data)[10:39] <- sapply(NMS.30.NAMES, rid.of.middle)
+# Reorder so not-analyzed variables are last
+hm.nms30.data <- hm.nms30.data[, c(10:39, 1:9)]
 hm.nms30.data.t <- as.data.frame(t(hm.nms30.data))
 # Reorder
-hm.nms30.data.t <- hm.nms30.data.t[rownames(hm.nms30.data.t)[c(1:30, 35:38, 31:34)], ]
+hm.nms30.data.t <- hm.nms30.data.t[rownames(hm.nms30.data.t)[c(1:30, 35:39, 34, 31:33)], ]
 plot.new()
 heatmap.2(as.matrix(hm.nms30.data.t), Rowv = FALSE, Colv = FALSE, dendrogram = 'none', trace = 'none',
           # cellnote = as.matrix(hm.nms30.data.t),
-          col = colorRampPalette(c('green', 'black', 'red'))(n = 1000),
+          col = colorRampPalette(rev(brewer.pal(11, 'RdBu')))(n = 1000),
           # RowSideColors = c(rep(gch[1], 2), rep(gch[2], 4), rep(gch[3], 6), rep(gch[4], 3), rep(gch[5], 3),
           #                   rep(gch[6], 3), rep(gch[7], 3), rep(gch[8], 2), rep(gch[9], 4), rep(gch[10], 4)),
           xlab = 'Cluster', key.xlab = 'z-score',
           cexCol = 1.5, cexRow = 1.2, srtCol = 0,
           margins = c(5, 18),
           # Draw lines to separate categories
-          rowsep = c(2, 6, 12, 15, 18, 21, 24, 26, 30, 34),
-          sepcolor = "#cccccc",
+          rowsep = c(2, 6, 12, 15, 18, 21, 24, 26, 30, 35),
+          sepcolor = "white",
           sepwidth = c(0.1, 0.1),
           lmat = rbind(c(0,3),c(2,1),c(0,4)),
           lwid = c(0.3,2),
           lhei = c(0.1,4,1),
           keysize = 0.5,
+          # key.xtickfun = function() { list(at = NULL) },
           key.par = list(mar = c(7, 8, 3, 12)),
           density.info = 'none'
           )
+table(cl$cluster[nms30.present$Cluster == 4])
 if (TRUE) {
   # Always write, for now
   # NOTE: I crop this in preview afterwards because it still has some
   # dead space
-  dev.copy(pdf, "../figures/nms30-hm-pub.pdf", width = 7, height = 10)
+  # dev.copy(pdf, "../figures/nms30-hm-pub.pdf", width = 7, height = 10)
+  dev.copy(pdf, "../figures/nms30-hm-pub-6.pdf", width = 7, height = 10)
   dev.off()
 }
 
-# Compute homogeneity/completeness/v-measure and alignment ====
+# Redo clustering with nonmotor only ====
 # cl.s$cluster, cl$cluster
+# Recreate cl.s
+# Use nms30 and nms30.s (scaled)
+set.seed(0)
+cl.s <- kmeans(x = nms30.s, 4, nstart = 25)
+
+# Compute homogeneity/completeness/v-measure and alignment ====
 redux.30 <- cl.s$cluster
-redux.30 <- factor(redux.30, levels = c("3", "2", "1", "4"))
-redux.30 <- revalue(redux.30, c("3" = "1", "1" = "3"))
+redux.30 <- factor(redux.30, levels = c("4", "3", "2", "1"))
+redux.30 <- revalue(redux.30, c("4" = "1", "3" = "2", "2" = "3", "1" = "4"))
 
 redux.d <- cl$cluster
-redux.d <- factor(redux.d, levels = c("4", "1", "3", "2"))
-redux.d <- revalue(redux.d, c("4" = "1", "1" = "2", "2" = "4"))
+redux.d <- factor(redux.d, levels = c("1", "2", "3", "4"))
+# redux.d <- factor(redux.d, levels = c("4", "1", "3", "2"))
+# redux.d <- revalue(redux.d, c("2" = "1", "3" = "2", "4" = "3", "1" = "4"))
 
 cat("Homogeneity/completeness/V-measure: ",
-    v.measure(nms30.present$Cluster, present$Cluster), "\n")
+    v.measure(redux.30, redux.d), "\n")
 cat("Adjusted rand index: ",
-    mclust::adjustedRandIndex(nms30.present$Cluster, present$Cluster), "\n")
+    mclust::adjustedRandIndex(redux.30, redux.d), "\n")
 
-# Stacked barplots bar plots bar chart barchart alignment ====
+# Different stacked barplots for 6 cluster solution ====
+re6.d <- redux.d
+re6.30 <- nms30.present$Cluster
+v.measure(re6.d, re6.30)
+mclust::adjustedRandIndex(re6.d, re6.30)
+
+align.6.pct <- data.frame(t(rbind(sapply(1:6, function(i) {
+    cat("Cluster ", i, "\n")
+    present.dist <- table(re6.d[re6.30 == i])
+    # Fill in empties
+    for (i in 1:4) {
+      if (is.na(present.dist[i])) {
+        present.dist[i] <- 0
+      }
+    }
+    round(sapply(present.dist, function(n) n / sum(present.dist)), 2)
+  }))),
+  compcluster = c("\n1", "\n2", "\n3", "\n4", "\n5", "\n6"),
+  comparison = rep("\nSymptoms cluster\n", 6)
+)
+names(align.6.pct) <- c("1", "2", "3", "4", "compcluster", "comparison")
+align.6.pct.long <- melt(align.6.pct, id = c("compcluster", "comparison"))
+
+align.6 <- data.frame(t(rbind(sapply(1:6, function(i) {
+    cat("Cluster ", i, "\n")
+    present.dist <- table(re6.d[re6.30 == i])
+    # Fill in empties
+    for (i in 1:4) {
+      if (is.na(present.dist[i])) {
+        present.dist[i] <- 0
+      }
+    }
+    present.dist
+  }))),
+  compcluster = c("\n1", "\n2", "\n3", "\n4", "\n5", "\n6"),
+  comparison = rep("\nSymptoms cluster\n", 6)
+)
+names(align.6) <- c("1", "2", "3", "4", "compcluster", "comparison")
+align.6.long <- melt(align.6, id = c("compcluster", "comparison"))
+align.6.2 <- align.6
+
+# Choose pct or normal
+comb.6 <- rbind(align.6.long)
+# Calculate midpoints of bars
+# Bind and plot as one
+
+# comb.6$pos <- as.numeric(sapply(c(1:6, 19:24), function(i) {
+#   heights <- comb.6[seq(i, i + 18, by = 6), "value"]
+#   cum.heights <- cumsum(heights)
+#   cum.heights - ((heights) / 2)
+# }))[as.integer(sapply(c(1:6, 19:24), function(i) seq(i, i + 18, length.out = 6)))]
+
+comb.6$fac <- c(rep(c("\n\n\n\n\n\n\n\n1", "\n\n\n\n\n\n\n\n2", "\n\n\n\n\n\n\n\n3", "\n\n\n\n\n\n\n\n4",
+                      "\n\n\n\n\n\n\n\n5", "\n\n\n\n\n\n\n\n6"), 4))
+
+pbar <- ggplot(comb.6, aes(y = value, fill = variable)) +
+  geom_bar(aes(x = compcluster), position = "stack", stat = "identity") +
+  xlab("Symptoms cluster") + ylab("Count") +
+  labs(fill = "Domains\ncluster") +
+  # scale_y_continuous(labels = percent_format()) +
+  theme_bw() +
+  theme_pub() +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_text(size=20, lineheight = 0.5),
+        plot.title = element_text(size=20, lineheight = 0.5),
+        axis.text.y = element_text(size=18),
+        axis.text.x = element_text(size=18, lineheight = 0.1),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 17)) +
+  scale_fill_manual(values = brewer.pal(8, "Set2")[1:4])
+
+pbar.pct <- ggplot(comb.6, aes(y = value, fill = variable)) +
+  geom_bar(aes(x = compcluster), position = "fill", stat = "identity") +
+  xlab("Symptoms cluster") + ylab("") +
+  labs(fill = "Domains\ncluster") +
+  scale_y_continuous(labels = percent_format()) +
+  theme_bw() +
+  theme_pub() +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_text(size=20, lineheight = 0.5),
+        plot.title = element_text(size=20, lineheight = 0.5),
+        axis.text.y = element_text(size=18),
+        axis.text.x = element_text(size=18),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 17)) +
+  scale_fill_manual(values = brewer.pal(8, "Set2")[1:4])
+
+pbar.pct
+
+# Do the same thing but for the other, I'm not going to rename stuff
+align.6.pct <- data.frame(t(rbind(sapply(1:4, function(i) {
+    cat("Cluster ", i, "\n")
+    present.dist <- table(re6.30[re6.d == i])
+    # Fill in empties
+    for (i in 1:6) {
+      if (is.na(present.dist[i])) {
+        present.dist[i] <- 0
+      }
+    }
+    round(sapply(present.dist, function(n) n / sum(present.dist)), 2)
+  }))),
+  compcluster = c("\n1", "\n2", "\n3", "\n4"),
+  comparison = rep("\nSymptoms cluster\n", 4)
+)
+names(align.6.pct) <- c("1", "2", "3", "4", "5", "6", "compcluster", "comparison")
+align.6.pct.long <- melt(align.6.pct, id = c("compcluster", "comparison"))
+
+align.6 <- data.frame(t(rbind(sapply(1:4, function(i) {
+    cat("Cluster ", i, "\n")
+    present.dist <- table(re6.30[re6.d == i])
+    # Fill in empties
+    for (i in 1:6) {
+      if (is.na(present.dist[i])) {
+        present.dist[i] <- 0
+      }
+    }
+    present.dist
+  }))),
+  compcluster = c("\n1", "\n2", "\n3", "\n4"),
+  comparison = rep("\nSymptoms cluster\n", 4)
+)
+names(align.6) <- c("1", "2", "3", "4", "5", "6", "compcluster", "comparison")
+align.6.long <- melt(align.6, id = c("compcluster", "comparison"))
+align.6
+
+# Choose pct or normal
+comb.6 <- rbind(align.6.long)
+# Calculate midpoints of bars
+# Bind and plot as one
+
+# comb.6$pos <- as.numeric(sapply(c(1:6, 19:24), function(i) {
+#   heights <- comb.6[seq(i, i + 18, by = 6), "value"]
+#   cum.heights <- cumsum(heights)
+#   cum.heights - ((heights) / 2)
+# }))[as.integer(sapply(c(1:6, 19:24), function(i) seq(i, i + 18, length.out = 6)))]
+
+comb.6$fac <- c(rep(c("\n\n\n\n\n\n\n\n1", "\n\n\n\n\n\n\n\n2", "\n\n\n\n\n\n\n\n3", "\n\n\n\n\n\n\n\n4"), 6))
+
+pbar.2 <- ggplot(comb.6, aes(y = value, fill = variable)) +
+  geom_bar(aes(x = compcluster), position = "stack", stat = "identity") +
+  xlab("Domains cluster") + ylab("Count") +
+  labs(fill = "Symptoms\ncluster") +
+  # scale_y_continuous(labels = percent_format()) +
+  theme_bw() +
+  theme_pub() +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_text(size=20, lineheight = 0.5),
+        plot.title = element_text(size=20, lineheight = 0.5),
+        axis.text.y = element_text(size=18),
+        axis.text.x = element_text(size=18, lineheight = 0.1),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 17)) +
+  scale_fill_manual(values = brewer.pal(8, "Set2")[1:6])
+
+pbar.pct.2 <- ggplot(comb.6, aes(y = value, fill = variable)) +
+  geom_bar(aes(x = compcluster), position = "fill", stat = "identity") +
+  xlab("Domains cluster") + ylab("") +
+  labs(fill = "Symptoms\ncluster") +
+  scale_y_continuous(labels = percent_format()) +
+  theme_bw() +
+  theme_pub() +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_text(size=20, lineheight = 0.5),
+        plot.title = element_text(size=20, lineheight = 0.5),
+        axis.text.y = element_text(size=18),
+        axis.text.x = element_text(size=18),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 17)) +
+  scale_fill_manual(values = brewer.pal(8, "Set2")[1:6])
+
+pbar.pct.2
+
+align.6[1:4, 1:6]
+
+# if (TRUE) {
+#   dev.copy(pdf, "../figures/cluster-alignment.pdf", width = 10, height = 5)
+#   dev.off()
+# }
+
+# Stacked barplots bar plots bar chart barchart cluster alignment ====
 # Distribution of nmsd cluster assignments for those who are in nms30
 nmsd.per.nms30 <- data.frame(t(rbind(sapply(1:4, function(i) {
     cat("Cluster ", i, "\n")
     present.dist <- table(redux.d[redux.30 == i])
+    # Fill in empties
+    for (i in 1:4) {
+      if (is.na(present.dist[i])) {
+        present.dist[i] <- 0
+      }
+    }
     round(sapply(present.dist, function(n) n / sum(present.dist)), 2)
   }))),
   compcluster = c("\n1", "\n2", "\n3", "\n4"),
@@ -441,6 +651,11 @@ ndpn30 <- melt(nmsd.per.nms30, id = c("compcluster", "comparison"))
 nms30.per.nmsd <- data.frame(t(rbind(sapply(1:4, function(i) {
     cat("Cluster ", i, "\n")
     present.dist <- table(redux.30[redux.d == i])
+    for (i in 1:4) {
+      if (is.na(present.dist[i])) {
+        present.dist[i] <- 0
+      }
+    }
     round(sapply(present.dist, function(n) n / sum(present.dist)), 2)
   }))),
   compcluster = c("\n1", "\n2", "\n3", "\n4"),
@@ -469,7 +684,7 @@ pbar <- ggplot(comb, aes(y = value, fill = variable)) +
 #   geom_text(aes(label = ifelse(value != 0, paste((value * 100), "%", sep = ""), ""), y = pos),
 #             color = "black", size = 4) +
   xlab("") + ylab("") +
-  geom_text(aes(x = compcluster, y = 0, label = fac), color = rep(gg_color_hue(4), 8),
+  geom_text(aes(x = compcluster, y = 0, label = fac), color = rep(brewer.pal(4, "Set2"), 8),
             inherit.aes = FALSE, parse = TRUE, size = 7, vjust = 2) +
   labs(fill = "Opposite\nclustering") +
   scale_y_continuous(labels = percent_format()) +
@@ -480,9 +695,10 @@ pbar <- ggplot(comb, aes(y = value, fill = variable)) +
         strip.text.x = element_text(size=20, lineheight = 0.5),
         plot.title = element_text(size=20, lineheight = 0.5),
         axis.text.y = element_text(size=18),
-        axis.text.x = element_text(colour = gg_color_hue(4), size = 18, lineheight = 0.5),
+        axis.text.x = element_text(colour = brewer.pal(4, "Set2"), size = 18, lineheight = 0.5),
         legend.text = element_text(size = 18),
         legend.title = element_text(size = 17)) +
+  scale_fill_manual(values = brewer.pal(8, "Set2")[1:4]) +
   ggtitle(" Symptoms cluster distribution      Domains cluster distribution   \n")
 gtbar <- ggplot_gtable(ggplot_build(pbar))
 gtbar$layout$clip[gtbar$layout$name == "panel"] <- "off"
@@ -495,14 +711,15 @@ if (TRUE) {
 
 
 # Correlation plots without bins ====
+everything.wide$cluster <- factor(everything.wide$cluster)
 
 ALPH <- 1/5
-SPAN <- 1
+SPAN <- 2
 XPOS <- 36
 
 # ggplot(everything.wide, aes(x=durat_pd))
 facts.of.int <- c("\nAnxiety\n" = "nms9", "\nDepression\n" = "nms10",
-                  "\nCISI Total\n" = "cisitot", "\nTremor\n" = "tremor")
+                  "\nCISI_PD_total\n" = "cisitot", "\nTremor\n" = "tremor")
 
 el <- melt(everything.wide, id.var = c("cluster", "durat_pd"))
 # Filter only less than 30s, for lack of
@@ -543,10 +760,11 @@ ggplot(el.sub, aes(x=durat_pd, y=value, color = cluster)) +
   theme_bw() +
   ylab("Symptom Score\n") +
   xlab("\nPD Duration (years)") +
-  scale_fill_manual(values = c("#d7f6ff", "#d2c5ff", "#fed4f4")) +
+  scale_color_manual(values = brewer.pal(8, "Set2")[1:4]) +
   labs(color = "Cluster") +
   theme_pub() +
-  theme(strip.text = element_text(lineheight = 0.5)) +
+  theme(strip.text = element_text(lineheight = 0.5))
+
 ggsave("../figures/long4-d.pdf")
 
 # Do the same thing, but on nms30 ====
@@ -611,7 +829,7 @@ is_d.e <- grepl("d", names(correlations.everything))
 is_d.e[which(is_d.e == TRUE)] <- "Domain"
 is_d.e[which(is_d.e == FALSE)] <- "Symptom"
 is_d.e[which(names(correlations.everything) %in% c("Axial", "Bradykinesia", "Rigidity", "Tremor"))] <- "Motor"
-is_d.e[which(names(correlations.everything) %in% c("CISI_Total", "Age", "PD_Onset"))] <- "Other"
+is_d.e[which(names(correlations.everything) %in% c("CISI_PD_total", "Age", "PD_onset"))] <- "Other"
 
 correlations.df.e <- data.frame(
   names=names(correlations.everything),

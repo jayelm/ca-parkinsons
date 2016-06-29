@@ -91,7 +91,7 @@ together.
 Various formal measures were used to determine the optimal number of clusters for the dataset. The
 optimal $k$ according to the Gap Statistic and the 1-standard-error method suggested by
 Tibshirani\cite{tibshirani01gap} was $k = 4$ (Supplementary Figure~\ref{fig:gap}). Other cluster validation
-methods (within sum of squares scree plot, minimum average silhouette width) suggested $k =
+methods (within sum of squares error scree plot, minimum average silhouette width) suggested $k =
 2, 3, 4$, where $k = 2, 3$ simply divided the data uninformatively into groups with varying levels
 of overall PD severity. Thus $k = 4$ was selected to offer a good blend of model fit,
 informativeness, and parsimony.
@@ -160,45 +160,30 @@ PD onset.
     \small
     \begin{tabular}{lrllll}
     \toprule
-    & Cluster & 1 & 2 & 3 & 4 \\
-    & $n$ & 406 (45\%) & 189 (21\%) & 221 (24\%) & 88 (10\%) \\
+    	 Cluster 	 1 	 2 	 3 	 4 \\
+    	 $n$ 	 406 (45\%) 	 189 (21\%) 	 221 (24\%) 	 88 (10\%) \\
     \midrule
-    Nonmotor domains & Cardiovascular & 0.7 (1.6)\tnote{24} & 2.3 (2.9)\tnote{134} & 1.1 (2.0)\tnote{24} &
+    Nonmotor domains 	 Cardiovascular 	 0.7 (1.6)\tnote{24} 	 2.3 (2.9)\tnote{134} 	 1.1 (2.0)\tnote{24} 	
     7.0 (6.0)\tnote{123} \\
-    & Sleep/fatigue & 4.3 (4.8)\tnote{234} & 14.9 (8.2)\tnote{134} & 6.9 (6.3)\tnote{124}
-    & 21.0 (10.0)\tnote{123} \\
-  & Mood/apathy & 3.1 (4.5)\tnote{234} & 16.1 (14.0)\tnote{134} & 6.6
-    (8.1)\tnote{124} & 23.4 (14.3)\tnote{123} \\
-    & Perception/hallucination & 0.5 (1.7)\tnote{24} & 1.9 (3.5)\tnote{134} & 0.8
-    (2.0)\tnote{24} & 8.6 (6.9)\tnote{123} \\
-    & Attention/memory & 2.8 (4.2)\tnote{24} & 8.9 (8.1)\tnote{134} & 3.2 (4.4)\tnote{24} &
-    15.6 (11.1)\tnote{123} \\
-    & Gastrointestinal & 2.8 (3.9)\tnote{234} & 8.8 (7.1)\tnote{134} & 4.1
-    (4.7)\tnote{124} & 14.6 (9.6)\tnote{123} \\
-    & Urinary & 4.5 (5.9)\tnote{234} & 12.4 (9.7)\tnote{134} & 6.1 (6.4)\tnote{124} &
-    20.3 (9.9)\tnote{123} \\
-    & Sexual function & 1.5 (3.1)\tnote{24} & 6.4 (7.4)\tnote{134} & 2.5 (4.1)\tnote{24} &
-    9.0 (9.7)\tnote{123} \\
-    & Miscellaneous & 3.9 (4.7)\tnote{24} & 13.2 (8.6)\tnote{13} & 5.2 (5.8)\tnote{24} &
-    14.0 (9.5)\tnote{13} \\
+    a	 Sleep/fatigue 	 4.3 (4.8)\tnote{234} 	 14.9 (8.2)\tnote{134} 	 6.9 (6.3)\tnote{124} 21.0 (10.0)\tnote{123} \\
+  	 a  Mood/apathy 	 3.1 (4.5)\tnote{234} 	 16.1 (14.0)\tnote{134} 	 6.6 (8.1)\tnote{124} 	 23.4 (14.3)\tnote{123} \\
+    	 Perception/hallucination 	 0.5 (1.7)\tnote{24} 	 1.9 (3.5)\tnote{134} 	 0.8 (2.0)\tnote{24} 	 8.6 (6.9)\tnote{123} \\
+    	 Attention/memory 	 2.8 (4.2)\tnote{24} 	 8.9 (8.1)\tnote{134} 	 3.2 (4.4)\tnote{24} 	15.6 (11.1)\tnote{123} \\
+    	 Gastrointestinal 	 2.8 (3.9)\tnote{234} 	 8.8 (7.1)\tnote{134} 	 4.1 (4.7)\tnote{124} 	 14.6 (9.6)\tnote{123} \\
+    	 Urinary 	 4.5 (5.9)\tnote{234} 	 12.4 (9.7)\tnote{134} 	 6.1 (6.4)\tnote{124} 	20.3 (9.9)\tnote{123} \\
+    	 Sexual function 	 1.5 (3.1)\tnote{24} 	 6.4 (7.4)\tnote{134} 	 2.5 (4.1)\tnote{24} 	9.0 (9.7)\tnote{123} \\
+    	 Miscellaneous 	 3.9 (4.7)\tnote{24} 	 13.2 (8.6)\tnote{13} 	 5.2 (5.8)\tnote{24} 	14.0 (9.5)\tnote{13} \\
     \midrule
-    Motor symptoms & Tremor & 1.9 (1.8)\tnote{34} & 1.6 (1.9)\tnote{34} & 4.3 (2.8)\tnote{124} & 3.5
-    (3.8)\tnote{123} \\
-    & Bradykinesia & 1.5 (0.9)\tnote{234} & 2.1 (1.1)\tnote{134} & 3.6 (0.9)\tnote{124} &
-    4.0 (1.5)\tnote{123} \\
-    & Rigidity & 1.5 (0.9)\tnote{234} & 1.8 (1.1)\tnote{134} & 3.3 (0.9)\tnote{124} &
-    3.8 (1.4)\tnote{123} \\
-    & Axial & 1.8 (1.6)\tnote{234} & 3.3 (2.1)\tnote{134} & 4.3 (2.4)\tnote{124} &
-    7.4 (2.9)\tnote{123} \\
+    Motor symptoms 	 Tremor 	 1.9 (1.8)\tnote{34} 	 1.6 (1.9)\tnote{34} 	 4.3 (2.8)\tnote{124} 	 3.5 (3.8)\tnote{123} \\
+    	 Bradykinesia 	 1.5 (0.9)\tnote{234} 	 2.1 (1.1)\tnote{134} 	 3.6 (0.9)\tnote{124} 	4.0 (1.5)\tnote{123} \\
+    	 Rigidity 	 1.5 (0.9)\tnote{234} 	 1.8 (1.1)\tnote{134} 	 3.3 (0.9)\tnote{124} 	3.8 (1.4)\tnote{123} \\
+    	 Axial 	 1.8 (1.6)\tnote{234} 	 3.3 (2.1)\tnote{134} 	 4.3 (2.4)\tnote{124} 	7.4 (2.9)\tnote{123} \\
     \midrule
-    Variables not & Sex (\% male) & 63 & 53\tnote{3} & 71\tnote{2} & 58 \\
-    used in analysis & CISI total & 5.7 (3.2)\tnote{234} & 9.2 (3.9)\tnote{14} & 9.7
-    (3.5)\tnote{14} & 14.8 (5.1)\tnote{123} \\
-    & Age (34--89) & 62.7 (9.7)\tnote{34} & 64 (9.0)\tnote{4} & 65 (10.2)\tnote{14} & 70.5 (8.9)\tnote{123} \\
-    & PD onset & 56 (10.6) & 55.2 (10.1) & 56.9 (11.1) & 58.2 (11.4) \\
-    & PD duration & 6.7 (4.8)\tnote{234} & 8.7 (5.7)\tnote{14} & 8 (5.5)\tnote{14} &
-    12.3
-    (8.1)\tnote{123} \\
+    Variables not 	 Sex (\% male) 	 63 	 53\tnote{3} 	 71\tnote{2} 	 58 \\
+    used in analysis 	 CISI total 	 5.7 (3.2)\tnote{234} 	 9.2 (3.9)\tnote{14} 	 9.7 (3.5)\tnote{14} 	 14.8 (5.1)\tnote{123} \\
+    	 Age (34--89) 	 62.7 (9.7)\tnote{34} 	 64 (9.0)\tnote{4} 	 65 (10.2)\tnote{14} 	 70.5 (8.9)\tnote{123} \\
+    	 PD onset 	 56 (10.6) 	 55.2 (10.1) 	 56.9 (11.1) 	 58.2 (11.4) \\
+    	 PD duration 	 6.7 (4.8)\tnote{234} 	 8.7 (5.7)\tnote{14} 	 8 (5.5)\tnote{14} 	12.3 (8.1)\tnote{123} \\
     \bottomrule
   \end{tabular}
   \begin{tablenotes}
@@ -385,10 +370,16 @@ symptom, occupying a single branch at the top of the tree.
 
 \subsection{Longitudinal analysis}
 
-Most variables had little to no correlation with PD duration (Supplementary Figure~\ref{fig:corr}). Variables
-with the highest correlation include symptoms urinary frequency, swallowing, and drooling; domains
-miscellaneous, urinary, and gastrointestinal; and total CISI score. Scatterplots for CISI Total,
-Tremor, Anxiety, and Depression appear in Supplementary Figure~\ref{fig:long4}.
+Most variables had little to no correlation with PD duration (Supplementary Figure~\ref{fig:corr}).
+Variables with the highest correlation included symptoms urinary frequency, swallowing, and
+drooling; domains miscellaneous, urinary, and gastrointestinal; and total CISI score. Scatterplots
+for CISI Total, Tremor, Anxiety, and Depression appear in Supplementary Figure~\ref{fig:long4}.
+Total CISI score increased predictably for all four clusters with increasing PD duration, but
+tremor, anxiety, and depression had no significant longitudinal progression; indeed, for cluster
+2, mood/apathy symptoms appeared to be highest at PD onset, decreasing as time progressed. Notably,
+for the motor/nonmotor-dominant groups, differences in severity for motor and nonmotor symptoms
+respectively was present early at PD onset, persisting throughout the range of PD durations
+observed.
 
 \section{Discussion}
 

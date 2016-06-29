@@ -61,6 +61,9 @@ rename.clusters <- function(cl) {
 # NOTE: Doesn't work well, there isn't any elbow
 
 # Just in case it's still defined from below
+library(TeachingDemos)
+seed <- char2seed("Mu")
+set.seed(seed)
 var <- NULL
 wss <- (nrow(raw.filtered)-1)*sum(apply(raw.filtered, 2, var))
 for (i in 2:15) {
@@ -114,10 +117,10 @@ cat("number of clusters estimated by optimum average silhouette width:", pamk.be
 plot(pam(raw.filtered, pamk.best$nc))
 
 # GAP STATISTIC ESTIMATION ====
-set.seed(0)
-# gaps <- clusGap(raw.filtered, kmeans, 14, B = 500)
+set.seed(21) # Randomly chosen seed, for reproducibility
+gaps <- clusGap(raw.filtered, kmeans, 14, B = 500)
 par(mar = c(4.3, 4.7, 0.5, 0.5), ps = 18)
-plot(gaps, xlab=expression(k), ylab=expression(Gap(k)), xaxt="n")
+plot(gaps, xlab=expression(k), ylab=expression(Gap(k)))
 # Embellishments
 bestK <- 4 # Figure this out with method Tibs2001SEmax
 gapk <- as.numeric(gaps$Tab[bestK, "gap"])
@@ -161,16 +164,18 @@ splits$trainset = raw.filtered
 set.seed(0)  # Important to let clusters be the same
 cl <- kmeans(splits$trainset, 4, nstart = 25)
 # Added 20151020 - and rename here
+# Changed 20160613 - added scmmotcp, need to rename
+# 3 (sever)
 print (cl$cluster)
   for (i in 1:length(cl$cluster)) {
     curr.cluster <- cl$cluster[[i]]
 
-    if (curr.cluster == 1) { # nms
+    if (curr.cluster == 1) { # nonmotor
       cl$cluster[[i]] <- 2
-    } else if (curr.cluster == 2) { # all severe
-      cl$cluster[[i]] <- 4
-    } else if (curr.cluster == 3) { # motor
+    } else if (curr.cluster == 2) { # motor
       cl$cluster[[i]] <- 3
+    } else if (curr.cluster == 3) { # severe
+      cl$cluster[[i]] <- 4
     } else if (curr.cluster == 4) { # mild
       cl$cluster[[i]] <- 1
     } else {
@@ -226,22 +231,23 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
     dev.off()
   }
   labeled.data <- cbind(data, cluster=cl$cluster)
-  # Rename clusters (added 20151020)
+  # Rename clusters (added 20151020, changed again 2016)
   if (k == 4) {
-  for (i in 1:length(cl$cluster)) {
-    curr.cluster <- cl$cluster[[i]]
-
-    if (curr.cluster == 1) { # nms
-      cl$cluster[[i]] <- 2
-    } else if (curr.cluster == 2) { # all severe
-      cl$cluster[[i]] <- 4
-    } else if (curr.cluster == 3) { # motor
-      cl$cluster[[i]] <- 3
-    } else if (curr.cluster == 4) { # mild
-      cl$cluster[[i]] <- 1
+    for (i in 1:length(cl$cluster)) {
+      curr.cluster <- cl$cluster[[i]]
+  
+      if (curr.cluster == 1) { # nonmotor
+        cl$cluster[[i]] <- 2
+      } else if (curr.cluster == 2) { # motor
+        cl$cluster[[i]] <- 3
+      } else if (curr.cluster == 3) { # severe
+        cl$cluster[[i]] <- 4
+      } else if (curr.cluster == 4) { # mild
+        cl$cluster[[i]] <- 1
+      } else {
+        print("wat")
+      }
     }
-
-  }
   }
   # Convert to factor
   labeled.data$cluster <- as.factor(labeled.data$cluster)
@@ -323,7 +329,6 @@ kmeans.dtree <- function(data, data.unscaled, k, save = FALSE, seed = 0) {
     "data" = labeled.data,
     "clustering" = cl,
     "unpruned.tree" = t,
-    # These are the same, you idiot.
     "xv.error.unpruned" = xv.error.unpruned,
     "pruned.tree" = pruned.t,
     "xv.error.pruned" = xv.error.pruned
@@ -337,7 +342,8 @@ names(trees) <- c("clusters2", "clusters3", "clusters4")
 for (i in 2:4) {
   istr <- paste("clusters", i, sep="")
   # Remember - PDFs can vary even if the (seeded) clusters don't
-  trees[[istr]] <-  kmeans.dtree(raw.filtered, raw.filtered.unscaled, i, save = SAVE.DTREES)
+  trees[[istr]] <-  kmeans.dtree(raw.filtered, raw.filtered.unscaled, i,
+                                 save = SAVE.DTREES, seed = 0)
 }
 
 # PRINT GLOBAL TREE STATS ====
@@ -462,7 +468,7 @@ names(clusters.raw.nmsonly) <- c("2", "3", "4")
 # CLUSTERS RAW WIDE -> LONG ====
 # NOTE: This lapply conversion hasn't been tested fully yet!
 clusters.raw.long <- lapply(c("2", "3", "4"), function(i) {
-  gather(clusters.raw[[i]], variable, measurement, age:axial)
+  gather(clusters.raw[[i]], variable, measurement, age:scmmotcp)
 })
 names(clusters.raw.long) <- c("2", "3", "4")
 # ADDED 01/20/16: shouldn't be through axial now, should be through nms30
@@ -732,8 +738,10 @@ cluster.genders <- sapply(1:4, function(i) {
 })
 
 # BIG VERSIONS OF CLUS4 ====
-clus4 <- clusters.raw.long[["4"]]
-clus4.nmsonly <- clus4[, c(NMS.30, 'cluster')]
+# ^^ 20160613 sidestep previous stuff. Now add bind to original data and call it clus4
+clus4 <- cbind(raw.omitted, cluster = cl$cluster)
+clus4.long <- gather(clus4, variable, measurement, age:scmmotcp)
+# clus4.nmsonly <- clus4[, c(NMS.30, 'cluster')]
 # Manually save these!
 p <- ggplot(clus4, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
   geom_boxplot() +

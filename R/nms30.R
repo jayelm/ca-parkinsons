@@ -42,7 +42,7 @@ nms30.s <- as.data.frame(scale(nms30))
 
 # With motor
 nms30m <- nms30
-nms30m[, MOTOR.SYMPTOMS] <- everything.wide[, MOTOR.SYMPTOMS]
+nms30m[, MOTOR.SYMPTOMS] <- raw.omitted[, MOTOR.SYMPTOMS]
 
 nms30m.scale <- scale(nms30m)
 nms30m.s <- as.data.frame(nms30m.scale)
@@ -102,8 +102,8 @@ rowD <- as.ggdend(hm$rowDendrogram)
 
 # motor
 # NOTE: apcluster interferes with this!!
-hm.m <- heatmap.2(as.matrix(nms30m.s),
-                  hclustfun = function(x) hclust(x, method='complete'),
+hm.m <- heatmap.2(as.matrix(nms30m.s[, 1:35]),
+                  hclustfun = function(x) hclust(x, method='average'),
                   trace='none')
 colD.m <- as.ggdend(hm.m$colDendrogram)
 
@@ -192,7 +192,50 @@ plot(d_clust.m)
 
 # library(cluster)
 # useless
-# clusGap(nms30.s, kmeans, 10, B = 100, verbose = interactive())
+set.seed(21)
+# set.seed(15)
+cg <- clusGap(nms30.s, kmeans, 14, B = 500)
+plot.new()
+print(cg, method = "Tibs2001SEmax")
+par(mar = c(4.3, 4.7, 0.5, 0.5), ps = 18)
+plot(cg, xlab=expression(k), ylab=expression(Gap(k)), xaxt = 'n')
+# Embellishments
+bestK <- 6 # Figure this out with method Tibs2001SEmax
+gapk <- as.numeric(cg$Tab[bestK, "gap"])
+gapk1.se <- as.numeric(cg$Tab[bestK + 1, "gap"] - cg$Tab[bestK + 1, "SE.sim"])
+segments(x0 = bestK, y0 = 0, x1 = bestK, y1 = gapk, lty = 2)
+segments(x0 = 0, y0 = gapk, x1 = bestK, y1 = gapk, lty = 2)
+segments(x0 = bestK + 1, y0 = 0, x1 = bestK + 1, y1 = gapk1.se, lty = 2)
+segments(x0 = 0, y0 = gapk1.se, x1 = bestK + 1, y1 = gapk1.se, lty = 2)
+axis(1, at = c(1:14))
+
+dev.copy(pdf, "../figures/gap-statistic-6.pdf", width = 8, height = 5)
+dev.off()
+
+print(cg, method = "Tibs2001SEmax", SE.factor = 1)
+
+# Testing
+# set.seed(21)
+set.seed(15)
+testing <- kmeans(nms30.s, 7, nstart = 1000)
+heatmap.2(t(testing$centers), dendrogram ='col', Rowv = FALSE, Colv = TRUE,
+          col = rev(colorRampPalette(brewer.pal(11, "RdBu"))(1000)),
+          trace = 'none')
+mclust::adjustedRandIndex(testing$cluster, cl$cluster)
+table(cl$cluster[testing$cluster == 1])
+table(cl$cluster[testing$cluster == 6])
+table(cl$cluster[testing$cluster == 5])
+table(cl$cluster[testing$cluster == 3])
+table(cl$cluster[testing$cluster == 2])
+table(cl$cluster[testing$cluster == 4])
+table(cl$cluster[testing$cluster == 2])
+
+# Why are there 2s in this section:
+weirdos <- nms30.s[names(cl$cluster[testing$cluster == 6] == 2), ]
+heatmap.2(t(as.matrix(weirdos)), trace = 'none',
+          col = rev(colorRampPalette(brewer.pal(11, "RdBu"))(1000)),
+          dendrogram = 'col', Rowv = FALSE, Colv = TRUE
+          )
 
 # pam_sils <- c()
 # for (i in 1:15) {

@@ -1,0 +1,13 @@
+nms_d1: 3-1 
+nms_d3: 4-2 
+nms_d4: 3-1 
+nms_d5: 3-1 
+nms_d7: 3-1 
+nms_d8: 3-1 4-2 
+nms_d9: 4-2 
+tremor: 2-1 4-3 
+scmmotcp: 3-2 
+cisitot: 3-2 
+age: 2-1 3-1 3-2 
+pdonset: 2-1 3-1 4-1 3-2 4-2 4-3 
+durat_pd: 3-2 

@@ -7,6 +7,7 @@ library(psych)
 # GLOBAL CONSTANTS ====
 SAVE.PREPROCESSING.PLOTS <- FALSE
 DB_FILE <- "../data/DATABASE_NMS Burden levels_15-4-2012.csv"
+MCP_FILE <- "../data/Database 951_Subtyping_30-5-2016.csv"
 ALL.SYMPTOMS <- c("nms_d1",
                  "nms_d2",
                  "nms_d3",
@@ -19,15 +20,18 @@ ALL.SYMPTOMS <- c("nms_d1",
                  "tremor",
                  "bradykin",
                  "rigidity",
-                 "axial")
+                 "axial",
+                 "scmmotcp")
 MOTOR.SYMPTOMS <- c("tremor",
                    "bradykin",
                    "rigidity",
-                   "axial")
+                   "axial",
+                   "scmmotcp")
 MOTOR.PUB <- c("Tremor",
                    "Bradykinesia",
                    "Rigidity",
-                   "Axial")
+                   "Axial",
+                  "Motor_comp")
 NMS.30.NAMES <- c(
   'd1-1-lightheaded',
   'd1-2-fainting',
@@ -108,7 +112,7 @@ NMS.D.NAMES <- c(
 )
 NMS.NUM.TO.PUB <- setNames(sapply(NMS.30.NAMES, function(s) paste(strsplit(s, "-")[[1]][c(1, 3)], collapse = "-")),
                            NMS.30)
-NMS.D.TO.NUM <- setNames(sapply(1:length(NMS.D), function(i) paste(i, "-", NMS.D[i]), sep = ""), NMS.D)
+NMS.D.TO.NUM <- setNames(sapply(1:length(NMS.D), function(i) paste(i, "-", NMS.D[i], sep = "")), NMS.D)
 NMS.D.MAP.PUB <- setNames(NMS.D.NAMES, NMS.D)
 NMS.D.MAP.PUB.N <- setNames(sapply(1:length(NMS.D),
                                    function(i) paste(i, NMS.D.NAMES[i], sep = "-")), NMS.D)
@@ -117,9 +121,12 @@ NMS.30.LONG.SHORT.MAP <- setNames(NMS.30.NAMES.PUB, NMS.30.NAMES)
 MISC.MAP <- c(
   'age' = 'Age',
   'sex' = 'Sex',
-  'pdonset' = 'PD onset',
-  'durat_pd' = 'PD duration',
-  'cisitot' = 'CISI total',
+  'pdonset' = 'PD_onset',
+  'durat_pd' = 'PD_duration',
+  'dyskinesia' = 'Dyskinesia',
+  'fluctuat' = 'Fluctuations',
+  'scmmotcp' = 'Motor_comp',
+  'cisitot' = 'CISI_PD_total',
   'tremor' = 'Tremor',
   'bradykin' = 'Bradykinesia',
   'rigidity' = 'Rigidity',
@@ -131,28 +138,20 @@ MISC.MAP <- c(
 PUB.MAP <- c(NMS.D.MAP.PUB, NMS.30.MAP.PUB, MISC.MAP)
 PUB.MAP.N <- c(NMS.D.MAP.PUB.N, NMS.30.MAP.PUB, MISC.MAP)  # This one just has n
 ALL.BUT.NMS <- c('age', 'sex', 'pdonset', 'durat_pd', 'cisitot',
-                 'tremor', 'bradykin', 'rigidity', 'axial')
+                 'tremor', 'bradykin', 'rigidity', 'axial', 'scmmotcp')
 INTERPRETED <- c("age", "sex", "pdonset", "durat_pd", "cisitot",
                  "nms_d1", "nms_d2", "nms_d3", "nms_d4", "nms_d5",
                  "nms_d6", "nms_d7", "nms_d8", "nms_d9",
-                 "tremor", "bradykin", "rigidity", "axial",
+                 "tremor", "bradykin", "rigidity", "axial", 'scmmotcp',
                  NMS.30)
 # Change this variable to change symptoms
 SYMPTOMS.TO.USE <- ALL.SYMPTOMS
 
-# UTILITY FUNCTIONS ====
-splitdf <- function(dataframe, seed=NULL, trainfrac=0.7) {
-  if (trainfrac<=0 | trainfrac>=1) stop("Training fraction must be between 0 and 1, not inclusive")
-  if (!is.null(seed)) set.seed(seed)
-  index <- 1:nrow(dataframe)
-  trainindex <- sample(index, trunc(length(index)/(1/trainfrac)))
-  trainset <- dataframe[trainindex, ]
-  testset <- dataframe[-trainindex, ]
-  list(trainset=trainset,testset=testset)
-}
-
 # IMPORT DATA, PREPROCESSING ====
 raw <- read.csv(DB_FILE)
+mcp <- read.csv(MCP_FILE)
+raw$dyskinesia <- mcp$dyskinesia
+raw$fluctuat <- mcp$fluctuat
 # Study is irrelevant
 # raw$study <- NULL
 # Get rid of NAs (later may use some kind of missing value compensation method

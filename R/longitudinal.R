@@ -399,11 +399,13 @@ if (SAVE.LONG.PLOTS) {
 }
 
 # Durat cor correlation NO BINNING ====
+everything.wide <- cbind(raw.omitted, cluster = cl$cluster)
 durat.cor.everything <- function(symptom) cor(everything.wide$durat_pd, as.numeric(everything.wide[[symptom]]))
 durat.cor.test <- function(symptom) cor.test(everything.wide$durat_pd, everything.wide[[symptom]])
 correlations.everything <- sapply(names(everything.wide),
                                   durat.cor.everything)
 # Get rid of cluster, sex, durat_pd
+# If include PD_onset, then need to change up scale
 to.remove <- c("cluster", "sex", "durat_pd")
 correlations.everything <- correlations.everything[!names(correlations.everything) %in% to.remove]
 names(correlations.everything) <- sapply(names(correlations.everything), function(v) c(NMS.D.MAP.PUB.N, NMS.NUM.TO.PUB, MISC.MAP)[[v]])
@@ -412,10 +414,10 @@ correlations.everything <- sort(correlations.everything)  # Sort ascending
 is_d.e <- grepl("d", names(correlations.everything))
 is_d.e[which(is_d.e == TRUE)] <- "Nonmotor symptom"
 is_d.e[which(is_d.e == FALSE)] <- "Nonmotor domain"
-is_d.e[which(names(correlations.everything) %in% c("Axial", "Bradykinesia", "Rigidity", "Tremor"))] <- "Motor symptom"
-is_d.e[which(names(correlations.everything) %in% c("CISI total", "Age", "PD onset"))] <- "Other"
+is_d.e[which(names(correlations.everything) %in% MOTOR.PUB)] <- "Motor symptom"
+is_d.e[which(names(correlations.everything) %in% c("CISI_PD_total", "Age", "PD_onset"))] <- "Other"
 is_d.e <- factor(is_d.e, levels = c("Nonmotor domain", "Nonmotor symptom", "Motor symptom", "Other"))
-is_d.cols <- c(brewer.pal(4, "Set2")[1], brewer.pal(4, "Pastel2")[1], brewer.pal(4, "Set2")[c(3, 4)])
+is_d.cols <- c(brewer.pal(8, "Set2")[5], brewer.pal(8, "Pastel2")[5], brewer.pal(8, "Set2")[c(6, 7)])
 
 correlations.df.e <- data.frame(
   names=names(correlations.everything),
@@ -430,7 +432,7 @@ correlations.df.e$names <- factor(correlations.df.e$names,
 ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
   geom_bar(stat="identity", position="identity") +
   # geom_text(aes(label=round(r, 2)), position=position_dodge(width=0.9), vjust=2 * (correlations.df.e$r < 0) - .5) +
-  scale_y_continuous(limits = c(0.0, 1)) +
+  scale_y_continuous(limits = c(-1, 1)) +
   ylab("r\n") +
   xlab("Variable") +
   guides(guides(fill=guide_legend(title="Variable Type"))) +

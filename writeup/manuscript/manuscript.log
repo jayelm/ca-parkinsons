@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  23 MAY 2016 00:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.5)  26 MAY 2016 23:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -557,13 +557,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 374.
  [2 <../../figures/cluster-alignment.pdf>]
-Overfull \hbox (5.68753pt too wide) in paragraph at lines 482--487
+Overfull \hbox (5.68753pt too wide) in paragraph at lines 488--493
 []\OT1/ptm/m/n/10 It's in-tu-itive that a Depression-Dominant group emerges fro
 m
  []
 
 
-Overfull \hbox (0.57727pt too wide) in paragraph at lines 482--487
+Overfull \hbox (0.57727pt too wide) in paragraph at lines 488--493
 \OT1/ptm/m/n/10 toms are highly sim-i-lar (Fig-ure 3[]) and treated with equal 
 weight.
  []
@@ -572,7 +572,7 @@ weight.
 File: ../../figures/gap-statistic.pdf Graphic file (type pdf)
 
 <use ../../figures/gap-statistic.pdf>
-Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 492
+Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 498
 .
 (pdftex.def)             Requested size: 252.0pt x 157.50026pt.
 
@@ -580,7 +580,7 @@ Package pdftex.def Info: ../../figures/gap-statistic.pdf used on input line 492
 File: ../../figures/cor-unbinned.pdf Graphic file (type pdf)
 
 <use ../../figures/cor-unbinned.pdf>
-Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 503.
+Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 509.
 
 (pdftex.def)             Requested size: 522.0pt x 260.99886pt.
 
@@ -588,7 +588,7 @@ Package pdftex.def Info: ../../figures/cor-unbinned.pdf used on input line 503.
 File: ../../figures/long4-d.pdf Graphic file (type pdf)
 
 <use ../../figures/long4-d.pdf>
-Package pdftex.def Info: ../../figures/long4-d.pdf used on input line 510.
+Package pdftex.def Info: ../../figures/long4-d.pdf used on input line 516.
 (pdftex.def)             Requested size: 417.6016pt x 327.23817pt.
  (./manuscript.bbl [3 <../../figures/gap-statistic.pdf>] [4 <../../figures/cor-
 unbinned.pdf> <../../figures/long4-d.pdf>])
@@ -599,7 +599,7 @@ unbinned.pdf> <../../figures/long4-d.pdf>])
 Here is how much of TeX's memory you used:
  5026 strings out of 494501
  74812 string characters out of 6167031
- 180082 words of memory out of 5000000
+ 179082 words of memory out of 5000000
  8183 multiletter control sequences out of 15000+600000
  61797 words of font info for 81 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
@@ -622,7 +622,7 @@ e/2015basic/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/201
 /texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015basic/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015basic/texmf-dis
 t/fonts/type1/urw/times/utmri8a.pfb>
-Output written on manuscript.pdf (8 pages, 647736 bytes).
+Output written on manuscript.pdf (8 pages, 648034 bytes).
 PDF statistics:
  201 PDF objects out of 1000 (max. 8388607)
  147 compressed objects within 2 object streams
