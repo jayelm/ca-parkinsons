@@ -4,6 +4,7 @@ library(doBy)
 library(xtable)
 library(reshape)
 library(grid)
+library(RColorBrewer)
 library(gridExtra)
 library(plyr)
 library(infotheo)
@@ -154,7 +155,7 @@ clus.pub$variable <- factor(clus.pub$variable, levels(clus.pub$variable)[c(1, 2,
 clus.pub$Type <- ""
 clus.pub[clus.pub$variable %in%
            sapply(NMS.D, function(s) paste("\n", PUB.MAP.N[as.character(s)][[1]], "\n", sep = "")), ]$Type <- "Nonmotor (analyzed)"
-clus.pub[clus.pub$variable %in% factor(c("\nAxial\n", "\nRigidity\n", "\nBradykinesia\n", "\nTremor\n", "\nMotor_cp\n")), ]$Type <- "Motor (analyzed)"
+clus.pub[clus.pub$variable %in% factor(c("\nAxial\n", "\nRigidity\n", "\nBradykinesia\n", "\nTremor\n", "\nMotor_comp\n")), ]$Type <- "Motor (analyzed)"
 clus.pub[!(clus.pub$Type %in% c("Nonmotor (analyzed)", "Motor (analyzed)")), ]$Type <- "Other (not analyzed)"
 clus.pub$Type <- factor(clus.pub$Type, levels = c('Nonmotor (analyzed)', 'Motor (analyzed)', 'Other (not analyzed)'))
 p <- ggplot(clus.pub, aes(x = factor(cluster), y = measurement, fill = factor(cluster))) +
@@ -379,6 +380,63 @@ pairwise.prop.test(nms30.sex, p.adjust = "bonferroni")
   }
 })
 
+# Correct nmsd heatmap ====
+library(tidyr)
+# This uses clus.pub from boxplots section
+clus.heatmap = clus4
+clus.heatmap[-which(colnames(clus.heatmap) == 'cluster')] = scale(clus.heatmap[-which(colnames(clus.heatmap) == 'cluster')])
+clus.heatmap.summary = summaryBy(. ~ cluster, clus.heatmap, keep.names = T)
+clus.heatmap.summary$cluster = NULL
+clus.heatmap.summary = t(clus.heatmap.summary)
+clus.heatmap.summary = clus.heatmap.summary[!(rownames(clus.heatmap.summary) %in% NMS.30), ]
+# Reorder
+clus.heatmap.summary = clus.heatmap.summary[c(6:14, 18, 16, 17, 15, 19, 5, 1, 3, 4), ]
+rownames(clus.heatmap.summary) = c(NMS.D.MAP.PUB.N[rownames(clus.heatmap.summary)[1:9]], PUB.MAP[rownames(clus.heatmap.summary)[10:18]])
+
+color.nonmotor = brewer.pal(8, "Dark2")[5]
+color.motor = brewer.pal(8, "Dark2")[6]
+color.other = brewer.pal(8, "Dark2")[7]
+plot.new()
+heatmap.2(as.matrix(clus.heatmap.summary), Rowv = FALSE, Colv = FALSE, dendrogram = 'none', trace = 'none',
+          # cellnote = as.matrix(hm.nms30.data.t),
+          col = colorRampPalette(rev(brewer.pal(11, 'RdBu')))(n = 250),
+          # RowSideColors = c(rep(gch[1], 2), rep(gch[2], 4), rep(gch[3], 6), rep(gch[4], 3), rep(gch[5], 3),
+          #                   rep(gch[6], 3), rep(gch[7], 3), rep(gch[8], 2), rep(gch[9], 4), rep(gch[10], 4)),
+          xlab = 'Cluster', key.xlab = 'z-score',
+          colRow = c(rep(color.nonmotor, 9), rep(color.motor, 5), rep(color.other, 4)),
+          # RowSideColors = c(rep(color.nonmotor, 9), rep(color.motor, 5), rep(color.other, 4)),
+          # If ^^^ then make rbind c(0, 4, 0) c(3, 2, 1) c(0, 5, 0)
+          # and lwid c(0.3, 2, 0.3)
+          cexCol = 1.5, cexRow = 1.2, srtCol = 0,
+          margins = c(5, 18),
+          # Draw lines to separate categories
+          rowsep = c(9, 14),
+          sepcolor = "white",
+          sepwidth = c(0.1, 0.1),
+          lmat = rbind(c(0,3),c(2,1),c(0,4)),
+          lwid = c(0.3,2),
+          lhei = c(0.6,4,1),
+          keysize = 1,
+          # key.xtickfun = function() { list(at = NULL) },
+          key.par = list(mar = c(7, 8, 3, 12)),
+          density.info = 'none'
+          )
+legend("top",      # location of the legend on the heatmap plot
+       legend = c("Nonmotor (analyzed)", "Motor (analyzed)", "Other (not analyzed)"), # category labels
+       col = c(color.nonmotor, color.motor, color.other),
+       lty = 1,
+       lwd = 10,
+       bty = 'n',
+       cex = 0.9
+)
+if (TRUE) {
+  # Always write, for now
+  # NOTE: I crop this in preview afterwards because it still has some
+  # dead space
+  dev.copy(pdf, "../figures/nmsd-hm-pub.pdf", width = 7, height = 10)
+  dev.off()
+}
+
 # Correct nms30 heatmap ====
 hm.nms30.raw.scaled <- nms30.present
 # Gender no need
@@ -399,9 +457,10 @@ hm.nms30.data.t <- hm.nms30.data.t[rownames(hm.nms30.data.t)[c(1:30, 35:39, 34, 
 plot.new()
 heatmap.2(as.matrix(hm.nms30.data.t), Rowv = FALSE, Colv = FALSE, dendrogram = 'none', trace = 'none',
           # cellnote = as.matrix(hm.nms30.data.t),
-          col = colorRampPalette(rev(brewer.pal(11, 'RdBu')))(n = 1000),
+          col = colorRampPalette(rev(brewer.pal(11, 'RdBu')))(n = 250),
           # RowSideColors = c(rep(gch[1], 2), rep(gch[2], 4), rep(gch[3], 6), rep(gch[4], 3), rep(gch[5], 3),
           #                   rep(gch[6], 3), rep(gch[7], 3), rep(gch[8], 2), rep(gch[9], 4), rep(gch[10], 4)),
+          colRow = c(rep(color.nonmotor, 30), rep(color.motor, 5), rep(color.other, 4)),
           xlab = 'Cluster', key.xlab = 'z-score',
           cexCol = 1.5, cexRow = 1.2, srtCol = 0,
           margins = c(5, 18),
@@ -411,13 +470,21 @@ heatmap.2(as.matrix(hm.nms30.data.t), Rowv = FALSE, Colv = FALSE, dendrogram = '
           sepwidth = c(0.1, 0.1),
           lmat = rbind(c(0,3),c(2,1),c(0,4)),
           lwid = c(0.3,2),
-          lhei = c(0.1,4,1),
+          lhei = c(0.6,4,1),
           keysize = 0.5,
           # key.xtickfun = function() { list(at = NULL) },
           key.par = list(mar = c(7, 8, 3, 12)),
           density.info = 'none'
           )
-table(cl$cluster[nms30.present$Cluster == 4])
+# table(cl$cluster[nms30.present$Cluster == 4])
+legend("top",      # location of the legend on the heatmap plot
+       legend = c("Nonmotor (analyzed)", "Motor (analyzed)", "Other (not analyzed)"), # category labels
+       col = c(color.nonmotor, color.motor, color.other),
+       lty = 1,
+       lwd = 10,
+       bty = 'n',
+       cex = 0.9
+)
 if (TRUE) {
   # Always write, for now
   # NOTE: I crop this in preview afterwards because it still has some
