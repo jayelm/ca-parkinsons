@@ -921,3 +921,86 @@ ggplot(correlations.df.e, aes(x=names, y=r, fill=variable)) +
 if (TRUE) {
   ggsave('../figures/cor-unbinned.pdf', width=15, height=8)
 }
+
+# RAY final statistics: durat_pd ====
+# less
+over.1 = table(clus4[clus4$cluster == 1, 'durat_pd'] < 5)
+over.2 = table(clus4[clus4$cluster == 2, 'durat_pd'] < 5)
+over.3 = table(clus4[clus4$cluster == 3, 'durat_pd'] < 5)
+over.4 = table(clus4[clus4$cluster == 4, 'durat_pd'] < 5)
+
+overs = rbind(over.1, over.2, over.3, over.4)
+chisq.test(overs)
+
+over.1[2] / (over.1[1] + over.1[2])
+over.2[2] / (over.2[1] + over.2[2])
+over.3[2] / (over.3[1] + over.3[2])
+over.4[2] / (over.4[1] + over.4[2])
+
+pairwise.prop.test(overs, p.adjust.method = "bonferroni")
+
+# TOTAL
+over.total = table(ray.clus4[, 'durat_pd'] < 5)
+# Compare to total
+over.total.comp = rbind(over.1, over.total)
+prop.test(over.total.comp)
+
+# everyone else
+over.ee = table(ray.clus4[ray.clus4$cluster != 1, 'durat_pd'] < 5)
+# Compare to ee
+over.ee.comp = rbind(over.1, over.ee)
+prop.test(over.ee.comp)
+
+# RAY: HY ====
+# Bind HY
+assertthat::are_equal(clus4$age, raw.omitted.full$age)
+ray.clus4 = cbind(clus4, hy = raw.omitted.full$hy)
+
+# FULL HY
+hy.1 = table(ray.clus4[ray.clus4$cluster == 1, 'hy'])
+hy.1[["5"]] = 0
+hy.2 = table(ray.clus4[ray.clus4$cluster == 2, 'hy'])
+hy.3 = table(ray.clus4[ray.clus4$cluster == 3, 'hy'])
+hy.4 = table(ray.clus4[ray.clus4$cluster == 4, 'hy'])
+hy.4 = c(0, hy.4)
+hy.4 = setNames(hy.4, c("1", "2", "3", "4", "5"))
+
+hys = rbind(hy.1, hy.2, hy.3, hy.4)
+# chisq.test(hys)  doesn't work, too few data
+
+hy.1[2] / (hy.1[1] + hy.1[2])
+hy.2[2] / (hy.2[1] + hy.2[2])
+hy.3[2] / (hy.3[1] + hy.3[2])
+hy.4[2] / (hy.4[1] + hy.4[2])
+t(hys)
+
+table(ray.clus4[, 'hy'])
+
+# HY <= 2
+hyp.1 = table(ray.clus4[ray.clus4$cluster == 1, 'hy'] <= 2)
+hyp.2 = table(ray.clus4[ray.clus4$cluster == 2, 'hy'] <= 2)
+hyp.3 = table(ray.clus4[ray.clus4$cluster == 3, 'hy'] <= 2)
+hyp.4 = table(ray.clus4[ray.clus4$cluster == 4, 'hy'] <= 2)
+
+hyps = rbind(hyp.1, hyp.2, hyp.3, hyp.4)
+chisq.test(hyps)
+
+hyp.1[2] / (hyp.1[1] + hyp.1[2])
+hyp.2[2] / (hyp.2[1] + hyp.2[2])
+hyp.3[2] / (hyp.3[1] + hyp.3[2])
+hyp.4[2] / (hyp.4[1] + hyp.4[2])
+t(hyps)
+
+pairwise.prop.test(hyps, p.adjust.method = "bonferroni")
+
+# TOTAL
+hyp.total = table(ray.clus4[, 'hy'] <= 2)
+# Compare to total
+hyp.total.comp = rbind(hyp.1, hyp.total)
+prop.test(hyp.total.comp)
+
+# everyone else
+hyp.ee = table(ray.clus4[ray.clus4$cluster != 1, 'hy'] <= 2)
+# Compare to ee
+hyp.ee.comp = rbind(hyp.1, hyp.ee)
+prop.test(hyp.ee.comp)
