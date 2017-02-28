@@ -10,6 +10,8 @@ to data collected from Parkinson's disease patients to identify relevant
 subtypes and important clinical features. Manuscript in preparation is located
 in located in `writeup/manuscript/manuscript.pdf`.
 
+The code to reproduce publication-ready figures is in `publication.R`
+
 Related work:
 
  - van Rooden et al (2010).
