@@ -23,3 +23,5 @@ vignettes/*.pdf
 *.synctex.gz
 *.blg
 *.toc
+
+~$*.docx
