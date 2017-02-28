@@ -1,8 +1,8 @@
 # Parkinson's disease subtypes
 
-![PD analysis](./png/analysis.png)
-![Hierarchical clustering](./png/hc.png)
-![Longitudinal analysis](./png/long.png)
+![PD analysis](./figures/png/analysis.png)
+![Hierarchical clustering](./figures/png/hc.png)
+![Longitudinal analysis](./figures/png/long.png)
 
 This repository contains exploratory work done by me at the Polytechnic
 University of Madrid in Summer 2015. The objective is to apply cluster analysis
@@ -10,7 +10,7 @@ to data collected from Parkinson's disease patients to identify relevant
 subtypes and important clinical features. Manuscript in preparation is located
 in located in `writeup/manuscript/manuscript.pdf`.
 
-Related work (those that are freely available are also saved in the papers folder):
+Related work:
 
  - van Rooden et al (2010).
      [The Identification of Parkinson's Disease Subtypes Using Cluster
