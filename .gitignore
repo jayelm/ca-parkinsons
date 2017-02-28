@@ -21,3 +21,5 @@ vignettes/*.pdf
 *.bib
 *.log
 *.synctex.gz
+*.blg
+*.toc
