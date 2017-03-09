@@ -10,7 +10,16 @@ to data collected from Parkinson's disease patients to identify relevant
 subtypes and important clinical features. Manuscript in preparation is located
 in located in `writeup/manuscript/manuscript.pdf`.
 
-The code to reproduce publication-ready figures is in `publication.R`
+The code to reproduce publication-ready figures is mostly in `publication.R`
+which depends first on `source`ing `preprocessing.R` and (maybe??)
+`kmeans-dtree.R` and `nms30.R` Additionally, the gap statistic figures
+
+## TODO
+
+- Organize and figure out procedure for exactly reproducing figures. Might be
+ able to put everything in preprocessing
+- Rename files to something more sensible (kmeans-dtree -> domains, nms30 -> symptoms)
+- Continue to get rid of unnecessary figures
 
 Related work:
 
