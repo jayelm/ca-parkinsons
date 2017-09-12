@@ -1,12 +1,12 @@
 # Parkinson's disease subtypes identified from cluster analysis of motor and non-motor symptoms
 
-This repository contains data, analyses, figures, and writeups for Mu et al.,
-Parkinson's disease subtypes identified from cluster analysis of motor and
-non-motor symptoms (under review).
+This repository contains data, analyses, figures, and manuscripts for
+
+> Jesse Mu, Kallol Ray Chaudhuri, Concha Bielza, Jesús de Pedro Cuesta, Pedro Larrañaga, and Pablo Martinez-Martin. Parkinson's disease subtypes identified from cluster analysis of motor and non-motor symptoms To appear in *Frontiers in Aging Neuroscience*
 
 The code to reproduce figures is mostly in `publication.R`
 which depends first on `source`ing `preprocessing.R` and (maybe??)
-`kmeans-dtree.R` and `nms30.R` Additionally, the gap statistic figures
+`kmeans-dtree.R` and `nms30.R`.
 
 ## TODO
 
